@@ -9,7 +9,7 @@ namespace Shared
     {
         #region DEBUG REGION CONFIGURATION
 
-        private const bool USE_EMBEDDED = true;
+        private const bool USE_EMBEDDED = false;
         private const string MANIFEST_RESOURCE_NAME = "Shared.appsettings.json";
 
         #endregion
@@ -45,6 +45,12 @@ namespace Shared
             }
             else
             {
+                if (!File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json")))
+                {
+                    throw new FileNotFoundException(
+                        "appsettings.json was not found. It may be missing or it may not have an adequate build action");
+                }
+
                 builder.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
             }
 
