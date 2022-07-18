@@ -7,12 +7,7 @@ namespace Shared
 {
     public static class DbConnectionHelper
     {
-        #region DEBUG REGION CONFIGURATION
-
-        private const bool USE_EMBEDDED = false;
-        private const string MANIFEST_RESOURCE_NAME = "Shared.appsettings.json";
-
-        #endregion
+        private const string SettingsManifestResourceName = "Shared.appsettings.json";
 
         private const string DbNameString = "Contabilidad"; // TODO: Define database name
         private static IConfigurationRoot? _config;
@@ -33,26 +28,13 @@ namespace Shared
 
         private static void CreateConfigurationRoot()
         {
+            var a = Assembly.GetAssembly(typeof(DbConnectionHelper));
+            var stream = a.GetManifestResourceStream(SettingsManifestResourceName);
+
             var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory());
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonStream(stream);
 
-            if (USE_EMBEDDED)
-            {
-                var a = Assembly.GetAssembly(typeof(DbConnectionHelper));
-                var stream = a.GetManifestResourceStream(MANIFEST_RESOURCE_NAME);
-
-                builder.AddJsonStream(stream);
-            }
-            else
-            {
-                if (!File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json")))
-                {
-                    throw new FileNotFoundException(
-                        "appsettings.json was not found. It may be missing or it may not have an adequate build action");
-                }
-
-                builder.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-            }
 
             _config = builder.Build();
 
