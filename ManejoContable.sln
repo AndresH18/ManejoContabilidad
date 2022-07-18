@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManejoContable", "ManejoContable\ManejoContable.csproj", "{C3E63A12-C091-41CD-B4D3-8C3C551966EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManejoContable", "ManejoContable\ManejoContable.csproj", "{C3E63A12-C091-41CD-B4D3-8C3C551966EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManejoContableHelpers", "ManejoContableHelpers\ManejoContableHelpers.csproj", "{EFF44242-03FA-421E-97F6-E3AAA23F98EF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbContextLibrary", "ContabilidadDbContext\DbContextLibrary.csproj", "{F8DD965A-3AF7-429F-868A-15DEC0D70BC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbContextLibrary", "ContabilidadDbContext\DbContextLibrary.csproj", "{F8DD965A-3AF7-429F-868A-15DEC0D70BC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		{C3E63A12-C091-41CD-B4D3-8C3C551966EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3E63A12-C091-41CD-B4D3-8C3C551966EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3E63A12-C091-41CD-B4D3-8C3C551966EA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EFF44242-03FA-421E-97F6-E3AAA23F98EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EFF44242-03FA-421E-97F6-E3AAA23F98EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EFF44242-03FA-421E-97F6-E3AAA23F98EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EFF44242-03FA-421E-97F6-E3AAA23F98EF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F8DD965A-3AF7-429F-868A-15DEC0D70BC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F8DD965A-3AF7-429F-868A-15DEC0D70BC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8DD965A-3AF7-429F-868A-15DEC0D70BC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
