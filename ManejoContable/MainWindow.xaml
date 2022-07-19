@@ -6,7 +6,21 @@
         xmlns:local="clr-namespace:ManejoContable"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
 
-    </Grid>
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Archivo">
+                <!-- TODO: Implementar Funcionalidad de los MenuItems  -->
+                <MenuItem Header="Menu Principal" />
+
+                <MenuItem Header="Salir" Click="ExitMenutItem_OnClick" />
+            </MenuItem>
+            <Button Content="Hello" Click="ButtonBase_OnClick"></Button>
+        </Menu>
+
+
+        <Frame Name="Frame" NavigationUIVisibility="Hidden" />
+
+    </DockPanel>
 </Window>

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ManejoContable.View.Pages;
 
 namespace ManejoContable
 {
@@ -23,6 +24,21 @@ namespace ManejoContable
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ExitMenutItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(new FacturaPage());
         }
     }
 }
