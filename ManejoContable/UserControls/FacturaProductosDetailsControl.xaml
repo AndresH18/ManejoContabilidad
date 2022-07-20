@@ -12,22 +12,29 @@
         <model:ProductoFactura x:Key="ProductoFactura" />
     </UserControl.Resources>
 
-    <DataGrid Name="ProductsGrid" DataContext="{StaticResource ProductoFactura }">
+    <GroupBox>
+        <GroupBox.Header>
+            <Label Content="Detalles"/>
+        </GroupBox.Header>
 
-        <DataGrid.Columns>
-            <DataGridTextColumn Header="# Item" IsReadOnly="True" />
-            <DataGridTextColumn Header="Codigo" Binding="{Binding Code}" IsReadOnly="True" />
+        <DataGrid Name="ProductsGrid" DataContext="{StaticResource ProductoFactura}" AutoGenerateColumns="False"
+                 IsReadOnly="True" >
 
-            <DataGridTextColumn Header="Descripcion" Binding="{Binding Description}" IsReadOnly="True" />
-            <DataGridTextColumn Header="U/M" Binding="{Binding UM}" />
-            <DataGridTextColumn Header="Cantidad" Binding="{Binding Quantity}" />
-            <DataGridTextColumn Header="Precio Unitario" Binding="{Binding UnitPrice}" IsReadOnly="True" />
-            <DataGridTextColumn Header="Descuento" Binding="{Binding Discount}" IsReadOnly="True" />
-            <DataGridTextColumn Header="Recargo" Binding="{Binding recargo}" IsReadOnly="True" />
-            <DataGridTextColumn Header="IVA" Binding="{Binding IVA}" IsReadOnly="True" />
-            <DataGridTextColumn Header="ICA" Binding="{Binding ICA}" IsReadOnly="True" />
-            <DataGridTextColumn Header="INC" Binding="{Binding INC}" IsReadOnly="True" />
-            <DataGridTextColumn Header="Valor Venta Item" Binding="{Binding Total}" IsReadOnly="True" />
-        </DataGrid.Columns>
-    </DataGrid>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="# Item"  />
+                <DataGridTextColumn Header="Codigo" Binding="{Binding Code}" />
+
+                <DataGridTextColumn Header="Descripcion" Binding="{Binding Description}" />
+                <DataGridTextColumn Header="U/M" Binding="{Binding UM}"  />
+                <DataGridTextColumn Header="Cantidad" Binding="{Binding Quantity}" />
+                <DataGridTextColumn Header="Precio Unitario" Binding="{Binding UnitPrice}"  />
+                <DataGridTextColumn Header="Descuento" Binding="{Binding Discount}" />
+                <DataGridTextColumn Header="Recargo" Binding="{Binding recargo}"  />
+                <DataGridTextColumn Header="IVA" Binding="{Binding IVA}"  />
+                <DataGridTextColumn Header="ICA" Binding="{Binding ICA}"  />
+                <DataGridTextColumn Header="INC" Binding="{Binding INC}"  />
+                <DataGridTextColumn Header="Valor Venta Item" Binding="{Binding Total}"  />
+            </DataGrid.Columns>
+        </DataGrid>
+    </GroupBox>
 </UserControl>
