@@ -24,7 +24,6 @@ namespace ManejoContable.View.Pages
         {
             InitializeComponent();
 
-            TextBlock.Text = $"This it the {nameof(FacturaPage)}";
 
         }
     }
