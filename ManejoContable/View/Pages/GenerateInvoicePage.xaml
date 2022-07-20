@@ -20,9 +20,12 @@
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
 
-        <!-- TODO: Crear contenedor de Info Cliente -->
+
+        <!-- Info Cliente -->
         <uc:ClientInformationControl Grid.Column="0" Grid.Row="0" />
 
+        <!-- Info ProductFactura -->
+        <uc:FacturaProductosDetailsControl Grid.Column="0" Grid.Row="1" />
         <!-- Datos Totales -->
         <uc:DatosTotales Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
 
