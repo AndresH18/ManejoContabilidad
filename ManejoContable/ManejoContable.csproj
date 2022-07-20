@@ -24,6 +24,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\ContabilidadDbContext\DbContextLibrary.csproj" />
+	  <ProjectReference Include="..\ModelEntities\ModelEntities.csproj" />
 	  <ProjectReference Include="..\Shared\Shared.csproj" />
 	</ItemGroup>
 

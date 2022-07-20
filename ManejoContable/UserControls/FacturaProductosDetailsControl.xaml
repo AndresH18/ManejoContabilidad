@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="ManejoContable.UserControls.FacturaProductosDetailsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:ManejoContable.UserControls"
+             xmlns:model="clr-namespace:ModelEntities;assembly=ModelEntities"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <model:ProductoFactura x:Key="ProductoFactura" />
+    </UserControl.Resources>
+
+    <DataGrid Name="ProductsGrid" DataContext="{StaticResource ProductoFactura }">
+
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="# Item" IsReadOnly="True" />
+            <DataGridTextColumn Header="Codigo" Binding="{Binding Code}" IsReadOnly="True" />
+
+            <DataGridTextColumn Header="Descripcion" Binding="{Binding Description}" IsReadOnly="True" />
+            <DataGridTextColumn Header="U/M" Binding="{Binding UM}" />
+            <DataGridTextColumn Header="Cantidad" Binding="{Binding Quantity}" />
+            <DataGridTextColumn Header="Precio Unitario" Binding="{Binding UnitPrice}" IsReadOnly="True" />
+            <DataGridTextColumn Header="Descuento" Binding="{Binding Discount}" IsReadOnly="True" />
+            <DataGridTextColumn Header="Recargo" Binding="{Binding recargo}" IsReadOnly="True" />
+            <DataGridTextColumn Header="IVA" Binding="{Binding IVA}" IsReadOnly="True" />
+            <DataGridTextColumn Header="ICA" Binding="{Binding ICA}" IsReadOnly="True" />
+            <DataGridTextColumn Header="INC" Binding="{Binding INC}" IsReadOnly="True" />
+            <DataGridTextColumn Header="Valor Venta Item" Binding="{Binding Total}" IsReadOnly="True" />
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>
