@@ -22,17 +22,17 @@ namespace ManejoContable.UserControls
     public partial class FacturaProductosDetailsControl : UserControl
     {
 
-        private readonly List<ProductoFactura> _productoList = new List<ProductoFactura>();
+        private readonly List<ProductoFactura> productoList = new List<ProductoFactura>();
         public FacturaProductosDetailsControl()
         {
             InitializeComponent();
 
             for (var i = 0; i < 10; i++)
             {
-                _productoList.Add(new ProductoFactura());
+                productoList.Add(new ProductoFactura());
             }
 
-            ProductsGrid.ItemsSource = _productoList;
+            ProductsGrid.ItemsSource = productoList;
 
         }
 
