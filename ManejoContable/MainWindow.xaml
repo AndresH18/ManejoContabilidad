@@ -5,9 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManejoContable"
         mc:Ignorable="d"
-        Height="450" MinHeight="450"
-        Width="800" MinWidth="800"
+        Height="600" MinHeight="550"
+        Width="1020" MinWidth="935"
         Title="MainWindow">
+
+    <!-- La razon de Width/Height de la ventana es 1.7-->
 
 
     <DockPanel>
