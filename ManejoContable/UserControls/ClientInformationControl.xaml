@@ -11,6 +11,7 @@
         <Style TargetType="TextBlock">
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"></Setter>
         </Style>
         <Style TargetType="Label" x:Key="LabelStyle">
             <Setter Property="FontWeight" Value="Bold"/>
@@ -37,6 +38,8 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+
             </Grid.ColumnDefinitions>
 
 
@@ -150,6 +153,13 @@
             <TextBlock Grid.Row="4"
                        Grid.Column="1"
                        Text="Telefono" />
+
+            <Button Name="ClientInformationEditButton"
+                Grid.Row="5" Grid.Column="4" 
+                    Content="Editar" 
+                    Click="ClientInformationEditButton_OnClick"
+                    Margin="5,0" 
+                    Padding="10,0"/>
 
         </Grid>
     </GroupBox>

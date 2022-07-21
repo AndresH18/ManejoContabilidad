@@ -24,5 +24,11 @@ namespace ManejoContable.UserControls
         {
             InitializeComponent();
         }
+
+        private void ClientInformationEditButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            // TODO: Implement Client information dialog
+            MessageBox.Show("Implement Edit Client information Dialog");
+        }
     }
 }
