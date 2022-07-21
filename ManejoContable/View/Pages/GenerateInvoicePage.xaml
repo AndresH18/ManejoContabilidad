@@ -11,12 +11,30 @@
       Background="WhiteSmoke">
 
     <DockPanel>
-
-        <Grid DockPanel.Dock="Bottom">
+        <Grid DockPanel.Dock="Bottom" Margin="5, 0">
+            <Grid.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="5, 0" />
+                    <Setter Property="Padding" Value="5, 1"></Setter>
+                </Style>
+            </Grid.Resources>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Button Content="H"></Button>
+
+            <Button Grid.Column="0" Content="Escanear PDF" />
+            <StackPanel Grid.Column="2" Orientation="Horizontal">
+                <Button>hooollaa</Button>
+                <Button>heeelllllo</Button>
+            </StackPanel>
+            <StackPanel Grid.Column="4" Orientation="Horizontal">
+                <Button Content="Cancelar" />
+                <Button Content="Continuar"></Button>
+            </StackPanel>
         </Grid>
 
         <Grid>
@@ -26,7 +44,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="6*" />
-                <ColumnDefinition Width="3*" MaxWidth="500"/>
+                <ColumnDefinition Width="3*" MaxWidth="500" />
             </Grid.ColumnDefinitions>
 
 
