@@ -20,7 +20,7 @@ namespace ManejoContable
     {
         // private const string DbNameString = "SomeName"; 
         // private static IConfigurationRoot? _config;
-        private static DbContextOptionsBuilder<ContabilidadDbContext>? _dbContextOptionsBuilder;
+        // private static DbContextOptionsBuilder<ContabilidadDbContext>? _dbContextOptionsBuilder;
 
         public static DbContextOptions<ContabilidadDbContext> DbOptions => DbConnectionHelper.DbContextOptions;
         // {
