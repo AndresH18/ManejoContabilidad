@@ -45,9 +45,10 @@ namespace ManejoContable.UserControls
             else if (ReferenceEquals(sender, RemoveButton))
             {
                 // TODO: Implement RemoveButton functionality
+                MessageBox.Show("Implement Remove Functionality");
+
             }
 
-            MessageBox.Show("Implement Remove Functionality");
         }
     }
 }
