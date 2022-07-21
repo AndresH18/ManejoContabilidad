@@ -10,25 +10,36 @@
       Title="FacturaPage"
       Background="WhiteSmoke">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="6*" />
-            <ColumnDefinition Width="3*" MaxWidth="400" />
-        </Grid.ColumnDefinitions>
+    <DockPanel>
+
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Content="H"></Button>
+        </Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="6*" />
+                <ColumnDefinition Width="3*" MaxWidth="500"/>
+            </Grid.ColumnDefinitions>
 
 
-        <!-- Info Cliente -->
-        <uc:ClientInformationControl Grid.Column="0" Grid.Row="0" />
+            <!-- Info Cliente -->
+            <uc:ClientInformationControl Grid.Column="0" Grid.Row="0" />
 
-        <!-- Info ProductFactura -->
-        <uc:FacturaProductosDetailsControl Grid.Column="0" Grid.Row="1" />
-        <!-- Datos Totales -->
-        <uc:DatosTotales Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
+            <!-- Info ProductFactura -->
+            <uc:FacturaProductosDetailsControl Grid.Column="0" Grid.Row="1" />
+            <!-- Datos Totales -->
+            <uc:DatosTotales Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
 
 
-    </Grid>
+        </Grid>
+
+    </DockPanel>
 </Page>

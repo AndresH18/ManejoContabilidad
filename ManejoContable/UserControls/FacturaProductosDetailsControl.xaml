@@ -23,7 +23,6 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="# Item"  />
                 <DataGridTextColumn Header="Codigo" Binding="{Binding Code}" />
-
                 <DataGridTextColumn Header="Descripcion" Binding="{Binding Description}" />
                 <DataGridTextColumn Header="U/M" Binding="{Binding UM}"  />
                 <DataGridTextColumn Header="Cantidad" Binding="{Binding Quantity}" />
