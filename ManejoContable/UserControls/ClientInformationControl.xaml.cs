@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ManejoContable.View.Windows;
+using ModelEntities;
 
 namespace ManejoContable.UserControls
 {
@@ -20,6 +22,16 @@ namespace ManejoContable.UserControls
     /// </summary>
     public partial class ClientInformationControl : UserControl
     {
+
+        public static readonly DependencyProperty ClienteProperty = DependencyProperty.Register(
+            "Cliente", typeof(Cliente), typeof(ClientInformationControl), new PropertyMetadata(default(Cliente?)));
+
+        public Cliente? Cliente
+        {
+            get { return (Cliente?)GetValue(ClienteProperty); }
+            set { SetValue(ClienteProperty, value); }
+        }
+
         public ClientInformationControl()
         {
             InitializeComponent();
@@ -27,8 +39,12 @@ namespace ManejoContable.UserControls
 
         private void ClientInformationEditButton_OnClick(object sender, RoutedEventArgs e)
         {
-            // TODO: Implement Client information dialog
-            MessageBox.Show("Implement Edit Client information Dialog");
+            var clientInformation = new ClientInformationWindow(Cliente)
+            {
+                ShowInTaskbar = false
+            };
+
+             clientInformation.ShowDialog();
         }
     }
 }
