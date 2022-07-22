@@ -29,5 +29,19 @@ namespace ManejoContable.View.Windows
             Owner = Application.Current.MainWindow;
             _cliente = cliente;
         }
+
+        private void ActionButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (ReferenceEquals(sender, OkButton))
+            {
+                // TODO: Implement OkButton
+                MessageBox.Show("Implement OkButton");
+            }
+            else if (ReferenceEquals(sender, CancelButton))
+            {
+                // TODO: Implement CancelButton
+                MessageBox.Show("Implement Cancel Button");
+            }
+        }
     }
 }

@@ -33,6 +33,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -170,5 +171,26 @@
         <TextBox Grid.Row="3"
                  Grid.Column="3"
                  Text="Correo" />
+
+        <StackPanel Grid.Row="6" Grid.Column="0"
+                    Grid.ColumnSpan="4"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="5, 10" />
+                    <Setter Property="Padding" Value="15, 5" />
+                </Style>
+            </StackPanel.Resources>
+
+            <Button Name="CancelButton"
+                    Content="Cancelar"
+                    Click="ActionButton_OnClick"/>
+
+            <Button Name="OkButton"
+                    Content="Aceptar" 
+                    Click="ActionButton_OnClick"/>
+
+        </StackPanel>
     </Grid>
 </Window>
