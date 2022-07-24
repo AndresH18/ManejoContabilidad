@@ -1,15 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Configuration;
+using ModelEntities;
 
 namespace DbContextLibrary
 {
     public class ContabilidadDbContext : DbContext
     {
-        private const string DbName = "DatabaseName"; // TODO: Define database name
+        private const string DbName = "Contabilidad"; // TODO: Define database name
         
         private static IConfigurationRoot? _configuration;
-        private static DbContextOptionsBuilder<ContabilidadDbContext>? _dbContextOptionsBuilder;
 
+        public DbSet<Cliente> Clientes { get; set; }
 
         public ContabilidadDbContext()
         {
@@ -42,19 +44,22 @@ namespace DbContextLibrary
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Cliente>()
+                .Property(c => c.TipoDocumento)
+                .HasConversion<EnumToStringConverter<TipoDocumento>>();
         }
 
 
-        private void CreateConfigurationRoot()
-        {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-            _configuration = builder.Build();
+        // private void CreateConfigurationRoot()
+        // {
+        //     var builder = new ConfigurationBuilder()
+        //         .SetBasePath(Directory.GetCurrentDirectory())
+        //         .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+        //     _configuration = builder.Build();
+        //
+        //     _dbContextOptionsBuilder = new DbContextOptionsBuilder<ContabilidadDbContext>();
+        //     _dbContextOptionsBuilder.UseSqlServer(_configuration.GetConnectionString(DbName));
+        // }
 
-            _dbContextOptionsBuilder = new DbContextOptionsBuilder<ContabilidadDbContext>();
-            _dbContextOptionsBuilder.UseSqlServer(_configuration.GetConnectionString(DbName));
-        }
     }
 }
