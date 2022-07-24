@@ -21,8 +21,6 @@ namespace ManejoContable.View.Windows
     /// </summary>
     public partial class EditClientInformationWindow : Window
     {
-        private string TipoDocumentossss { get; set; }
-
         private Cliente? _cliente;
 
         public EditClientInformationWindow(Cliente? cliente)

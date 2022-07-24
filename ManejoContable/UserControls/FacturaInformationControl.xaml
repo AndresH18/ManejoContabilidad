@@ -1,13 +1,16 @@
-﻿<UserControl x:Class="ManejoContable.UserControls.ClientInformationControl"
+﻿<UserControl x:Class="ManejoContable.UserControls.FacturaInformationControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ManejoContable.UserControls"
+             xmlns:modelEntities="clr-namespace:ModelEntities;assembly=ModelEntities"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
+
+
         <Style TargetType="TextBlock">
             <Setter Property="TextAlignment" Value="Center" />
             <Setter Property="VerticalAlignment" Value="Center" />
@@ -20,7 +23,7 @@
     </UserControl.Resources>
 
 
-    <Grid Name="Grid">
+    <Grid Name="Grid" >
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -68,7 +71,7 @@
 
         <TextBlock Grid.Row="0"
                    Grid.Column="1"
-                   Text="Num Fact" />
+                   Text="{Binding Cliente.NumeroDocumento}" />
 
         <TextBlock Grid.Row="1"
                    Grid.Column="1"

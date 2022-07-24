@@ -18,20 +18,31 @@ using ModelEntities;
 namespace ManejoContable.UserControls
 {
     /// <summary>
-    /// Interaction logic for ClientInformationControl.xaml
+    /// Interaction logic for FacturaInformationControl.xaml
     /// </summary>
-    public partial class ClientInformationControl : UserControl
+    public partial class FacturaInformationControl : UserControl
     {
         public static readonly DependencyProperty ClienteProperty = DependencyProperty.Register(
-            "Cliente", typeof(Cliente), typeof(ClientInformationControl), new PropertyMetadata(default(Cliente?)));
+            "Cliente", typeof(Cliente), typeof(FacturaInformationControl),
+            new PropertyMetadata(default(Cliente?), ClientPropertyChanged));
+
+        private static void ClientPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var clientInformationControl = (FacturaInformationControl) d;
+
+            if (e.NewValue is Cliente c)
+            {
+                
+            }
+        }
 
         public Cliente? Cliente
         {
-            get { return (Cliente?) GetValue(ClienteProperty); }
-            set { SetValue(ClienteProperty, value); }
+            get => (Cliente?) GetValue(ClienteProperty);
+            set => SetValue(ClienteProperty, value);
         }
 
-        public ClientInformationControl()
+        public FacturaInformationControl()
         {
             InitializeComponent();
         }

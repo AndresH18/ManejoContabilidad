@@ -55,7 +55,7 @@
                 <GroupBox.Header>
                     <Label Content="Informacion Cliente" />
                 </GroupBox.Header>
-                <uc:ClientInformationControl />
+                <uc:FacturaInformationControl />
             </GroupBox>
 
             <!-- Info ProductFactura -->
