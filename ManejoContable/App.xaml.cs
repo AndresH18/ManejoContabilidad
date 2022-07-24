@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using DbContextLibrary;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Shared;
 
 namespace ManejoContable
 {
@@ -18,41 +19,57 @@ namespace ManejoContable
     /// </summary>
     public partial class App : Application
     {
-        // private const string DbNameString = "SomeName"; 
-        // private static IConfigurationRoot? _config;
-        // private static DbContextOptionsBuilder<ContabilidadDbContext>? _dbContextOptionsBuilder;
+        private const string DbNameString = "Contabilidad";
 
-        public static DbContextOptions<ContabilidadDbContext> DbOptions => DbConnectionHelper.DbContextOptions;
-        // {
-        //     get
-        //     {
-        //         if (_config == null || _dbContextOptionsBuilder == null)
-        //         {
-        //             CreateConfigurationRoot();
-        //         }
-        //
-        //         return _dbContextOptionsBuilder!.Options;
-        //     }
-        // }
+        private static readonly string SettingsManifestResourceName = $"{typeof(App)}.appsettings.json";
+
+        private static IConfigurationRoot? _config;
+
+        private static DbContextOptionsBuilder<ContabilidadDbContext>? _dbContextOptionsBuilder;
+
+        public static DbContextOptions<ContabilidadDbContext> DbOptions
+        {
+            get
+            {
+                if (_config == null || _dbContextOptionsBuilder == null)
+                {
+                    CreateConfigurationRoot();
+                }
+
+                return _dbContextOptionsBuilder!.Options;
+            }
+        }
 
         public App()
         {
-            //     CreateConfigurationRoot();
+            CreateConfigurationRoot();
         }
 
-        // private static void CreateConfigurationRoot()
-        // {
-        //     
-        //
-        //     var builder = new ConfigurationBuilder()
-        //         .SetBasePath(Directory.GetCurrentDirectory())
-        //         .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-        //     _config = builder.Build();
-        //
-        //     _dbContextOptionsBuilder = new DbContextOptionsBuilder<ContabilidadDbContext>();
-        //     _dbContextOptionsBuilder.UseSqlServer(_config.GetConnectionString(DbNameString));
-        //
-        //     // return _dbContextOptionsBuilder.Options;
-        // }
+        private static void CreateConfigurationRoot()
+        {
+            var assembly = Assembly.GetAssembly(typeof(App));
+            var stream = assembly?.GetManifestResourceStream(SettingsManifestResourceName);
+
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonStream(stream);
+
+            _config = builder.Build();
+
+            _dbContextOptionsBuilder = new DbContextOptionsBuilder<ContabilidadDbContext>();
+            _dbContextOptionsBuilder.UseSqlServer(_config.GetConnectionString(DbNameString));
+
+            /*
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            _config = builder.Build();
+        
+            _dbContextOptionsBuilder = new DbContextOptionsBuilder<ContabilidadDbContext>();
+            _dbContextOptionsBuilder.UseSqlServer(_config.GetConnectionString(DbNameString));
+            */
+
+            // return _dbContextOptionsBuilder.Options;
+        }
     }
 }

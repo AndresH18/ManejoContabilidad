@@ -1,14 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using System.Reflection;
-using Microsoft.Extensions.Configuration;
-using Shared;
-
-
-
 
 Console.WriteLine("Hello, World!");
-Console.WriteLine(DbConnectionHelper.DbContextOptions.ToString());
+// Console.WriteLine(DbConnectionHelper.DbContextOptions.ToString());
 //
 // // ReadFromEmbeddedResources();
 //
@@ -41,3 +35,5 @@ Console.WriteLine(DbConnectionHelper.DbContextOptions.ToString());
 //         Console.WriteLine(reader.ReadToEnd());
 //     }
 // }
+
+// var a = Assembly.GetAssembly(typeof(App))
