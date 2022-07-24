@@ -22,13 +22,12 @@ namespace ManejoContable.UserControls
     /// </summary>
     public partial class ClientInformationControl : UserControl
     {
-
         public static readonly DependencyProperty ClienteProperty = DependencyProperty.Register(
             "Cliente", typeof(Cliente), typeof(ClientInformationControl), new PropertyMetadata(default(Cliente?)));
 
         public Cliente? Cliente
         {
-            get { return (Cliente?)GetValue(ClienteProperty); }
+            get { return (Cliente?) GetValue(ClienteProperty); }
             set { SetValue(ClienteProperty, value); }
         }
 
@@ -39,12 +38,12 @@ namespace ManejoContable.UserControls
 
         private void ClientInformationEditButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var clientInformation = new ClientInformationWindow(Cliente)
+            var clientInformation = new EditClientInformationWindow(Cliente)
             {
                 ShowInTaskbar = false
             };
 
-             clientInformation.ShowDialog();
+            clientInformation.ShowDialog();
         }
     }
 }

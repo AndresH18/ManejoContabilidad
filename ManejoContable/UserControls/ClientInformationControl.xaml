@@ -9,158 +9,154 @@
 
     <UserControl.Resources>
         <Style TargetType="TextBlock">
-            <Setter Property="TextAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="TextWrapping" Value="Wrap"></Setter>
         </Style>
         <Style TargetType="Label" x:Key="LabelStyle">
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
     </UserControl.Resources>
 
-    <GroupBox>
-        <GroupBox.Header>
-            <Label Content="Informacion Cliente" />
-        </GroupBox.Header>
-        <Grid>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
+    <Grid Name="Grid">
 
-            </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+
+        </Grid.ColumnDefinitions>
 
 
-            <Label Content="Numero Factura"
-                   Style="{StaticResource LabelStyle}"
-                   Grid.Row="0"
-                   Grid.Column="0" />
+        <Label Content="Numero Factura"
+               Style="{StaticResource LabelStyle}"
+               Grid.Row="0"
+               Grid.Column="0" />
 
-            <Label Content="Nombre Comercial"
-                   Style="{StaticResource LabelStyle}"
-                   Grid.Row="0"
-                   Grid.Column="2" />
+        <Label Content="Nombre Comercial"
+               Style="{StaticResource LabelStyle}"
+               Grid.Row="0"
+               Grid.Column="2" />
 
-            <Label Content="Tipo Documento"
-                   Style="{StaticResource LabelStyle}"
-                   Grid.Row="1"
-                   Grid.Column="0" />
+        <Label Content="Tipo Documento"
+               Style="{StaticResource LabelStyle}"
+               Grid.Row="1"
+               Grid.Column="0" />
 
-            <Label Content="Numero Documento"
-                   Style="{StaticResource LabelStyle}"
-                   Grid.Row="1"
-                   Grid.Column="2" />
+        <Label Content="Numero Documento"
+               Style="{StaticResource LabelStyle}"
+               Grid.Row="1"
+               Grid.Column="2" />
 
-            <Label Content="Tipo Contribuyente"
-                   Style="{StaticResource LabelStyle}"
-                   Grid.Row="4"
-                   Grid.Column="2" />
-
-
-            <TextBlock Grid.Row="0"
-                       Grid.Column="1"
-                       Text="Num Fact" />
-
-            <TextBlock Grid.Row="1"
-                       Grid.Column="1"
-                       Text="[CC, NIT, ...]" />
-
-            <TextBlock Grid.Row="1"
-                       Grid.Column="3"
-                       Text="Num Doc" />
-
-            <TextBlock Grid.Row="4"
-                       Grid.Column="3"
-                       Text="[Persona Juridica, ...]" />
-
-            <TextBlock Grid.Row="0"
-                       Grid.Column="3"
-                       Text="Nombre Cliente" />
+        <Label Content="Tipo Contribuyente"
+               Style="{StaticResource LabelStyle}"
+               Grid.Row="4"
+               Grid.Column="2" />
 
 
-            <Label Content="Regimen Contable"
-                   Style="{StaticResource LabelStyle}"
-                   Grid.Column="0"
-                   Grid.Row="5" />
+        <TextBlock Grid.Row="0"
+                   Grid.Column="1"
+                   Text="Num Fact" />
 
-            <Label Content="Tipo Responsabilidad"
-                   Style="{StaticResource LabelStyle}"
-                   Grid.Row="5" Grid.Column="2" />
+        <TextBlock Grid.Row="1"
+                   Grid.Column="1"
+                   Text="[CC, NIT, ...]" />
 
-            <Label Content="Departamento"
-                   Style="{StaticResource LabelStyle}"
-                   Grid.Column="0"
-                   Grid.Row="2" />
+        <TextBlock Grid.Row="1"
+                   Grid.Column="3"
+                   Text="Num Doc" />
 
-            <Label Content="Municipio"
-                   Style="{StaticResource LabelStyle}"
-                   Grid.Column="2"
-                   Grid.Row="2" />
+        <TextBlock Grid.Row="4"
+                   Grid.Column="3"
+                   Text="[Persona Juridica, ...]" />
 
-            <Label Content="Direccion"
-                   Style="{StaticResource LabelStyle}"
-                   Grid.Column="0"
-                   Grid.Row="3" />
+        <TextBlock Grid.Row="0"
+                   Grid.Column="3"
+                   Text="Nombre Cliente" />
 
-            <Label Content="Correo"
-                   Style="{StaticResource LabelStyle}"
-                   Grid.Column="2"
-                   Grid.Row="3" />
 
-            <Label Content="Telefono"
-                   Style="{StaticResource LabelStyle}"
-                   Grid.Column="0"
-                   Grid.Row="4" />
+        <Label Content="Regimen Contable"
+               Style="{StaticResource LabelStyle}"
+               Grid.Column="0"
+               Grid.Row="5" />
 
-            <TextBlock Grid.Column="1"
-                       Grid.Row="5"
-                       Text="???" />
+        <Label Content="Tipo Responsabilidad"
+               Style="{StaticResource LabelStyle}"
+               Grid.Row="5" Grid.Column="2" />
 
-            <TextBlock Grid.Column="3"
+        <Label Content="Departamento"
+               Style="{StaticResource LabelStyle}"
+               Grid.Column="0"
+               Grid.Row="2" />
+
+        <Label Content="Municipio"
+               Style="{StaticResource LabelStyle}"
+               Grid.Column="2"
+               Grid.Row="2" />
+
+        <Label Content="Direccion"
+               Style="{StaticResource LabelStyle}"
+               Grid.Column="0"
+               Grid.Row="3" />
+
+        <Label Content="Correo"
+               Style="{StaticResource LabelStyle}"
+               Grid.Column="2"
+               Grid.Row="3" />
+
+        <Label Content="Telefono"
+               Style="{StaticResource LabelStyle}"
+               Grid.Column="0"
+               Grid.Row="4" />
+
+        <TextBlock Grid.Column="1"
                    Grid.Row="5"
-                   
+                   Text="???" />
+
+        <TextBlock Grid.Column="3"
+                   Grid.Row="5"
+
                    Text="???" />
 
 
-            <TextBlock Grid.Column="1"
-                       Grid.Row="2"
-                       Text="Departamento" />
+        <TextBlock Grid.Column="1"
+                   Grid.Row="2"
+                   Text="Departamento" />
 
-            <TextBlock Grid.Column="3"
-                       Grid.Row="2"
-                       Text="Municipio" />
+        <TextBlock Grid.Column="3"
+                   Grid.Row="2"
+                   Text="Municipio" />
 
-            <TextBlock Grid.Row="3"
-                       Grid.Column="1"
-                       Text="Direccion" />
+        <TextBlock Grid.Row="3"
+                   Grid.Column="1"
+                   Text="Direccion" />
 
-            <TextBlock Grid.Row="3"
-                       Grid.Column="3"
-                       Text="Correo" />
+        <TextBlock Grid.Row="3"
+                   Grid.Column="3"
+                   Text="Correo" />
 
-            <TextBlock Grid.Row="4"
-                       Grid.Column="1"
-                       Text="Telefono" />
+        <TextBlock Grid.Row="4"
+                   Grid.Column="1"
+                   Text="Telefono" />
 
-            <Button Name="ClientInformationEditButton"
-                Grid.Row="5" Grid.Column="4" 
-                    Content="Editar" 
-                    Click="ClientInformationEditButton_OnClick"
-                    Margin="5,0" 
-                    Padding="10,0"/>
+        <Button Name="ClientInformationEditButton"
+                Grid.Row="5" Grid.Column="4"
+                Content="Editar"
+                Click="ClientInformationEditButton_OnClick"
+                Margin="5,0"
+                Padding="10,0" />
 
-        </Grid>
-    </GroupBox>
+    </Grid>
 </UserControl>

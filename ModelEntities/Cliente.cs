@@ -6,7 +6,7 @@ public class Cliente
 {
     [Key] public int Id { get; set; }
     public string Nombre { get; set; }
-    public string TipoDocumento { get; set; } = "NIT";
+    public TipoDocumento TipoDocumento { get; set; } = default;
     public string NumeroDocumento { get; set; } = "123 233 9888";
     public string? Direccion { get; set; }
     public int MunicipioId { get; set; }

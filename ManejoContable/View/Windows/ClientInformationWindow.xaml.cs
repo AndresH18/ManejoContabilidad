@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,31 +20,23 @@ namespace ManejoContable.View.Windows
     /// </summary>
     public partial class ClientInformationWindow : Window
     {
-        private string TipoDocumentossss { get; set; }
+        public static readonly DependencyProperty ClienteProperty = DependencyProperty.Register(
+            "Cliente", typeof(Cliente), typeof(ClientInformationWindow), new PropertyMetadata(default(Cliente)));
 
-        private Cliente? _cliente;
-
-        public ClientInformationWindow(Cliente? cliente)
+        public Cliente Cliente
+        {
+            get { return (Cliente) GetValue(ClienteProperty); }
+            set { SetValue(ClienteProperty, value); }
+        }
+        public ClientInformationWindow(Cliente cliente)
         {
             InitializeComponent();
+
+            // ClientInformationControl.ClientInformationEditButton.Visibility = Visibility.Collapsed;
             Owner = Application.Current.MainWindow;
-            _cliente = cliente;
+
+            ShowInTaskbar = true;
         }
 
-        private void ActionButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (ReferenceEquals(sender, OkButton))
-            {
-                // TODO: Implement OkButton
-                MessageBox.Show("Implement OkButton");
-
-                var tipoDoc = TipoDocumentoComboBox.SelectedItem as Cliente;
-            }
-            else if (ReferenceEquals(sender, CancelButton))
-            {
-                DialogResult = false;
-                Close();
-            }
-        }
     }
 }

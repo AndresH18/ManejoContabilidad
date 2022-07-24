@@ -26,16 +26,16 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content="Escanear PDF" Click="UnimplementedButtonFunctionality_OnClick"/>
-            
+            <Button Grid.Column="0" Content="Escanear PDF" Click="UnimplementedButtonFunctionality_OnClick" />
+
             <!-- <StackPanel Grid.Column="2" Orientation="Horizontal"> -->
             <!--     <Button Content="Informacion Cliente"></Button> -->
             <!--     <Button Content=""></Button> -->
             <!-- </StackPanel> -->
 
             <StackPanel Grid.Column="4" Orientation="Horizontal">
-                <Button Content="Cancelar" Click="UnimplementedButtonFunctionality_OnClick"/>
-                <Button Content="Continuar" Click="UnimplementedButtonFunctionality_OnClick"/>
+                <Button Content="Cancelar" Click="UnimplementedButtonFunctionality_OnClick" />
+                <Button Content="Continuar" Click="UnimplementedButtonFunctionality_OnClick" />
             </StackPanel>
         </Grid>
 
@@ -51,13 +51,29 @@
 
 
             <!-- Info Cliente -->
-            <uc:ClientInformationControl Grid.Column="0" Grid.Row="0" />
+            <GroupBox Grid.Column="0" Grid.Row="0">
+                <GroupBox.Header>
+                    <Label Content="Informacion Cliente" />
+                </GroupBox.Header>
+                <uc:ClientInformationControl />
+            </GroupBox>
 
             <!-- Info ProductFactura -->
-            <uc:FacturaProductosDetailsControl Grid.Column="0" Grid.Row="1" />
-            <!-- Datos Totales -->
-            <uc:DatosTotales Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
 
+            <GroupBox Grid.Column="0" Grid.Row="1">
+                <GroupBox.Header>
+                    <Label Content="Detalles" />
+                </GroupBox.Header>
+
+                <uc:FacturaProductosDetailsControl />
+            </GroupBox>
+            <!-- Datos Totales -->
+            <GroupBox Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+                <GroupBox.Header>
+                    <Label Content="Detalles Totales" />
+                </GroupBox.Header>
+                <uc:DatosTotales Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
+            </GroupBox>
 
         </Grid>
 

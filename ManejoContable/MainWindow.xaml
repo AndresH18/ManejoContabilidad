@@ -20,6 +20,15 @@
 
                 <MenuItem Header="Salir" Click="ExitMenutItem_OnClick" />
             </MenuItem>
+            <MenuItem Header="Clientes">
+                <MenuItem Name="ViewClientsMenuItem"
+                          Header="Ver Clientes" 
+                          Click="ViewClientsMenuItem_OnClick" />
+                <MenuItem Header="Agregar" Click="MenuItem_OnClick" />
+                <MenuItem Header="Eliminar" Click="MenuItem_OnClick" />
+                <MenuItem Header="Buscar" Click="MenuItem_OnClick" />
+
+            </MenuItem>
             <Button Content="Hello" Click="ButtonBase_OnClick"></Button>
         </Menu>
 
