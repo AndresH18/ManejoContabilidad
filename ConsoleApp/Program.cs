@@ -1,7 +1,28 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
+using DbContextLibrary;
+using ModelEntities;
+
 Console.WriteLine("Hello, World!");
+
+using (var db = new ContabilidadDbContext())
+{
+    db.Clientes.Add(new Cliente() {Nombre = "Andres", TipoDocumento = TipoDocumento.Ti, NumeroDocumento = "EEEEEEE"});
+    Console.WriteLine("Saving Changes");
+    db.SaveChanges();
+    Console.WriteLine("Changes Saved");
+
+    db.Clientes.ToList()
+        .ForEach(c => Console.WriteLine("id={0}; nombre={1}, tipoDoc={2}", c.Id, c.Nombre, c.TipoDocumento));
+    db.Clientes.RemoveRange(db.Clientes.ToList());
+    db.SaveChanges();
+}
+
+Console.WriteLine();
+
+#region Probando Leer los Ensamblados
+
 // Console.WriteLine(DbConnectionHelper.DbContextOptions.ToString());
 //
 // // ReadFromEmbeddedResources();
@@ -37,3 +58,5 @@ Console.WriteLine("Hello, World!");
 // }
 
 // var a = Assembly.GetAssembly(typeof(App))
+
+#endregion
