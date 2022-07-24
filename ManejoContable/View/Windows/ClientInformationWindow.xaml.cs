@@ -21,6 +21,8 @@ namespace ManejoContable.View.Windows
     /// </summary>
     public partial class ClientInformationWindow : Window
     {
+        private string TipoDocumentossss { get; set; }
+
         private Cliente? _cliente;
 
         public ClientInformationWindow(Cliente? cliente)
@@ -36,11 +38,13 @@ namespace ManejoContable.View.Windows
             {
                 // TODO: Implement OkButton
                 MessageBox.Show("Implement OkButton");
+
+                var tipoDoc = TipoDocumentoComboBox.SelectedItem as Cliente;
             }
             else if (ReferenceEquals(sender, CancelButton))
             {
-                // TODO: Implement CancelButton
-                MessageBox.Show("Implement Cancel Button");
+                DialogResult = false;
+                Close();
             }
         }
     }

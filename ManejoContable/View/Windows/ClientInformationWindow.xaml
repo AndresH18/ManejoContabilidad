@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:model="clr-namespace:ModelEntities;assembly=ModelEntities"
         xmlns:local="clr-namespace:ManejoContable.View.Windows"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
@@ -22,10 +23,19 @@
         <Style TargetType="TextBox">
 
         </Style>
+
+        <ObjectDataProvider x:Key="TipoDocumentoSource"
+                            ObjectType="{x:Type system:Enum}"
+                            MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="model:TipoDocumento"/>
+            </ObjectDataProvider.MethodParameters>
+        
+        </ObjectDataProvider>
     </Window.Resources>
 
-    <Grid DataContext="{StaticResource Cliente}">
-
+    <!-- <Grid DataContext="{StaticResource Cliente}"> -->
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -70,16 +80,13 @@
                  Grid.Column="1"
                  Text="Numero Factura" />
 
-        <ComboBox Grid.Row="1"
+        <ComboBox Name="TipoDocumentoComboBox"
+                  Grid.Row="1"
                   Grid.Column="1"
                   Text="[CC, NIT, ...]"
-                  SelectedIndex="0">
-            <ComboBoxItem Content="Tipo de Documento"></ComboBoxItem>
-            <ComboBoxItem Content="this is 1" />
-            <ComboBoxItem Content="this is 2" />
-            <ComboBoxItem Content="there are 3" />
-            <ComboBoxItem Content="there are 4" />
-            <ComboBoxItem Content="but 5" />
+                  SelectedIndex="0"
+                  ItemsSource="{Binding Source={StaticResource TipoDocumentoSource}}">
+
         </ComboBox>
 
         <TextBox Grid.Row="1"
@@ -185,11 +192,11 @@
 
             <Button Name="CancelButton"
                     Content="Cancelar"
-                    Click="ActionButton_OnClick"/>
+                    Click="ActionButton_OnClick" />
 
             <Button Name="OkButton"
-                    Content="Aceptar" 
-                    Click="ActionButton_OnClick"/>
+                    Content="Aceptar"
+                    Click="ActionButton_OnClick" />
 
         </StackPanel>
     </Grid>
