@@ -10,10 +10,10 @@
       Title="AddClientPage">
 
     <Page.Resources>
-        <clientUserControls:EditUserInformationControl x:Key="UserInformationControl" />
+        <clientUserControls:EditClientInformationControl x:Key="UserInformationControl" />
     </Page.Resources>
 
     <Grid>
-        <clientUserControls:EditUserInformationControl />
+        <clientUserControls:EditClientInformationControl />
     </Grid>
 </Page>

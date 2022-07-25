@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ManejoContable.UserControls.ClientUserControls
 {
     /// <summary>
-    /// Interaction logic for EditUserInformationControl.xaml
+    /// Interaction logic for EditClientInformationControl.xaml
     /// </summary>
-    public partial class EditUserInformationControl : UserControl
+    public partial class EditClientInformationControl : UserControl
     {
-        public EditUserInformationControl()
+        public EditClientInformationControl()
         {
             InitializeComponent();
         }
