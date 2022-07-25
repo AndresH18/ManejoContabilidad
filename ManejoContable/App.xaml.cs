@@ -21,7 +21,7 @@ namespace ManejoContable
     {
         private const string DbNameString = "Contabilidad";
 
-        private static readonly string SettingsManifestResourceName = $"{typeof(App)}.appsettings.json";
+        private static readonly string SettingsManifestResourceName = "ManejoContable.appsettings.json";
 
         private static IConfigurationRoot? _config;
 
