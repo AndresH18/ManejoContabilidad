@@ -18,9 +18,9 @@ namespace ManejoContable.UserControls
     /// <summary>
     /// Interaction logic for DatosTotales.xaml
     /// </summary>
+    [Obsolete]
     public partial class DatosTotales : UserControl
     {
-
         // public static readonly DependencyProperty MyPropertyProperty = DependencyProperty.Register(
         //     "MyProperty", typeof(string), typeof(DatosTotales), new PropertyMetadata(default(string)));
         //

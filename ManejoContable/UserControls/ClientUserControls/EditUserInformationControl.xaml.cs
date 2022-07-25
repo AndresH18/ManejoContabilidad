@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,25 +10,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ModelEntities;
 
-namespace ManejoContable.View.Windows
+namespace ManejoContable.UserControls.ClientUserControls
 {
     /// <summary>
-    /// Interaction logic for EditClientInformationWindow.xaml
+    /// Interaction logic for EditUserInformationControl.xaml
     /// </summary>
-    public partial class EditClientInformationWindow : Window
+    public partial class EditUserInformationControl : UserControl
     {
-        private Cliente? _cliente;
-
-        public EditClientInformationWindow(Cliente? cliente)
+        public EditUserInformationControl()
         {
             InitializeComponent();
-            Owner = Application.Current.MainWindow;
-            _cliente = cliente;
         }
-
+        
         private void ActionButton_OnClick(object sender, RoutedEventArgs e)
         {
             if (ReferenceEquals(sender, OkButton))
@@ -37,12 +32,12 @@ namespace ManejoContable.View.Windows
                 // TODO: Implement OkButton
                 MessageBox.Show("Implement OkButton");
 
-                var tipoDoc = TipoDocumentoComboBox.SelectedItem as Cliente;
+                // var tipoDoc = TipoDocumentoComboBox.SelectedItem as Cliente;
             }
             else if (ReferenceEquals(sender, CancelButton))
             {
-                DialogResult = false;
-                Close();
+                // DialogResult = false;
+                // Close();
             }
         }
     }

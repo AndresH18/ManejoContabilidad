@@ -40,7 +40,7 @@ namespace ManejoContable
             //     new ClientInformationWindow(new Client() {Nombre = "Andres", NumeroDocumento = string.Empty}).Content);
         }
 
-        private void ExitMenutItem_OnClick(object sender, RoutedEventArgs e)
+        private void ExitMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
@@ -52,8 +52,15 @@ namespace ManejoContable
 
         private void ViewClientsMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            // TODO: Check if can Navigate
+            // TODO?: Check if can Navigate
             Frame.Navigate(new ViewClientsPage());
+        }
+
+        private void AddClientMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            // TODO? Check if can Navigate
+
+
         }
     }
 }

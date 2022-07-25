@@ -19,6 +19,7 @@ namespace ManejoContable.UserControls
     /// <summary>
     /// Interaction logic for FacturaProductosDetailsControl.xaml
     /// </summary>
+    [Obsolete]
     public partial class FacturaProductosDetailsControl : UserControl
     {
         private readonly List<ProductoFactura> _productoList = new List<ProductoFactura>();
@@ -46,9 +47,7 @@ namespace ManejoContable.UserControls
             {
                 // TODO: Implement RemoveButton functionality
                 MessageBox.Show("Implement Remove Functionality");
-
             }
-
         }
     }
 }

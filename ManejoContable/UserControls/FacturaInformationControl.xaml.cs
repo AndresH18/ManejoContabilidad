@@ -20,6 +20,7 @@ namespace ManejoContable.UserControls
     /// <summary>
     /// Interaction logic for FacturaInformationControl.xaml
     /// </summary>
+    [Obsolete]
     public partial class FacturaInformationControl : UserControl
     {
         public static readonly DependencyProperty ClienteProperty = DependencyProperty.Register(
@@ -28,17 +29,16 @@ namespace ManejoContable.UserControls
 
         private static void ClientPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var clientInformationControl = (FacturaInformationControl) d;
+            var clientInformationControl = (FacturaInformationControl)d;
 
             if (e.NewValue is Cliente c)
             {
-                
             }
         }
 
         public Cliente? Cliente
         {
-            get => (Cliente?) GetValue(ClienteProperty);
+            get => (Cliente?)GetValue(ClienteProperty);
             set => SetValue(ClienteProperty, value);
         }
 

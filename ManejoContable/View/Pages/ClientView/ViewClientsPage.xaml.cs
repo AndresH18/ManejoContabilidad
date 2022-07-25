@@ -17,7 +17,7 @@ namespace ManejoContable.View.Pages.ClientView
         public ViewClientsPage()
         {
             InitializeComponent();
-            ClientsDataGrid.ItemsSource = new List<Cliente>()
+            ClientsDataGrid.ItemsSource = new List<Cliente>
             {
                 new() {Nombre = "Imporcom", NumeroDocumento = "123-456-7890", TipoDocumento = TipoDocumento.Nit},
                 new() {Nombre = "Andres' Programmers SAS", NumeroDocumento = "111-222-33-44"}
