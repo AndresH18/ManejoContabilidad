@@ -37,7 +37,7 @@ namespace ManejoContable
             MessageBox.Show(message);
 
             // Frame.Navigate(
-            //     new ClientInformationWindow(new Cliente() {Nombre = "Andres", NumeroDocumento = string.Empty}).Content);
+            //     new ClientInformationWindow(new Client() {Nombre = "Andres", NumeroDocumento = string.Empty}).Content);
         }
 
         private void ExitMenutItem_OnClick(object sender, RoutedEventArgs e)

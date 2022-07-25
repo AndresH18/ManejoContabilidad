@@ -37,7 +37,7 @@ namespace ManejoContable.View.Pages.ClientView
             };
             if (clientDialog.ShowDialog() == true)
             {
-                // TODO: refrescar informacion
+                // TODO: Refresh information
             }
         }
     }

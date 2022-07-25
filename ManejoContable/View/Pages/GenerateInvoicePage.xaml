@@ -53,7 +53,7 @@
             <!-- Info Cliente -->
             <GroupBox Grid.Column="0" Grid.Row="0">
                 <GroupBox.Header>
-                    <Label Content="Informacion Cliente" />
+                    <Label Content="Informacion Client" />
                 </GroupBox.Header>
                 <uc:FacturaInformationControl />
             </GroupBox>

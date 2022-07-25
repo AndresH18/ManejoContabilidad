@@ -23,7 +23,7 @@ namespace ManejoContable.UserControls
     public partial class FacturaInformationControl : UserControl
     {
         public static readonly DependencyProperty ClienteProperty = DependencyProperty.Register(
-            "Cliente", typeof(Cliente), typeof(FacturaInformationControl),
+            "Client", typeof(Cliente), typeof(FacturaInformationControl),
             new PropertyMetadata(default(Cliente?), ClientPropertyChanged));
 
         private static void ClientPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

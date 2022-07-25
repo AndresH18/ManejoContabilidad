@@ -20,15 +20,23 @@ namespace ManejoContable.View.Windows
     /// </summary>
     public partial class ClientInformationWindow : Window
     {
-        public Cliente Cliente { get; }
-        public ClientInformationWindow(Cliente cliente)
+        public static readonly DependencyProperty ClientProperty = DependencyProperty.Register(
+            "Client", typeof(Cliente), typeof(ClientInformationWindow), new PropertyMetadata(default(Cliente)));
+
+        public Cliente Client
+        {
+            get { return (Cliente)GetValue(ClientProperty); }
+            set { SetValue(ClientProperty, value); }
+        }
+        public ClientInformationWindow(Cliente client)
         {
             InitializeComponent();
-            Cliente = cliente;
+            Client = client;
             // FacturaInformationControl.ClientInformationEditButton.Visibility = Visibility.Collapsed;
             Owner = Application.Current.MainWindow;
 
             ShowInTaskbar = true;
+            // DataContext = this;
         }
 
     }

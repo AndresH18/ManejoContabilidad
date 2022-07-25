@@ -75,23 +75,23 @@
 
         <TextBlock Grid.Row="1"
                    Grid.Column="1"
-                   Text="{Binding Cliente.TipoDocumento}"
+                   Text="{Binding Client.TipoDocumento}"
                    d:Text="[CC, NIT, ...]" />
 
         <TextBlock Grid.Row="1"
                    Grid.Column="3"
-                   Text="{Binding Cliente.NumeroDocumento}"
+                   Text="{Binding Client.NumeroDocumento}"
                    d:Text="Num Doc" />
 
         <TextBlock Grid.Row="4"
                    Grid.Column="3"
-                   Text="{Binding Cliente.TipoContribuyente}"
+                   Text="{Binding Client.TipoContribuyente}"
                    d:Text="[Persona Juridica, ...]" />
 
         <TextBlock Grid.Row="0"
                    Grid.Column="1"
-                   Text="{Binding Cliente.Nombre}"
-                   d:Text="Nombre Cliente" />
+                   Text="{Binding Client.Nombre, Mode=OneWay}"
+                   d:Text="Nombre Client" />
 
         <Label Content="Regimen Contable"
                Style="{StaticResource LabelStyle}"
@@ -129,12 +129,12 @@
 
         <TextBlock Grid.Column="1"
                    Grid.Row="5"
-                   Text="{Binding Cliente.RegimenContable}"
+                   Text="{Binding Client.RegimenContable}"
                    d:Text="regimen contable" />
 
         <TextBlock Grid.Column="3"
                    Grid.Row="5"
-                   Text="{Binding Cliente.Responsabilidad}"
+                   Text="{Binding Client.Responsabilidad}"
                    d:Text="tipo responsabilidad" />
 
         <!-- TODO: Bind to Departamento -->
@@ -148,17 +148,17 @@
 
         <TextBlock Grid.Row="3"
                    Grid.Column="1"
-                   Text="{Binding Cliente.Direccion}"
+                   Text="{Binding Client.Direccion}"
                    d:Text="Direccion" />
 
         <TextBlock Grid.Row="3"
                    Grid.Column="3"
-                   Text="{Binding Cliente.Correo}"
+                   Text="{Binding Client.Correo}"
                    d:Text="Correo" />
 
         <TextBlock Grid.Row="4"
                    Grid.Column="1"
-                   Text="{Binding Cliente.Telefono}"
+                   Text="{Binding Client.Telefono}"
                    d:Text="Telefono" />
 
 
