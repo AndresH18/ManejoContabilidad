@@ -9,14 +9,16 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
         Title="ClientInformationWindow" Height="450" Width="800"
+        MinHeight="450" MinWidth="800"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
     <Window.Resources>
         <modelEntities:Cliente x:Key="Cliente" />
         <Style TargetType="TextBlock">
-            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="TextAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="TextWrapping" Value="Wrap"></Setter>
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Margin" Value="50,0,0,0"/>
         </Style>
         <Style TargetType="Label" x:Key="LabelStyle">
             <Setter Property="FontWeight" Value="Bold" />
@@ -34,6 +36,7 @@
     <!-- -->
     <!-- -->
     <!-- </Grid> -->
+
     <Grid Name="Grid">
 
         <Grid.RowDefinitions>
@@ -140,11 +143,12 @@
         <!-- TODO: Bind to Departamento -->
         <TextBlock Grid.Column="1"
                    Grid.Row="2"
-                   Text="Departamento" />
+                   Text="...Departamento..." />
+
         <!-- TODO: Bind to Municipio -->
         <TextBlock Grid.Column="3"
                    Grid.Row="2"
-                   Text="Municipio" />
+                   Text="...Municipio..." />
 
         <TextBlock Grid.Row="3"
                    Grid.Column="1"
@@ -163,5 +167,4 @@
 
 
     </Grid>
-
 </Window>
