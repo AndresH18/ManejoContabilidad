@@ -26,5 +26,11 @@ namespace ManejoContable.View.Pages
 
 
         }
+
+        private void UnimplementedButtonFunctionality_OnClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Functionality not yet Implemented");
+        }
+
     }
 }

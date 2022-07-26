@@ -9,9 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbContextLibrary", "Contabi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{39D7018F-7C70-494C-B39A-AC8C3FF32E2C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{F591AAE6-D6E9-409B-A0C4-14AD54A7ED99}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelEntities", "ModelEntities\ModelEntities.csproj", "{B2BAEFD0-BAC4-4597-A2CC-DA37CCADBC6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelEntities", "ModelEntities\ModelEntities.csproj", "{B2BAEFD0-BAC4-4597-A2CC-DA37CCADBC6B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +29,6 @@ Global
 		{39D7018F-7C70-494C-B39A-AC8C3FF32E2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39D7018F-7C70-494C-B39A-AC8C3FF32E2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39D7018F-7C70-494C-B39A-AC8C3FF32E2C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F591AAE6-D6E9-409B-A0C4-14AD54A7ED99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F591AAE6-D6E9-409B-A0C4-14AD54A7ED99}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F591AAE6-D6E9-409B-A0C4-14AD54A7ED99}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F591AAE6-D6E9-409B-A0C4-14AD54A7ED99}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B2BAEFD0-BAC4-4597-A2CC-DA37CCADBC6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B2BAEFD0-BAC4-4597-A2CC-DA37CCADBC6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2BAEFD0-BAC4-4597-A2CC-DA37CCADBC6B}.Release|Any CPU.ActiveCfg = Release|Any CPU

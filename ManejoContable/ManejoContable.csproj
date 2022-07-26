@@ -8,6 +8,16 @@
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
@@ -25,13 +35,12 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\ContabilidadDbContext\DbContextLibrary.csproj" />
 	  <ProjectReference Include="..\ModelEntities\ModelEntities.csproj" />
-	  <ProjectReference Include="..\Shared\Shared.csproj" />
 	</ItemGroup>
 
 
 	<ItemGroup>
+	  <Folder Include="UserControls\EventArgs\" />
 	  <Folder Include="ViewModel\" />
-	  <Folder Include="View\Windows\" />
 	</ItemGroup>
 
 </Project>

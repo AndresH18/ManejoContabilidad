@@ -10,25 +10,72 @@
       Title="FacturaPage"
       Background="WhiteSmoke">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="4*" />
-            <ColumnDefinition Width="2*" />
-        </Grid.ColumnDefinitions>
+    <DockPanel>
+        <Grid DockPanel.Dock="Bottom" Margin="5, 2">
+            <Grid.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="5, 0" />
+                    <Setter Property="Padding" Value="10, 5"></Setter>
+                </Style>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Content="Escanear PDF" Click="UnimplementedButtonFunctionality_OnClick" />
+
+            <!-- <StackPanel Grid.Column="2" Orientation="Horizontal"> -->
+            <!--     <Button Content="Informacion Cliente"></Button> -->
+            <!--     <Button Content=""></Button> -->
+            <!-- </StackPanel> -->
+
+            <StackPanel Grid.Column="4" Orientation="Horizontal">
+                <Button Content="Cancelar" Click="UnimplementedButtonFunctionality_OnClick" />
+                <Button Content="Continuar" Click="UnimplementedButtonFunctionality_OnClick" />
+            </StackPanel>
+        </Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="6*" />
+                <ColumnDefinition Width="3*" MaxWidth="500" />
+            </Grid.ColumnDefinitions>
 
 
-        <!-- Info Cliente -->
-        <uc:ClientInformationControl Grid.Column="0" Grid.Row="0" />
+            <!-- Info Cliente -->
+            <GroupBox Grid.Column="0" Grid.Row="0">
+                <GroupBox.Header>
+                    <Label Content="Informacion Client" />
+                </GroupBox.Header>
+                <uc:FacturaInformationControl />
+            </GroupBox>
 
-        <!-- Info ProductFactura -->
-        <uc:FacturaProductosDetailsControl Grid.Column="0" Grid.Row="1" />
-        <!-- Datos Totales -->
-        <uc:DatosTotales Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
+            <!-- Info ProductFactura -->
 
+            <GroupBox Grid.Column="0" Grid.Row="1">
+                <GroupBox.Header>
+                    <Label Content="Detalles" />
+                </GroupBox.Header>
 
-    </Grid>
+                <uc:FacturaProductosDetailsControl />
+            </GroupBox>
+            <!-- Datos Totales -->
+            <GroupBox Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+                <GroupBox.Header>
+                    <Label Content="Detalles Totales" />
+                </GroupBox.Header>
+                <uc:DatosTotales Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
+            </GroupBox>
+
+        </Grid>
+
+    </DockPanel>
 </Page>

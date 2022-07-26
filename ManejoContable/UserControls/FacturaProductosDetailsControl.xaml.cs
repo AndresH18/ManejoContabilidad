@@ -19,10 +19,11 @@ namespace ManejoContable.UserControls
     /// <summary>
     /// Interaction logic for FacturaProductosDetailsControl.xaml
     /// </summary>
+    [Obsolete]
     public partial class FacturaProductosDetailsControl : UserControl
     {
-
         private readonly List<ProductoFactura> _productoList = new List<ProductoFactura>();
+
         public FacturaProductosDetailsControl()
         {
             InitializeComponent();
@@ -33,8 +34,20 @@ namespace ManejoContable.UserControls
             }
 
             ProductsGrid.ItemsSource = _productoList;
-
         }
 
+        private void GridButtons_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (ReferenceEquals(sender, AddButton))
+            {
+                // TODO: Implement AddButton functionality
+                MessageBox.Show("Implement Add Functionality");
+            }
+            else if (ReferenceEquals(sender, RemoveButton))
+            {
+                // TODO: Implement RemoveButton functionality
+                MessageBox.Show("Implement Remove Functionality");
+            }
+        }
     }
 }
