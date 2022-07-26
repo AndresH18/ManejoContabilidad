@@ -1,13 +1,14 @@
 ﻿<UserControl x:Class="ManejoContable.UserControls.ClientUserControls.EditClientInformationControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ManejoContable.UserControls.ClientUserControls"
              xmlns:modelEntities="clr-namespace:ModelEntities;assembly=ModelEntities"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
     <UserControl.Resources>
         <modelEntities:Cliente x:Key="Cliente" />
@@ -15,8 +16,11 @@
         <Style TargetType="Label">
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="10, 0"></Setter>
+
         </Style>
         <Style TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
 
         </Style>
 
@@ -24,7 +28,7 @@
                             ObjectType="{x:Type system:Enum}"
                             MethodName="GetValues">
             <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="modelEntities:TipoDocumento"/>
+                <x:Type TypeName="modelEntities:TipoDocumento" />
             </ObjectDataProvider.MethodParameters>
 
         </ObjectDataProvider>
@@ -50,14 +54,9 @@
 
         </Grid.ColumnDefinitions>
 
-
-        <Label Content="Numero Factura"
-               Grid.Row="0"
-               Grid.Column="0" />
-
         <Label Content="Nombre Comercial"
                Grid.Row="0"
-               Grid.Column="2" />
+               Grid.Column="0" />
 
         <Label Content="Tipo Documento"
                Grid.Row="1"
@@ -71,28 +70,65 @@
                Grid.Row="4"
                Grid.Column="2" />
 
-
         <TextBox Grid.Row="0"
                  Grid.Column="1"
-                 Text="Numero Factura" />
+                 Text="{Binding Cliente.Nombre}"
+                 d:Text="Nombre Client" />
 
         <ComboBox Name="TipoDocumentoComboBox"
                   Grid.Row="1"
                   Grid.Column="1"
-                  Text="[CC, NIT, ...]"
-                  SelectedIndex="0"
-                  ItemsSource="{Binding Source={StaticResource TipoDocumentoSource}}">
-
-        </ComboBox>
+                  d:Text="[CC, NIT, ...]"
+                  SelectedValue="{Binding Cliente.TipoDocumento}"
+                  d:SelectedIndex="0"
+                  ItemsSource="{Binding Source={StaticResource TipoDocumentoSource}}" />
 
         <TextBox Grid.Row="1"
                  Grid.Column="3"
-                 Text="Num Doc" />
+                 Text="{Binding Cliente.NumeroDocumento}"
+                 d:Text="Num Doc" />
 
+        <!-- TODO: Bind to Municipio and Departamento -->
+        <ComboBox Grid.Column="1"
+                  Grid.Row="2"
+                  SelectedIndex="0">
+            <ComboBoxItem Content="Departamento" />
+            <ComboBoxItem Content="this is 1" />
+            <ComboBoxItem Content="this is 2" />
+            <ComboBoxItem Content="there are 3" />
+            <ComboBoxItem Content="there are 4" />
+            <ComboBoxItem Content="but 5" />
+        </ComboBox>
+
+        <ComboBox Grid.Column="3"
+                  Grid.Row="2"
+                  SelectedIndex="0">
+            <ComboBoxItem Content="Municipio" />
+            <ComboBoxItem Content="this is 1" />
+            <ComboBoxItem Content="this is 2" />
+            <ComboBoxItem Content="there are 3" />
+            <ComboBoxItem Content="there are 4" />
+            <ComboBoxItem Content="but 5" />
+        </ComboBox>
+
+        <TextBox Grid.Row="3"
+                 Grid.Column="1"
+                 Text="{Binding Cliente.Direccion}"
+                 d:Text="Direccion" />
+
+        <TextBox Grid.Row="3"
+                 Grid.Column="3"
+                 d:Text="Correo" />
+
+        <TextBox Grid.Row="4"
+                 Grid.Column="1"
+                 Text="{Binding Cliente.Telefono}"
+                 d:Text="Telefono" />
+
+        <!-- TODO: Bind to Tipo Contribuyente -->
         <ComboBox Grid.Row="4"
                   Grid.Column="3"
                   SelectedIndex="0">
-
             <ComboBoxItem Content="[persona juridica]"></ComboBoxItem>
             <ComboBoxItem Content="this is 1" />
             <ComboBoxItem Content="this is 2" />
@@ -101,10 +137,16 @@
             <ComboBoxItem Content="but 5" />
         </ComboBox>
 
-        <TextBox Grid.Row="0"
-                 Grid.Column="3"
-                 Text="Nombre Client" />
-
+        <!-- TODO: Bind Regimen Contable -->
+        <TextBox Grid.Column="1"
+                   Grid.Row="5"
+                   HorizontalContentAlignment="Center"
+                   Text="???" />
+        <!-- TODO: Bind Tipo Responsabilidad -->
+        <TextBox Grid.Column="3"
+                   Grid.Row="5"
+                   HorizontalContentAlignment="Center"
+                   Text="???" />
 
         <Label Content="Regimen Contable"
                Grid.Column="0"
@@ -133,47 +175,6 @@
                Grid.Column="0"
                Grid.Row="4" />
 
-        <TextBlock Grid.Column="1"
-                   Grid.Row="5"
-                   HorizontalAlignment="Center"
-                   Text="???" />
-
-        <TextBlock Grid.Column="3"
-                   Grid.Row="5"
-                   HorizontalAlignment="Center"
-                   Text="???" />
-
-
-        <ComboBox Grid.Column="1"
-                  Grid.Row="2"
-                  SelectedIndex="0">
-            <ComboBoxItem Content="Departamento" />
-            <ComboBoxItem Content="this is 1" />
-            <ComboBoxItem Content="this is 2" />
-            <ComboBoxItem Content="there are 3" />
-            <ComboBoxItem Content="there are 4" />
-            <ComboBoxItem Content="but 5" />
-        </ComboBox>
-        <ComboBox Grid.Column="3"
-                  Grid.Row="2"
-                  SelectedIndex="0">
-            <ComboBoxItem Content="Municipio" />
-            <ComboBoxItem Content="this is 1" />
-            <ComboBoxItem Content="this is 2" />
-            <ComboBoxItem Content="there are 3" />
-            <ComboBoxItem Content="there are 4" />
-            <ComboBoxItem Content="but 5" />
-        </ComboBox>
-        <TextBox Grid.Row="3"
-                 Grid.Column="1"
-                 Text="Direccion" />
-        <TextBox Grid.Row="4"
-                 Grid.Column="1"
-                 Text="Telefono" />
-
-        <TextBox Grid.Row="3"
-                 Grid.Column="3"
-                 Text="Correo" />
 
         <StackPanel Grid.Row="6" Grid.Column="0"
                     Grid.ColumnSpan="4"
@@ -188,11 +189,11 @@
 
             <Button Name="CancelButton"
                     Content="Cancelar"
-                    Click="ActionButton_OnClick" />
+                    Click="CancelButton_OnClick" />
 
             <Button Name="OkButton"
                     Content="Aceptar"
-                    Click="ActionButton_OnClick" />
+                    Click="OkButton_OnClick" />
 
         </StackPanel>
     </Grid>

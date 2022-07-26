@@ -26,17 +26,6 @@
         </Style>
     </Window.Resources>
 
-
-    <!-- <Grid> -->
-    <!--     ~1~ TODO: Crear elementos para mostrar datos del Cliente @1@ -->
-    <!--     ~1~ <control:FacturaInformationControl x:Name="ClientInformationControl"  @1@ -->
-    <!--     ~1~                                   DataContext="{StaticResource Cliente}" @1@ -->
-    <!--     ~1~                                   Cliente="{Binding}" /> @1@ -->
-    <!-- -->
-    <!-- -->
-    <!-- -->
-    <!-- </Grid> -->
-
     <Grid Name="Grid">
 
         <Grid.RowDefinitions>
@@ -93,7 +82,7 @@
 
         <TextBlock Grid.Row="0"
                    Grid.Column="1"
-                   Text="{Binding Client.Nombre, Mode=OneWay}"
+                   Text="{Binding Client.Nombre}"
                    d:Text="Nombre Client" />
 
         <Label Content="Regimen Contable"
@@ -164,7 +153,6 @@
                    Grid.Column="1"
                    Text="{Binding Client.Telefono}"
                    d:Text="Telefono" />
-
 
     </Grid>
 </Window>

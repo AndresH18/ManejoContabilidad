@@ -9,11 +9,9 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddClientPage">
 
-    <Page.Resources>
-        <clientUserControls:EditClientInformationControl x:Key="UserInformationControl" />
-    </Page.Resources>
 
     <Grid>
-        <clientUserControls:EditClientInformationControl />
+        <clientUserControls:EditClientInformationControl x:Name="ClientInformationControl"
+                                                         Margin="10" />
     </Grid>
 </Page>

@@ -39,6 +39,7 @@
 
 
 	<ItemGroup>
+	  <Folder Include="UserControls\EventArgs\" />
 	  <Folder Include="ViewModel\" />
 	</ItemGroup>
 

@@ -59,8 +59,7 @@ namespace ManejoContable
         private void AddClientMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             // TODO? Check if can Navigate
-
-
+            Frame.Navigate(new AddClientPage());
         }
     }
 }

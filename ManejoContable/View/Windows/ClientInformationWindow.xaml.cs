@@ -26,7 +26,7 @@ namespace ManejoContable.View.Windows
         public Cliente Client
         {
             get { return (Cliente)GetValue(ClientProperty); }
-            set { SetValue(ClientProperty, value); }
+            private init { SetValue(ClientProperty, value); }
         }
         public ClientInformationWindow(Cliente client)
         {

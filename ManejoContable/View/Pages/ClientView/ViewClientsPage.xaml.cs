@@ -13,7 +13,6 @@ namespace ManejoContable.View.Pages.ClientView
     /// </summary>
     public partial class ViewClientsPage : Page
     {
-
         public ViewClientsPage()
         {
             InitializeComponent();
@@ -33,7 +32,6 @@ namespace ManejoContable.View.Pages.ClientView
             var clientDialog = new ClientInformationWindow(rowCliente)
             {
                 // Owner = Application.Current.MainWindow
-
             };
             if (clientDialog.ShowDialog() == true)
             {
