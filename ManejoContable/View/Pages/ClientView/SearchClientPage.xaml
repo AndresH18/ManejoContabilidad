@@ -1,0 +1,84 @@
+﻿<Page x:Class="ManejoContable.View.Pages.ClientView.SearchClientPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:ManejoContable.View.Pages.ClientView"
+      xmlns:manejoContable="clr-namespace:ManejoContable"
+      xmlns:system="clr-namespace:System;assembly=System.Runtime"
+      xmlns:modelEntities="clr-namespace:ModelEntities;assembly=ModelEntities"
+      mc:Ignorable="d"
+      Title="SearchClientPage" Height="450" Width="800">
+
+
+    <Page.Resources>
+        <ObjectDataProvider x:Key="DocumentTypeProvider"
+                            ObjectType="{x:Type system:Enum}"
+                            MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="modelEntities:TipoDocumento" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Grid.Column="0">
+            <GroupBox.Header>
+                <Label Content="Filtros" />
+            </GroupBox.Header>
+
+            <StackPanel VerticalAlignment="Center">
+                <CheckBox Name="DocumentTypeCheckBox"
+                          Content="Tipo de Documento" />
+                <CheckBox Name="DocumentNumberCheckbox"
+                          Content="Numero Documento" />
+                <CheckBox Name="ClientNameCheckBox"
+                          Content="Nombre" />
+
+                <!-- TODO: Ver que otros elementos agregar a los filtros -->
+                <Button Content="Buscar"
+                        Margin="5, 15"
+                        Click="SearchButton_OnClick">
+                </Button>
+            </StackPanel>
+
+        </GroupBox>
+
+        <GroupBox Grid.Column="1">
+            <GroupBox.Header>
+                <Label Content="Buscar"></Label>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0" Content="Nombre Cliente" />
+                <Label Grid.Column="0" Grid.Row="1" Content="Tipo Documento" />
+                <Label Grid.Column="0" Grid.Row="2" Content="Numero Documento" />
+
+
+                <TextBox Name="NameTextBox"
+                         Grid.Column="1" Grid.Row="0" />
+
+                <ComboBox Name="DocumentTypeComboBox"
+                          Grid.Column="1" Grid.Row="1"
+                          ItemsSource="{Binding Source={StaticResource DocumentTypeProvider}}" />
+                <TextBox Name="DocumentNumberTextBox"
+                         Grid.Column="1" Grid.Row="2" />
+                
+
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Page>

@@ -13,6 +13,7 @@ namespace ManejoContable.View.Pages.ClientView
     /// </summary>
     public partial class ViewClientsPage : Page
     {
+        
         public ViewClientsPage()
         {
             InitializeComponent();
@@ -22,6 +23,13 @@ namespace ManejoContable.View.Pages.ClientView
                 new() {Nombre = "Andres' Programmers SAS", NumeroDocumento = "111-222-33-44"}
             };
         }
+
+        public ViewClientsPage(IEnumerable<Cliente> clientes)
+        {
+            InitializeComponent();
+            ClientsDataGrid.ItemsSource = clientes;
+        }
+        
 
         private void DataGridRowDoubleClick_OnHandler(object sender, MouseButtonEventArgs e)
         {
