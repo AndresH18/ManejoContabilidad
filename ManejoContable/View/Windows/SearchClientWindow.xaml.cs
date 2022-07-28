@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
+using System.Windows.Automation;
 using ManejoContable.View.Pages.ClientView;
 using ModelEntities;
 
@@ -33,9 +35,18 @@ public partial class SearchClientWindow : Window
                     Nombre = "Fernando", NumeroDocumento = Guid.NewGuid().ToString(), TipoDocumento = TipoDocumento.Ti
                 }
             };
-            var clientPage = new ViewClientsPage(results);
-            Close();
-            mainWindow.Frame.Navigate(clientPage);
+            if (results.Count > 0)
+            {
+                var clientPage = new ViewClientsPage(results);
+                Close();
+                mainWindow.Frame.Navigate(clientPage);
+            }
+            else
+            {
+                MessageBox.Show("No existen Clientes con estos campos");
+            }
+
+            
         }
     }
 }
