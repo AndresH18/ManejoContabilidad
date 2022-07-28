@@ -61,5 +61,10 @@ namespace ManejoContable
             // TODO? Check if can Navigate
             Frame.Navigate(new AddClientPage());
         }
+
+        private void SearchClientsMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            var r = new SearchClientWindow(){Owner = this}.ShowDialog();
+        }
     }
 }

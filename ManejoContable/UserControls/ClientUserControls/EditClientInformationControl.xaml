@@ -78,9 +78,8 @@
         <ComboBox Name="TipoDocumentoComboBox"
                   Grid.Row="1"
                   Grid.Column="1"
-                  d:Text="[CC, NIT, ...]"
                   SelectedValue="{Binding Cliente.TipoDocumento}"
-                  d:SelectedIndex="0"
+                  d:SelectedIndex="0"   
                   ItemsSource="{Binding Source={StaticResource TipoDocumentoSource}}" />
 
         <TextBox Grid.Row="1"

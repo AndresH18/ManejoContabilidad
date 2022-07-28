@@ -13,6 +13,7 @@ namespace ManejoContable.View.Pages.ClientView
     /// </summary>
     public partial class ViewClientsPage : Page
     {
+        
         public ViewClientsPage()
         {
             InitializeComponent();
@@ -23,6 +24,13 @@ namespace ManejoContable.View.Pages.ClientView
             };
         }
 
+        public ViewClientsPage(IEnumerable<Cliente> clientes)
+        {
+            InitializeComponent();
+            ClientsDataGrid.ItemsSource = clientes;
+        }
+        
+
         private void DataGridRowDoubleClick_OnHandler(object sender, MouseButtonEventArgs e)
         {
             Debug.WriteLine(
@@ -31,7 +39,7 @@ namespace ManejoContable.View.Pages.ClientView
             var rowCliente = (Cliente) ClientsDataGrid.SelectedItem;
             var clientDialog = new ClientInformationWindow(rowCliente)
             {
-                // Owner = Application.Current.MainWindow
+                Owner = Application.Current.MainWindow as MainWindow
             };
             if (clientDialog.ShowDialog() == true)
             {
