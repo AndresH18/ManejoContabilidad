@@ -11,15 +11,17 @@
         ShowInTaskbar="False"
         Title="ClientInformationWindow" Height="450" Width="800"
         MinHeight="450" MinWidth="800"
+        ResizeMode="NoResize"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
     <Window.Resources>
         <modelEntities:Cliente x:Key="Cliente" />
+
         <Style TargetType="TextBlock">
             <Setter Property="TextAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="TextWrapping" Value="Wrap" />
-            <Setter Property="Margin" Value="50,0,0,0"/>
+            <Setter Property="Margin" Value="50,0,0,0" />
         </Style>
         <Style TargetType="Label" x:Key="LabelStyle">
             <Setter Property="FontWeight" Value="Bold" />
@@ -27,8 +29,7 @@
         </Style>
     </Window.Resources>
 
-    <Grid Name="Grid">
-
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -68,22 +69,22 @@
 
         <TextBlock Grid.Row="1"
                    Grid.Column="1"
-                   Text="{Binding Client.TipoDocumento}"
+                   Text="{Binding Cliente.TipoDocumento}"
                    d:Text="[CC, NIT, ...]" />
 
         <TextBlock Grid.Row="1"
                    Grid.Column="3"
-                   Text="{Binding Client.NumeroDocumento}"
+                   Text="{Binding Cliente.NumeroDocumento}"
                    d:Text="Num Doc" />
 
         <TextBlock Grid.Row="4"
                    Grid.Column="3"
-                   Text="{Binding Client.TipoContribuyente}"
+                   Text="{Binding Cliente.TipoContribuyente}"
                    d:Text="[Persona Juridica, ...]" />
 
         <TextBlock Grid.Row="0"
                    Grid.Column="1"
-                   Text="{Binding Client.Nombre}"
+                   Text="{Binding Cliente.Nombre}"
                    d:Text="Nombre Client" />
 
         <Label Content="Regimen Contable"
@@ -122,12 +123,12 @@
 
         <TextBlock Grid.Column="1"
                    Grid.Row="5"
-                   Text="{Binding Client.RegimenContable}"
+                   Text="{Binding Cliente.RegimenContable}"
                    d:Text="regimen contable" />
 
         <TextBlock Grid.Column="3"
                    Grid.Row="5"
-                   Text="{Binding Client.Responsabilidad}"
+                   Text="{Binding Cliente.Responsabilidad}"
                    d:Text="tipo responsabilidad" />
 
         <!-- TODO: Bind to Departamento -->
@@ -142,17 +143,17 @@
 
         <TextBlock Grid.Row="3"
                    Grid.Column="1"
-                   Text="{Binding Client.Direccion}"
+                   Text="{Binding Cliente.Direccion}"
                    d:Text="Direccion" />
 
         <TextBlock Grid.Row="3"
                    Grid.Column="3"
-                   Text="{Binding Client.Correo}"
+                   Text="{Binding Cliente.Correo}"
                    d:Text="Correo" />
 
         <TextBlock Grid.Row="4"
                    Grid.Column="1"
-                   Text="{Binding Client.Telefono}"
+                   Text="{Binding Cliente.Telefono}"
                    d:Text="Telefono" />
 
     </Grid>

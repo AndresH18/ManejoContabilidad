@@ -46,5 +46,15 @@ namespace ManejoContable.View.Pages.ClientView
                 // TODO: Refresh information
             }
         }
+
+        private void Search_OnClick(object sender, RoutedEventArgs e)
+        {
+            // TODO: filter results according to the filters
+        }
+
+        private void Clear_OnClick(object sender, RoutedEventArgs e)
+        {
+            // TODO: Set fields to empty and restore to original results
+        }
     }
 }
