@@ -33,9 +33,7 @@ namespace ManejoContable.View.Windows
             InitializeComponent();
             Client = client;
             // FacturaInformationControl.ClientInformationEditButton.Visibility = Visibility.Collapsed;
-            Owner = Application.Current.MainWindow;
 
-            ShowInTaskbar = true;
             // DataContext = this;
         }
 
