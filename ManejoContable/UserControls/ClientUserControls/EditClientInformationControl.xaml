@@ -12,18 +12,6 @@
 
     <UserControl.Resources>
         <modelEntities:Cliente x:Key="Cliente" />
-
-        <Style TargetType="Label">
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="10, 0"></Setter>
-
-        </Style>
-        <Style TargetType="TextBox">
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-
-        </Style>
-
         <ObjectDataProvider x:Key="TipoDocumentoSource"
                             ObjectType="{x:Type system:Enum}"
                             MethodName="GetValues">
@@ -32,6 +20,19 @@
             </ObjectDataProvider.MethodParameters>
 
         </ObjectDataProvider>
+
+        <Style TargetType="Label">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="10, 0" />
+
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+
+        </Style>
+
+
     </UserControl.Resources>
 
 
@@ -72,19 +73,19 @@
 
         <TextBox Grid.Row="0"
                  Grid.Column="1"
-                 Text="{Binding Cliente.Nombre}"
+                 Text="{Binding Cliente.Nombre, Mode=OneWay}"
                  d:Text="Nombre Client" />
 
         <ComboBox Name="TipoDocumentoComboBox"
                   Grid.Row="1"
                   Grid.Column="1"
-                  SelectedValue="{Binding Cliente.TipoDocumento}"
-                  d:SelectedIndex="0"   
+                  SelectedValue="{Binding Cliente.TipoDocumento, Mode=OneWay}"
+                  d:SelectedIndex="0"
                   ItemsSource="{Binding Source={StaticResource TipoDocumentoSource}}" />
 
         <TextBox Grid.Row="1"
                  Grid.Column="3"
-                 Text="{Binding Cliente.NumeroDocumento}"
+                 Text="{Binding Cliente.NumeroDocumento, Mode=OneWay}"
                  d:Text="Num Doc" />
 
         <!-- TODO: Bind to Municipio and Departamento -->
@@ -112,7 +113,7 @@
 
         <TextBox Grid.Row="3"
                  Grid.Column="1"
-                 Text="{Binding Cliente.Direccion}"
+                 Text="{Binding Cliente.Direccion, Mode=OneWay}"
                  d:Text="Direccion" />
 
         <TextBox Grid.Row="3"
@@ -121,14 +122,14 @@
 
         <TextBox Grid.Row="4"
                  Grid.Column="1"
-                 Text="{Binding Cliente.Telefono}"
+                 Text="{Binding Cliente.Telefono, Mode=OneWay}"
                  d:Text="Telefono" />
 
         <!-- TODO: Bind to Tipo Contribuyente -->
         <ComboBox Grid.Row="4"
                   Grid.Column="3"
                   SelectedIndex="0">
-            <ComboBoxItem Content="[persona juridica]"></ComboBoxItem>
+            <ComboBoxItem Content="[persona juridica]" />
             <ComboBoxItem Content="this is 1" />
             <ComboBoxItem Content="this is 2" />
             <ComboBoxItem Content="there are 3" />
@@ -138,14 +139,14 @@
 
         <!-- TODO: Bind Regimen Contable -->
         <TextBox Grid.Column="1"
-                   Grid.Row="5"
-                   HorizontalContentAlignment="Center"
-                   Text="???" />
+                 Grid.Row="5"
+                 HorizontalContentAlignment="Center"
+                 Text="???" />
         <!-- TODO: Bind Tipo Responsabilidad -->
         <TextBox Grid.Column="3"
-                   Grid.Row="5"
-                   HorizontalContentAlignment="Center"
-                   Text="???" />
+                 Grid.Row="5"
+                 HorizontalContentAlignment="Center"
+                 Text="???" />
 
         <Label Content="Regimen Contable"
                Grid.Column="0"

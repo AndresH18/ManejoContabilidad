@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ManejoContable.View.Pages.ClientView;
 using ModelEntities;
 
 namespace ManejoContable.View.Windows
@@ -20,21 +21,13 @@ namespace ManejoContable.View.Windows
     /// </summary>
     public partial class ClientInformationWindow : Window
     {
-        public static readonly DependencyProperty ClientProperty = DependencyProperty.Register(
-            "Client", typeof(Cliente), typeof(ClientInformationWindow), new PropertyMetadata(default(Cliente)));
-
-        public Cliente Client
-        {
-            get { return (Cliente)GetValue(ClientProperty); }
-            private init { SetValue(ClientProperty, value); }
-        }
-        public ClientInformationWindow(Cliente client)
+        private Cliente _cliente;
+        public ClientInformationWindow(Cliente cliente)
         {
             InitializeComponent();
-            Client = client;
-            // FacturaInformationControl.ClientInformationEditButton.Visibility = Visibility.Collapsed;
+            _cliente = cliente;
 
-            // DataContext = this;
+            Frame.Navigate(new ViewClientInformationPage(cliente));
         }
 
     }

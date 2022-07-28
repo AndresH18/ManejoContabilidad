@@ -1,4 +1,4 @@
-﻿<Page x:Class="ManejoContable.View.Pages.ClientView.AddClientPage"
+﻿<Page x:Class="ManejoContable.View.Pages.ClientView.EditClientPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -7,10 +7,10 @@
       xmlns:clientControls="clr-namespace:ManejoContable.UserControls.ClientUserControls"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AddClientPage">
-
+      Title="EditClientPage">
 
     <Grid>
-        <clientControls:EditClientInformationControl x:Name="ClientInformationControl" Margin="10" />
+        <clientControls:EditClientInformationControl x:Name="ClientInformationControl"
+                                                     Margin="10" />
     </Grid>
 </Page>

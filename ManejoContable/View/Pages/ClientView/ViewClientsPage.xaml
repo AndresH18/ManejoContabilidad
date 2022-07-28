@@ -19,6 +19,12 @@
                 <x:Type TypeName="modelEntities:TipoDocumento" />
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
+
+        
+        <Style TargetType="DataGridRow">
+            <!-- DataGrid double Click Event Handler Setter -->
+            <EventSetter Event="MouseDoubleClick" Handler="DataGridRowDoubleClick_OnHandler" />
+        </Style>
     </Page.Resources>
 
     <Grid>
@@ -96,12 +102,11 @@
                   IsReadOnly="True"
                   DataContext="{StaticResource Cliente}"
                   SelectionMode="Single"
-                  CanUserResizeRows="False">
+                  CanUserResizeRows="False"
+                  >
 
             <DataGrid.Resources>
-                <Style TargetType="DataGridRow">
-                    <EventSetter Event="MouseDoubleClick" Handler="DataGridRowDoubleClick_OnHandler" />
-                </Style>
+
             </DataGrid.Resources>
 
 
