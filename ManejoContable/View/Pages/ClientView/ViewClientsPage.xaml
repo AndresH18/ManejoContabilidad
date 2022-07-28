@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:modelEntities="clr-namespace:ModelEntities;assembly=ModelEntities"
+      xmlns:system="clr-namespace:System;assembly=System.Runtime"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Background="WhiteSmoke"
@@ -11,11 +12,86 @@
 
     <Page.Resources>
         <modelEntities:Cliente x:Key="Cliente" />
+        <ObjectDataProvider x:Key="DocumentTypeProvider"
+                            ObjectType="{x:Type system:Enum}"
+                            MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="modelEntities:TipoDocumento" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
     </Page.Resources>
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
 
-        <DataGrid Name="ClientsDataGrid"
+        <Grid Grid.Column="0" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+
+            <GroupBox Grid.Row="0">
+                <GroupBox.Header>
+                    <Label Content="Buscar"></Label>
+                </GroupBox.Header>
+
+                <StackPanel>
+                    <StackPanel.Resources>
+                        <Style TargetType="Label">
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <Label Content="Nombre Cliente" />
+                    <TextBox Name="NameTextBox" />
+
+                    <Label Content="Tipo Documento" />
+                    <ComboBox Name="DocumentTypeComboBox"
+                              SelectedIndex="0"
+                              ItemsSource="{Binding Source={StaticResource DocumentTypeProvider}}" />
+
+                    <Label Content="Numero Documento" />
+                    <TextBox Name="DocumentNumberTextBox" />
+
+                    <Label Content="Correo" />
+                    <TextBox Name="EmailTextBox" />
+
+                    <Label Content="Telefono" />
+                    <TextBox Name="PhoneTextBox" />
+
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Grid.Row="1">
+                <GroupBox.Header>
+                    <Label Content="Filtros" />
+                </GroupBox.Header>
+
+                <StackPanel VerticalAlignment="Center">
+                    <CheckBox Name="DocumentTypeCheckBox"
+                              Content="Tipo de Documento" />
+                    <CheckBox Name="DocumentNumberCheckbox"
+                              Content="Numero Documento" />
+                    <CheckBox Name="ClientNameCheckBox"
+                              Content="Nombre" />
+                    <CheckBox Name="EmailCheckBox"
+                              Content="Email" />
+                    <CheckBox Name="PhoneCheckBox"
+                              Content="Telefono" />
+
+                    <!-- TODO: Ver que otros elementos agregar a los filtros -->
+                    <Button Content="Buscar" Margin="5, 15, 5, 5" Click="Search_OnClick" />
+                    <Button Content="Reset" Margin="5, 5, 5, 5" Click="Clear_OnClick" />
+                </StackPanel>
+            </GroupBox>
+
+        </Grid>
+
+        <DataGrid Grid.Column="1" Name="ClientsDataGrid"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
                   DataContext="{StaticResource Cliente}"
@@ -30,15 +106,16 @@
 
 
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Nombre"
+                                    Binding="{Binding Nombre}"
+                                    Width="*" />
                 <DataGridTextColumn Header="# Documento"
                                     Binding="{Binding NumeroDocumento}"
                                     Width="*" />
                 <DataGridTextColumn Header="Tipo Documento"
                                     Binding="{Binding TipoDocumento}"
                                     Width="*" />
-                <DataGridTextColumn Header="Nombre"
-                                    Binding="{Binding Nombre}"
-                                    Width="*" />
+
             </DataGrid.Columns>
 
         </DataGrid>
