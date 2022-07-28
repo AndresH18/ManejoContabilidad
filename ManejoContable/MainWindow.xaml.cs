@@ -64,7 +64,7 @@ namespace ManejoContable
 
         private void SearchClientsMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            new SearchClientWindow().ShowDialog();
+            var r = new SearchClientWindow(){Owner = this}.ShowDialog();
         }
     }
 }

@@ -39,7 +39,7 @@ namespace ManejoContable.View.Pages.ClientView
             var rowCliente = (Cliente) ClientsDataGrid.SelectedItem;
             var clientDialog = new ClientInformationWindow(rowCliente)
             {
-                // Owner = Application.Current.MainWindow
+                Owner = Application.Current.MainWindow as MainWindow
             };
             if (clientDialog.ShowDialog() == true)
             {
