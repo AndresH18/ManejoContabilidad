@@ -363,3 +363,6 @@ MigrationBackup/
 FodyWeavers.xsd
 /TODO.json
 /.idea/.idea.ManejoContable/.idea
+.vscode/launch.json
+.gitignore
+/.vscode/tasks.json
