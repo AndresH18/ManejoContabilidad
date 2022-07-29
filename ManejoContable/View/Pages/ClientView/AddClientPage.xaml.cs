@@ -27,6 +27,7 @@ namespace ManejoContable.View.Pages.ClientView
         public AddClientPage()
         {
             InitializeComponent();
+
             ClientInformationControl.Ok += Control_OnOk;
             ClientInformationControl.Cancel += Control_OnCancel;
         }
@@ -41,9 +42,11 @@ namespace ManejoContable.View.Pages.ClientView
             // TODO: If exists: Inform User
         }
 
-        private void Control_OnCancel(object? sender, ClientEventArgs e)
+        private void Control_OnCancel(object? sender, EventArgs e)
         {
+            
             // TODO: Implement Cancel Functionality. Client will not be added 
+
         }
     }
 }

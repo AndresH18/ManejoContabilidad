@@ -14,6 +14,11 @@
 
     <DockPanel>
         <Menu DockPanel.Dock="Top">
+            <Menu.Resources>
+                <Style TargetType="MenuItem">
+                    <Setter Property="StaysOpenOnClick" Value="False" />
+                </Style>
+            </Menu.Resources>
             <MenuItem Header="Archivo">
                 <!-- TODO: Implementar Funcionalidad de los MenuItems  -->
                 <MenuItem Header="Menu Principal" />
@@ -25,13 +30,13 @@
                           Header="Ver Clientes"
                           Click="ViewClientsMenuItem_OnClick" />
 
-                <MenuItem Header="Buscar" Click="SearchClientsMenuItem_OnClick" />
+                <MenuItem Header="Buscar" IsEnabled="False" />
                 <MenuItem Header="Agregar" Click="AddClientMenuItem_OnClick" />
                 <MenuItem Header="Eliminar" Click="MenuItem_OnClick" />
 
 
             </MenuItem>
-            <Button Content="Hello" Click="ButtonBase_OnClick"></Button>
+            <Button Content="Hello" Click="ButtonBase_OnClick" />
         </Menu>
 
 

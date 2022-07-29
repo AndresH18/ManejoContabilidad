@@ -28,17 +28,27 @@ namespace ManejoContable.UserControls.ClientUserControls
 
         private static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var control = (EditClientInformationControl) d;
+            var control = (EditClientInformationControl)d;
             if (e.NewValue is Cliente c)
             {
                 control._client = c;
             }
         }
 
-        public Cliente Cliente
+        public Cliente? Cliente
         {
-            get => (Cliente) GetValue(ClienteProperty);
-            set => SetValue(ClienteProperty, value);
+            get => (Cliente)GetValue(ClienteProperty);
+            set
+            {
+                if (value is not null)
+                {
+                    SetValue(ClienteProperty, value);
+                }
+                else
+                {
+                    // clear Fields
+                }
+            }
         }
 
         private Cliente? _client;
@@ -52,45 +62,41 @@ namespace ManejoContable.UserControls.ClientUserControls
         public EditClientInformationControl()
         {
             InitializeComponent();
-            Cliente = new Cliente() {Nombre = "Andres", TipoDocumento = TipoDocumento.Ti, NumeroDocumento = "123-456"};
-        }
-
-        /// <summary>
-        /// <para>
-        /// Constructor for creating a new <see cref="EditClientInformationControl"/> with a <see cref="Cliente"/> instance.
-        /// </para>
-        /// <para>Used to edit a <see cref="Cliente"/>'s information.</para>
-        /// </summary>
-        /// <param name="cliente"></param>
-        [Obsolete]
-        public EditClientInformationControl(Cliente cliente) : this()
-        {
-            Cliente = cliente;
         }
 
         private void OkButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var args = new ClientEventArgs();
-            if (Cliente != null)
-            {
-                args.Cliente = Cliente;
-            }
-
+            // if (Cliente != null)
+            // {
+            //     args.Cliente = Cliente;
+            // }
+            var args = new ClientEventArgs { Cliente = Cliente ?? CreateClient() };
             Ok?.Invoke(this, args);
         }
 
         private void CancelButton_OnClick(object sender, RoutedEventArgs e)
         {
-            Cliente = new Cliente()
+            Cancel?.Invoke(this, System.EventArgs.Empty);
+        }
+
+        private Cliente CreateClient()
+        {
+            var c = new Cliente
             {
-                Nombre = Guid.NewGuid().ToString(), NumeroDocumento = Guid.NewGuid().ToString(),
-                TipoDocumento = TipoDocumento.Cc
+                Correo = EmailTextBox.Text,
+                Direccion = AddressTextBox.Text,
+                MunicipioId = MunicipioComboBox.SelectedItem.ToString(),
+                Nombre = NameTextBox.Text,
+                NumeroDocumento = DocumentNumberTextBox.Text,
+                TipoDocumento = (TipoDocumento)DocumentTypeComboBox.SelectedItem,
+                Telefono = PhoneTextBox.Text,
+                TipoContribuyente = TipoContribuyenteTextBox.Text,
             };
-            // Cancel?.Invoke(this, new ClientEventArgs());
+            return c;
         }
 
         public event EventHandler<ClientEventArgs>? Ok;
 
-        public event EventHandler<ClientEventArgs>? Cancel;
+        public event EventHandler? Cancel;
     }
 }

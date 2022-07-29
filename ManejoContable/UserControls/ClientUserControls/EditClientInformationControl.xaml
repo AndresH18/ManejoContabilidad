@@ -71,25 +71,28 @@
                Grid.Row="4"
                Grid.Column="2" />
 
-        <TextBox Grid.Row="0"
+        <TextBox Name="NameTextBox"
+                 Grid.Row="0"
                  Grid.Column="1"
                  Text="{Binding Cliente.Nombre, Mode=OneWay}"
                  d:Text="Nombre Client" />
 
-        <ComboBox Name="TipoDocumentoComboBox"
+        <ComboBox Name="DocumentTypeComboBox"
                   Grid.Row="1"
                   Grid.Column="1"
                   SelectedValue="{Binding Cliente.TipoDocumento, Mode=OneWay}"
                   d:SelectedIndex="0"
                   ItemsSource="{Binding Source={StaticResource TipoDocumentoSource}}" />
 
-        <TextBox Grid.Row="1"
+        <TextBox Name="DocumentNumberTextBox"
+                 Grid.Row="1"
                  Grid.Column="3"
                  Text="{Binding Cliente.NumeroDocumento, Mode=OneWay}"
                  d:Text="Num Doc" />
 
         <!-- TODO: Bind to Municipio and Departamento -->
-        <ComboBox Grid.Column="1"
+        <ComboBox Name="DepartamentoComboBox"
+                  Grid.Column="1"
                   Grid.Row="2"
                   SelectedIndex="0">
             <ComboBoxItem Content="Departamento" />
@@ -100,7 +103,8 @@
             <ComboBoxItem Content="but 5" />
         </ComboBox>
 
-        <ComboBox Grid.Column="3"
+        <ComboBox Name="MunicipioComboBox"
+                  Grid.Column="3"
                   Grid.Row="2"
                   SelectedIndex="0">
             <ComboBoxItem Content="Municipio" />
@@ -111,22 +115,26 @@
             <ComboBoxItem Content="but 5" />
         </ComboBox>
 
-        <TextBox Grid.Row="3"
+        <TextBox Name="AddressTextBox"
+                 Grid.Row="3"
                  Grid.Column="1"
                  Text="{Binding Cliente.Direccion, Mode=OneWay}"
                  d:Text="Direccion" />
 
-        <TextBox Grid.Row="3"
+        <TextBox Name="EmailTextBox"
+                 Grid.Row="3"
                  Grid.Column="3"
                  d:Text="Correo" />
 
-        <TextBox Grid.Row="4"
+        <TextBox Name="PhoneTextBox"
+                 Grid.Row="4"
                  Grid.Column="1"
                  Text="{Binding Cliente.Telefono, Mode=OneWay}"
                  d:Text="Telefono" />
 
         <!-- TODO: Bind to Tipo Contribuyente -->
-        <ComboBox Grid.Row="4"
+        <ComboBox Name="TipoContribuyenteTextBox"
+                  Grid.Row="4"
                   Grid.Column="3"
                   SelectedIndex="0">
             <ComboBoxItem Content="[persona juridica]" />
@@ -143,10 +151,11 @@
                  HorizontalContentAlignment="Center"
                  Text="???" />
         <!-- TODO: Bind Tipo Responsabilidad -->
-        <TextBox Grid.Column="3"
-                 Grid.Row="5"
-                 HorizontalContentAlignment="Center"
-                 Text="???" />
+        <TextBox
+            Grid.Column="3"
+            Grid.Row="5"
+            HorizontalContentAlignment="Center"
+            Text="???" />
 
         <Label Content="Regimen Contable"
                Grid.Column="0"

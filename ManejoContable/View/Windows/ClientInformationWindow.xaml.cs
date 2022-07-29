@@ -21,19 +21,17 @@ namespace ManejoContable.View.Windows
     /// </summary>
     public partial class ClientInformationWindow : Window
     {
-        public static readonly DependencyProperty ClienteProperty = DependencyProperty.Register(
-            "Cliente", typeof(Cliente), typeof(ClientInformationWindow), new PropertyMetadata(default(Cliente)));
-
-        public Cliente Cliente
-        {
-            get { return (Cliente)GetValue(ClienteProperty); }
-            private init { SetValue(ClienteProperty, value); }
-        }
         public ClientInformationWindow(Cliente cliente)
         {
             InitializeComponent();
-            Cliente = cliente;
+            // Cliente = cliente;
+            Frame.Navigate(new ClientInformationPage(cliente, OnEditClickedAction));
         }
 
+        private void OnEditClickedAction(Cliente obj)
+        {
+            // TODO: Implement navigation to edit client
+            throw new NotImplementedException();
+        }
     }
 }

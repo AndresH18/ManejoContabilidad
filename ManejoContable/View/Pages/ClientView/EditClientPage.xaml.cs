@@ -23,9 +23,9 @@ namespace ManejoContable.View.Pages.ClientView
     /// </summary>
     public partial class EditClientPage : Page
     {
-        private Cliente _cliente;
+        private readonly Cliente _cliente;
 
-        public EditClientPage( Cliente cliente)
+        public EditClientPage(Cliente cliente)
         {
             InitializeComponent();
 
@@ -33,6 +33,8 @@ namespace ManejoContable.View.Pages.ClientView
             ClientInformationControl.Cancel += Control_OnCancel;
 
             _cliente = cliente;
+            
+            ClientInformationControl.Cliente = cliente;
         }
 
         private void Control_OnOk(object? sender, ClientEventArgs e)
@@ -45,7 +47,7 @@ namespace ManejoContable.View.Pages.ClientView
             // TODO: Notify changes
         }
 
-        private void Control_OnCancel(object? sender, ClientEventArgs e)
+        private void Control_OnCancel(object? sender, EventArgs e)
         {
             // TODO: Implement Cancel Functionality. Client will not be changed
         }
