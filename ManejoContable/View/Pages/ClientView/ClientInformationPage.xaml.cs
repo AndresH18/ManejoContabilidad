@@ -31,7 +31,7 @@ namespace ManejoContable.View.Pages.ClientView
         }
 
 
-        private Action<Cliente>? _editAction;
+        private Action? _editAction;
 
         public ClientInformationPage(Cliente cliente)
         {
@@ -39,7 +39,7 @@ namespace ManejoContable.View.Pages.ClientView
             Cliente = cliente;
         }
 
-        public ClientInformationPage(Cliente cliente, Action<Cliente> onEditClickedAction) : this(cliente)
+        public ClientInformationPage(Cliente cliente, Action onEditClickedAction) : this(cliente)
         {
             _editAction = onEditClickedAction;
         }
@@ -47,7 +47,7 @@ namespace ManejoContable.View.Pages.ClientView
 
         private void EditButton_OnClick(object sender, RoutedEventArgs e)
         {
-            _editAction?.Invoke(Cliente);
+            _editAction?.Invoke();
         }
     }
 }

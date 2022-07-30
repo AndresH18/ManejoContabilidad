@@ -16,6 +16,7 @@
 
 
     <Frame Name="Frame"
-           Margin="5" />
+           Margin="5"
+           NavigationUIVisibility="Hidden"/>
 
 </Window>

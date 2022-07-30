@@ -24,32 +24,50 @@ namespace ManejoContable.View.Pages.ClientView
     public partial class EditClientPage : Page
     {
         private readonly Cliente _cliente;
+        private readonly Action? _returnToClientViewAction;
 
-        public EditClientPage(Cliente cliente)
+        private EditClientPage(Cliente cliente)
         {
             InitializeComponent();
 
             ClientInformationControl.Ok += Control_OnOk;
             ClientInformationControl.Cancel += Control_OnCancel;
 
+            ClientInformationControl.OkButton.Content = "Guardar";
+
             _cliente = cliente;
-            
+
             ClientInformationControl.Cliente = cliente;
+        }
+
+        public EditClientPage(Cliente cliente, Action returnToClientViewAction) : this(cliente)
+        {
+            _returnToClientViewAction = returnToClientViewAction;
         }
 
         private void Control_OnOk(object? sender, ClientEventArgs e)
         {
             var client = e.Cliente;
+
+            // var result = MessageBox.Show("Quieres Guardar los Cambios?", "", MessageBoxButton.OKCancel,
+            //     MessageBoxImage.Question, MessageBoxResult.Cancel);
+            // if (result == MessageBoxResult.OK)
+
             // TODO: Verify Changes are valid
 
             // TODO: Update Client on DB
 
             // TODO: Notify changes
+
+            MessageBox.Show("Save not implemented");
         }
 
         private void Control_OnCancel(object? sender, EventArgs e)
         {
             // TODO: Implement Cancel Functionality. Client will not be changed
+
+            // return to client information page
+            _returnToClientViewAction?.Invoke();
         }
     }
 }

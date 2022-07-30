@@ -21,17 +21,28 @@ namespace ManejoContable.View.Windows
     /// </summary>
     public partial class ClientInformationWindow : Window
     {
+        private readonly Cliente _cliente;
+
         public ClientInformationWindow(Cliente cliente)
         {
             InitializeComponent();
-            // Cliente = cliente;
-            Frame.Navigate(new ClientInformationPage(cliente, OnEditClickedAction));
+
+            _cliente = cliente;
+
+            NavigateToClientInformationAction();
+            // Frame.Navigate(new ClientInformationPage(_cliente, OnEditClickedAction));
         }
 
-        private void OnEditClickedAction(Cliente obj)
+        private void OnEditClickedAction()
         {
-            // TODO: Implement navigation to edit client
-            throw new NotImplementedException();
+            // Navigate to EditClientPage
+            Frame.Navigate(new EditClientPage(_cliente, NavigateToClientInformationAction));
+        }
+
+        private void NavigateToClientInformationAction()
+        {
+            // Return to Client information window
+            Frame.Navigate(new ClientInformationPage(_cliente, OnEditClickedAction));
         }
     }
 }

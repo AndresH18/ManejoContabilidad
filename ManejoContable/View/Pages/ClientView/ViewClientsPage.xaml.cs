@@ -13,14 +13,22 @@ namespace ManejoContable.View.Pages.ClientView
     /// </summary>
     public partial class ViewClientsPage : Page
     {
-        
         public ViewClientsPage()
         {
             InitializeComponent();
             ClientsDataGrid.ItemsSource = new List<Cliente>
             {
-                new() {Nombre = "Imporcom", NumeroDocumento = "123-456-7890", TipoDocumento = TipoDocumento.Nit},
-                new() {Nombre = "Andres' Programmers SAS", NumeroDocumento = "111-222-33-44"}
+                new()
+                {
+                    Nombre = "Imporcom", NumeroDocumento = "123-456-7890", TipoDocumento = TipoDocumento.Nit,
+                    Direccion = "Cra impor #1", Correo = "imporcom@correo.com", Telefono = "123-456-7890",
+                },
+                new()
+                {
+                    Nombre = "Andres' Programmers SAS", NumeroDocumento = "111-222-33-44",
+                    TipoDocumento = TipoDocumento.Cc, Correo = "andres@correo.com", Telefono = "111-222-3344",
+                    Direccion = "Calle 123 # 445 sur",  
+                }
             };
         }
 
@@ -29,14 +37,14 @@ namespace ManejoContable.View.Pages.ClientView
             InitializeComponent();
             ClientsDataGrid.ItemsSource = clientes;
         }
-        
+
 
         private void DataGridRowDoubleClick_OnHandler(object sender, MouseButtonEventArgs e)
         {
             Debug.WriteLine(
                 $"{typeof(ViewClientsPage)}: {nameof(DataGridRowDoubleClick_OnHandler)}: Row Double Click Event Triggered");
 
-            var rowCliente = (Cliente) ClientsDataGrid.SelectedItem;
+            var rowCliente = (Cliente)ClientsDataGrid.SelectedItem;
             var clientDialog = new ClientInformationWindow(rowCliente)
             {
                 Owner = Application.Current.MainWindow as MainWindow
