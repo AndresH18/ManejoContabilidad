@@ -25,6 +25,7 @@
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Margin" Value="10, 0" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
 
         </Style>
         <Style TargetType="TextBox">
@@ -188,7 +189,8 @@
         <StackPanel Grid.Row="6" Grid.Column="0"
                     Grid.ColumnSpan="4"
                     HorizontalAlignment="Right"
-                    Orientation="Horizontal">
+                    Orientation="Horizontal"
+                    Margin="0, 30">
             <StackPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Margin" Value="5, 10" />

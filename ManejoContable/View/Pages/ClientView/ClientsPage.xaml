@@ -1,4 +1,4 @@
-﻿<Page x:Class="ManejoContable.View.Pages.ClientView.ViewClientsPage"
+﻿<Page x:Class="ManejoContable.View.Pages.ClientView.ClientsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -10,7 +10,7 @@
       MinHeight="500"
       d:DesignHeight="500" d:DesignWidth="800"
       Background="WhiteSmoke"
-      Title="ViewClientsPage">
+      Title="ClientsPage">
 
     <Page.Resources>
         <modelEntities:Cliente x:Key="Cliente" />
@@ -110,13 +110,20 @@
                     </Grid.ColumnDefinitions>
 
                     <Button Grid.Column="0" Grid.Row="0"
-                            Content="Agregar" />
+                            Content="Agregar" 
+                            Click="AddClient_OnClick"/>
+
                     <Button Grid.Column="1" Grid.Row="0"
-                            Content="Ver" />
+                            Content="Ver" 
+                            Click="ShowClient_OnClick"/>
+                    
                     <Button Grid.Column="0" Grid.Row="1"
-                            Content="Eliminar " />
+                            Content="Eliminar " 
+                            Click="DeleteClient_OnClick"/>
+                    
                     <Button Grid.Column="1" Grid.Row="1"
-                            Content="Editar" />
+                            Content="Editar" 
+                            Click="EditClient_OnClick"/>
 
                 </Grid>
             </GroupBox>

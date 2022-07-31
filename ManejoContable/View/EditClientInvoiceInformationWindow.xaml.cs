@@ -17,7 +17,7 @@ using ModelEntities;
 namespace ManejoContable.View.Windows
 {
     /// <summary>
-    /// Interaction logic for EditClientInformationWindow.xaml
+    /// Interaction logic for EditClientInvoiceInformationWindow.xaml
     /// </summary>
     [Obsolete]
     public partial class EditClientInformationWindow : Window

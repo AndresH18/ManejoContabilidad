@@ -18,6 +18,7 @@ namespace ManejoContable.View.Pages
     /// <summary>
     /// Interaction logic for FacturaPage.xaml
     /// </summary>
+    [Obsolete]
     public partial class FacturaPage : Page
     {
         public FacturaPage()
