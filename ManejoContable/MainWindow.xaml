@@ -40,7 +40,7 @@
         </Menu>
 
 
-        <Frame Name="Frame" NavigationUIVisibility="Hidden" Margin="5" />
+        <Frame Name="Frame" NavigationUIVisibility="Hidden"/>
 
     </DockPanel>
 </Window>

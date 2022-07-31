@@ -28,6 +28,15 @@ namespace ManejoContable
         public MainWindow()
         {
             InitializeComponent();
+
+            // Frame.Navigated += delegate(object sender, NavigationEventArgs args)
+            // {
+            //     if (sender is Frame {Content: Page page})
+            //     {
+            //         MinHeight = page.MinHeight;
+            //         MinWidth = page.MinWidth;
+            //     }
+            // };
         }
 
         private void MenuItem_OnClick(object sender, RoutedEventArgs e)
@@ -61,6 +70,5 @@ namespace ManejoContable
             // TODO? Check if can Navigate
             Frame.Navigate(new AddClientPage());
         }
-        
     }
 }
