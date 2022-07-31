@@ -39,21 +39,22 @@ namespace ManejoContable
             // };
         }
 
-        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
-        {
-            var message = $"{(sender as MenuItem)?.Header}. Not Implemented";
-            Debug.WriteLine(message);
-            MessageBox.Show(message);
-
-            // Frame.Navigate(
-            //     new ClientInformationWindow(new Client() {Nombre = "Andres", NumeroDocumento = string.Empty}).Content);
-        }
+        // private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        // {
+        //     var message = $"{(sender as MenuItem)?.Header}. Not Implemented";
+        //     Debug.WriteLine(message);
+        //     MessageBox.Show(message);
+        //
+        //     // Frame.Navigate(
+        //     //     new ClientInformationWindow(new Client() {Nombre = "Andres", NumeroDocumento = string.Empty}).Content);
+        // }
 
         private void ExitMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
 
+        [Obsolete("This method was only for testing purposes and will be deleted")]
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(new FacturaPage());
@@ -62,13 +63,13 @@ namespace ManejoContable
         private void ViewClientsMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             // TODO?: Check if can Navigate
-            Frame.Navigate(new ViewClientsPage());
+            Frame.Navigate(new ClientsPage());
         }
 
-        private void AddClientMenuItem_OnClick(object sender, RoutedEventArgs e)
-        {
-            // TODO? Check if can Navigate
-            Frame.Navigate(new AddClientPage());
-        }
+        // private void AddClientMenuItem_OnClick(object sender, RoutedEventArgs e)
+        // {
+        //     // TODO? Check if can Navigate
+        //     Frame.Navigate(new AddClientPage(null));
+        // }
     }
 }
