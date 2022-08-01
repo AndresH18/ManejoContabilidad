@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:modelEntities="clr-namespace:ModelEntities;assembly=ModelEntities"
       xmlns:system="clr-namespace:System;assembly=System.Runtime"
+      xmlns:vm="clr-namespace:ManejoContable.ViewModel.Client"
       mc:Ignorable="d"
       MinWidth="800"
       MinHeight="500"
@@ -13,6 +14,9 @@
       Title="ClientsPage">
 
     <Page.Resources>
+
+        <vm:ClientsViewModel x:Key="Vm" />
+
         <modelEntities:Cliente x:Key="Cliente" />
         <ObjectDataProvider x:Key="DocumentTypeProvider"
                             ObjectType="{x:Type system:Enum}"
@@ -29,7 +33,7 @@
         </Style>
     </Page.Resources>
 
-    <Grid>
+    <Grid DataContext="{StaticResource Vm}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="3*" />
@@ -110,20 +114,25 @@
                     </Grid.ColumnDefinitions>
 
                     <Button Grid.Column="0" Grid.Row="0"
-                            Content="Agregar" 
-                            Click="AddClient_OnClick"/>
+                            Content="Agregar"
+                            Click="AddClient_OnClick" />
 
                     <Button Grid.Column="1" Grid.Row="0"
-                            Content="Ver" 
-                            Click="ShowClient_OnClick"/>
-                    
+                            Content="Ver"
+                            Command="{Binding ViewClientCommand}"
+                            CommandParameter="{Binding SelectedCliente}" />
+
                     <Button Grid.Column="0" Grid.Row="1"
-                            Content="Eliminar " 
-                            Click="DeleteClient_OnClick"/>
-                    
+                            Content="Eliminar "
+                            Click="DeleteClient_OnClick"
+                            Command="{Binding DeleteClientCommand}"
+                            CommandParameter="{Binding SelectedCliente}" />
+
                     <Button Grid.Column="1" Grid.Row="1"
-                            Content="Editar" 
-                            Click="EditClient_OnClick"/>
+                            Content="Editar"
+                            Click="EditClient_OnClick"
+                            Command="{Binding EditClientCommand}"
+                            CommandParameter="{Binding SelectedCliente}" />
 
                 </Grid>
             </GroupBox>
@@ -133,14 +142,10 @@
         <DataGrid Grid.Column="1" Name="ClientsDataGrid"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
-                  DataContext="{StaticResource Cliente}"
                   SelectionMode="Single"
-                  CanUserResizeRows="False">
-
-            <DataGrid.Resources>
-
-            </DataGrid.Resources>
-
+                  CanUserResizeRows="False"
+                  SelectedItem="{Binding SelectedCliente, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Clients}">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nombre"

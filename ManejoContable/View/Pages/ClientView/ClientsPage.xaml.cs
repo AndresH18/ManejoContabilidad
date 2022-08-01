@@ -18,20 +18,7 @@ namespace ManejoContable.View.Pages.ClientView
         public ClientsPage()
         {
             InitializeComponent();
-            ClientsDataGrid.ItemsSource = new List<Cliente>
-            {
-                new()
-                {
-                    Nombre = "Imporcom", NumeroDocumento = "123-456-7890", TipoDocumento = TipoDocumento.Nit,
-                    Direccion = "Cra impor #1", Correo = "imporcom@correo.com", Telefono = "123-456-7890",
-                },
-                new()
-                {
-                    Nombre = "Andres' Programmers SAS", NumeroDocumento = "111-222-33-44",
-                    TipoDocumento = TipoDocumento.Cc, Correo = "andres@correo.com", Telefono = "111-222-3344",
-                    Direccion = "Calle 123 # 445 sur",
-                }
-            };
+           
         }
 
         private ClientsPage(IEnumerable<Cliente> clientes)
@@ -76,6 +63,7 @@ namespace ManejoContable.View.Pages.ClientView
             {
                 Owner = Application.Current.MainWindow,
                 ShowInTaskbar = false,
+                ResizeMode = ResizeMode.NoResize,
             }.ShowDialog();
         }
 
@@ -88,6 +76,7 @@ namespace ManejoContable.View.Pages.ClientView
                 {
                     Owner = Application.Current.MainWindow,
                     ShowInTaskbar = false,
+                    ResizeMode = ResizeMode.NoResize,
                 }.ShowDialog();
             }
             else
@@ -131,7 +120,8 @@ namespace ManejoContable.View.Pages.ClientView
                 var dialogResult = new EditClientWindow(c)
                 {
                     Owner = Application.Current.MainWindow,
-                    ShowInTaskbar = false
+                    ShowInTaskbar = false,
+                    ResizeMode = ResizeMode.NoResize
                 }.ShowDialog();
             }
             else
