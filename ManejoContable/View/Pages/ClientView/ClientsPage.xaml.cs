@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using ManejoContable.View.Windows;
 using ManejoContable.View.Windows.Client;
+using ManejoContable.ViewModel.Client;
 using ModelEntities;
 
 namespace ManejoContable.View.Pages.ClientView
@@ -18,7 +19,6 @@ namespace ManejoContable.View.Pages.ClientView
         public ClientsPage()
         {
             InitializeComponent();
-           
         }
 
         private ClientsPage(IEnumerable<Cliente> clientes)
@@ -56,7 +56,7 @@ namespace ManejoContable.View.Pages.ClientView
             // TODO: Set fields to empty and restore to original results
         }
 
-
+        [Obsolete("Use IClientDialogService")]
         private void AddClient_OnClick(object sender, RoutedEventArgs e)
         {
             var dialogResult = new AddClientWindow()
@@ -67,6 +67,7 @@ namespace ManejoContable.View.Pages.ClientView
             }.ShowDialog();
         }
 
+        [Obsolete("Use IClientDialogService")]
         private void ShowClient_OnClick(object sender, RoutedEventArgs e)
         {
             // TODO: Implement Show client information. already implemented, call it here
@@ -85,6 +86,7 @@ namespace ManejoContable.View.Pages.ClientView
             }
         }
 
+        [Obsolete("Use IClientDialogService")]
         private void DeleteClient_OnClick(object sender, RoutedEventArgs e)
         {
             if (ClientsDataGrid.SelectedItem is Cliente c)
@@ -107,6 +109,7 @@ namespace ManejoContable.View.Pages.ClientView
             }
         }
 
+        [Obsolete("Use IClientDialogService")]
         private void EditClient_OnClick(object sender, RoutedEventArgs e)
         {
             // TODO: Implement Edit Client Information. modify.

@@ -29,7 +29,7 @@
 
         <Style TargetType="DataGridRow">
             <!-- DataGrid double Click Event Handler Setter -->
-            <EventSetter Event="MouseDoubleClick" Handler="DataGridRowDoubleClick_OnHandler" />
+            <!-- <EventSetter Event="MouseDoubleClick" Handler="DataGridRowDoubleClick_OnHandler" /> -->
         </Style>
     </Page.Resources>
 
@@ -115,7 +115,7 @@
 
                     <Button Grid.Column="0" Grid.Row="0"
                             Content="Agregar"
-                            Click="AddClient_OnClick" />
+                            Command="{Binding AddClientCommand}" />
 
                     <Button Grid.Column="1" Grid.Row="0"
                             Content="Ver"
@@ -124,13 +124,11 @@
 
                     <Button Grid.Column="0" Grid.Row="1"
                             Content="Eliminar "
-                            Click="DeleteClient_OnClick"
                             Command="{Binding DeleteClientCommand}"
                             CommandParameter="{Binding SelectedCliente}" />
 
                     <Button Grid.Column="1" Grid.Row="1"
                             Content="Editar"
-                            Click="EditClient_OnClick"
                             Command="{Binding EditClientCommand}"
                             CommandParameter="{Binding SelectedCliente}" />
 
@@ -146,6 +144,12 @@
                   CanUserResizeRows="False"
                   SelectedItem="{Binding SelectedCliente, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Clients}">
+
+            <DataGrid.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick"
+                              Command="{Binding ViewClientCommand}"
+                              CommandParameter="{Binding SelectedCliente}" />
+            </DataGrid.InputBindings>
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nombre"

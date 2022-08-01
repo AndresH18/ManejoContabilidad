@@ -12,8 +12,10 @@ public class ClientsViewModel : INotifyPropertyChanged
 
     public ViewClientCommand ViewClientCommand { get; init; }
     public DeleteClientCommand DeleteClientCommand { get; init; }
-
     public EditClientCommand EditClientCommand { get; init; }
+    public AddClientCommand AddClientCommand { get; init; }
+
+    private IClientDialogService _clientDialog;
 
     private Cliente? _cliente;
 
@@ -33,6 +35,9 @@ public class ClientsViewModel : INotifyPropertyChanged
         ViewClientCommand = new ViewClientCommand(this);
         DeleteClientCommand = new DeleteClientCommand(this);
         EditClientCommand = new EditClientCommand(this);
+        AddClientCommand = new AddClientCommand(this);
+
+        _clientDialog = new ClientClientDialogService();
 
         Clients = new ObservableCollection<Cliente>
         {
@@ -55,20 +60,30 @@ public class ClientsViewModel : INotifyPropertyChanged
 
     public void ShowClientInformation(Cliente cliente)
     {
-        // TODO: Open the Window Dialog to show client information
         Debug.WriteLine($"{nameof(ShowClientInformation)}: showing client information.");
+
+        _clientDialog.OpenClientInformationDialog(cliente);
     }
 
     public void DeleteClient(Cliente cliente)
     {
-        // TODO: Open the Window dialog to confirm client deletion
+        var result = _clientDialog.DeleteClientDialog(cliente);
+        // TODO: use Result
         Debug.WriteLine($"{nameof(DeleteClient)}: prompt to delete client.");
     }
 
     public void EditClient(Cliente cliente)
     {
-        // TODO: open the window dialog to edit the client
+        var result = _clientDialog.UpdateClientDialog(cliente);
+        // TODO: use Result
         Debug.WriteLine($"{nameof(EditClient)}: show edit client dialog.");
+    }
+
+    public void AddClient()
+    {
+        var result = _clientDialog.AddClientDialog();
+        // TODO: use Result
+        Debug.WriteLine($"{nameof(AddClient)}: show edit client dialog.");
     }
 
 

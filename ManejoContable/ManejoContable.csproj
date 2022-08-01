@@ -40,7 +40,6 @@
 
 	<ItemGroup>
 	  <Folder Include="UserControls\EventArgs\" />
-	  <Folder Include="ViewModel\Client\Commands\" />
 	</ItemGroup>
 
 </Project>
