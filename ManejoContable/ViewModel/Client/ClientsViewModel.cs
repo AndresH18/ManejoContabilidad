@@ -69,6 +69,16 @@ public class ClientsViewModel : INotifyPropertyChanged
     {
         var result = _clientDialog.DeleteClientDialog(cliente);
         // TODO: use Result
+
+        #region Test
+
+        if (result)
+        {
+            Clients.Remove(cliente);
+        }
+
+        #endregion
+
         Debug.WriteLine($"{nameof(DeleteClient)}: prompt to delete client.");
     }
 

@@ -21,27 +21,47 @@ namespace ManejoContable.View.Windows.Client
     /// </summary>
     public partial class EditClientWindow : Window
     {
-        private Cliente _cliente;
+        public static readonly DependencyProperty ClienteProperty = DependencyProperty.Register(
+            "Cliente", typeof(Cliente), typeof(EditClientWindow), new PropertyMetadata(default(Cliente)));
+
+        private Cliente Cliente
+        {
+            get => (Cliente) GetValue(ClienteProperty);
+            init => SetValue(ClienteProperty, value);
+        }
+
+        public Cliente NewValue => Cliente;
+
+        public Cliente OldValue { get; }
+
         public EditClientWindow(Cliente cliente)
         {
             InitializeComponent();
-            ClientInformationControl.Ok += EditClientOnOk;
-            ClientInformationControl.Cancel += EditClientOnCancel;
 
-            _cliente = cliente;
-            ClientInformationControl.Cliente = _cliente;
+            OldValue = cliente;
+            Cliente = (Cliente) cliente.Clone();
         }
 
-        private void EditClientOnCancel(object? sender, EventArgs e)
+        public static EditClientWindow CreateAddClientDialogWindow()
+        {
+            return new EditClientWindow(new Cliente())
+            {
+                Owner = Application.Current.MainWindow,
+                ShowInTaskbar = false,
+                ResizeMode = ResizeMode.NoResize,
+            };
+        }
+
+        private void CancelButton_OnClick(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
-            Close();
         }
 
-        private void EditClientOnOk(object? sender, ClientEventArgs e)
+        private void OkButton_OnClick(object sender, RoutedEventArgs e)
         {
-            // TODO : Add Client
             MessageBox.Show("implement edit client");
+
+            DialogResult = true;
         }
     }
 }

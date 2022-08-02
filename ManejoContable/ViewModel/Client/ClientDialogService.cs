@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using ManejoContable.View.Windows.Client;
 using ModelEntities;
 
@@ -8,8 +9,8 @@ public interface IClientDialogService
 {
     public void OpenClientInformationDialog(Cliente cliente);
     public bool DeleteClientDialog(Cliente cliente);
-    public bool UpdateClientDialog(Cliente client);
-    public bool AddClientDialog();
+    public Cliente? UpdateClientDialog(Cliente client);
+    public Cliente? AddClientDialog();
 }
 
 public class ClientClientDialogService : IClientDialogService
@@ -39,37 +40,48 @@ public class ClientClientDialogService : IClientDialogService
             // Nothing 
         }
 
-        return false;
+        return true;
     }
 
-    public bool UpdateClientDialog(Cliente client)
+    public Cliente? UpdateClientDialog(Cliente client)
     {
-        // TODO: Implement Edit Client Information. modify.
         // System.Media.SystemSounds.Asterisk.Play();
         // System.Media.SystemSounds.Hand.Play();
         // System.Media.SystemSounds.Beep.Play();
         // System.Media.SystemSounds.Question.Play();
 
-
-        var dialogResult = new EditClientWindow(client)
+        var dialog = new EditClientWindow(client)
         {
             Owner = Application.Current.MainWindow,
             ShowInTaskbar = false,
             ResizeMode = ResizeMode.NoResize
-        }.ShowDialog();
+        };
+        var dialogResult = dialog.ShowDialog();
 
-        return dialogResult == true;
+        // return dialogResult == true ? dialog.NewValue : dialog.OldValue;
+        return dialogResult == true ? dialog.NewValue : default;
     }
 
-    public bool AddClientDialog()
+    public Cliente? AddClientDialog()
     {
-        var dialogResult = new AddClientWindow()
-        {
-            Owner = Application.Current.MainWindow,
-            ShowInTaskbar = false,
-            ResizeMode = ResizeMode.NoResize,
-        }.ShowDialog();
+        var window = EditClientWindow.CreateAddClientDialogWindow();
 
-        return dialogResult == true;
+        var result = window.ShowDialog();
+
+        return result == true ? window.NewValue : default;
+    }
+
+    private Cliente dd()
+    {
+        Cliente c;
+
+        H(out c);
+
+        return c;
+    }
+
+    private void H(out Cliente c)
+    {
+        c = new Cliente();
     }
 }
