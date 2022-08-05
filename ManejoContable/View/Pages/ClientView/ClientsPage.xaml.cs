@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -131,6 +132,32 @@ namespace ManejoContable.View.Pages.ClientView
             {
                 System.Media.SystemSounds.Beep.Play();
             }
+        }
+
+        private void CheckBox_OnChecked(object sender, RoutedEventArgs e)
+        {
+            if (sender is not CheckBox c) return;
+
+            // if (ReferenceEquals(c, DocumentTypeCheckBox))
+            // {
+            //     DocumentTypeComboBox.IsEnabled = c.IsChecked ?? false;
+            // }
+            // else if (ReferenceEquals(c, DocumentNumberCheckbox))
+            // {
+            //     DocumentNumberTextBox.IsEnabled = c.IsChecked ?? false;
+            // }
+            // else if (ReferenceEquals(c, ClientNameCheckBox))
+            // {
+            //     NameTextBox.IsEnabled = c.IsChecked ?? false;
+            // }
+            // else if (ReferenceEquals(c, EmailCheckBox))
+            // {
+            //     EmailTextBox.IsEnabled = c.IsChecked ?? false;
+            // }
+            // else if (ReferenceEquals(c, PhoneCheckBox))
+            // {
+            //     PhoneTextBox.IsEnabled = c.IsChecked ?? false;
+            // }
         }
     }
 }

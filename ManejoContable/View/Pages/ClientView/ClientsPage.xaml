@@ -78,15 +78,24 @@
 
                     <StackPanel VerticalAlignment="Center" Margin="0 10">
                         <CheckBox Name="DocumentTypeCheckBox"
-                                  Content="Tipo de Documento" />
+                                  Content="Tipo de Documento"
+                                  Checked="CheckBox_OnChecked"/>
+
                         <CheckBox Name="DocumentNumberCheckbox"
-                                  Content="Numero Documento" />
+                                  Content="Numero Documento"
+                                  Checked="CheckBox_OnChecked" />
+
                         <CheckBox Name="ClientNameCheckBox"
-                                  Content="Nombre" />
+                                  Content="Nombre"
+                                  Checked="CheckBox_OnChecked" />
+
                         <CheckBox Name="EmailCheckBox"
-                                  Content="Email" />
+                                  Content="Email"
+                                  Checked="CheckBox_OnChecked" />
+
                         <CheckBox Name="PhoneCheckBox"
-                                  Content="Telefono" />
+                                  Content="Telefono"
+                                  Checked="CheckBox_OnChecked" />
 
                         <!-- TODO: Ver que otros elementos agregar a los filtros -->
                         <Button Content="Buscar" Margin="5, 15, 5, 5" Click="Search_OnClick" />
