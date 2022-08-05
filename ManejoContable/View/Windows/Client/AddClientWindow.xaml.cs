@@ -12,36 +12,32 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ManejoContable.UserControls.EventArgs;
-using ModelEntities;
 
 namespace ManejoContable.View.Windows.Client
 {
     /// <summary>
-    /// Interaction logic for EditClientWindow.xaml
+    /// Interaction logic for AddClientWindow.xaml
     /// </summary>
-    public partial class EditClientWindow : Window
+    public partial class AddClientWindow : Window
     {
-        private Cliente _cliente;
-        public EditClientWindow(Cliente cliente)
+        public AddClientWindow()
         {
             InitializeComponent();
-            ClientInformationControl.Ok += EditClientOnOk;
-            ClientInformationControl.Cancel += EditClientOnCancel;
-
-            _cliente = cliente;
-            ClientInformationControl.Cliente = _cliente;
+            
+            ClientInformationControl.Ok += AddClient_OnOk;
+            ClientInformationControl.Cancel += AddClient_OnCancel;
         }
 
-        private void EditClientOnCancel(object? sender, EventArgs e)
+        private void AddClient_OnCancel(object? sender, EventArgs e)
         {
             DialogResult = false;
             Close();
         }
 
-        private void EditClientOnOk(object? sender, ClientEventArgs e)
+        private void AddClient_OnOk(object? sender, ClientEventArgs e)
         {
             // TODO : Add Client
-            MessageBox.Show("implement edit client");
+            MessageBox.Show("implement add client");
         }
     }
 }

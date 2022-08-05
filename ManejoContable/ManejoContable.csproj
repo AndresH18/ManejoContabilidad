@@ -39,7 +39,6 @@
 
 
 	<ItemGroup>
-	  <Folder Include="UserControls\ClientUserControls\" />
 	  <Folder Include="UserControls\EventArgs\" />
 	</ItemGroup>
 

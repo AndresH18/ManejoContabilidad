@@ -2,7 +2,7 @@
 
 namespace ModelEntities;
 
-public class Cliente : ICloneable
+public class Cliente
 {
     [Key] public int Id { get; set; }
     public string Nombre { get; set; } = string.Empty;
@@ -16,21 +16,4 @@ public class Cliente : ICloneable
     public string? RegimenContable { get; set; }
     public string? Responsabilidad { get; set; }
 
-    public object Clone()
-    {
-        return new Cliente
-        {
-            Id = Id,
-            Nombre = Nombre,
-            TipoDocumento = TipoDocumento,
-            NumeroDocumento = NumeroDocumento,
-            Direccion = Direccion,
-            MunicipioId = MunicipioId,
-            Correo = Correo,
-            Telefono = Telefono,
-            TipoContribuyente = TipoContribuyente,
-            RegimenContable = RegimenContable,
-            Responsabilidad = Responsabilidad
-        };
-    }
 }

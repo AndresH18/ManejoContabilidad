@@ -27,7 +27,7 @@ namespace ManejoContable.View.Pages.ClientView
             ClientsDataGrid.ItemsSource = clientes;
         }
 
-        [Obsolete]
+
         private void DataGridRowDoubleClick_OnHandler(object sender, MouseButtonEventArgs e)
         {
             Debug.WriteLine(
@@ -42,6 +42,8 @@ namespace ManejoContable.View.Pages.ClientView
             // {
             //     // Refresh information
             // }
+
+            ShowClient_OnClick(sender, e);
         }
 
         private void Search_OnClick(object sender, RoutedEventArgs e)
@@ -54,6 +56,81 @@ namespace ManejoContable.View.Pages.ClientView
             // TODO: Set fields to empty and restore to original results
         }
 
-        
+        [Obsolete("Use IClientDialogService")]
+        private void AddClient_OnClick(object sender, RoutedEventArgs e)
+        {
+            var dialogResult = new AddClientWindow()
+            {
+                Owner = Application.Current.MainWindow,
+                ShowInTaskbar = false,
+                ResizeMode = ResizeMode.NoResize,
+            }.ShowDialog();
+        }
+
+        [Obsolete("Use IClientDialogService")]
+        private void ShowClient_OnClick(object sender, RoutedEventArgs e)
+        {
+            // TODO: Implement Show client information. already implemented, call it here
+            if (ClientsDataGrid.SelectedItem is Cliente c)
+            {
+                var dialogResult = new ViewClientWindow(c)
+                {
+                    Owner = Application.Current.MainWindow,
+                    ShowInTaskbar = false,
+                    ResizeMode = ResizeMode.NoResize,
+                }.ShowDialog();
+            }
+            else
+            {
+                System.Media.SystemSounds.Beep.Play();
+            }
+        }
+
+        [Obsolete("Use IClientDialogService")]
+        private void DeleteClient_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (ClientsDataGrid.SelectedItem is Cliente c)
+            {
+                // TODO: Implement DeleteClient . use new Window, or use the dialog result
+                var result = MessageBox.Show("Implement Delete", "Borrar Cliente?", MessageBoxButton.OKCancel,
+                    MessageBoxImage.Question, MessageBoxResult.Cancel);
+                if (result == MessageBoxResult.OK)
+                {
+                    // delete client
+                }
+                else
+                {
+                    // Nothing 
+                }
+            }
+            else
+            {
+                System.Media.SystemSounds.Beep.Play();
+            }
+        }
+
+        [Obsolete("Use IClientDialogService")]
+        private void EditClient_OnClick(object sender, RoutedEventArgs e)
+        {
+            // TODO: Implement Edit Client Information. modify.
+            // System.Media.SystemSounds.Asterisk.Play();
+            // System.Media.SystemSounds.Hand.Play();
+            // System.Media.SystemSounds.Beep.Play();
+            // System.Media.SystemSounds.Question.Play();
+
+            if (ClientsDataGrid.SelectedItem is Cliente c)
+            {
+                var dialogResult = new EditClientWindow(c)
+                {
+                    Owner = Application.Current.MainWindow,
+                    ShowInTaskbar = false,
+                    ResizeMode = ResizeMode.NoResize
+                }.ShowDialog();
+            }
+            else
+            {
+                System.Media.SystemSounds.Beep.Play();
+            }
+        }
     }
 }

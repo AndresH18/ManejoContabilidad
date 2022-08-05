@@ -1,0 +1,212 @@
+﻿<UserControl x:Class="ManejoContable.UserControls.ClientUserControls.EditClientInformationControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:ManejoContable.UserControls.ClientUserControls"
+             xmlns:modelEntities="clr-namespace:ModelEntities;assembly=ModelEntities"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}">
+
+    <UserControl.Resources>
+        <modelEntities:Cliente x:Key="Cliente" />
+        <ObjectDataProvider x:Key="TipoDocumentoSource"
+                            ObjectType="{x:Type system:Enum}"
+                            MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="modelEntities:TipoDocumento" />
+            </ObjectDataProvider.MethodParameters>
+
+        </ObjectDataProvider>
+
+        <Style TargetType="Label">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="10, 0" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+
+        </Style>
+
+
+    </UserControl.Resources>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Nombre Comercial"
+               Grid.Row="0"
+               Grid.Column="0" />
+
+        <Label Content="Tipo Documento"
+               Grid.Row="1"
+               Grid.Column="0" />
+
+        <Label Content="Numero Documento"
+               Grid.Row="1"
+               Grid.Column="2" />
+
+        <Label Content="Tipo Contribuyente"
+               Grid.Row="4"
+               Grid.Column="2" />
+
+        <TextBox Name="NameTextBox"
+                 Grid.Row="0"
+                 Grid.Column="1"
+                 Text="{Binding Cliente.Nombre, Mode=OneWay}"
+                 d:Text="Nombre Client" />
+
+        <ComboBox Name="DocumentTypeComboBox"
+                  Grid.Row="1"
+                  Grid.Column="1"
+                  SelectedValue="{Binding Cliente.TipoDocumento, Mode=OneWay}"
+                  d:SelectedIndex="0"
+                  ItemsSource="{Binding Source={StaticResource TipoDocumentoSource}}" />
+
+        <TextBox Name="DocumentNumberTextBox"
+                 Grid.Row="1"
+                 Grid.Column="3"
+                 Text="{Binding Cliente.NumeroDocumento, Mode=OneWay}"
+                 d:Text="Num Doc" />
+
+        <!-- TODO: Bind to Municipio and Departamento -->
+        <ComboBox Name="DepartamentoComboBox"
+                  Grid.Column="1"
+                  Grid.Row="2"
+                  SelectedIndex="0">
+            <ComboBoxItem Content="Departamento" />
+            <ComboBoxItem Content="this is 1" />
+            <ComboBoxItem Content="this is 2" />
+            <ComboBoxItem Content="there are 3" />
+            <ComboBoxItem Content="there are 4" />
+            <ComboBoxItem Content="but 5" />
+        </ComboBox>
+
+        <ComboBox Name="MunicipioComboBox"
+                  Grid.Column="3"
+                  Grid.Row="2"
+                  SelectedIndex="0">
+            <ComboBoxItem Content="Municipio" />
+            <ComboBoxItem Content="this is 1" />
+            <ComboBoxItem Content="this is 2" />
+            <ComboBoxItem Content="there are 3" />
+            <ComboBoxItem Content="there are 4" />
+            <ComboBoxItem Content="but 5" />
+        </ComboBox>
+
+        <TextBox Name="AddressTextBox"
+                 Grid.Row="3"
+                 Grid.Column="1"
+                 Text="{Binding Cliente.Direccion, Mode=OneWay}"
+                 d:Text="Direccion" />
+
+        <TextBox Name="EmailTextBox"
+                 Grid.Row="3"
+                 Grid.Column="3"
+                 d:Text="Correo" />
+
+        <TextBox Name="PhoneTextBox"
+                 Grid.Row="4"
+                 Grid.Column="1"
+                 Text="{Binding Cliente.Telefono, Mode=OneWay}"
+                 d:Text="Telefono" />
+
+        <!-- TODO: Bind to Tipo Contribuyente -->
+        <ComboBox Name="TipoContribuyenteTextBox"
+                  Grid.Row="4"
+                  Grid.Column="3"
+                  SelectedIndex="0">
+            <ComboBoxItem Content="[persona juridica]" />
+            <ComboBoxItem Content="this is 1" />
+            <ComboBoxItem Content="this is 2" />
+            <ComboBoxItem Content="there are 3" />
+            <ComboBoxItem Content="there are 4" />
+            <ComboBoxItem Content="but 5" />
+        </ComboBox>
+
+        <!-- TODO: Bind Regimen Contable -->
+        <TextBox Grid.Column="1"
+                 Grid.Row="5"
+                 HorizontalContentAlignment="Center"
+                 Text="???" />
+        <!-- TODO: Bind Tipo Responsabilidad -->
+        <TextBox
+            Grid.Column="3"
+            Grid.Row="5"
+            HorizontalContentAlignment="Center"
+            Text="???" />
+
+        <Label Content="Regimen Contable"
+               Grid.Column="0"
+               Grid.Row="5" />
+
+        <Label Content="Tipo Responsabilidad"
+               Grid.Row="5" Grid.Column="2" />
+
+        <Label Content="Departamento"
+               Grid.Column="0"
+               Grid.Row="2" />
+
+        <Label Content="Municipio"
+               Grid.Column="2"
+               Grid.Row="2" />
+
+        <Label Content="Direccion"
+               Grid.Column="0"
+               Grid.Row="3" />
+
+        <Label Content="Correo"
+               Grid.Column="2"
+               Grid.Row="3" />
+
+        <Label Content="Telefono"
+               Grid.Column="0"
+               Grid.Row="4" />
+
+
+        <StackPanel Grid.Row="6" Grid.Column="0"
+                    Grid.ColumnSpan="4"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal"
+                    Margin="0, 30">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="5, 10" />
+                    <Setter Property="Padding" Value="15, 5" />
+                </Style>
+            </StackPanel.Resources>
+
+            <Button Name="CancelButton"
+                    Content="Cancelar"
+                    Click="CancelButton_OnClick" />
+
+            <Button Name="OkButton"
+                    Content="Aceptar"
+                    Click="OkButton_OnClick" />
+
+        </StackPanel>
+    </Grid>
+
+</UserControl>
