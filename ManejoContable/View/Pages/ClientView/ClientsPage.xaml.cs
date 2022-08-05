@@ -51,9 +51,45 @@ namespace ManejoContable.View.Pages.ClientView
 
         private void Clear_OnClick(object sender, RoutedEventArgs e)
         {
-            // TODO: Set fields to empty and restore to original results
+            // set checkboxes to unchecked
+            DocumentTypeCheckBox.IsChecked = true;
+            DocumentNumberCheckbox.IsChecked = true;
+            ClientNameCheckBox.IsChecked = true;
+            EmailCheckBox.IsChecked = true;
+            PhoneCheckBox.IsChecked = true;
+
+            // clear the fields
+            DocumentNumberTextBox.Text = default;
+            DocumentTypeComboBox.SelectedIndex = 0;
+            NameTextBox.Text = default;
+            EmailTextBox.Text = default;
+            PhoneTextBox.Text = default;
         }
 
-        
+        private void CheckBox_OnChecked(object sender, RoutedEventArgs e)
+        {
+            if (sender is not CheckBox c) return;
+
+            if (ReferenceEquals(c, DocumentTypeCheckBox))
+            {
+                DocumentTypeComboBox.IsEnabled = c.IsChecked ?? false;
+            }
+            else if (ReferenceEquals(c, DocumentNumberCheckbox))
+            {
+                DocumentNumberTextBox.IsEnabled = c.IsChecked ?? false;
+            }
+            else if (ReferenceEquals(c, ClientNameCheckBox))
+            {
+                NameTextBox.IsEnabled = c.IsChecked ?? false;
+            }
+            else if (ReferenceEquals(c, EmailCheckBox))
+            {
+                EmailTextBox.IsEnabled = c.IsChecked ?? false;
+            }
+            else if (ReferenceEquals(c, PhoneCheckBox))
+            {
+                PhoneTextBox.IsEnabled = c.IsChecked ?? false;
+            }
+        }
     }
 }

@@ -45,9 +45,11 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-
             <GroupBox Grid.Column="0"
-                      BorderThickness="1.5">
+                      BorderThickness="1.5"
+                      IsEnabled="False"
+                      ToolTip="Todavia no esta en funcionamiento"
+                      Background="LightGray">
                 <GroupBox.Header>
                     <Label Content="Buscar"></Label>
                 </GroupBox.Header>
@@ -78,18 +80,27 @@
 
                     <StackPanel VerticalAlignment="Center" Margin="0 10">
                         <CheckBox Name="DocumentTypeCheckBox"
-                                  Content="Tipo de Documento" />
+                                  Content="Tipo de Documento"
+                                  Click="CheckBox_OnChecked" />
+
                         <CheckBox Name="DocumentNumberCheckbox"
-                                  Content="Numero Documento" />
+                                  Content="Numero Documento"
+                                  Click="CheckBox_OnChecked" />
+
                         <CheckBox Name="ClientNameCheckBox"
-                                  Content="Nombre" />
+                                  Content="Nombre"
+                                  Click="CheckBox_OnChecked" />
+
                         <CheckBox Name="EmailCheckBox"
-                                  Content="Email" />
+                                  Content="Email"
+                                  Click="CheckBox_OnChecked" />
+
                         <CheckBox Name="PhoneCheckBox"
-                                  Content="Telefono" />
+                                  Content="Telefono"
+                                  Click="CheckBox_OnChecked" />
 
                         <!-- TODO: Ver que otros elementos agregar a los filtros -->
-                        <Button Content="Buscar" Margin="5, 15, 5, 5" Click="Search_OnClick" />
+                        <Button Content="Buscar" Margin="5, 15, 5, 5" />
                         <Button Content="Reset" Margin="5, 5, 5, 5" Click="Clear_OnClick" />
                     </StackPanel>
                 </StackPanel>
