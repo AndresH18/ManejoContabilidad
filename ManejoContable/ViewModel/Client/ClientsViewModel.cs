@@ -15,6 +15,8 @@ public class ClientsViewModel : INotifyPropertyChanged
     public EditClientCommand EditClientCommand { get; init; }
     public AddClientCommand AddClientCommand { get; init; }
 
+    public FilterClientCommand FilterClientCommand { get; init; }
+
     private IClientDialogService _clientDialog;
 
     private Cliente? _cliente;
@@ -36,6 +38,7 @@ public class ClientsViewModel : INotifyPropertyChanged
         DeleteClientCommand = new DeleteClientCommand(this);
         EditClientCommand = new EditClientCommand(this);
         AddClientCommand = new AddClientCommand(this);
+        FilterClientCommand = new FilterClientCommand(this);
 
         _clientDialog = new ClientClientDialogService();
 
