@@ -33,14 +33,13 @@
                 <!-- <MenuItem Header="Buscar" IsEnabled="False" /> -->
                 <!-- <MenuItem Header="Agregar" Click="AddClientMenuItem_OnClick" /> -->
                 <!-- <MenuItem Header="Eliminar" Click="MenuItem_OnClick" /> -->
-
-
             </MenuItem>
+            <MenuItem Header="Productos" Click="ProductsMenuItem_OnCLick"></MenuItem>
             <Button Content="Hello" Click="ButtonBase_OnClick" />
         </Menu>
 
 
-        <Frame Name="Frame" NavigationUIVisibility="Hidden"/>
+        <Frame Name="Frame" NavigationUIVisibility="Hidden" />
 
     </DockPanel>
 </Window>

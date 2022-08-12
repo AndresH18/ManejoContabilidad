@@ -1,0 +1,49 @@
+﻿<Page x:Class="ManejoContable.View.Pages.Product.ProductsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:ManejoContable.View.Pages.Product"
+      xmlns:vm="clr-namespace:ManejoContable.ViewModel.Product"
+      mc:Ignorable="d"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ProductsPage">
+
+    <Page.Resources>
+        <vm:ProductViewModel x:Key="ViewModel" />
+    </Page.Resources>
+
+    <Grid
+        DataContext="{StaticResource ViewModel}">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <DataGrid Grid.Column="1"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  CanUserResizeRows="False"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding Products}">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nombre"
+                                    Binding="{Binding Nombre}"
+                                    Width="*" />
+                <DataGridTextColumn Header="Codigo"
+                                    Binding="{Binding Codigo}"
+                                    Width="*" />
+                <DataGridTextColumn Header="Marca"
+                                    Width="*" />
+                <DataGridTextColumn Header="Categoria"
+                                    Width="*" />
+                <DataGridTextColumn Header="Valor Unitario"
+                                    Binding="{Binding PrecioUnitario}"
+                                    Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Page>

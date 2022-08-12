@@ -9,7 +9,10 @@ public class Cliente : ICloneable
     public TipoDocumento TipoDocumento { get; set; } = default;
     public string NumeroDocumento { get; set; } = "123 233 9888";
     public string? Direccion { get; set; }
+    // TODO: Create relationship for the Entity Framework Core
+    [Required]
     public string? MunicipioId { get; set; }
+
     public string? Correo { get; set; }
     public string? Telefono { get; set; }
     public string? TipoContribuyente { get; set; }

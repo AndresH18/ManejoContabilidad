@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="UserControls\ClientUserControls\**" />
+    <EmbeddedResource Remove="UserControls\ClientUserControls\**" />
+    <None Remove="UserControls\ClientUserControls\**" />
+    <Page Remove="UserControls\ClientUserControls\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="appsettings.json" />
   </ItemGroup>
 
@@ -39,8 +46,8 @@
 
 
 	<ItemGroup>
-	  <Folder Include="UserControls\ClientUserControls\" />
 	  <Folder Include="UserControls\EventArgs\" />
+	  <Folder Include="ViewModel\Product\" />
 	</ItemGroup>
 
 </Project>
