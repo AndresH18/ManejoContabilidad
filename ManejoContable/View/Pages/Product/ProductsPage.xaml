@@ -18,10 +18,15 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
 
-        <DataGrid Grid.Column="1"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <DataGrid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"
                   IsReadOnly="True"
                   SelectionMode="Single"
                   CanUserResizeRows="False"
@@ -51,6 +56,47 @@
                                     Width="*" />
             </DataGrid.Columns>
         </DataGrid>
+
+        <GroupBox Grid.Row="1" Grid.Column="0">
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="5" />
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    </Style>
+                </Grid.Resources>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Grid.Row="0"
+                        Content="Agregar"
+                        Command="{Binding CreateClientCommand}" />
+
+                <Button Grid.Column="1" Grid.Row="0"
+                        Content="Ver"
+                        Command="{Binding ViewClientCommand}"
+                        CommandParameter="{Binding SelectedCliente}" />
+
+                <Button Grid.Column="0" Grid.Row="1"
+                        Content="Eliminar "
+                        Command="{Binding DeleteClientCommand}"
+                        CommandParameter="{Binding SelectedCliente}" />
+
+                <Button Grid.Column="1" Grid.Row="1"
+                        Content="Editar"
+                        Command="{Binding EditClientCommand}"
+                        CommandParameter="{Binding SelectedCliente}" />
+
+            </Grid>
+        </GroupBox>
 
     </Grid>
 </Page>

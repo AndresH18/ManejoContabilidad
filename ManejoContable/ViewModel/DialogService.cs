@@ -102,7 +102,11 @@ public class ProductDialogService : IDialogService<Producto>
 
     public bool DeleteDialog(Producto producto)
     {
-        throw new NotImplementedException();
+        // TODO: Implement Delete
+        var result = MessageBox.Show("Implement", "sss", MessageBoxButton.OKCancel, MessageBoxImage.Question,
+            MessageBoxResult.Cancel);
+
+        return result == MessageBoxResult.OK;
     }
 
     public Producto? UpdateDialog(Producto producto)
