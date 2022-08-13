@@ -22,7 +22,7 @@ public class ViewClientCommand : ICommand
 
     public void Execute(object? parameter)
     {
-        _clientViewModel.ShowInformation((Cliente)parameter!);
+        _clientViewModel.Show((Cliente)parameter!);
     }
 
     public event EventHandler? CanExecuteChanged

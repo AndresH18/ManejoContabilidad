@@ -21,7 +21,7 @@ public class ViewCommand<T> : ICommand
 
     public void Execute(object? parameter)
     {
-        _viewModel.ShowInformation((T) parameter!);
+        _viewModel.Show((T) parameter!);
     }
 
     public event EventHandler? CanExecuteChanged

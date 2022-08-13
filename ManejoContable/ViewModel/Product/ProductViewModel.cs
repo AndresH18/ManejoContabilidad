@@ -39,7 +39,7 @@ public class ProductViewModel : IBaseViewModel<Producto>, INotifyPropertyChanged
         };
     }
 
-    public void ShowInformation(Producto t)
+    public void Show(Producto t)
     {
         throw new NotImplementedException();
     }
@@ -54,7 +54,7 @@ public class ProductViewModel : IBaseViewModel<Producto>, INotifyPropertyChanged
         throw new NotImplementedException();
     }
 
-    public void Add()
+    public void Create()
     {
         throw new NotImplementedException();
     }

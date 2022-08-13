@@ -23,7 +23,7 @@ public class AddClientCommand<T> : ICommand
 
     public void Execute(object? parameter)
     {
-        _clientViewModel.Add();
+        _clientViewModel.Create();
     }
 
     public event EventHandler? CanExecuteChanged

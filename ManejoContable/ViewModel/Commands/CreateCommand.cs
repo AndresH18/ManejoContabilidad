@@ -4,11 +4,11 @@ using System.Windows.Input;
 
 namespace ManejoContable.ViewModel.Commands;
 
-public class AddCommand<T> : ICommand
+public class CreateCommand<T> : ICommand
 {
     private readonly IBaseViewModel<T> _viewModel;
 
-    public AddCommand(IBaseViewModel<T> viewModel)
+    public CreateCommand(IBaseViewModel<T> viewModel)
     {
         _viewModel = viewModel;
     }
@@ -22,7 +22,7 @@ public class AddCommand<T> : ICommand
 
     public void Execute(object? parameter)
     {
-        _viewModel.Add();
+        _viewModel.Create();
     }
 
     public event EventHandler? CanExecuteChanged

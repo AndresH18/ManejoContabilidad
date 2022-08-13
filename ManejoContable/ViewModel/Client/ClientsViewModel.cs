@@ -14,7 +14,7 @@ public class ClientsViewModel : IBaseViewModel<Cliente>,INotifyPropertyChanged
     public ViewCommand<Cliente> ViewClientCommand { get; init; }
     public DeleteCommand<Cliente> DeleteClientCommand { get; init; }
     public EditCommand<Cliente> EditClientCommand { get; init; }
-    public AddCommand<Cliente> AddClientCommand { get; init; }
+    public CreateCommand<Cliente> CreateClientCommand { get; init; }
 
     private IDialogService _dialog;
 
@@ -36,7 +36,7 @@ public class ClientsViewModel : IBaseViewModel<Cliente>,INotifyPropertyChanged
         ViewClientCommand = new ViewCommand<Cliente>(this);
         DeleteClientCommand = new DeleteCommand<Cliente>(this);
         EditClientCommand = new EditCommand<Cliente>(this);
-        AddClientCommand = new AddCommand<Cliente>(this);
+        CreateClientCommand = new CreateCommand<Cliente>(this);
 
         _dialog = new ClientDialogService();
 
@@ -59,9 +59,9 @@ public class ClientsViewModel : IBaseViewModel<Cliente>,INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
 
 
-    public void ShowInformation(Cliente cliente)
+    public void Show(Cliente cliente)
     {
-        Debug.WriteLine($"{nameof(ShowInformation)}: showing client information.");
+        Debug.WriteLine($"{nameof(Show)}: showing client information.");
 
         _dialog.OpenInformationDialog(cliente);
     }
@@ -90,11 +90,11 @@ public class ClientsViewModel : IBaseViewModel<Cliente>,INotifyPropertyChanged
         Debug.WriteLine($"{nameof(Edit)}: show edit client dialog.");
     }
 
-    public void Add()
+    public void Create()
     {
         var result = _dialog.AddDialog();
         // TODO: use Result
-        Debug.WriteLine($"{nameof(Add)}: show edit client dialog.");
+        Debug.WriteLine($"{nameof(Create)}: show edit client dialog.");
     }
 
 

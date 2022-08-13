@@ -125,7 +125,7 @@
 
                     <Button Grid.Column="0" Grid.Row="0"
                             Content="Agregar"
-                            Command="{Binding AddClientCommand}" />
+                            Command="{Binding CreateClientCommand}" />
 
                     <Button Grid.Column="1" Grid.Row="0"
                             Content="Ver"
