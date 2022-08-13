@@ -111,11 +111,24 @@ public class ProductDialogService : IDialogService<Producto>
 
     public Producto? UpdateDialog(Producto producto)
     {
-        throw new NotImplementedException();
+        var dialog = new EditProductWindow(producto)
+        {
+            Owner = Application.Current.MainWindow,
+            ShowInTaskbar = false,
+            ResizeMode = ResizeMode.NoResize
+        };
+        var dialogResult = dialog.ShowDialog();
+
+        // return dialogResult == true ? dialog.NewValue : dialog.OldValue;
+        return dialogResult == true ? dialog.NewValue : default;
     }
 
     public Producto? AddDialog()
     {
-        throw new NotImplementedException();
+        var window = EditProductWindow.CreateAddProductDialogWindow();
+
+        var result = window.ShowDialog();
+
+        return result == true ? window.NewValue : default;
     }
 }

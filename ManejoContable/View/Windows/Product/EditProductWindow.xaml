@@ -1,4 +1,4 @@
-﻿<Window x:Class="ManejoContable.View.Windows.Product.ViewProductWindow"
+﻿<Window x:Class="ManejoContable.View.Windows.Product.EditProductWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,7 +9,7 @@
         MaxHeight="450" MaxWidth="800"
         Height="450"
         Width="800"
-        Title="ViewProductWindow"
+        Title="EditProductWindow" 
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid.Resources>
@@ -17,11 +17,11 @@
                 <Setter Property="FontWeight" Value="Bold" />
                 <Setter Property="HorizontalContentAlignment" Value="Right" />
                 <Setter Property="VerticalAlignment" Value="Center" />
-                <Setter Property="Margin" Value="30,10" />
+                <Setter Property="Margin" Value="30, 10, 0,10" />
             </Style>
-            <Style TargetType="TextBlock">
-                <Setter Property="Margin" Value="20, 10" />
-                <Setter Property="VerticalAlignment" Value="Center" />
+            <Style TargetType="TextBox">
+                <Setter Property="Margin" Value="15, 10" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
             </Style>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
@@ -29,6 +29,7 @@
             <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -46,17 +47,39 @@
         <Label Grid.Column="0" Grid.Row="5" Content="Precio Unitario" />
         <Label Grid.Column="0" Grid.Row="6" Content="Descripcion" />
 
-        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Producto.Nombre}" d:Text="Nombre producto" />
+        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Producto.Nombre, Mode=TwoWay}" d:Text="Nombre producto" />
         <!-- TODO: Bind to Categoria.Name -->
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Producto.CategoriaId}" d:Text="Categoria" />
+        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Producto.CategoriaId, Mode=TwoWay}" d:Text="Categoria" />
         <!-- TODO: Bind to Marca.Name -->
-        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Producto.MarcaId}" d:Text="Marca" />
-        <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Producto.Codigo}" d:Text="Codigo" />
-        <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding Producto.Referencia}" d:Text="Referencia" />
-        <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding Producto.PrecioUnitario, StringFormat={}{0:C}}"
+        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Producto.MarcaId, Mode=TwoWay}" d:Text="Marca" />
+        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Producto.Codigo, Mode=TwoWay}" d:Text="Codigo" />
+        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Producto.Referencia, Mode=TwoWay}" d:Text="Referencia" />
+        <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Producto.PrecioUnitario, StringFormat={}{0:C}, Mode=TwoWay}"
                    d:Text="Precio" />
-        <TextBlock Grid.Column="1" Grid.Row="6" Text="{Binding Producto.Descripcion}" TextWrapping="Wrap"
+        <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Producto.Descripcion, Mode=TwoWay}" TextWrapping="Wrap"
                    d:Text="Descripcion" />
+
+        <StackPanel Grid.Row="7" Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal"
+                    Margin="0, 30">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="5, 10" />
+                    <Setter Property="Padding" Value="15, 5" />
+                </Style>
+            </StackPanel.Resources>
+
+            <Button Name="CancelButton"
+                    Content="Cancelar"
+                    Click="CancelButton_OnClick" />
+
+            <Button Name="OkButton"
+                    Content="Aceptar"
+                    Click="OkButton_OnClick" />
+
+        </StackPanel>
 
     </Grid>
 </Window>

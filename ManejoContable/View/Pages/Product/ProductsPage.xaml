@@ -78,22 +78,22 @@
 
                 <Button Grid.Column="0" Grid.Row="0"
                         Content="Agregar"
-                        Command="{Binding CreateClientCommand}" />
+                        Command="{Binding CreateCommand}" />
 
                 <Button Grid.Column="1" Grid.Row="0"
                         Content="Ver"
-                        Command="{Binding ViewClientCommand}"
-                        CommandParameter="{Binding SelectedCliente}" />
+                        Command="{Binding ViewCommand}"
+                        CommandParameter="{Binding SelectedProduct}" />
 
                 <Button Grid.Column="0" Grid.Row="1"
                         Content="Eliminar "
-                        Command="{Binding DeleteClientCommand}"
-                        CommandParameter="{Binding SelectedCliente}" />
+                        Command="{Binding DeleteCommand}"
+                        CommandParameter="{Binding SelectedProduct}" />
 
                 <Button Grid.Column="1" Grid.Row="1"
                         Content="Editar"
-                        Command="{Binding EditClientCommand}"
-                        CommandParameter="{Binding SelectedCliente}" />
+                        Command="{Binding EditCommand}"
+                        CommandParameter="{Binding SelectedProduct}" />
 
             </Grid>
         </GroupBox>

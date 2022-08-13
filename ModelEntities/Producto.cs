@@ -1,6 +1,6 @@
 ﻿namespace ModelEntities;
 
-public class Producto
+public class Producto : ICloneable
 {
     public int Id { get; set; }
 
@@ -16,4 +16,19 @@ public class Producto
     public string Referencia { get; set; } = string.Empty;
     public decimal PrecioUnitario { get; set; }
     public string? Descripcion { get; set; }
+
+    public object Clone()
+    {
+        return new Producto
+        {
+            Id = Id,
+            Nombre = Nombre,
+            CategoriaId = CategoriaId,
+            MarcaId = MarcaId,
+            Descripcion = Descripcion,
+            Codigo = Codigo,
+            PrecioUnitario = PrecioUnitario,
+            Referencia = Referencia
+        };
+    }
 }
