@@ -26,7 +26,14 @@
                   SelectionMode="Single"
                   CanUserResizeRows="False"
                   AutoGenerateColumns="False"
+                  SelectedItem="{Binding SelectedProduct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Products}">
+            
+            <DataGrid.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick"
+                              Command="{Binding ViewCommand}"
+                              CommandParameter="{Binding SelectedProduct}" />
+            </DataGrid.InputBindings>
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nombre"

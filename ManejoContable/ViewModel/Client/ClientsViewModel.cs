@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using ManejoContable.ViewModel.Client.Commands;
 using ManejoContable.ViewModel.Commands;
 using ModelEntities;
 
@@ -16,7 +15,7 @@ public class ClientsViewModel : IBaseViewModel<Cliente>,INotifyPropertyChanged
     public EditCommand<Cliente> EditClientCommand { get; init; }
     public CreateCommand<Cliente> CreateClientCommand { get; init; }
 
-    private IDialogService _dialog;
+    private IDialogService<Cliente> _dialog;
 
     private Cliente? _cliente;
 
@@ -70,7 +69,7 @@ public class ClientsViewModel : IBaseViewModel<Cliente>,INotifyPropertyChanged
     {
         var result = _dialog.DeleteDialog(cliente);
         // TODO: use Result
-
+        // TODO: delete test
         #region Test
 
         if (result)

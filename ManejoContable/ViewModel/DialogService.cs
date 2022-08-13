@@ -5,15 +5,15 @@ using ModelEntities;
 
 namespace ManejoContable.ViewModel;
 
-public interface IDialogService
+public interface IDialogService<T>
 {
-    public void OpenInformationDialog(Cliente cliente);
-    public bool DeleteDialog(Cliente cliente);
-    public Cliente? UpdateDialog(Cliente client);
-    public Cliente? AddDialog();
+    public void OpenInformationDialog(T t);
+    public bool DeleteDialog(T t);
+    public T? UpdateDialog(T t);
+    public T? AddDialog();
 }
 
-public class ClientDialogService : IDialogService
+public class ClientDialogService : IDialogService<Cliente>
 {
     public void OpenInformationDialog(Cliente cliente)
     {
@@ -83,5 +83,29 @@ public class ClientDialogService : IDialogService
     private void H(out Cliente c)
     {
         c = new Cliente();
+    }
+}
+
+public class ProductDialogService : IDialogService<Producto>
+{
+    // TODO: Implement Dialog Functionality
+    public void OpenInformationDialog(Producto producto)
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool DeleteDialog(Producto producto)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Producto? UpdateDialog(Producto producto)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Producto? AddDialog()
+    {
+        throw new NotImplementedException();
     }
 }
