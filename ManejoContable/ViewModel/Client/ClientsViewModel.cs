@@ -2,20 +2,21 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using ManejoContable.ViewModel.Client.Commands;
+using ManejoContable.ViewModel.Commands;
 using ModelEntities;
 
 namespace ManejoContable.ViewModel.Client;
 
-public class ClientsViewModel : INotifyPropertyChanged
+public class ClientsViewModel : IBaseViewModel<Cliente>,INotifyPropertyChanged
 {
     public ObservableCollection<Cliente> Clients { get; private set; }
 
-    public ViewClientCommand ViewClientCommand { get; init; }
-    public DeleteClientCommand DeleteClientCommand { get; init; }
-    public EditClientCommand EditClientCommand { get; init; }
-    public AddClientCommand AddClientCommand { get; init; }
+    public ViewCommand<Cliente> ViewClientCommand { get; init; }
+    public DeleteCommand<Cliente> DeleteClientCommand { get; init; }
+    public EditCommand<Cliente> EditClientCommand { get; init; }
+    public AddCommand<Cliente> AddClientCommand { get; init; }
 
-    private IClientDialogService _clientDialog;
+    private IDialogService _dialog;
 
     private Cliente? _cliente;
 
@@ -32,12 +33,12 @@ public class ClientsViewModel : INotifyPropertyChanged
 
     public ClientsViewModel()
     {
-        ViewClientCommand = new ViewClientCommand(this);
-        DeleteClientCommand = new DeleteClientCommand(this);
-        EditClientCommand = new EditClientCommand(this);
-        AddClientCommand = new AddClientCommand(this);
+        ViewClientCommand = new ViewCommand<Cliente>(this);
+        DeleteClientCommand = new DeleteCommand<Cliente>(this);
+        EditClientCommand = new EditCommand<Cliente>(this);
+        AddClientCommand = new AddCommand<Cliente>(this);
 
-        _clientDialog = new ClientClientDialogService();
+        _dialog = new ClientDialogService();
 
         Clients = new ObservableCollection<Cliente>
         {
@@ -58,16 +59,16 @@ public class ClientsViewModel : INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
 
 
-    public void ShowClientInformation(Cliente cliente)
+    public void ShowInformation(Cliente cliente)
     {
-        Debug.WriteLine($"{nameof(ShowClientInformation)}: showing client information.");
+        Debug.WriteLine($"{nameof(ShowInformation)}: showing client information.");
 
-        _clientDialog.OpenClientInformationDialog(cliente);
+        _dialog.OpenInformationDialog(cliente);
     }
 
-    public void DeleteClient(Cliente cliente)
+    public void Delete(Cliente cliente)
     {
-        var result = _clientDialog.DeleteClientDialog(cliente);
+        var result = _dialog.DeleteDialog(cliente);
         // TODO: use Result
 
         #region Test
@@ -79,21 +80,21 @@ public class ClientsViewModel : INotifyPropertyChanged
 
         #endregion
 
-        Debug.WriteLine($"{nameof(DeleteClient)}: prompt to delete client.");
+        Debug.WriteLine($"{nameof(Delete)}: prompt to delete client.");
     }
 
-    public void EditClient(Cliente cliente)
+    public void Edit(Cliente cliente)
     {
-        var result = _clientDialog.UpdateClientDialog(cliente);
+        var result = _dialog.UpdateDialog(cliente);
         // TODO: use Result
-        Debug.WriteLine($"{nameof(EditClient)}: show edit client dialog.");
+        Debug.WriteLine($"{nameof(Edit)}: show edit client dialog.");
     }
 
-    public void AddClient()
+    public void Add()
     {
-        var result = _clientDialog.AddClientDialog();
+        var result = _dialog.AddDialog();
         // TODO: use Result
-        Debug.WriteLine($"{nameof(AddClient)}: show edit client dialog.");
+        Debug.WriteLine($"{nameof(Add)}: show edit client dialog.");
     }
 
 

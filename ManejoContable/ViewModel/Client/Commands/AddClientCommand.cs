@@ -5,11 +5,11 @@ using ModelEntities;
 
 namespace ManejoContable.ViewModel.Client.Commands;
 
-public class AddClientCommand : ICommand
+public class AddClientCommand<T> : ICommand
 {
-    private readonly ClientsViewModel _clientViewModel;
+    private readonly IBaseViewModel<T> _clientViewModel;
 
-    public AddClientCommand(ClientsViewModel clientViewModel)
+    public AddClientCommand(IBaseViewModel<T> clientViewModel)
     {
         _clientViewModel = clientViewModel;
     }
@@ -23,7 +23,7 @@ public class AddClientCommand : ICommand
 
     public void Execute(object? parameter)
     {
-        _clientViewModel.AddClient();
+        _clientViewModel.Add();
     }
 
     public event EventHandler? CanExecuteChanged

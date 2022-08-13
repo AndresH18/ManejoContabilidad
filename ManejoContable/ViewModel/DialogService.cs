@@ -3,19 +3,19 @@ using System.Windows;
 using ManejoContable.View.Windows.Client;
 using ModelEntities;
 
-namespace ManejoContable.ViewModel.Client;
+namespace ManejoContable.ViewModel;
 
-public interface IClientDialogService
+public interface IDialogService
 {
-    public void OpenClientInformationDialog(Cliente cliente);
-    public bool DeleteClientDialog(Cliente cliente);
-    public Cliente? UpdateClientDialog(Cliente client);
-    public Cliente? AddClientDialog();
+    public void OpenInformationDialog(Cliente cliente);
+    public bool DeleteDialog(Cliente cliente);
+    public Cliente? UpdateDialog(Cliente client);
+    public Cliente? AddDialog();
 }
 
-public class ClientClientDialogService : IClientDialogService
+public class ClientDialogService : IDialogService
 {
-    public void OpenClientInformationDialog(Cliente cliente)
+    public void OpenInformationDialog(Cliente cliente)
     {
         var dialogResult = new ViewClientWindow(cliente)
         {
@@ -25,9 +25,9 @@ public class ClientClientDialogService : IClientDialogService
         }.ShowDialog();
     }
 
-    public bool DeleteClientDialog(Cliente cliente)
+    public bool DeleteDialog(Cliente cliente)
     {
-        // TODO: Implement DeleteClient . use new Window, or use the dialog result
+        // TODO: Implement Delete . use new Window, or use the dialog result
         var result = MessageBox.Show("Implement Delete", "Borrar Cliente?",
             MessageBoxButton.OKCancel,
             MessageBoxImage.Question, MessageBoxResult.Cancel);
@@ -43,7 +43,7 @@ public class ClientClientDialogService : IClientDialogService
         return true;
     }
 
-    public Cliente? UpdateClientDialog(Cliente client)
+    public Cliente? UpdateDialog(Cliente client)
     {
         // System.Media.SystemSounds.Asterisk.Play();
         // System.Media.SystemSounds.Hand.Play();
@@ -62,7 +62,7 @@ public class ClientClientDialogService : IClientDialogService
         return dialogResult == true ? dialog.NewValue : default;
     }
 
-    public Cliente? AddClientDialog()
+    public Cliente? AddDialog()
     {
         var window = EditClientWindow.CreateAddClientDialogWindow();
 

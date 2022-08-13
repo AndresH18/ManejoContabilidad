@@ -16,8 +16,7 @@
     <Page.Resources>
 
         <vm:ClientsViewModel x:Key="Vm" />
-
-        <modelEntities:Cliente x:Key="Cliente" />
+        
         <ObjectDataProvider x:Key="DocumentTypeProvider"
                             ObjectType="{x:Type system:Enum}"
                             MethodName="GetValues">

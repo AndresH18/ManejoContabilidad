@@ -5,11 +5,11 @@ using ModelEntities;
 
 namespace ManejoContable.ViewModel.Client.Commands;
 
-public class DeleteClientCommand : ICommand
+public class DeleteClientCommand<T> : ICommand
 {
-    private readonly ClientsViewModel _clientViewModel;
+    private readonly IBaseViewModel<T> _clientViewModel;
 
-    public DeleteClientCommand(ClientsViewModel clientViewModel)
+    public DeleteClientCommand(IBaseViewModel<T> clientViewModel)
     {
         _clientViewModel = clientViewModel;
     }
@@ -17,12 +17,12 @@ public class DeleteClientCommand : ICommand
     public bool CanExecute(object? parameter)
     {
         Debug.WriteLine($"{GetType().Name}: was called. parameter-type={parameter?.GetType()}");
-        return parameter is Cliente;
+        return parameter is T;
     }
 
     public void Execute(object? parameter)
     {
-        _clientViewModel.DeleteClient((Cliente)parameter!);
+        _clientViewModel.Delete((T) parameter!);
     }
 
     public event EventHandler? CanExecuteChanged

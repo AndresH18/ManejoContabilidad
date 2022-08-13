@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
+using ManejoContable.ViewModel.Commands;
 using ModelEntities;
 
 namespace ManejoContable.ViewModel.Product;
 
-public class ProductViewModel : INotifyPropertyChanged
+public class ProductViewModel : IBaseViewModel<Producto>, INotifyPropertyChanged
 {
     public ObservableCollection<Producto> Products { get; }
     private Producto? _producto;
+
+    public ViewCommand<Producto> ViewProductCommand { get; }
 
     public Producto? SelectedProduct
     {
@@ -27,10 +31,32 @@ public class ProductViewModel : INotifyPropertyChanged
         // {
         //     Products = new ObservableCollection<Producto>();
         // }
+        ViewProductCommand = new ViewCommand<Producto>(this);
+
         Products = new ObservableCollection<Producto>
         {
-            new Producto() { Nombre = "Radio", Codigo = "rad-01", PrecioUnitario = 20.3M },
+            new Producto() {Nombre = "Radio", Codigo = "rad-01", PrecioUnitario = 20.3M},
         };
+    }
+
+    public void ShowInformation(Producto t)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Delete(Producto t)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Edit(Producto t)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Add()
+    {
+        throw new NotImplementedException();
     }
 
     private void NotifyPropertyChange(string name)
