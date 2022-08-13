@@ -48,6 +48,7 @@
 	<ItemGroup>
 	  <Folder Include="UserControls\EventArgs\" />
 	  <Folder Include="ViewModel\Client\" />
+	  <Folder Include="ViewModel\Services\" />
 	  <Folder Include="ViewModel\Product\" />
 	</ItemGroup>
 

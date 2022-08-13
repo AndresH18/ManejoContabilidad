@@ -47,7 +47,7 @@
                 <DataGridTextColumn Header="Categoria"
                                     Width="*" />
                 <DataGridTextColumn Header="Valor Unitario"
-                                    Binding="{Binding PrecioUnitario}"
+                                    Binding="{Binding PrecioUnitario, StringFormat={}{0:C}}"
                                     Width="*" />
             </DataGrid.Columns>
         </DataGrid>

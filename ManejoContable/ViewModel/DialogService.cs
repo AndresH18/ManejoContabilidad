@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using ManejoContable.View.Windows.Client;
+using ManejoContable.View.Windows.Product;
 using ModelEntities;
 
 namespace ManejoContable.ViewModel;
@@ -91,7 +92,12 @@ public class ProductDialogService : IDialogService<Producto>
     // TODO: Implement Dialog Functionality
     public void OpenInformationDialog(Producto producto)
     {
-        throw new NotImplementedException();
+        new ViewProductWindow(producto)
+        {
+            Owner = Application.Current.MainWindow,
+            ResizeMode = ResizeMode.NoResize,
+            ShowInTaskbar = false,
+        }.ShowDialog();
     }
 
     public bool DeleteDialog(Producto producto)
