@@ -6,8 +6,7 @@ public class Producto : ICloneable
 
     public string Nombre { get; set; }
 
-    // TODO: Map relationship for Entity Framework Core
-    public int CategoriaId { get; set; }
+    
 
     // TODO: Map relationship for Entity Framework Core
     public int MarcaId { get; set; }
@@ -16,6 +15,10 @@ public class Producto : ICloneable
     public string Referencia { get; set; } = string.Empty;
     public decimal PrecioUnitario { get; set; }
     public string? Descripcion { get; set; }
+
+    // TODO: Map relationship for Entity Framework Core
+    public int? CategoriaId { get; set; }
+    public virtual Categoria Categoria { get; set; }
 
     public object Clone()
     {
