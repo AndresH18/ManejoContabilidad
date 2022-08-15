@@ -15,7 +15,7 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
     public EditCommand<Cliente> EditCommand { get; init; }
     public CreateCommand<Cliente> CreateCommand { get; init; }
 
-    private IDialogService<Cliente> _dialog;
+    private readonly IDialogService<Cliente> _dialog;
 
     private Cliente? _model;
 

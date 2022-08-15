@@ -18,7 +18,7 @@ public class ProductViewModel : IBaseViewModel<Producto>, INotifyPropertyChanged
     public DeleteCommand<Producto> DeleteCommand { get; }
     public EditCommand<Producto> EditCommand { get; }
 
-    private IDialogService<Producto> _dialog;
+    private readonly IDialogService<Producto> _dialog;
     private Producto? _producto;
 
     public Producto? SelectedModel
@@ -48,7 +48,7 @@ public class ProductViewModel : IBaseViewModel<Producto>, INotifyPropertyChanged
 
         Models = new ObservableCollection<Producto>
         {
-            new Producto() {Nombre = "Radio", Codigo = "rad-01", PrecioUnitario = 20.3M},
+            new Producto() { Nombre = "Radio", Codigo = "rad-01", PrecioUnitario = 20.3M },
         };
     }
 
