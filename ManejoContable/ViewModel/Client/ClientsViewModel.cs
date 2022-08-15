@@ -6,9 +6,9 @@ using ModelEntities;
 
 namespace ManejoContable.ViewModel.Client;
 
-public class ClientsViewModel : IBaseViewModel<Cliente>,INotifyPropertyChanged
+public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
 {
-    public ObservableCollection<Cliente> Clients { get; private set; }
+    public ObservableCollection<Cliente> Models { get; }
 
     public ViewCommand<Cliente> ViewClientCommand { get; init; }
     public DeleteCommand<Cliente> DeleteClientCommand { get; init; }
@@ -39,7 +39,7 @@ public class ClientsViewModel : IBaseViewModel<Cliente>,INotifyPropertyChanged
 
         _dialog = new ClientDialogService();
 
-        Clients = new ObservableCollection<Cliente>
+        Models = new ObservableCollection<Cliente>
         {
             new()
             {
@@ -70,11 +70,12 @@ public class ClientsViewModel : IBaseViewModel<Cliente>,INotifyPropertyChanged
         var result = _dialog.DeleteDialog(cliente);
         // TODO: use Result
         // TODO: delete test
+
         #region Test
 
         if (result)
         {
-            Clients.Remove(cliente);
+            Models.Remove(cliente);
         }
 
         #endregion

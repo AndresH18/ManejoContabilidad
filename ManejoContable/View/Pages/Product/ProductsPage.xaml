@@ -32,7 +32,7 @@
                   CanUserResizeRows="False"
                   AutoGenerateColumns="False"
                   SelectedItem="{Binding SelectedProduct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                  ItemsSource="{Binding Products}">
+                  ItemsSource="{Binding Models}">
             
             <DataGrid.InputBindings>
                 <MouseBinding MouseAction="LeftDoubleClick"

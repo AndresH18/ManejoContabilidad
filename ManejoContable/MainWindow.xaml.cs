@@ -76,5 +76,15 @@ namespace ManejoContable
         {
             Frame.Navigate(new ProductsPage());
         }
+
+        private void MarcasMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CategoriasMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

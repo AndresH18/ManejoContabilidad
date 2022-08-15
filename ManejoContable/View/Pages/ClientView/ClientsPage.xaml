@@ -153,7 +153,7 @@
                   SelectionMode="Single"
                   CanUserResizeRows="False"
                   SelectedItem="{Binding SelectedCliente, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                  ItemsSource="{Binding Clients}">
+                  ItemsSource="{Binding Models}">
 
             <DataGrid.InputBindings>
                 <MouseBinding MouseAction="LeftDoubleClick"

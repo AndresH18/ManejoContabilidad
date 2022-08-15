@@ -11,8 +11,7 @@ namespace ManejoContable.ViewModel.Product;
 
 public class ProductViewModel : IBaseViewModel<Producto>, INotifyPropertyChanged
 {
-    public ObservableCollection<Producto> Products { get; }
-
+    public ObservableCollection<Producto> Models { get; }
 
     public ViewCommand<Producto> ViewCommand { get; }
     public CreateCommand<Producto> CreateCommand { get; }
@@ -36,7 +35,7 @@ public class ProductViewModel : IBaseViewModel<Producto>, INotifyPropertyChanged
     {
         // if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
         // {
-        //     Products = new ObservableCollection<Producto>();
+        //     Models = new ObservableCollection<Producto>();
         // }
 
         _dialog = new ProductDialogService();
@@ -47,7 +46,7 @@ public class ProductViewModel : IBaseViewModel<Producto>, INotifyPropertyChanged
         EditCommand = new EditCommand<Producto>(this);
 
 
-        Products = new ObservableCollection<Producto>
+        Models = new ObservableCollection<Producto>
         {
             new Producto() {Nombre = "Radio", Codigo = "rad-01", PrecioUnitario = 20.3M},
         };
