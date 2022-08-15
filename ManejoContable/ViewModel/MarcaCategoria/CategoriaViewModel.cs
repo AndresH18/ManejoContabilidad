@@ -9,7 +9,17 @@ public class CategoriaViewModel : IBaseViewModel<Categoria>
 
     public CategoriaViewModel()
     {
-        Models = new ObservableCollection<Categoria> { };
+        Models = new ObservableCollection<Categoria>
+        {
+            new()
+            {
+                Name = "Television", Description = "Televisores, pantallas grandes, etc"
+            },
+            new()
+            {
+                Name = "Radios", Description = "Radios, Telecomunicaciones"
+            }
+        };
     }
 
     public void Show(Categoria t)
