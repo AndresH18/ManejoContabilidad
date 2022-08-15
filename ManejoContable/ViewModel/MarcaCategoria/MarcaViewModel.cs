@@ -24,7 +24,7 @@ public class MarcaViewModel : IBaseViewModel<Marca>, INotifyPropertyChanged
         set
         {
             _model = value;
-            NotifyPropertyChange(nameof(SelectedModel));
+            NotifyPropertyChanged(nameof(SelectedModel));
         }
     }
 
@@ -73,7 +73,7 @@ public class MarcaViewModel : IBaseViewModel<Marca>, INotifyPropertyChanged
         var result = _dialog.AddDialog();
     }
 
-    private void NotifyPropertyChange(string name)
+    private void NotifyPropertyChanged(string name)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }

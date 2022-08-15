@@ -17,7 +17,7 @@ namespace ManejoContable.View.Windows.MarcaCategoria
         public Marca NewValue => Marca;
         public Marca OldValue { get; }
 
-        protected MarcaWindow(Marca marca)
+        private MarcaWindow(Marca marca)
         {
             InitializeComponent();
             OldValue = marca;

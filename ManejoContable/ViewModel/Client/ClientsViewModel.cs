@@ -25,7 +25,7 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
         set
         {
             _model = value;
-            OnPropertyChanged(nameof(SelectedModel));
+            NotifyPropertyChanged(nameof(SelectedModel));
         }
     }
 
@@ -98,7 +98,7 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
     }
 
 
-    private void OnPropertyChanged(string propertyName)
+    private void NotifyPropertyChanged(string propertyName)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }

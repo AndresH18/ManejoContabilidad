@@ -159,3 +159,36 @@ public class MarcaDialogService : IDialogService<Marca>
         return result == true ? dialog.NewValue : default;
     }
 }
+
+public class CategoriaDialogService : IDialogService<Categoria>
+{
+    public void OpenInformationDialog(Categoria t)
+    {
+        CategoriaWindow.CreateViewCategoriaWindow(t).ShowDialog();
+    }
+
+    public bool DeleteDialog(Categoria t)
+    {
+        // TODO: Implement Delete
+        var result = MessageBox.Show("Implement", "ssss", MessageBoxButton.OKCancel, MessageBoxImage.Question,
+            MessageBoxResult.Cancel);
+
+        return result == MessageBoxResult.OK;
+    }
+
+    public Categoria? UpdateDialog(Categoria t)
+    {
+        var dialog = CategoriaWindow.CreateUpdateCategoriaWindow(t);
+        var result = dialog.ShowDialog();
+
+        return result == true ? dialog.NewValue : default;
+    }
+
+    public Categoria? AddDialog()
+    {
+        var dialog = CategoriaWindow.CreateAddCategoriaWindow();
+        var result = dialog.ShowDialog();
+
+        return result == true ? dialog.NewValue : default;
+    }
+}

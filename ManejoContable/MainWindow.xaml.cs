@@ -85,7 +85,7 @@ namespace ManejoContable
 
         private void CategoriasMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            Frame.Navigate(new CategoriaPage());
         }
     }
 }

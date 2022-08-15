@@ -1,17 +1,18 @@
-﻿<Page x:Class="ManejoContable.View.Pages.MarcaCategoria.MarcasPage"
+﻿<Page x:Class="ManejoContable.View.Pages.MarcaCategoria.CategoriaPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:ManejoContable.View.Pages.MarcaCategoria"
-      xmlns:model="clr-namespace:ModelEntities;assembly=ModelEntities"
       xmlns:vm="clr-namespace:ManejoContable.ViewModel.MarcaCategoria"
+      xmlns:model="clr-namespace:ModelEntities;assembly=ModelEntities"
+      xmlns:modelEntities="clr-namespace:ModelEntities;assembly=ModelEntities"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="MarcasPage">
+      Title="CategoriaPage">
 
     <Page.Resources>
-        <vm:MarcaViewModel x:Key="ViewModel" />
+        <vm:CategoriaViewModel x:Key="ViewModel" />
     </Page.Resources>
 
     <Grid Name="Grid" DataContext="{StaticResource ViewModel}">
@@ -45,7 +46,7 @@
             <!-- </ListView.InputBindings> -->
 
             <ListView.ItemTemplate>
-                <DataTemplate DataType="{x:Type model:Marca}">
+                <DataTemplate DataType="{x:Type model:Categoria}">
                     <StackPanel>
                         <Label Content="{Binding Name}" FontWeight="Bold" />
                         <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="10, 0" />
