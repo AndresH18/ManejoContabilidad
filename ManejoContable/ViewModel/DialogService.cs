@@ -19,12 +19,7 @@ public class ClientDialogService : IDialogService<Cliente>
 {
     public void OpenInformationDialog(Cliente cliente)
     {
-        var dialogResult = new ViewClientWindow(cliente)
-        {
-            Owner = Application.Current.MainWindow,
-            ShowInTaskbar = false,
-            ResizeMode = ResizeMode.NoResize,
-        }.ShowDialog();
+        ClientWindow.CreateViewClientWindow(cliente).ShowDialog();
     }
 
     public bool DeleteDialog(Cliente cliente)
@@ -33,7 +28,6 @@ public class ClientDialogService : IDialogService<Cliente>
         var result = MessageBox.Show("Implement Delete", "Borrar Cliente?",
             MessageBoxButton.OKCancel,
             MessageBoxImage.Question, MessageBoxResult.Cancel);
-
 
         return result == MessageBoxResult.OK;
     }
@@ -45,12 +39,7 @@ public class ClientDialogService : IDialogService<Cliente>
         // System.Media.SystemSounds.Beep.Play();
         // System.Media.SystemSounds.Question.Play();
 
-        var dialog = new EditClientWindow(client)
-        {
-            Owner = Application.Current.MainWindow,
-            ShowInTaskbar = false,
-            ResizeMode = ResizeMode.NoResize
-        };
+        var dialog = ClientWindow.CreateUpdateClientWindow(client);
         var dialogResult = dialog.ShowDialog();
 
         // return dialogResult == true ? dialog.NewValue : dialog.OldValue;
@@ -59,7 +48,7 @@ public class ClientDialogService : IDialogService<Cliente>
 
     public Cliente? AddDialog()
     {
-        var window = EditClientWindow.CreateAddClientDialogWindow();
+        var window = ClientWindow.CreateAddClientWindow();
 
         var result = window.ShowDialog();
 
@@ -86,12 +75,7 @@ public class ProductDialogService : IDialogService<Producto>
     // TODO: Implement Dialog Functionality
     public void OpenInformationDialog(Producto producto)
     {
-        new ViewProductWindow(producto)
-        {
-            Owner = Application.Current.MainWindow,
-            ResizeMode = ResizeMode.NoResize,
-            ShowInTaskbar = false,
-        }.ShowDialog();
+        ProductWindow.CreateViewProductWindow(producto).ShowDialog();
     }
 
     public bool DeleteDialog(Producto producto)
@@ -105,12 +89,8 @@ public class ProductDialogService : IDialogService<Producto>
 
     public Producto? UpdateDialog(Producto producto)
     {
-        var dialog = new EditProductWindow(producto)
-        {
-            Owner = Application.Current.MainWindow,
-            ShowInTaskbar = false,
-            ResizeMode = ResizeMode.NoResize
-        };
+        var dialog = ProductWindow.CreateUpdateProductWindow(producto);
+
         var dialogResult = dialog.ShowDialog();
 
         // return dialogResult == true ? dialog.NewValue : dialog.OldValue;
@@ -119,7 +99,7 @@ public class ProductDialogService : IDialogService<Producto>
 
     public Producto? AddDialog()
     {
-        var window = EditProductWindow.CreateAddProductDialogWindow();
+        var window = ProductWindow.CreateAddProductWindow();
 
         var result = window.ShowDialog();
 
