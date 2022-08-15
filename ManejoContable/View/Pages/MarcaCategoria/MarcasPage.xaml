@@ -14,21 +14,35 @@
         <vm:MarcaViewModel x:Key="ViewModel" />
     </Page.Resources>
 
-    <Grid DataContext="{StaticResource ViewModel}">
+    <Grid Name="Grid" DataContext="{StaticResource ViewModel}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
         <ListView Name="ListView"
-                  Grid.Column="1"
-                  ItemsSource="{Binding Models}">
+                  Grid.Column="1" Grid.Row="0"
+                  Grid.RowSpan="2"
+                  MouseDoubleClick="ListView_OnMouseDoubleClick"
+                  ItemsSource="{Binding Models}"
+                  SelectedItem="{Binding SelectedModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 </Style>
             </ListView.ItemContainerStyle>
+
+            <!-- <ListView.InputBindings> -->
+            <!--     <MouseBinding MouseAction="LeftDoubleClick" -->
+            <!--                   Command="{Binding  ViewCommand}" -->
+            <!--                   CommandParameter="{Binding SelectedMarca}" /> -->
+            <!-- </ListView.InputBindings> -->
 
             <ListView.ItemTemplate>
                 <DataTemplate DataType="model:Marca">
@@ -39,5 +53,46 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <GroupBox Grid.Row="1" Grid.Column="0">
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="5" />
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    </Style>
+                </Grid.Resources>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Grid.Row="0"
+                        Content="Agregar"
+                        Command="{Binding CreateCommand}" />
+
+                <Button Grid.Column="1" Grid.Row="0"
+                        Content="Ver"
+                        Command="{Binding ViewCommand}"
+                        CommandParameter="{Binding SelectedModel}" />
+
+                <Button Grid.Column="0" Grid.Row="1"
+                        Content="Eliminar "
+                        Command="{Binding DeleteCommand}"
+                        CommandParameter="{Binding SelectedModel}" />
+
+                <Button Grid.Column="1" Grid.Row="1"
+                        Content="Editar"
+                        Command="{Binding EditCommand}"
+                        CommandParameter="{Binding SelectedModel}" />
+
+            </Grid>
+        </GroupBox>
     </Grid>
 </Page>

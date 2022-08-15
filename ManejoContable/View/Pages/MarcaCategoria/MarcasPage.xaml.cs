@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ManejoContable.ViewModel;
+using ManejoContable.ViewModel.MarcaCategoria;
+using ModelEntities;
 
 namespace ManejoContable.View.Pages.MarcaCategoria
 {
@@ -25,5 +28,12 @@ namespace ManejoContable.View.Pages.MarcaCategoria
             InitializeComponent();
         }
 
+        private void ListView_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (Grid.DataContext is IBaseViewModel<Marca> m && m.ViewCommand.CanExecute(m.SelectedModel))
+            {
+                m.ViewCommand.Execute(m.SelectedModel);
+            }
+        }
     }
 }

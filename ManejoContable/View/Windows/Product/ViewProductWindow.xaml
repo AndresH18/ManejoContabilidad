@@ -40,7 +40,7 @@
 
         <Label Grid.Column="0" Grid.Row="0" Content="Nombre Producto" />
         <Label Grid.Column="0" Grid.Row="1" Content="Categoria" />
-        <Label Grid.Column="0" Grid.Row="2" Content="Marca" />
+        <Label Grid.Column="0" Grid.Row="2" Content="SelectedModel" />
         <Label Grid.Column="0" Grid.Row="3" Content="Codigo" />
         <Label Grid.Column="0" Grid.Row="4" Content="Referencia" />
         <Label Grid.Column="0" Grid.Row="5" Content="Precio Unitario" />
@@ -50,7 +50,7 @@
         <!-- TODO: Bind to Categoria.Name -->
         <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Producto.CategoriaId}" d:Text="Categoria" />
         <!-- TODO: Bind to Marca.Name -->
-        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Producto.MarcaId}" d:Text="Marca" />
+        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Producto.MarcaId}" d:Text="SelectedModel" />
         <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Producto.Codigo}" d:Text="Codigo" />
         <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding Producto.Referencia}" d:Text="Referencia" />
         <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding Producto.PrecioUnitario, StringFormat={}{0:C}}"
