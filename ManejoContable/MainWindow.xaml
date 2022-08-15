@@ -33,14 +33,17 @@
                 <!-- <MenuItem Header="Buscar" IsEnabled="False" /> -->
                 <!-- <MenuItem Header="Agregar" Click="AddClientMenuItem_OnClick" /> -->
                 <!-- <MenuItem Header="Eliminar" Click="MenuItem_OnClick" /> -->
-
-
+            </MenuItem>
+            <MenuItem Header="Productos">
+                <MenuItem Header="Ver Productos" Click="ProductsMenuItem_OnCLick" />
+                <MenuItem Header="Ver Marcas" Click="MarcasMenuItem_OnClick" />
+                <MenuItem Header="Ver Categorias" Click="CategoriasMenuItem_OnClick" />
             </MenuItem>
             <Button Content="Hello" Click="ButtonBase_OnClick" />
         </Menu>
 
 
-        <Frame Name="Frame" NavigationUIVisibility="Hidden"/>
+        <Frame Name="Frame" NavigationUIVisibility="Hidden" />
 
     </DockPanel>
 </Window>

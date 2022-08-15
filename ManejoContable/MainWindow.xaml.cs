@@ -15,6 +15,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ManejoContable.View.Pages;
 using ManejoContable.View.Pages.ClientView;
+using ManejoContable.View.Pages.MarcaCategoria;
+using ManejoContable.View.Pages.Product;
 using ManejoContable.View.Windows;
 using ModelEntities;
 
@@ -71,5 +73,19 @@ namespace ManejoContable
         //     // TODO? Check if can Navigate
         //     Frame.Navigate(new AddClientPage(null));
         // }
+        private void ProductsMenuItem_OnCLick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(new ProductsPage());
+        }
+
+        private void MarcasMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(new MarcasPage());
+        }
+
+        private void CategoriasMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(new CategoriaPage());
+        }
     }
 }

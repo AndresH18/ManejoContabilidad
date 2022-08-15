@@ -1,28 +1,28 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Input;
-using ModelEntities;
 
-namespace ManejoContable.ViewModel.Client.Commands;
+namespace ManejoContable.ViewModel.Commands;
 
-public class EditClientCommand : ICommand
+public class DeleteCommand<T> : ICommand
 {
-    private readonly ClientsViewModel _clientViewModel;
+    private readonly IBaseViewModel<T> _viewModel;
 
-    public EditClientCommand(ClientsViewModel clientViewModel)
+    public DeleteCommand(IBaseViewModel<T> viewModel)
     {
-        _clientViewModel = clientViewModel;
+        _viewModel = viewModel;
     }
 
     public bool CanExecute(object? parameter)
     {
         Debug.WriteLine($"{GetType().Name}: was called. parameter-type={parameter?.GetType()}");
-        return parameter is Cliente;
+
+        return parameter is T;
     }
 
     public void Execute(object? parameter)
     {
-        _clientViewModel.EditClient((Cliente)parameter!);
+        _viewModel.Delete((T)parameter!);
     }
 
     public event EventHandler? CanExecuteChanged

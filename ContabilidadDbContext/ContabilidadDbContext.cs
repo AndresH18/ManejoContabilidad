@@ -12,6 +12,8 @@ namespace DbContextLibrary
         private static IConfigurationRoot? _configuration;
 
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<Producto> Productos { get; set; }
 
         public ContabilidadDbContext()
         {
@@ -49,8 +51,14 @@ namespace DbContextLibrary
                 .HasConversion<EnumToStringConverter<TipoDocumento>>();
 
             modelBuilder.Entity<Cliente>().HasData(
-                new Cliente { Nombre = "Imporcom", NumeroDocumento = "123-456-7890", TipoDocumento = TipoDocumento.Nit },
-                new Cliente { Nombre = "Andres' Programmers SAS", NumeroDocumento = "111-222-33-44" }
+                new Cliente
+                {
+                    Id = 1, Nombre = "Imporcom", NumeroDocumento = "123-456-7890", TipoDocumento = TipoDocumento.Nit
+                },
+                new Cliente
+                {
+                    Id = 2, Nombre = "Andres' Programmers SAS", NumeroDocumento = "111-222-33-44"
+                }
             );
         }
 

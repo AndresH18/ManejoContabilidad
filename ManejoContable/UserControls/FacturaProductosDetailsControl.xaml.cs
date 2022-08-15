@@ -41,7 +41,7 @@ namespace ManejoContable.UserControls
             if (ReferenceEquals(sender, AddButton))
             {
                 // TODO: Implement AddButton functionality
-                MessageBox.Show("Implement Add Functionality");
+                MessageBox.Show("Implement Create Functionality");
             }
             else if (ReferenceEquals(sender, RemoveButton))
             {
