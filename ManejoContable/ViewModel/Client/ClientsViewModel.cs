@@ -10,32 +10,32 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
 {
     public ObservableCollection<Cliente> Models { get; }
 
-    public ViewCommand<Cliente> ViewClientCommand { get; init; }
-    public DeleteCommand<Cliente> DeleteClientCommand { get; init; }
-    public EditCommand<Cliente> EditClientCommand { get; init; }
-    public CreateCommand<Cliente> CreateClientCommand { get; init; }
+    public ViewCommand<Cliente> ViewCommand { get; init; }
+    public DeleteCommand<Cliente> DeleteCommand { get; init; }
+    public EditCommand<Cliente> EditCommand { get; init; }
+    public CreateCommand<Cliente> CreateCommand { get; init; }
 
     private IDialogService<Cliente> _dialog;
 
-    private Cliente? _cliente;
+    private Cliente? _model;
 
-    public Cliente? SelectedCliente
+    public Cliente? SelectedModel
     {
-        get => _cliente;
+        get => _model;
         set
         {
-            _cliente = value;
-            OnPropertyChanged(nameof(SelectedCliente));
+            _model = value;
+            OnPropertyChanged(nameof(SelectedModel));
         }
     }
 
 
     public ClientsViewModel()
     {
-        ViewClientCommand = new ViewCommand<Cliente>(this);
-        DeleteClientCommand = new DeleteCommand<Cliente>(this);
-        EditClientCommand = new EditCommand<Cliente>(this);
-        CreateClientCommand = new CreateCommand<Cliente>(this);
+        ViewCommand = new ViewCommand<Cliente>(this);
+        DeleteCommand = new DeleteCommand<Cliente>(this);
+        EditCommand = new EditCommand<Cliente>(this);
+        CreateCommand = new CreateCommand<Cliente>(this);
 
         _dialog = new ClientDialogService();
 

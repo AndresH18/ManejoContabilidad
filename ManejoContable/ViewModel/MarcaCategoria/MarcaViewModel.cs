@@ -1,16 +1,42 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using ManejoContable.ViewModel.Commands;
 using ModelEntities;
 
 namespace ManejoContable.ViewModel.MarcaCategoria;
 
-public class MarcaViewModel : IBaseViewModel<Marca>
+public class MarcaViewModel : IBaseViewModel<Marca>, INotifyPropertyChanged
 {
     public ObservableCollection<Marca> Models { get; }
+    public ViewCommand<Marca> ViewCommand { get; }
+    public CreateCommand<Marca> CreateCommand { get; }
+    public DeleteCommand<Marca> DeleteCommand { get; }
+    public EditCommand<Marca> EditCommand { get; }
+
+    private IDialogService<Marca> _dialog;
+    private Marca? _model;
+
+    public Marca? SelectedModel
+    {
+        get => _model;
+        set
+        {
+            _model = value;
+            NotifyPropertyChange(nameof(SelectedModel));
+        }
+    }
 
     public MarcaViewModel()
     {
+        _dialog = new MarcaDialogService();
+
+        ViewCommand = new ViewCommand<Marca>(this);
+        CreateCommand = new CreateCommand<Marca>(this);
+        DeleteCommand = new DeleteCommand<Marca>(this);
+        EditCommand = new EditCommand<Marca>(this);
+
         Models = new ObservableCollection<Marca>
         {
             new()
@@ -26,21 +52,31 @@ public class MarcaViewModel : IBaseViewModel<Marca>
 
     public void Show(Marca t)
     {
-        throw new System.NotImplementedException();
+        _dialog.OpenInformationDialog(t);
     }
 
     public void Delete(Marca t)
     {
-        throw new System.NotImplementedException();
+        // TODO: use delete result
+        var result = _dialog.DeleteDialog(t);
     }
 
     public void Edit(Marca t)
     {
-        throw new System.NotImplementedException();
+        // TODO: use update result
+        var result = _dialog.UpdateDialog(t);
     }
 
     public void Create()
     {
-        throw new System.NotImplementedException();
+        // TODO: use Add result
+        var result = _dialog.AddDialog();
     }
+
+    private void NotifyPropertyChange(string name)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 }

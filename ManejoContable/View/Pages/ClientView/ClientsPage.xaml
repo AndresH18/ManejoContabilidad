@@ -125,22 +125,22 @@
 
                     <Button Grid.Column="0" Grid.Row="0"
                             Content="Agregar"
-                            Command="{Binding CreateClientCommand}" />
+                            Command="{Binding CreateCommand}" />
 
                     <Button Grid.Column="1" Grid.Row="0"
                             Content="Ver"
-                            Command="{Binding ViewClientCommand}"
-                            CommandParameter="{Binding SelectedCliente}" />
+                            Command="{Binding ViewCommand}"
+                            CommandParameter="{Binding SelectedModel}" />
 
                     <Button Grid.Column="0" Grid.Row="1"
                             Content="Eliminar "
-                            Command="{Binding DeleteClientCommand}"
-                            CommandParameter="{Binding SelectedCliente}" />
+                            Command="{Binding DeleteCommand}"
+                            CommandParameter="{Binding SelectedModel}" />
 
                     <Button Grid.Column="1" Grid.Row="1"
                             Content="Editar"
-                            Command="{Binding EditClientCommand}"
-                            CommandParameter="{Binding SelectedCliente}" />
+                            Command="{Binding EditCommand}"
+                            CommandParameter="{Binding SelectedModel}" />
 
                 </Grid>
             </GroupBox>
@@ -152,13 +152,13 @@
                   IsReadOnly="True"
                   SelectionMode="Single"
                   CanUserResizeRows="False"
-                  SelectedItem="{Binding SelectedCliente, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding SelectedModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Models}">
 
             <DataGrid.InputBindings>
                 <MouseBinding MouseAction="LeftDoubleClick"
-                              Command="{Binding ViewClientCommand}"
-                              CommandParameter="{Binding SelectedCliente}" />
+                              Command="{Binding ViewCommand}"
+                              CommandParameter="{Binding SelectedModel}" />
             </DataGrid.InputBindings>
 
             <DataGrid.Columns>

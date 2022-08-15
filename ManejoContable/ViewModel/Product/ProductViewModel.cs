@@ -21,13 +21,13 @@ public class ProductViewModel : IBaseViewModel<Producto>, INotifyPropertyChanged
     private IDialogService<Producto> _dialog;
     private Producto? _producto;
 
-    public Producto? SelectedProduct
+    public Producto? SelectedModel
     {
         get => _producto;
         set
         {
             _producto = value;
-            NotifyPropertyChange(nameof(SelectedProduct));
+            NotifyPropertyChange(nameof(SelectedModel));
         }
     }
 

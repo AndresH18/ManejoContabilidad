@@ -31,13 +31,13 @@
                   SelectionMode="Single"
                   CanUserResizeRows="False"
                   AutoGenerateColumns="False"
-                  SelectedItem="{Binding SelectedProduct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding SelectedModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Models}">
             
             <DataGrid.InputBindings>
                 <MouseBinding MouseAction="LeftDoubleClick"
                               Command="{Binding ViewCommand}"
-                              CommandParameter="{Binding SelectedProduct}" />
+                              CommandParameter="{Binding SelectedModel}" />
             </DataGrid.InputBindings>
 
             <DataGrid.Columns>
@@ -47,7 +47,7 @@
                 <DataGridTextColumn Header="Codigo"
                                     Binding="{Binding Codigo}"
                                     Width="*" />
-                <DataGridTextColumn Header="Marca"
+                <DataGridTextColumn Header="SelectedModel"
                                     Width="*" />
                 <DataGridTextColumn Header="Categoria"
                                     Width="*" />
@@ -83,17 +83,17 @@
                 <Button Grid.Column="1" Grid.Row="0"
                         Content="Ver"
                         Command="{Binding ViewCommand}"
-                        CommandParameter="{Binding SelectedProduct}" />
+                        CommandParameter="{Binding SelectedModel}" />
 
                 <Button Grid.Column="0" Grid.Row="1"
                         Content="Eliminar "
                         Command="{Binding DeleteCommand}"
-                        CommandParameter="{Binding SelectedProduct}" />
+                        CommandParameter="{Binding SelectedModel}" />
 
                 <Button Grid.Column="1" Grid.Row="1"
                         Content="Editar"
                         Command="{Binding EditCommand}"
-                        CommandParameter="{Binding SelectedProduct}" />
+                        CommandParameter="{Binding SelectedModel}" />
 
             </Grid>
         </GroupBox>

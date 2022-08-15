@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using ManejoContable.View.Windows.Client;
+using ManejoContable.View.Windows.MarcaCategoria;
 using ManejoContable.View.Windows.Product;
 using ModelEntities;
 
@@ -32,16 +33,9 @@ public class ClientDialogService : IDialogService<Cliente>
         var result = MessageBox.Show("Implement Delete", "Borrar Cliente?",
             MessageBoxButton.OKCancel,
             MessageBoxImage.Question, MessageBoxResult.Cancel);
-        if (result == MessageBoxResult.OK)
-        {
-            // delete client
-        }
-        else
-        {
-            // Nothing 
-        }
 
-        return true;
+
+        return result == MessageBoxResult.OK;
     }
 
     public Cliente? UpdateDialog(Cliente client)
@@ -103,7 +97,7 @@ public class ProductDialogService : IDialogService<Producto>
     public bool DeleteDialog(Producto producto)
     {
         // TODO: Implement Delete
-        var result = MessageBox.Show("Implement", "sss", MessageBoxButton.OKCancel, MessageBoxImage.Question,
+        var result = MessageBox.Show("Implement", "ssss", MessageBoxButton.OKCancel, MessageBoxImage.Question,
             MessageBoxResult.Cancel);
 
         return result == MessageBoxResult.OK;
@@ -130,5 +124,38 @@ public class ProductDialogService : IDialogService<Producto>
         var result = window.ShowDialog();
 
         return result == true ? window.NewValue : default;
+    }
+}
+
+public class MarcaDialogService : IDialogService<Marca>
+{
+    public void OpenInformationDialog(Marca t)
+    {
+        MarcaWindow.CreateViewMarcaWindow(t).ShowDialog();
+    }
+
+    public bool DeleteDialog(Marca t)
+    {
+        // TODO: Implement Delete
+        var result = MessageBox.Show("Implement", "ssss", MessageBoxButton.OKCancel, MessageBoxImage.Question,
+            MessageBoxResult.Cancel);
+
+        return result == MessageBoxResult.OK;
+    }
+
+    public Marca? UpdateDialog(Marca t)
+    {
+        var dialog = MarcaWindow.CreateUpdateMarcaWindow(t);
+        var result = dialog.ShowDialog();
+
+        return result == true ? dialog.NewValue : default;
+    }
+
+    public Marca? AddDialog()
+    {
+        var dialog = MarcaWindow.CreateAddMarcaWindow();
+        var result = dialog.ShowDialog();
+
+        return result == true ? dialog.NewValue : default;
     }
 }
