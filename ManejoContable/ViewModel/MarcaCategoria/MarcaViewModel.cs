@@ -15,7 +15,7 @@ public class MarcaViewModel : IBaseViewModel<Marca>, INotifyPropertyChanged
     public DeleteCommand<Marca> DeleteCommand { get; }
     public EditCommand<Marca> EditCommand { get; }
 
-    private IDialogService<Marca> _dialog;
+    private readonly IDialogService<Marca> _dialog;
     private Marca? _model;
 
     public Marca? SelectedModel

@@ -15,7 +15,7 @@ public class CategoriaViewModel : IBaseViewModel<Categoria>, INotifyPropertyChan
     public DeleteCommand<Categoria> DeleteCommand { get; }
     public EditCommand<Categoria> EditCommand { get; }
 
-    private IDialogService<Categoria> _dialog;
+    private readonly IDialogService<Categoria> _dialog;
     private Categoria? _marca;
 
     public Categoria? SelectedModel
