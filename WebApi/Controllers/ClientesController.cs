@@ -6,23 +6,25 @@ namespace WebApi.Controllers;
 
 [ApiController]
 [Route("[Controller]")]
-public class ClientesRepository : Controller
+public class ClientesController : Controller
 {
     private IClienteRepository _repository;
 
-    public ClientesRepository()
-    {
-        _repository = new ClienteRepository();
-    }
+    // public ClientesController()
+    // {
+    //     _repository = new ClienteRepository();
+    // }
 
-    public ClientesRepository(IClienteRepository repository)
+    public ClientesController(IClienteRepository repository)
     {
         _repository = repository;
     }
 
     // GET
     [HttpGet]
+    // public ActionResult<int> Check() => Ok(_repository.GetHashCode());
     public ActionResult<List<Cliente>> GetAll() => _repository.GetAll().ToList();
+    
 
     [HttpGet("{id}")]
     public ActionResult<Cliente> Get(int id)
