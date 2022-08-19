@@ -21,6 +21,8 @@ public class Cliente : ICloneable
     public string? RegimenContable { get; set; }
     public string? Responsabilidad { get; set; }
 
+    public virtual List<Factura> Facturas { get; set; }
+
     public object Clone()
     {
         return new Cliente

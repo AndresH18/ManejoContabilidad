@@ -15,6 +15,7 @@ public class ContabilidadDbContext : DbContext
     public DbSet<Categoria> Categorias { get; set; }
     public DbSet<Marca> Marcas { get; set; }
     public DbSet<Producto> Productos { get; set; }
+    public DbSet<Factura> Facturas { get; set; }
 
     public ContabilidadDbContext()
     {
@@ -61,6 +62,9 @@ public class ContabilidadDbContext : DbContext
                 Id = 2, Nombre = "Andres' Programmers SAS", NumeroDocumento = "111-222-33-44"
             }
         );
+
+        modelBuilder.Entity<DetallesFactura>()
+            .HasKey(df => new { df.FacturaId, df.ProductoFacturaId });
     }
 
 
