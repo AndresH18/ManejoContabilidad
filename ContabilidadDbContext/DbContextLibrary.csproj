@@ -26,4 +26,10 @@
 	  <Folder Include="Repository\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <EmbeddedResource Include="appsettings.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	</ItemGroup>
+
 </Project>

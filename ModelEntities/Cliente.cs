@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ModelEntities;
 
-public class Cliente : ICloneable
+public class Cliente : IModel, ICloneable
 {
     [Key] public int Id { get; set; }
     public string Nombre { get; set; } = string.Empty;
@@ -10,8 +11,7 @@ public class Cliente : ICloneable
     public string NumeroDocumento { get; set; } = "123 233 9888";
 
     public string? Direccion { get; set; }
-
-    // TODO: Create relationship for the Entity Framework Core
+    
     //[Required]
     public string? MunicipioId { get; set; }
 
@@ -21,7 +21,7 @@ public class Cliente : ICloneable
     public string? RegimenContable { get; set; }
     public string? Responsabilidad { get; set; }
 
-    public virtual List<Factura> Facturas { get; set; }
+    [JsonIgnore] public virtual List<Factura> Facturas { get; set; }
 
     public object Clone()
     {

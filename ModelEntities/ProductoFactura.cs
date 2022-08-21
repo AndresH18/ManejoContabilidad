@@ -1,6 +1,8 @@
-﻿namespace ModelEntities;
+﻿using System.Text.Json.Serialization;
 
-public class ProductoFactura
+namespace ModelEntities;
+
+public class ProductoFactura : IModel
 {
     public int Id { get; set; }
     public string Nombre { get; set; }
@@ -11,5 +13,5 @@ public class ProductoFactura
     public decimal PrecioUnitario { get; set; }
     public string? Descripcion { get; set; }
 
-    public virtual DetallesFactura DetallesFactura { get; set; }
+    [JsonIgnore] public virtual DetallesFactura DetallesFactura { get; set; }
 }

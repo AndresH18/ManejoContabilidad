@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Configuration;
 using ModelEntities;
@@ -34,9 +35,15 @@ public class ContabilidadDbContext : DbContext
         // base.OnConfiguring(optionsBuilder);
         if (!optionsBuilder.IsConfigured)
         {
+            var a = Assembly.GetAssembly(typeof(ContabilidadDbContext));
+            var stream = a?.GetManifestResourceStream("DbContextLibrary.appsettings.json");
+
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+            if (stream != null)
+                builder.AddJsonStream(stream);
 
             _configuration = builder.Build();
 

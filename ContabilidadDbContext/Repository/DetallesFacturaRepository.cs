@@ -3,11 +3,16 @@ using ModelEntities;
 
 namespace DbContextLibrary.Repository;
 
-public interface IDetallesFactura : ICompositeRepository<DetallesFactura>
+public interface IDetallesFacturaRepository
 {
+    DetallesFactura Create(DetallesFactura detallesFactura);
+    IEnumerable<DetallesFactura> GetAll();
+    DetallesFactura? GetById(int facturaId, int productoFacturaId);
+    void Update(DetallesFactura detallesFactura);
+    void Delete(int facturaId, int productoFacturaId);
 }
 
-public class DetallesFacturaRepository : IDetallesFactura
+public class DetallesFacturaRepositoryRepository : IDetallesFacturaRepository
 {
     private readonly ContabilidadDbContext _db = new();
 

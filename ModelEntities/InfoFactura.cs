@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ModelEntities;
 
-public class InfoFactura
+public class InfoFactura : IModel
 {
     [Key, ForeignKey("Factura")]
     [Required]
@@ -19,5 +20,5 @@ public class InfoFactura
     public string? Prefijo { get; set; }
     public string? MedioPago { get; set; }
     public string? Plazo { get; set; }
-    public virtual Factura Factura { get; set; }
+    [JsonIgnore] public virtual Factura Factura { get; set; }
 }
