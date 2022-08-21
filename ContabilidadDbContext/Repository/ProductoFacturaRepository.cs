@@ -13,24 +13,24 @@ public class ProductoFacturaRepository : IProductoFacturaRepository
 
     public ProductoFactura Create(ProductoFactura entity)
     {
-        _db.ProductoFacturas.Add(entity);
+        _db.ProductoFactura.Add(entity);
         _db.SaveChanges();
         return entity;
     }
 
     public IEnumerable<ProductoFactura> GetAll()
     {
-        return _db.ProductoFacturas.AsNoTracking();
+        return _db.ProductoFactura.AsNoTracking();
     }
 
     public ProductoFactura? GetById(int id)
     {
-        return _db.ProductoFacturas.AsNoTracking().FirstOrDefault(pf => pf.Id == id);
+        return _db.ProductoFactura.AsNoTracking().FirstOrDefault(pf => pf.Id == id);
     }
 
     public void Update(ProductoFactura entity)
     {
-        _db.ProductoFacturas.Update(entity);
+        _db.ProductoFactura.Update(entity);
         _db.SaveChanges();
     }
 
@@ -39,7 +39,7 @@ public class ProductoFacturaRepository : IProductoFacturaRepository
         var pf = GetById(id);
         if (pf != null)
         {
-            _db.ProductoFacturas.Remove(pf);
+            _db.ProductoFactura.Remove(pf);
             _db.SaveChanges();
         }
     }

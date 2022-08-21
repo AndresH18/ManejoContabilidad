@@ -18,7 +18,7 @@ public class ContabilidadDbContext : DbContext
     public DbSet<Factura> Facturas { get; set; }
     public DbSet<InfoFactura> InfoFactura { get; set; }
     public DbSet<DetallesFactura> DetallesFactura { get; set; }
-    public DbSet<ProductoFactura> ProductoFacturas { get; set; }
+    public DbSet<ProductoFactura> ProductoFactura { get; set; }
 
     public ContabilidadDbContext()
     {
