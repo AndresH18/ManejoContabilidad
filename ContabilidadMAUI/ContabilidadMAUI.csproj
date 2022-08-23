@@ -28,6 +28,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -49,13 +50,20 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="NewFolder\Marca\" />
+	  <Compile Update="View\Categoria\ViewCategoriasPage.xaml.cs">
+	    <DependentUpon>ViewCategoriasPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\Marca\ViewMarcasPage.xaml.cs">
+	    <DependentUpon>ViewMarcasPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="NewFolder\Marca\ViewMarcasPage.xaml.cs">
-	    <DependentUpon>ViewMarcasPage.xaml</DependentUpon>
-	  </Compile>
+	  <Folder Include="View\Categoria\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\ModelEntities\ModelEntities.csproj" />
 	</ItemGroup>
 
 </Project>

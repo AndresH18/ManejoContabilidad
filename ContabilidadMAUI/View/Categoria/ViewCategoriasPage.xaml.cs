@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ContabilidadMAUI.NewFolder.Marca;
+namespace ContabilidadMAUI.View.Categoria;
 
-public partial class ViewMarcasPage : ContentPage
+public partial class ViewCategoriasPage : ContentPage
 {
-    public ViewMarcasPage()
+    public ViewCategoriasPage()
     {
         InitializeComponent();
     }
