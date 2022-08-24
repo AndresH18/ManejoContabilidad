@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ManejoContable.View.Pages;
 using ManejoContable.View.Pages.ClientView;
+using ManejoContable.View.Pages.Facturas;
 using ManejoContable.View.Pages.MarcaCategoria;
 using ManejoContable.View.Pages.Product;
 using ManejoContable.View.Windows;
@@ -86,6 +87,11 @@ namespace ManejoContable
         private void CategoriasMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(new CategoriaPage());
+        }
+
+        private void FacturasMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(new FacturasPage());
         }
     }
 }

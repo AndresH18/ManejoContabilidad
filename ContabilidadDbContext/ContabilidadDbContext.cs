@@ -73,8 +73,25 @@ public class ContabilidadDbContext : DbContext
             }
         );
 
+        modelBuilder.Entity<Categoria>()
+            .HasData(
+                new Categoria
+                {
+                    Id = 1,
+                    Name = "Television",
+                    Description = "Televisores, pantallas grandes, etc"
+                },
+                new Categoria
+                {
+                    Id = 2,
+                    Name = "Radios",
+                    Description = "Radios, Telecomunicaciones"
+                }
+            );
+
+
         modelBuilder.Entity<DetallesFactura>()
-            .HasKey(df => new {df.FacturaId, df.ProductoFacturaId});
+            .HasKey(df => new { df.FacturaId, df.ProductoFacturaId });
     }
 
 
