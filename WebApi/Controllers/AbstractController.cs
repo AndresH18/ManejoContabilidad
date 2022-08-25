@@ -54,7 +54,7 @@ public abstract class AbstractController<TRepo, TModel> : Controller
             return NotFound();
 
         _repo.Update(model);
-        return NotFound();
+        return NoContent();
     }
     
     // DELETE
