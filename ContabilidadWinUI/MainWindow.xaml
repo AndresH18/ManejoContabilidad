@@ -12,7 +12,8 @@
                     ItemInvoked="NavView_OnItemInvoked"
                     Loaded="NavView_OnLoaded"
                     BackRequested="NavView_BackRequested"
-                    Background="Red">
+                    IsSettingsVisible="False"
+                    Background="Gray">
 
         <NavigationView.MenuItems>
 
