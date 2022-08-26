@@ -5,9 +5,55 @@
     xmlns:local="using:ContabilidadWinUI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d">
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="myButton" Click="myButton_Click" Background="Green">Click Me</Button>
-    </StackPanel>
+    <NavigationView Name="NavView"
+                    ItemInvoked="NavView_OnItemInvoked"
+                    Loaded="NavView_OnLoaded"
+                    BackRequested="NavView_BackRequested"
+                    Background="Red">
+
+        <NavigationView.MenuItems>
+
+            <NavigationViewItem Content="Home" Tag="home">
+                <NavigationViewItem.Icon>
+                    <SymbolIcon Symbol="Home" />
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItem Content="Clientes" Tag="clientes">
+                <NavigationViewItem.Icon>
+                    <SymbolIcon Symbol="People" />
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+
+            <NavigationViewItem Content="Productos" Tag="collection" SelectsOnInvoked="False">
+                <NavigationViewItem.Icon>
+                    <SymbolIcon Symbol="ShowBcc" />
+                </NavigationViewItem.Icon>
+                <!-- Creating a hierarchical structure, like a submenu -->
+                <NavigationViewItem.MenuItems>
+                    <NavigationViewItem Content="Productos" Tag="productos">
+                        <NavigationViewItem.Icon>
+                            <SymbolIcon Symbol="Shop" />
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                    <NavigationViewItem Content="Categorias" Tag="categorias">
+                        <NavigationViewItem.Icon>
+                            <SymbolIcon Symbol="Tag" />
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                    <NavigationViewItem Content="Marcas" Tag="marcas">
+                        <NavigationViewItem.Icon>
+                            <SymbolIcon Symbol="BrowsePhotos" />
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                </NavigationViewItem.MenuItems>
+            </NavigationViewItem>
+
+        </NavigationView.MenuItems>
+
+        <Frame Name="ContentFrame" IsTabStop="True" />
+
+    </NavigationView>
 </Window>

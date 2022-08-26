@@ -1,29 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows10.0.17763.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
-    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows10.0.17763.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="UserControls\ClientUserControls\**" />
-    <EmbeddedResource Remove="UserControls\ClientUserControls\**" />
-    <None Remove="UserControls\ClientUserControls\**" />
-    <Page Remove="UserControls\ClientUserControls\**" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="UserControls\ClientUserControls\**" />
+		<EmbeddedResource Remove="UserControls\ClientUserControls\**" />
+		<None Remove="UserControls\ClientUserControls\**" />
+		<Page Remove="UserControls\ClientUserControls\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Remove="appsettings.json" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="appsettings.json" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="appsettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</EmbeddedResource>
+	</ItemGroup>
 
 
 	<ItemGroup>
@@ -38,19 +38,16 @@
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
 	</ItemGroup>
 
-
 	<ItemGroup>
-	  <ProjectReference Include="..\ContabilidadDbContext\DbContextLibrary.csproj" />
-	  <ProjectReference Include="..\ModelEntities\ModelEntities.csproj" />
+		<Folder Include="UserControls\EventArgs\" />
+		<Folder Include="ViewModel\Client\" />
+		<Folder Include="ViewModel\MarcaCategoria\" />
+		<Folder Include="ViewModel\Services\" />
+		<Folder Include="ViewModel\Product\" />
 	</ItemGroup>
 
-
 	<ItemGroup>
-	  <Folder Include="UserControls\EventArgs\" />
-	  <Folder Include="ViewModel\Client\" />
-	  <Folder Include="ViewModel\MarcaCategoria\" />
-	  <Folder Include="ViewModel\Services\" />
-	  <Folder Include="ViewModel\Product\" />
+		<ProjectReference Include="..\ModelEntities\ModelEntities.csproj" />
 	</ItemGroup>
 
 </Project>
