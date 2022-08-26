@@ -4,10 +4,37 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:cc="using:ContabilidadWinUI.Controls"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:vm="using:ContabilidadWinUI.ViewModel"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid >
+    <Page.Resources>
+        <vm:ClientsViewModel x:Key="Vm" />
+    </Page.Resources>
 
-    </Grid>
+    <controls:DockPanel DataContext="{StaticResource Vm}">
+
+        <cc:AppBarControl controls:DockPanel.Dock="Top" />
+
+        <controls:DataGrid
+            ItemsSource="{Binding Models}"
+            SelectedItem="{Binding SelectedModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            AutoGenerateColumns="False">
+
+            <controls:DataGrid.Columns>
+                <controls:DataGridTextColumn Header="Nombre"
+                                             Binding="{Binding Nombre}"
+                                             Width="*" />
+                <controls:DataGridTextColumn Header="# Documento"
+                                             Binding="{Binding NumeroDocumento}"
+                                             Width="*" />
+                <controls:DataGridTextColumn Header="Tipo Documento"
+                                             Binding="{Binding TipoDocumento}"
+                                             Width="*" />
+            </controls:DataGrid.Columns>
+
+        </controls:DataGrid>
+    </controls:DockPanel>
 </Page>
