@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ContabilidadWinUI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "ContabilidadWinUI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
