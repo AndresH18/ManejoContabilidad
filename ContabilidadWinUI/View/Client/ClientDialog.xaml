@@ -1,0 +1,19 @@
+﻿<Page
+    x:Class="ContabilidadWinUI.View.Client.ClientDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ContabilidadWinUI.View.Client"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
+        <TextBox Name="NameTextBox"
+                 Header="Nombre"
+                 PlaceholderText="Nombre "
+                 TextWrapping="Wrap"
+                 Text="{Binding Path=Cliente.Nombre, FallbackValue=''}" />
+    </StackPanel>
+</Page>

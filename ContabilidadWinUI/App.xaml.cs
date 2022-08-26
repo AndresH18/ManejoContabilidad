@@ -42,10 +42,10 @@ namespace ContabilidadWinUI
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            _mainWindow = new MainWindow();
-            _mainWindow.Activate();
+            Window = new MainWindow();
+            Window.Activate();
         }
 
-        private Window? _mainWindow;
+        public Window? Window { get; private set; }
     }
 }

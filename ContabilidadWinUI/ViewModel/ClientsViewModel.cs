@@ -21,6 +21,8 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
         }
     }
 
+    public IModelDialogService<Cliente> DialogService { get; }
+
     public ViewCommand<Cliente> ViewCommand { get; }
     public CreateCommand<Cliente> CreateCommand { get; }
     public DeleteCommand<Cliente> DeleteCommand { get; }
@@ -29,6 +31,8 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
 
     public ClientsViewModel()
     {
+        DialogService = new ClientDialogService();
+
         ViewCommand = new ViewCommand<Cliente>(this);
         CreateCommand = new CreateCommand<Cliente>(this);
         DeleteCommand = new DeleteCommand<Cliente>(this);
@@ -50,10 +54,11 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
         };
     }
 
-    public void Create()
+    public async void Create()
     {
-        // TODO: Implement create client
-        throw new System.NotImplementedException($"Implement {typeof(ClientsViewModel)}:{nameof(Create)}");
+        // // TODO: Implement create client
+        // throw new System.NotImplementedException($"Implement {typeof(ClientsViewModel)}:{nameof(Create)}");
+        await DialogService.CreateDialog(SelectedModel!);
     }
 
     public void Show(Cliente t)
