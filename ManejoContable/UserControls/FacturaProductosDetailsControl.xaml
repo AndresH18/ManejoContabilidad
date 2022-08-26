@@ -9,7 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
-        <model:ProductoFactura x:Key="ProductoFactura" />
+        <model:ProductoFactura_V2 x:Key="ProductoFactura" />
     </UserControl.Resources>
 
 

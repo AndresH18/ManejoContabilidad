@@ -18,7 +18,7 @@ using ModelEntities;
 namespace ManejoContable.View.Pages.MarcaCategoria
 {
     /// <summary>
-    /// Interaction logic for CategoriaPage.xaml
+    /// Interaction logic for CategoriasPage.xaml
     /// </summary>
     public partial class CategoriaPage : Page
     {

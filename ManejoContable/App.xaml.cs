@@ -19,57 +19,65 @@ namespace ManejoContable
     /// </summary>
     public partial class App : Application
     {
-        private const string DbNameString = "Contabilidad";
+        #region DbContextOptionsBuilder
 
-        private static readonly string SettingsManifestResourceName = "ManejoContable.appsettings.json";
+        // private const string DbNameString = "Contabilidad";
 
-        private static IConfigurationRoot? _config;
+        // private static readonly string SettingsManifestResourceName = "ManejoContable.appsettings.json";
 
-        private static DbContextOptionsBuilder<ContabilidadDbContext>? _dbContextOptionsBuilder;
+        // private static IConfigurationRoot? _config;
 
-        public static DbContextOptions<ContabilidadDbContext> DbOptions
-        {
-            get
-            {
-                if (_config == null || _dbContextOptionsBuilder == null)
-                {
-                    CreateConfigurationRoot();
-                }
+        // private static DbContextOptionsBuilder<ContabilidadDbContext>? _dbContextOptionsBuilder;
 
-                return _dbContextOptionsBuilder!.Options;
-            }
-        }
+        // public static DbContextOptions<ContabilidadDbContext> DbOptions
+        // {
+        //     get
+        //     {
+        //         if (_config == null || _dbContextOptionsBuilder == null)
+        //         {
+        //             CreateConfigurationRoot();
+        //         }
+
+        //         return _dbContextOptionsBuilder!.Options;
+        //     }
+        // }
+
+
+        // private static void CreateConfigurationRoot()
+        // {
+        //     var assembly = Assembly.GetAssembly(typeof(App));
+        //     var stream = assembly?.GetManifestResourceStream(SettingsManifestResourceName);
+
+        //     var builder = new ConfigurationBuilder()
+        //         .SetBasePath(Directory.GetCurrentDirectory())
+        //         .AddJsonStream(stream);
+
+        //     _config = builder.Build();
+
+        //     _dbContextOptionsBuilder = new DbContextOptionsBuilder<ContabilidadDbContext>();
+        //     _dbContextOptionsBuilder.UseSqlServer(_config.GetConnectionString(DbNameString));
+
+        //     /*
+        //     var builder = new ConfigurationBuilder()
+        //         .SetBasePath(Directory.GetCurrentDirectory())
+        //         .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+        //     _config = builder.Build();
+
+        //     _dbContextOptionsBuilder = new DbContextOptionsBuilder<ContabilidadDbContext>();
+        //     _dbContextOptionsBuilder.UseSqlServer(_config.GetConnectionString(DbNameString));
+        //     */
+
+        //     // return _dbContextOptionsBuilder.Options;
+        // }
+        // public App()
+        // {
+        //     CreateConfigurationRoot();
+        // }
+
+        #endregion
 
         public App()
         {
-            CreateConfigurationRoot();
-        }
-
-        private static void CreateConfigurationRoot()
-        {
-            var assembly = Assembly.GetAssembly(typeof(App));
-            var stream = assembly?.GetManifestResourceStream(SettingsManifestResourceName);
-
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonStream(stream);
-
-            _config = builder.Build();
-
-            _dbContextOptionsBuilder = new DbContextOptionsBuilder<ContabilidadDbContext>();
-            _dbContextOptionsBuilder.UseSqlServer(_config.GetConnectionString(DbNameString));
-
-            /*
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-            _config = builder.Build();
-        
-            _dbContextOptionsBuilder = new DbContextOptionsBuilder<ContabilidadDbContext>();
-            _dbContextOptionsBuilder.UseSqlServer(_config.GetConnectionString(DbNameString));
-            */
-
-            // return _dbContextOptionsBuilder.Options;
         }
     }
 }

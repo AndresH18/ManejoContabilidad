@@ -39,6 +39,7 @@
                 <MenuItem Header="Ver Marcas" Click="MarcasMenuItem_OnClick" />
                 <MenuItem Header="Ver Categorias" Click="CategoriasMenuItem_OnClick" />
             </MenuItem>
+            <MenuItem Header="Facturas" Click="FacturasMenuItem_OnClick"/>
             <Button Content="Hello" Click="ButtonBase_OnClick" />
         </Menu>
 

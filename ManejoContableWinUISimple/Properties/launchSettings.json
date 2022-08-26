@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ManejoContableWinUISimple (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "ManejoContableWinUISimple (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

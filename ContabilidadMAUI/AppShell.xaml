@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Shell
+    x:Class="ContabilidadMAUI.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ContabilidadMAUI"
+    xmlns:marca="clr-namespace:ContabilidadMAUI.View.Marca"
+    xmlns:categoria="clr-namespace:ContabilidadMAUI.View.Categoria"
+    Shell.FlyoutBehavior="Locked">
+
+
+    <ShellContent Title="Home"
+                  ContentTemplate="{DataTemplate local:MainPage}"
+                  Route="HomePage" />
+
+
+    <FlyoutItem Title="Marcas">
+        <ShellContent
+            Title="Ver Marcas"
+            ContentTemplate="{DataTemplate marca:ViewMarcasPage}"
+            Route="ViewMarcasPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Categorias">
+        <ShellContent Title="Ver Categorias"
+                      ContentTemplate="{DataTemplate categoria:ViewCategoriasPage}"
+                      Route="ViewCategoriasPage">
+        </ShellContent>
+    </FlyoutItem>
+
+
+    <!-- <ShellContent -->
+    <!--     Title="Home" -->
+    <!--     ContentTemplate="{DataTemplate local:MainPage}" -->
+    <!--     Route="MainPage" /> -->
+    <!-- -->
+    <!-- <FlyoutItem Title="Clientes" FlyoutDisplayOptions="AsMultipleItems"> -->
+    <!--     <Tab Title="l111"> -->
+    <!--         <ShellContent ContentTemplate="{DataTemplate view:ClientsPage}"></ShellContent> -->
+    <!--     </Tab> -->
+    <!--     <Tab Title="l2222"> -->
+    <!--         <ShellContent ContentTemplate="{DataTemplate view:ClientsPage}"></ShellContent> -->
+    <!--     </Tab> -->
+    <!-- -->
+    <!-- </FlyoutItem> -->
+
+</Shell>

@@ -1,6 +1,8 @@
-﻿namespace ModelEntities;
+﻿using System.Text.Json.Serialization;
 
-public class Producto : ICloneable
+namespace ModelEntities;
+
+public class Producto : IModel, ICloneable
 {
     public int Id { get; set; }
     public string Nombre { get; set; }
@@ -11,12 +13,11 @@ public class Producto : ICloneable
 
     // Categoria Relationship
     public int? CategoriaId { get; set; }
-    public virtual Categoria Categoria { get; set; }
+    [JsonIgnore] public virtual Categoria Categoria { get; set; }
 
     // Marca Relationship
     public int MarcaId { get; set; }
-    public virtual Marca Marca { get; set; }
-
+    [JsonIgnore] public virtual Marca Marca { get; set; }
 
     public object Clone()
     {
