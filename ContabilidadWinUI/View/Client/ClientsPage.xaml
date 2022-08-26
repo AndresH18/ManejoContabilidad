@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:cc="using:ContabilidadWinUI.Controls"
     xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     xmlns:vm="using:ContabilidadWinUI.ViewModel"
     mc:Ignorable="d"
@@ -16,10 +15,29 @@
 
     <controls:DockPanel DataContext="{StaticResource Vm}">
 
-        <cc:AppBarControl controls:DockPanel.Dock="Top" />
+        <CommandBar controls:DockPanel.Dock="Top"
+                    Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
+
+            <AppBarButton Label="Add"
+                          Icon="Add"
+                          Command="{Binding CreateCommand}"
+                          CommandParameter="{Binding SelectedModel}" />
+            <AppBarButton Icon="Edit"
+                          Label="Editar"
+                          Command="{Binding EditCommand}"
+                          CommandParameter="{Binding SelectedModel}" />
+            <AppBarButton Label="Borrar"
+                          Command="{Binding DeleteCommand}"
+                          CommandParameter="{Binding SelectedModel}">
+                <AppBarButton.Icon>
+                    <SymbolIcon Symbol="Delete" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+        </CommandBar>
 
         <controls:DataGrid
             ItemsSource="{Binding Models}"
+            IsReadOnly="True"
             SelectedItem="{Binding SelectedModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             AutoGenerateColumns="False">
 

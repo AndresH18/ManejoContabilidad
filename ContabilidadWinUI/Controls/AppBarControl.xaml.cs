@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -20,6 +21,36 @@ namespace ContabilidadWinUI.Controls
 {
     public sealed partial class AppBarControl : UserControl
     {
+        public static readonly DependencyProperty CreateCommandProperty = DependencyProperty.Register(
+            nameof(CreateCommand), typeof(ICommand), typeof(AppBarControl), new PropertyMetadata(default(ICommand)));
+
+        public static readonly DependencyProperty DeleteCommandProperty = DependencyProperty.Register(
+            nameof(DeleteCommand), typeof(ICommand), typeof(AppBarControl), new PropertyMetadata(default(ICommand)));
+
+        public static readonly DependencyProperty EditCommandProperty = DependencyProperty.Register(
+            nameof(EditCommand), typeof(ICommand), typeof(AppBarControl), new PropertyMetadata(default(ICommand)));
+
+
+        public ICommand CreateCommand
+        {
+            get => (ICommand)GetValue(CreateCommandProperty);
+            set => SetValue(CreateCommandProperty, value);
+        }
+
+
+        public ICommand EditCommand
+        {
+            get { return (ICommand)GetValue(EditCommandProperty); }
+            set { SetValue(EditCommandProperty, value); }
+        }
+
+
+        public ICommand DeleteCommand
+        {
+            get { return (ICommand)GetValue(DeleteCommandProperty); }
+            set { SetValue(DeleteCommandProperty, value); }
+        }
+
         public AppBarControl()
         {
             this.InitializeComponent();

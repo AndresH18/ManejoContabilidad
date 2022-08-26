@@ -46,6 +46,6 @@ namespace ContabilidadWinUI
             _mainWindow.Activate();
         }
 
-        private Window _mainWindow;
+        private Window? _mainWindow;
     }
 }
