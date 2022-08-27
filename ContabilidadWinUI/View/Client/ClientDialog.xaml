@@ -5,15 +5,44 @@
     xmlns:local="using:ContabilidadWinUI.View.Client"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:modelEntities="using:ModelEntities"
+    xmlns:system="using:System"
+    xmlns:ui="using:CommunityToolkit.WinUI.UI"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
 
-    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
+
+    <RelativePanel HorizontalAlignment="Stretch"
+                   VerticalAlignment="Stretch"
+                   Margin="10"
+                   Width="350">
+
         <TextBox Name="NameTextBox"
+                 RelativePanel.AlignRightWithPanel="True"
+                 RelativePanel.AlignLeftWithPanel="True"
                  Header="Nombre"
-                 PlaceholderText="Nombre "
+                 PlaceholderText="Nombre"
                  TextWrapping="Wrap"
                  Text="{Binding Path=Cliente.Nombre, FallbackValue=''}" />
-    </StackPanel>
+
+        <ComboBox Name="DocumentTypeComboBox"
+                  HorizontalAlignment="Stretch"
+                  RelativePanel.Below="NameTextBox"
+                  Header="Tipo Documento"
+                  Text="Hollla"
+                  Loaded="DocumentTypeComboBox_OnLoaded"
+                  SelectedItem="{Binding Path=Cliente.TipoDocumento, Mode=TwoWay}"
+                  ItemsSource="{ui:EnumValues Type=modelEntities:TipoDocumento}" />
+
+        <TextBox Name="DocumentNumberTextBox"
+                 RelativePanel.RightOf="DocumentTypeComboBox"
+                 RelativePanel.AlignVerticalCenterWith="DocumentTypeComboBox"
+                 RelativePanel.AlignRightWithPanel="True"
+                 HorizontalAlignment="Stretch"
+                 PlaceholderText="Numero Documento"
+                 Margin="20,0,0,0"
+                 Header="Numero Documento">
+        </TextBox>
+    </RelativePanel>
 </Page>

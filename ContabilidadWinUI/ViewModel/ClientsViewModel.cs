@@ -58,7 +58,7 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
     {
         // // TODO: Implement create client
         // throw new System.NotImplementedException($"Implement {typeof(ClientsViewModel)}:{nameof(Create)}");
-        await DialogService.CreateDialog(SelectedModel!);
+        await DialogService.CreateDialog();
     }
 
     public void Show(Cliente t)

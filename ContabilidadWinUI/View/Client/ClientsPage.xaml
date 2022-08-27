@@ -20,15 +20,15 @@
 
             <AppBarButton Label="Add"
                           Icon="Add"
-                          Command="{Binding CreateCommand}"
-                          CommandParameter="{Binding SelectedModel}" />
+                          Command="{Binding Path=CreateCommand}"
+                          CommandParameter="{Binding Path=SelectedModel}" />
             <AppBarButton Icon="Edit"
                           Label="Editar"
-                          Command="{Binding EditCommand}"
-                          CommandParameter="{Binding SelectedModel}" />
+                          Command="{Binding Path=EditCommand}"
+                          CommandParameter="{Binding Path=SelectedModel}" />
             <AppBarButton Label="Borrar"
-                          Command="{Binding DeleteCommand}"
-                          CommandParameter="{Binding SelectedModel}">
+                          Command="{Binding Path=DeleteCommand}"
+                          CommandParameter="{Binding Path=SelectedModel}">
                 <AppBarButton.Icon>
                     <SymbolIcon Symbol="Delete" />
                 </AppBarButton.Icon>
@@ -36,9 +36,10 @@
         </CommandBar>
 
         <controls:DataGrid
-            ItemsSource="{Binding Models}"
+            ItemsSource="{Binding Path=Models}"
             IsReadOnly="True"
-            SelectedItem="{Binding SelectedModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            SelectedItem="{Binding Path=SelectedModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            SelectionMode="Single"
             AutoGenerateColumns="False">
 
             <controls:DataGrid.Columns>

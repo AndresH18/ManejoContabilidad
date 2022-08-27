@@ -9,7 +9,7 @@ namespace ContabilidadWinUI.ViewModel;
 
 public interface IModelDialogService<T>
 {
-    Task<T?> CreateDialog(T model);
+    Task<T?> CreateDialog();
     void ShowDialog(T model);
     T? UpdateDialog(T model);
     bool DeleteDialog(T model);
@@ -17,7 +17,7 @@ public interface IModelDialogService<T>
 
 public class ClientDialogService : IModelDialogService<Cliente>
 {
-    public async Task<Cliente?> CreateDialog(Cliente model)
+    public async Task<Cliente?> CreateDialog()
     {
         // 
         ContentDialog dialog = new ContentDialog();
@@ -32,7 +32,7 @@ public class ClientDialogService : IModelDialogService<Cliente>
         dialog.SecondaryButtonText = "Don't Save";
         dialog.CloseButtonText = "Cancel";
         dialog.DefaultButton = ContentDialogButton.Primary;
-        dialog.Content = new ClientDialog(model);
+        dialog.Content = ClientDialog.CreateClientDialog();
 
         var result = await dialog.ShowAsync();
 
@@ -41,16 +41,16 @@ public class ClientDialogService : IModelDialogService<Cliente>
 
     public void ShowDialog(Cliente model)
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 
     public Cliente? UpdateDialog(Cliente model)
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 
     public bool DeleteDialog(Cliente model)
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 }

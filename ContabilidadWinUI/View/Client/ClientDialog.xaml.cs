@@ -24,12 +24,24 @@ namespace ContabilidadWinUI.View.Client
     /// </summary>
     public sealed partial class ClientDialog : Page
     {
-        public Cliente? Cliente { get; set; }
+        public Cliente Cliente { get; set; }
 
-        public ClientDialog(Cliente cliente)
+        private ClientDialog(Cliente cliente)
         {
-            this.InitializeComponent();
             this.Cliente = cliente;
+            this.InitializeComponent();
+        }
+
+        public static ClientDialog CreateClientDialog()
+        {
+            return new ClientDialog(new Cliente())
+            {
+            };
+        }
+
+        private void DocumentTypeComboBox_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            DocumentTypeComboBox.SelectedIndex = (int) Cliente.TipoDocumento;
         }
     }
 }
