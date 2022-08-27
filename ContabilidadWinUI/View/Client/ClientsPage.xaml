@@ -33,7 +33,22 @@
                     <SymbolIcon Symbol="Delete" />
                 </AppBarButton.Icon>
             </AppBarButton>
+
+            <AppBarButton Label="Ver"
+                          Command="{Binding Path=ViewCommand}"
+                          CommandParameter="{Binding Path=SelectedModel}">
+                <AppBarButton.Icon>
+                    <SymbolIcon Symbol="View" />
+                </AppBarButton.Icon>
+            </AppBarButton>
         </CommandBar>
+
+        <ProgressBar Visibility="{Binding Path=TaskVisibility}"
+                 IsIndeterminate="True"
+                 ShowError="{Binding Path=IsTaskError, Mode=OneWay}"
+                 controls:DockPanel.Dock="Top" />
+
+
 
         <controls:DataGrid
             ItemsSource="{Binding Path=Models}"
@@ -55,5 +70,7 @@
             </controls:DataGrid.Columns>
 
         </controls:DataGrid>
+
+
     </controls:DockPanel>
 </Page>

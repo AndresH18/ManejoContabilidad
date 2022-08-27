@@ -23,26 +23,66 @@
                  RelativePanel.AlignLeftWithPanel="True"
                  Header="Nombre"
                  PlaceholderText="Nombre"
-                 TextWrapping="Wrap"
+                 MaxLength="150"
                  Text="{Binding Path=Cliente.Nombre, FallbackValue=''}" />
 
         <ComboBox Name="DocumentTypeComboBox"
                   HorizontalAlignment="Stretch"
                   RelativePanel.Below="NameTextBox"
                   Header="Tipo Documento"
-                  Text="Hollla"
                   Loaded="DocumentTypeComboBox_OnLoaded"
                   SelectedItem="{Binding Path=Cliente.TipoDocumento, Mode=TwoWay}"
                   ItemsSource="{ui:EnumValues Type=modelEntities:TipoDocumento}" />
 
         <TextBox Name="DocumentNumberTextBox"
+                 Text="{Binding Path=Cliente.NumeroDocumento, Mode=TwoWay}"
+                 PlaceholderText="Numero Documento"
+                 MaxLength="100"
                  RelativePanel.RightOf="DocumentTypeComboBox"
                  RelativePanel.AlignVerticalCenterWith="DocumentTypeComboBox"
                  RelativePanel.AlignRightWithPanel="True"
                  HorizontalAlignment="Stretch"
-                 PlaceholderText="Numero Documento"
                  Margin="20,0,0,0"
-                 Header="Numero Documento">
-        </TextBox>
+                 Header="Numero Documento" />
+
+        <Grid Name="LocationGrid"
+              RelativePanel.Below="DocumentTypeComboBox"
+              RelativePanel.AlignLeftWithPanel="True"
+              RelativePanel.AlignRightWithPanel="True">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- TODO: Bind to Departamentos -->
+            <ComboBox Grid.Column="0" Name="DepartamentoComboBox"
+                      Header="Departamento"
+                      Loaded="DepartamentoComboBox_OnLoaded"
+                      HorizontalAlignment="Stretch" />
+
+            <!-- TODO: Bind to Municipios -->
+            <ComboBox Grid.Column="1" Name="MunicipioComboBox"
+                      Header="Municipio"
+                      Loaded="DepartamentoComboBox_OnLoaded"
+                      HorizontalAlignment="Stretch"
+                      Margin="20,0,0,0" />
+        </Grid>
+
+        <TextBox Name="PhoneTextBox"
+                 Text="{Binding Path=Cliente.Telefono}"
+                 Header="Numero de Telefono"
+                 PlaceholderText="123-456-7890"
+                 RelativePanel.Below="LocationGrid"
+                 RelativePanel.AlignLeftWithPanel="True"
+                 RelativePanel.AlignRightWithPanel="True" />
+
+        <TextBox Name="EmailTextBox"
+                 Text="{Binding Path=Cliente.Correo}"
+                 Header="Email"
+                 PlaceholderText="something@example.com"
+                 RelativePanel.Below="PhoneTextBox"
+                 RelativePanel.AlignLeftWithPanel="True"
+                 RelativePanel.AlignRightWithPanel="True" />
     </RelativePanel>
 </Page>

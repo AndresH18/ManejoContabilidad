@@ -1,15 +1,45 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using ContabilidadWinUI.ViewModel.Commands;
+using Microsoft.UI.Xaml;
 using ModelEntities;
 
 namespace ContabilidadWinUI.ViewModel;
 
 public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
 {
+    private int _taskCounter;
+    private bool _isError;
     private Cliente? _model;
 
     public ObservableCollection<Cliente> Models { get; }
+
+    /// <summary>
+    /// <p>
+    /// Gets the <see cref="Visibility"/> based on the <see cref="_taskCounter"/>.
+    /// </p>
+    /// <p>
+    /// This is used for bindings in which the user should know that there is an operation running
+    /// </p>
+    /// </summary>
+    public Visibility TaskVisibility => _taskCounter > 0 ? Visibility.Visible : Visibility.Collapsed;
+
+    /// <summary>
+    /// <p>
+    /// Gets the error state from <see cref="_isError"/>.
+    /// </p>
+    /// <p>This is used for bindings in which the user should know that an operation was unsuccessful</p>
+    /// </summary>
+    public bool IsTaskError
+    {
+        get => _isError;
+        private set
+        {
+            _isError = value;
+            NotifyPropertyChanged(nameof(IsTaskError));
+        }
+    }
 
     public Cliente? SelectedModel
     {
@@ -48,7 +78,7 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
             new()
             {
                 Nombre = "Andres' Programmers SAS", NumeroDocumento = "111-222-33-44",
-                TipoDocumento = TipoDocumento.Cc, Correo = "andres@correo.com", Telefono = "111-222-3344",
+                TipoDocumento = TipoDocumento.Cc, Correo = "andres@correo.com", Telefono = "111-876-2394",
                 Direccion = "Calle 123 # 445 sur",
             }
         };
@@ -56,27 +86,43 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
 
     public async void Create()
     {
-        // // TODO: Implement create client
-        // throw new System.NotImplementedException($"Implement {typeof(ClientsViewModel)}:{nameof(Create)}");
-        await DialogService.CreateDialog();
+        // TODO: Implement create client
+        var c = await DialogService.CreateDialog();
     }
 
     public void Show(Cliente t)
     {
-        // TODO: Implement show client
-        throw new System.NotImplementedException($"Implement {typeof(ClientsViewModel)}:{nameof(Show)}");
+        DialogService.ShowDialog(t);
     }
 
-    public void Delete(Cliente t)
+    public async void Delete(Cliente t)
     {
-        // TOOD: Implement Delete Client
-        throw new System.NotImplementedException($"Implement {typeof(ClientsViewModel)}:{nameof(Delete)}");
+        // TODO: Implement Delete Client
+        var r = await DialogService.DeleteDialog(t);
     }
 
-    public void Edit(Cliente t)
+    public async void Edit(Cliente t)
     {
         // TODO: Implement Edit Client
-        throw new System.NotImplementedException($"Implement {typeof(ClientsViewModel)}:{nameof(Edit)}");
+        var c = await DialogService.UpdateDialog(t);
+    }
+
+    /// <summary>
+    /// Adds 1 to <see cref="_taskCounter"/> and notifies property changed.
+    /// </summary>
+    private void AddTask()
+    {
+        _taskCounter++;
+        NotifyPropertyChanged(nameof(TaskVisibility));
+    }
+
+    /// <summary>
+    /// Removes 1 to <see cref="_taskCounter"/> and notifies property changed.
+    /// </summary>
+    private void RemoveTask()
+    {
+        _taskCounter--;
+        NotifyPropertyChanged(nameof(TaskVisibility));
     }
 
     private void NotifyPropertyChanged(string propertyName)
