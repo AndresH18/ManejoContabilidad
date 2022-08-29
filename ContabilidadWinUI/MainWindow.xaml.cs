@@ -82,7 +82,7 @@ namespace ContabilidadWinUI
 
         private void NavView_Navigate(string? navItemTag, NavigationTransitionInfo transitionInfo)
         {
-            Type? _page = null;
+            Type? page = null;
             if (navItemTag == "settings")
             {
                 // _page = typeof(SettingsPage);
@@ -90,7 +90,7 @@ namespace ContabilidadWinUI
             else
             {
                 var item = _pages.FirstOrDefault(p => p.Tag.Equals(navItemTag));
-                _page = item.Page;
+                page = item.Page;
             }
 
             // Get the page type before navigation so you can prevent duplicate
@@ -98,9 +98,9 @@ namespace ContabilidadWinUI
             var preNavPageType = ContentFrame.CurrentSourcePageType;
 
             // Only navigate if the selected page isn't currently loaded.
-            if (_page is not null && !Type.Equals(preNavPageType, _page))
+            if (page is not null && !Type.Equals(preNavPageType, page))
             {
-                ContentFrame.Navigate(_page, null, transitionInfo);
+                ContentFrame.Navigate(page, null, transitionInfo);
             }
         }
 
