@@ -9,19 +9,18 @@ public class Cliente : IModel, ICloneable
     public string Nombre { get; set; } = string.Empty;
     public TipoDocumento TipoDocumento { get; set; } = default;
     public string NumeroDocumento { get; set; } = "123 233 9888";
+    [JsonIgnore] public string? Direccion { get; set; }
 
-    public string? Direccion { get; set; }
-    
-    //[Required]
-    public string? MunicipioId { get; set; }
+    // [Required] 
+    [JsonIgnore] public string? MunicipioId { get; set; }
 
     public string? Correo { get; set; }
     public string? Telefono { get; set; }
-    public string? TipoContribuyente { get; set; }
-    public string? RegimenContable { get; set; }
-    public string? Responsabilidad { get; set; }
+    [JsonIgnore] public string? TipoContribuyente { get; set; }
+    [JsonIgnore] public string? RegimenContable { get; set; }
+    [JsonIgnore] public string? Responsabilidad { get; set; }
 
-    [JsonIgnore] public virtual List<Factura> Facturas { get; set; }
+    [JsonIgnore] public virtual List<Factura> Facturas { get; set; } = new();
 
     public object Clone()
     {

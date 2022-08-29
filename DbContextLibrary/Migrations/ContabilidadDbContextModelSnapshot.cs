@@ -250,9 +250,8 @@ namespace DbContextLibrary.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Categoria")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("CategoriaId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Codigo")
                         .IsRequired()
@@ -261,9 +260,8 @@ namespace DbContextLibrary.Migrations
                     b.Property<string>("Descripcion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Marca")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("MarcaId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -277,6 +275,10 @@ namespace DbContextLibrary.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoriaId");
+
+                    b.HasIndex("MarcaId");
 
                     b.ToTable("ProductoFactura", (string)null);
                 });
@@ -330,6 +332,23 @@ namespace DbContextLibrary.Migrations
 
                     b.HasOne("ModelEntities.Marca", "Marca")
                         .WithMany("Productos")
+                        .HasForeignKey("MarcaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Categoria");
+
+                    b.Navigation("Marca");
+                });
+
+            modelBuilder.Entity("ModelEntities.ProductoFactura", b =>
+                {
+                    b.HasOne("ModelEntities.Categoria", "Categoria")
+                        .WithMany()
+                        .HasForeignKey("CategoriaId");
+
+                    b.HasOne("ModelEntities.Marca", "Marca")
+                        .WithMany()
                         .HasForeignKey("MarcaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
