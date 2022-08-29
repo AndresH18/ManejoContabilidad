@@ -25,8 +25,8 @@ namespace ContabilidadWinUI.Controls
 
         public string Title
         {
-            get { return (string)GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); }
+            get => (string) GetValue(TitleProperty);
+            set => SetValue(TitleProperty, value);
         }
 
         public static readonly DependencyProperty SourceProperty = DependencyProperty.Register(
@@ -34,9 +34,19 @@ namespace ContabilidadWinUI.Controls
 
         public string Source
         {
-            get { return (string)GetValue(SourceProperty); }
-            set { SetValue(SourceProperty, value); }
+            get => (string) GetValue(SourceProperty);
+            set => SetValue(SourceProperty, value);
         }
+
+        public static readonly DependencyProperty SymbolIconProperty = DependencyProperty.Register(
+            nameof(SymbolIcon), typeof(Symbol), typeof(HeaderTile), new PropertyMetadata(default(Symbol)));
+
+        public Symbol SymbolIcon
+        {
+            get => (Symbol) GetValue(SymbolIconProperty);
+            set => SetValue(SymbolIconProperty, value);
+        }
+
         public HeaderTile()
         {
             this.InitializeComponent();

@@ -11,7 +11,16 @@
     <Grid>
         <GridView>
             <GridView.Header>
-                <controls:HeaderTile Title="" Source=""></controls:HeaderTile>
+
+                <StackPanel Orientation="Horizontal" Margin="12, 39,43,0">
+                    <controls:HeaderTile x:Name="HeaderTile" Title="Getting Started"
+                                         Source="/Assets/gettingStarted.png"
+                                         >
+                        <controls:HeaderTile.SymbolIcon>
+                            <Symbol>OpenFile</Symbol>
+                        </controls:HeaderTile.SymbolIcon>
+                    </controls:HeaderTile>
+                </StackPanel>
             </GridView.Header>
         </GridView>
 

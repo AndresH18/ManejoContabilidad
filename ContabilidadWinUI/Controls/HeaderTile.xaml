@@ -46,30 +46,30 @@
         </Grid.Resources>
 
         <!-- <HyperlinkButton/> -->
-        <Button>
+        <HyperlinkButton>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="102" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Image
-                    Source="{x:Bind Source, Mode=OneWay}"
-                    Stretch="UniformToFill"
-                    HorizontalAlignment="Center" />
 
-                <Grid Height="48" Opacity="1" Grid.Row="1" HorizontalAlignment="Stretch"
-                      Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
-                    <TextBlock Text="{x:Bind Title, Mode=OneWay}"
-                               Margin="16,0"
-                               Style="{StaticResource BodyStrongTextBlockStyle}"
-                               Foreground="{ThemeResource TextFillColorPrimaryBrush}"
-                               VerticalAlignment="Center"
-                               TextWrapping="Wrap" />
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8A7;" HorizontalAlignment="Right"
-                              VerticalAlignment="Center" Margin="12" FontSize="16" />
-                </Grid>
+                <!-- <Image -->
+                <!--     Source="{x:Bind Source, Mode=OneWay}" -->
+                <!--     Stretch="UniformToFill" -->
+                <!--     HorizontalAlignment="Center" /> -->
+
+                <SymbolIcon Symbol="{x:Bind SymbolIcon, Mode=OneWay}"
+                            Grid.Column="0"
+                            Grid.Row="0" />
+
+                <TextBlock Text="{x:Bind Title, Mode=OneWay}"
+                           Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                           VerticalAlignment="Center"
+                           TextWrapping="Wrap"
+                           Grid.Row="1" />
+
             </Grid>
-        </Button>
+        </HyperlinkButton>
 
     </Grid>
 </UserControl>
