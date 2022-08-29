@@ -136,7 +136,7 @@ namespace ContabilidadWinUI
             // If navigation occurs on SelectionChanged, this isn't needed.
             // Because we use ItemInvoked to navigate, we need to call Navigate
             // here to load the home page.
-            NavView_Navigate("home", new EntranceNavigationTransitionInfo());
+            NavView_Navigate(_pages[0].Tag, new EntranceNavigationTransitionInfo());
 
             #region Commented out
 
@@ -173,7 +173,7 @@ namespace ContabilidadWinUI
                 //         return n.Tag.Equals(item.Tag);
                 //     });
 
-                NavView.Header = ((NavigationViewItem)NavView.SelectedItem)?.Content?.ToString();
+                NavView.Header = ((NavigationViewItem) NavView.SelectedItem)?.Content?.ToString();
             }
         }
 
