@@ -13,6 +13,7 @@ public class MarcaRepository : IMarcaRepository
 
     public Marca Create(Marca marca)
     {
+        marca.Id = 0;
         _db.Marcas.Add(marca);
         _db.SaveChanges();
         return marca;

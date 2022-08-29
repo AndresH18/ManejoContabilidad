@@ -13,6 +13,7 @@ public class CategoriaRepository : ICategoriaRepository
 
     public Categoria Create(Categoria entity)
     {
+        entity.Id = 0;
         _db.Categorias.Add(entity);
         _db.SaveChanges();
         return entity;

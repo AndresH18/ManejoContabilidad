@@ -13,6 +13,7 @@ public class FacturaRepository : IFacturaRepository
 
     public Factura Create(Factura entity)
     {
+        entity.Id = 0;
         _db.Facturas.Add(entity);
         _db.SaveChanges();
         return entity;

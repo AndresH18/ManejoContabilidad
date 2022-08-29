@@ -13,6 +13,7 @@ public class ClienteRepository : IClienteRepository
 
     public Cliente Create(Cliente entity)
     {
+        entity.Id = 0;
         _db.Clientes.Add(entity);
         _db.SaveChanges();
         return entity;

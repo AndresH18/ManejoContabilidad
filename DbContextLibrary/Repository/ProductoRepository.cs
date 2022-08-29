@@ -13,6 +13,7 @@ public class ProductoRepository : IProductoRepository
 
     public Producto Create(Producto entity)
     {
+        entity.Id = 0;
         _db.Productos.Add(entity);
         _db.SaveChanges();
         return entity;
