@@ -4,6 +4,8 @@ using ModelEntities;
 
 namespace WebApi.Controllers;
 
+[ApiController]
+[Route("[Controller]")]
 public class DetallesFacturaController : Controller
 {
     private readonly IDetallesFacturaRepository _repository;
@@ -17,7 +19,7 @@ public class DetallesFacturaController : Controller
     [HttpGet]
     public ActionResult<List<DetallesFactura>> GetAll() => _repository.GetAll().ToList();
 
-    [HttpGet("{facturaId; productoFacturaId}")]
+    [HttpGet("factura/{facturaId}/producto_factura/{productoFacturaId}")]
     public ActionResult<DetallesFactura?> Get(int facturaId, int productoFacturaId)
     {
         var df = _repository.GetById(facturaId, productoFacturaId);
@@ -37,28 +39,28 @@ public class DetallesFacturaController : Controller
     }
 
     // PUT
-    [HttpPut("{facturaId; productoFacturaId}")]
+    [HttpPut("factura/{facturaId}/producto_factura/{productoFacturaId}")]
     public ActionResult Update(int facturaId, int productoFacturaId, DetallesFactura detallesFactura)
     {
         if (facturaId != detallesFactura.FacturaId || productoFacturaId != detallesFactura.ProductoFacturaId)
             return BadRequest();
-
+    
         var df = _repository.GetById(facturaId, productoFacturaId);
         if (df == null)
             return NotFound();
-
+    
         _repository.Update(detallesFactura);
         return NoContent();
     }
-
+    
     // DELETE
-    [HttpDelete("{facturaId; productoFacturaId}")]
+    [HttpDelete("factura/{facturaId}/producto_factura/{productoFacturaId}")]
     public ActionResult Delete(int facturaId, int productoFacturaId, DetallesFactura detallesFactura)
     {
         var df = _repository.GetById(facturaId, productoFacturaId);
         if (df == null)
             return NotFound();
-
+    
         _repository.Delete(facturaId, productoFacturaId);
         return NoContent();
     }
