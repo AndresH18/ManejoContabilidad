@@ -23,6 +23,7 @@
                  RelativePanel.AlignLeftWithPanel="True"
                  Header="Nombre"
                  PlaceholderText="Nombre"
+                 IsReadOnly="{Binding Path=IsReadOnly}"
                  MaxLength="150"
                  Text="{Binding Path=Cliente.Nombre, FallbackValue=''}" />
 
@@ -30,6 +31,7 @@
                   HorizontalAlignment="Stretch"
                   RelativePanel.Below="NameTextBox"
                   Header="Tipo Documento"
+                  IsEnabled="{Binding Path=IsEditEnabled}"
                   Loaded="DocumentTypeComboBox_OnLoaded"
                   SelectedItem="{Binding Path=Cliente.TipoDocumento, Mode=TwoWay}"
                   ItemsSource="{ui:EnumValues Type=modelEntities:TipoDocumento}" />
@@ -37,6 +39,7 @@
         <TextBox Name="DocumentNumberTextBox"
                  Text="{Binding Path=Cliente.NumeroDocumento, Mode=TwoWay}"
                  PlaceholderText="Numero Documento"
+                 IsReadOnly="{Binding Path=IsReadOnly}"
                  MaxLength="100"
                  RelativePanel.RightOf="DocumentTypeComboBox"
                  RelativePanel.AlignVerticalCenterWith="DocumentTypeComboBox"
@@ -58,12 +61,14 @@
             <!-- TODO: Bind to Departamentos -->
             <ComboBox Grid.Column="0" Name="DepartamentoComboBox"
                       Header="Departamento"
+                      IsEnabled="{Binding Path=IsEditEnabled}"
                       Loaded="DepartamentoComboBox_OnLoaded"
                       HorizontalAlignment="Stretch" />
 
             <!-- TODO: Bind to Municipios -->
             <ComboBox Grid.Column="1" Name="MunicipioComboBox"
                       Header="Municipio"
+                      IsEnabled="{Binding Path=IsEditEnabled}"
                       Loaded="DepartamentoComboBox_OnLoaded"
                       HorizontalAlignment="Stretch"
                       Margin="20,0,0,0" />
@@ -72,6 +77,7 @@
         <TextBox Name="PhoneTextBox"
                  Text="{Binding Path=Cliente.Telefono}"
                  Header="Numero de Telefono"
+                 IsReadOnly="{Binding Path=IsReadOnly}"
                  PlaceholderText="123-456-7890"
                  RelativePanel.Below="LocationGrid"
                  RelativePanel.AlignLeftWithPanel="True"
@@ -80,6 +86,7 @@
         <TextBox Name="EmailTextBox"
                  Text="{Binding Path=Cliente.Correo}"
                  Header="Email"
+                 IsReadOnly="{Binding Path=IsReadOnly}"
                  PlaceholderText="something@example.com"
                  RelativePanel.Below="PhoneTextBox"
                  RelativePanel.AlignLeftWithPanel="True"

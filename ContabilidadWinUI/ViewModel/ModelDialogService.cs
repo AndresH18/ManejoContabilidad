@@ -19,7 +19,8 @@ public class ClientDialogService : IModelDialogService<Cliente>
 {
     public async Task<Cliente?> CreateDialog()
     {
-        var content = ClientDialog.CreateDialog();
+        var newCliente = new Cliente();
+        var content = ClientDialog.CreateDialog(newCliente);
 
         var dialog = new ContentDialog
         {
@@ -37,19 +38,20 @@ public class ClientDialogService : IModelDialogService<Cliente>
 
         var result = await dialog.ShowAsync();
 
-        return null;
+        return result == ContentDialogResult.Primary ? newCliente : null;
     }
 
     public async void ShowDialog(Cliente model)
     {
-        var content = ClientDialog.CreateViewDialog(model);
+        // var content = ClientDialog.CreateViewDialog(model);
+        var content = ClientDialog.CreateDialog(model, isReadOnly: true);
 
         var dialog = new ContentDialog
         {
             // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
             XamlRoot = (Application.Current as App)?.Window?.Content.XamlRoot,
             Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
-            Title = "Agregar Cliente",
+            Title = model.Nombre,
             // Title = model.Nombre,
             // PrimaryButtonText = "Guardar",
             // dialog.SecondaryButtonText = "Don't Save";
@@ -58,12 +60,13 @@ public class ClientDialogService : IModelDialogService<Cliente>
             Content = content
         };
 
-        var result = await dialog.ShowAsync();
+        await dialog.ShowAsync();
     }
 
     public async Task<Cliente?> UpdateDialog(Cliente model)
     {
-        var content = ClientDialog.CreateUpdateDialog(model);
+        var clientToUpdate = (Cliente)model.Clone();
+        var content = ClientDialog.CreateDialog(clientToUpdate);
 
         var dialog = new ContentDialog
         {
@@ -81,12 +84,12 @@ public class ClientDialogService : IModelDialogService<Cliente>
 
         var result = await dialog.ShowAsync();
 
-        return null;
+        return result == ContentDialogResult.Primary ? clientToUpdate : null;
     }
 
     public async Task<bool> DeleteDialog(Cliente model)
     {
-        var content = ClientDialog.CreateViewDialog(model);
+        var content = ClientDialog.CreateDialog(model, isReadOnly: true);
         var dialog = new ContentDialog
         {
             // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
@@ -103,6 +106,6 @@ public class ClientDialogService : IModelDialogService<Cliente>
 
         var result = await dialog.ShowAsync();
 
-        return false;
+        return result == ContentDialogResult.Primary;
     }
 }

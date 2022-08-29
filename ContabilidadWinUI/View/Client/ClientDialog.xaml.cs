@@ -24,6 +24,9 @@ namespace ContabilidadWinUI.View.Client
     /// </summary>
     public sealed partial class ClientDialog : Page
     {
+        public bool IsReadOnly { get; private init; }
+        public bool IsEditEnabled => !IsReadOnly;
+
         public Cliente Cliente { get; set; }
 
         private ClientDialog(Cliente cliente)
@@ -32,37 +35,24 @@ namespace ContabilidadWinUI.View.Client
             this.InitializeComponent();
         }
 
-        public static ClientDialog CreateViewDialog(Cliente cliente) => new(cliente)
-        {
-            NameTextBox = {IsReadOnly = true},
-            DocumentNumberTextBox = {IsReadOnly = true},
-            DocumentTypeComboBox = {IsEnabled = false},
-            DepartamentoComboBox = {IsEnabled = false},
-            MunicipioComboBox = {IsEnabled = false},
-            PhoneTextBox = {IsReadOnly = true},
-            EmailTextBox = {IsReadOnly = true}
-        };
-
-        public static ClientDialog CreateDialog() => new(new Cliente());
-        // public static ClientDialog CreateDialog() => CreateUpdateDialog(new Cliente());
-
-        public static ClientDialog CreateUpdateDialog(Cliente cliente) => new(cliente);
+        public static ClientDialog CreateDialog(Cliente cliente, bool isReadOnly = false) =>
+            new(cliente) { IsReadOnly = isReadOnly };
 
         private void DocumentTypeComboBox_OnLoaded(object sender, RoutedEventArgs e)
         {
-            DocumentTypeComboBox.SelectedIndex = (int) Cliente.TipoDocumento;
+            DocumentTypeComboBox.SelectedIndex = (int)Cliente.TipoDocumento;
         }
 
         private void DepartamentoComboBox_OnLoaded(object sender, RoutedEventArgs e)
         {
             if (ReferenceEquals(sender, DepartamentoComboBox))
             {
-                DepartamentoComboBox.ItemsSource = new[] {"Departamento"};
+                DepartamentoComboBox.ItemsSource = new[] { "Departamento" };
                 DepartamentoComboBox.SelectedIndex = 0;
             }
             else if (ReferenceEquals(sender, MunicipioComboBox))
             {
-                MunicipioComboBox.ItemsSource = new[] {"Municipio"};
+                MunicipioComboBox.ItemsSource = new[] { "Municipio" };
                 MunicipioComboBox.SelectedIndex = 0;
             }
         }
