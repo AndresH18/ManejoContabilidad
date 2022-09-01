@@ -11,7 +11,6 @@ builder.Services.AddScoped<IDetallesFacturaRepository, DetallesFacturaRepository
 builder.Services.AddScoped<IFacturaRepository, FacturaRepository>();
 builder.Services.AddScoped<IInfoFacturaRepository, InfoFacturaRepository>();
 builder.Services.AddScoped<IMarcaRepository, MarcaRepository>();
-builder.Services.AddScoped<IProductoFacturaRepository, ProductoFacturaRepository>();
 builder.Services.AddScoped<IProductoRepository, ProductoRepository>();
 
 

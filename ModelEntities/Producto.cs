@@ -19,6 +19,8 @@ public class Producto : IModel, ICloneable
     public int MarcaId { get; set; }
     [JsonIgnore] public virtual Marca? Marca { get; set; }
 
+    [JsonIgnore] public List<DetallesFactura> DetallesFacturas { get; set; } = new();
+
     public object Clone()
     {
         return new Producto
