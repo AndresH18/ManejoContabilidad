@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Configuration;
 using ModelEntities;
@@ -87,4 +88,48 @@ public class ContabilidadDbContext : DbContext
     //     _dbContextOptionsBuilder = new DbContextOptionsBuilder<ContabilidadDbContext>();
     //     _dbContextOptionsBuilder.UseSqlServer(_configuration.GetConnectionString(DbName));
     // }
+
+    public static ContabilidadDbContext InMemoryDatabase()
+    {
+        var contextOptions = new DbContextOptionsBuilder<ContabilidadDbContext>()
+            .UseInMemoryDatabase("ContabilidadDbTesting")
+            .ConfigureWarnings(b => b.Ignore(InMemoryEventId.TransactionIgnoredWarning))
+            .Options;
+
+        var db = new ContabilidadDbContext(contextOptions);
+
+        db.Database.EnsureDeleted();
+        db.Database.EnsureCreated();
+
+        db.Categorias.AddRange(
+            new Categoria {Name = "Televisores"},
+            new Categoria {Name = "Radios"}
+        );
+
+        db.Marcas.AddRange(
+            new Marca {Name = "Samsung", Description = "Korean Company"},
+            new Marca {Name = "Nokia", Description = "Indestructible Phones"});
+
+        db.Productos.AddRange(
+            new Producto
+            {
+                Nombre = "Radio Nokia",
+                Codigo = "rad-01",
+                CategoriaId = 2,
+                MarcaId = 2,
+                PrecioUnitario = 20.3M
+            },
+            new Producto
+            {
+                Nombre = "Televisor Samsung 70'",
+                Codigo = "tel-01-70",
+                CategoriaId = 1,
+                MarcaId = 1,
+                PrecioUnitario = 50M
+            });
+
+
+        db.SaveChanges();
+        return db;
+    }
 }
