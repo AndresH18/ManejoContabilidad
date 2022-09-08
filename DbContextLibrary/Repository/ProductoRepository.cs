@@ -9,7 +9,12 @@ public interface IProductoRepository : IRepository<Producto>
 
 public class ProductoRepository : IProductoRepository
 {
-    private readonly ContabilidadDbContext _db = new();
+    private readonly ContabilidadDbContext _db;
+
+    public ProductoRepository(ContabilidadDbContext db)
+    {
+        _db = db;
+    }
 
     public Producto Create(Producto entity)
     {
