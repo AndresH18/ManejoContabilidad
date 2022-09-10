@@ -11,7 +11,7 @@ namespace WebApi.Controllers;
 public abstract class AbstractController<TRepo, TModel, TGet> : Controller
     where TRepo : IRepository<TModel>
     where TModel : class, IModel
-    where TGet : ModelRecord
+    where TGet : GetModelRecord
 {
     protected TRepo Repo;
     protected IMapper Mapper;
