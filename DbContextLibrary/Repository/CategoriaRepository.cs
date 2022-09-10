@@ -9,8 +9,12 @@ public interface ICategoriaRepository : IRepository<Categoria>
 
 public class CategoriaRepository : ICategoriaRepository
 {
-    private readonly ContabilidadDbContext _db = new();
+    private readonly ContabilidadDbContext _db;
 
+    public CategoriaRepository(ContabilidadDbContext db)
+    {
+        _db = db;
+    }
     public Categoria Create(Categoria entity)
     {
         entity.Id = 0;

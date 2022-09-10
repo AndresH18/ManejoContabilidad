@@ -9,7 +9,12 @@ public interface IFacturaRepository : IRepository<Factura>
 
 public class FacturaRepository : IFacturaRepository
 {
-    private readonly ContabilidadDbContext _db = new();
+    private readonly ContabilidadDbContext _db;
+
+    public FacturaRepository(ContabilidadDbContext db)
+    {
+        _db = db;
+    }
 
     public Factura Create(Factura entity)
     {

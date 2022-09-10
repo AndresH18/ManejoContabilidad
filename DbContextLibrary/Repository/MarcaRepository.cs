@@ -9,7 +9,12 @@ public interface IMarcaRepository : IRepository<Marca>
 
 public class MarcaRepository : IMarcaRepository
 {
-    private readonly ContabilidadDbContext _db = new();
+    private readonly ContabilidadDbContext _db;
+
+    public MarcaRepository(ContabilidadDbContext db)
+    {
+        _db = db;
+    }
 
     public Marca Create(Marca marca)
     {

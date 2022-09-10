@@ -14,7 +14,12 @@ public interface IDetallesFacturaRepository
 
 public class DetallesFacturaRepositoryRepository : IDetallesFacturaRepository
 {
-    private readonly ContabilidadDbContext _db = new();
+    private readonly ContabilidadDbContext _db;
+
+    public DetallesFacturaRepositoryRepository(ContabilidadDbContext db)
+    {
+        _db = db;
+    }
 
     public DetallesFactura Create(DetallesFactura entity)
     {

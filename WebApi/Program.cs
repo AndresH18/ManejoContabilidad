@@ -1,4 +1,7 @@
+using System.Diagnostics;
+using DbContextLibrary;
 using DbContextLibrary.Repository;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +16,9 @@ builder.Services.AddScoped<IInfoFacturaRepository, InfoFacturaRepository>();
 builder.Services.AddScoped<IMarcaRepository, MarcaRepository>();
 builder.Services.AddScoped<IProductoRepository, ProductoRepository>();
 
+// Add DbContext
+builder.Services.AddDbContext<ContabilidadDbContext>(c =>
+    c.UseSqlServer(builder.Configuration.GetConnectionString("Contabilidad")));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
