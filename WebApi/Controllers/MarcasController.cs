@@ -1,16 +1,14 @@
-﻿using AutoMapper;
-using DbContextLibrary.Repository;
+﻿using DbContextLibrary.Repository;
 using Microsoft.AspNetCore.Mvc;
 using ModelEntities;
-using WebApi.Dtos;
 
 namespace WebApi.Controllers;
 
 [ApiController]
 [Route("[Controller]")]
-public class MarcasController : AbstractController<IMarcaRepository, Marca, MarcaGet>
+public class MarcasController : AbstractController<IMarcaRepository, Marca>
 {
-    public MarcasController(IMarcaRepository repo, IMapper mapper) : base(repo, mapper)
+    public MarcasController(IMarcaRepository repo) : base(repo)
     {
     }
 }

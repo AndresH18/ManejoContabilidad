@@ -7,8 +7,9 @@ namespace ModelEntities;
 public class DetallesFactura
 {
     [Required] public int FacturaId { get; set; }
-    [Required] public int ProductoId { get; set; }
     public int Cantidad { get; set; }
+    
+    [Required] public int ProductoId { get; set; }
 
     [JsonIgnore] public virtual Factura? Factura { get; set; }
     [JsonIgnore] public virtual Producto? Producto { get; set; }

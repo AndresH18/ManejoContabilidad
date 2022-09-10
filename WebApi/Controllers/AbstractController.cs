@@ -1,77 +1,71 @@
-﻿using AutoMapper;
-using DbContextLibrary.Repository;
+﻿using DbContextLibrary.Repository;
 using Microsoft.AspNetCore.Mvc;
 using ModelEntities;
-using WebApi.Dtos;
 
 namespace WebApi.Controllers;
 
 [ApiController]
 [Route("[Controller]")]
-public abstract class AbstractController<TRepo, TModel, TGet> : Controller
+public abstract class AbstractController<TRepo, TModel> : Controller
     where TRepo : IRepository<TModel>
     where TModel : class, IModel
-    where TGet : ModelRecord
 {
-    protected TRepo Repo;
-    protected IMapper Mapper;
+    protected TRepo _repo;
 
-    protected AbstractController(TRepo repo, IMapper mapper)
+    protected AbstractController(TRepo repo)
     {
-        Repo = repo;
-        Mapper = mapper;
+        _repo = repo;
     }
 
     // GET
     [HttpGet]
-    public ActionResult<List<TGet>> GetAll()
+    public ActionResult<List<TModel>> GetAll()
     {
-        return Ok(Mapper.Map<IEnumerable<TGet>>(Repo.GetAll()));
-        // return Repo.GetAll();
+        return _repo.GetAll().ToList();
     }
 
-    [HttpGet("{id:int}")]
-    public ActionResult<TGet?> Get(int id)
+    [HttpGet("{id}")]
+    public ActionResult<TModel?> Get(int id)
     {
-        var model = Repo.GetById(id);
+        var model = _repo.GetById(id);
         if (model == null)
             return NotFound();
 
-        return Ok(Mapper.Map<TGet>(model));
+        return Ok(model);
     }
 
     // POST
     [HttpPost]
     public ActionResult Create(TModel model)
     {
-        Repo.Create(model);
+        _repo.Create(model);
         return CreatedAtAction(nameof(Create), new {model.Id}, model);
     }
 
     // PUT
-    [HttpPut("{id:int}")]
+    [HttpPut("{id}")]
     public ActionResult Update(int id, TModel model)
     {
         if (id != model.Id)
             return BadRequest();
 
-        var existingModel = Repo.GetById(id);
+        var existingModel = _repo.GetById(id);
         if (existingModel == null)
             return NotFound();
 
-        Repo.Update(model);
+        _repo.Update(model);
         return NoContent();
     }
 
     // DELETE
-    [HttpDelete("{id:int}")]
+    [HttpDelete("{id}")]
     public ActionResult Delete(int id)
     {
-        var model = Repo.GetById(id);
+        var model = _repo.GetById(id);
         if (model == null)
             return NotFound();
 
-        Repo.Delete(id);
+        _repo.Delete(id);
         return NoContent();
     }
 }

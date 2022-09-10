@@ -1,13 +1,11 @@
-﻿using AutoMapper;
-using DbContextLibrary.Repository;
+﻿using DbContextLibrary.Repository;
 using ModelEntities;
-using WebApi.Dtos;
 
 namespace WebApi.Controllers;
 
-public class ProductosController : AbstractController<IProductoRepository, Producto, ProductoGet>
+public class ProductosController : AbstractController<IProductoRepository, Producto>
 {
-    public ProductosController(IProductoRepository repo, IMapper mapper) : base(repo, mapper)
+    public ProductosController(IProductoRepository repo) : base(repo)
     {
     }
 }

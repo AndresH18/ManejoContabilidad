@@ -1,14 +1,12 @@
-﻿using AutoMapper;
-using DbContextLibrary.Repository;
+﻿using DbContextLibrary.Repository;
 using Microsoft.AspNetCore.Mvc;
 using ModelEntities;
-using WebApi.Dtos;
 
 namespace WebApi.Controllers;
 
-public class CategoriasController : AbstractController<ICategoriaRepository, Categoria, CategoriaGet>
+public class CategoriasController : AbstractController<ICategoriaRepository, Categoria>
 {
-    public CategoriasController(ICategoriaRepository repository, IMapper mapper) : base(repository, mapper)
+    public CategoriasController(ICategoriaRepository repository) : base(repository)
     {
     }
 }
