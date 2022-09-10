@@ -20,6 +20,9 @@ builder.Services.AddScoped<IProductoRepository, ProductoRepository>();
 builder.Services.AddDbContext<ContabilidadDbContext>(c =>
     c.UseSqlServer(builder.Configuration.GetConnectionString("Contabilidad")));
 
+// wires the auto mappers through dependency injection
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
