@@ -30,7 +30,7 @@ public class DetallesFacturaRepositoryRepository : IDetallesFacturaRepository
 
     public IEnumerable<DetallesFactura> GetAll()
     {
-        return _db.DetallesFactura.AsNoTracking();
+        return _db.DetallesFactura.AsNoTracking().ToList();
     }
 
     public DetallesFactura? GetById(int facturaId, int productoId)

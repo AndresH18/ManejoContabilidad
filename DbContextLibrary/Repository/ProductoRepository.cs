@@ -26,7 +26,7 @@ public class ProductoRepository : IProductoRepository
 
     public IEnumerable<Producto> GetAll()
     {
-        return _db.Productos.AsNoTracking();
+        return _db.Productos.AsNoTracking().ToList();
     }
 
     public Producto? GetById(int id)

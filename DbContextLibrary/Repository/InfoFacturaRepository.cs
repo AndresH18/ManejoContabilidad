@@ -25,7 +25,7 @@ public class InfoFacturaRepository : IInfoFacturaRepository
 
     public IEnumerable<InfoFactura> GetAll()
     {
-        return _db.InfoFactura.AsNoTracking();
+        return _db.InfoFactura.AsNoTracking().ToList();
     }
 
     public InfoFactura? GetById(int id)

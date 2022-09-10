@@ -25,7 +25,7 @@ public class CategoriaRepository : ICategoriaRepository
 
     public IEnumerable<Categoria> GetAll()
     {
-        return _db.Categorias.AsNoTracking();
+        return _db.Categorias.AsNoTracking().ToList();
     }
 
     public Categoria? GetById(int id)

@@ -26,7 +26,7 @@ public class MarcaRepository : IMarcaRepository
 
     public IEnumerable<Marca> GetAll()
     {
-        return _db.Marcas.AsNoTracking();
+        return _db.Marcas.AsNoTracking().ToList();
     }
 
     public Marca? GetById(int id)

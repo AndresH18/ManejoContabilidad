@@ -26,7 +26,7 @@ public class FacturaRepository : IFacturaRepository
 
     public IEnumerable<Factura> GetAll()
     {
-        return _db.Facturas.AsNoTracking();
+        return _db.Facturas.AsNoTracking().ToList();
     }
 
     public Factura? GetById(int id)
