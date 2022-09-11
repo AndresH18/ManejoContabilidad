@@ -8,7 +8,7 @@ namespace WebApi.Controllers;
 
 [ApiController]
 [Route("[Controller]")]
-public class MarcasController : AbstractController<IMarcaRepository, Marca, MarcaGet>
+public class MarcasController : AbstractController<IMarcaRepository, Marca, MarcaGet, MarcaPost>
 {
     public MarcasController(IMarcaRepository repo, IMapper mapper) : base(repo, mapper)
     {

@@ -5,7 +5,7 @@ using WebApi.Dtos;
 
 namespace WebApi.Controllers;
 
-public class InfoFacturaController : AbstractController<IInfoFacturaRepository, InfoFactura, InfoFacturaGet>
+public class InfoFacturaController : AbstractController<IInfoFacturaRepository, InfoFactura, InfoFacturaGet, InfoFacturaPost>
 {
     public InfoFacturaController(IInfoFacturaRepository repo, IMapper mapper) : base(repo, mapper)
     {

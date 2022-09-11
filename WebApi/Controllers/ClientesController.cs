@@ -8,7 +8,7 @@ namespace WebApi.Controllers;
 
 [ApiController]
 [Route("[Controller]")]
-public class ClientesController : AbstractController<IClienteRepository, Cliente, ClienteGet>
+public class ClientesController : AbstractController<IClienteRepository, Cliente, ClienteGet, ClientePost>
 {
     public ClientesController(IClienteRepository repo, IMapper mapper) : base(repo, mapper)
     {

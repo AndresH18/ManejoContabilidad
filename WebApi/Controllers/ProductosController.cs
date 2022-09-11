@@ -5,7 +5,7 @@ using WebApi.Dtos;
 
 namespace WebApi.Controllers;
 
-public class ProductosController : AbstractController<IProductoRepository, Producto, ProductoGet>
+public class ProductosController : AbstractController<IProductoRepository, Producto, ProductoGet, ProductoPost>
 {
     public ProductosController(IProductoRepository repo, IMapper mapper) : base(repo, mapper)
     {

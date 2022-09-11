@@ -10,8 +10,8 @@ public record ProductoGet(int Id, string Name, string? Description, decimal Unit
 
 public record ClienteGet(int Id, string Name, TipoDocumento DocumentType, string DocumentNumber) : GetModelRecord(Id);
 
-public record DetallesFacturaGet(int FacturaId, int ProductoId, int Amount);
-
 public record FacturaGet(int Id, int ClienteId) : GetModelRecord(Id);
 
 public record InfoFacturaGet(int Id, string? NumeroFactura) : GetModelRecord(Id);
+
+public record DetallesFacturaGet(int FacturaId, int ProductoId, int Amount);

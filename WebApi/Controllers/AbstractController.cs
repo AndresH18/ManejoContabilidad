@@ -8,10 +8,11 @@ namespace WebApi.Controllers;
 
 [ApiController]
 [Route("[Controller]")]
-public abstract class AbstractController<TRepo, TModel, TGet> : Controller
+public abstract class AbstractController<TRepo, TModel, TGet, TPost> : Controller
     where TRepo : IRepository<TModel>
     where TModel : class, IModel
     where TGet : GetModelRecord
+    where TPost : PostModelRecord
 {
     protected TRepo Repo;
     protected IMapper Mapper;
@@ -42,22 +43,27 @@ public abstract class AbstractController<TRepo, TModel, TGet> : Controller
 
     // POST
     [HttpPost]
-    public ActionResult Create(TModel model)
+    public ActionResult<TGet> Create(TPost post)
     {
+        var model = Mapper.Map<TModel>(post);
+
         Repo.Create(model);
-        return CreatedAtAction(nameof(Create), new {model.Id}, model);
+
+        return CreatedAtAction(nameof(Create), new {model.Id}, Mapper.Map<TGet>(model));
     }
 
     // PUT
     [HttpPut("{id:int}")]
-    public ActionResult Update(int id, TModel model)
+    public ActionResult Update(int id, TPost post)
     {
-        if (id != model.Id)
-            return BadRequest();
+        // if (id != model.Id)
+        //     return BadRequest();
 
-        var existingModel = Repo.GetById(id);
-        if (existingModel == null)
+        var model = Repo.GetById(id);
+        if (model == null)
             return NotFound();
+        
+        model = Mapper.Map<TModel>(post);
 
         Repo.Update(model);
         return NoContent();
