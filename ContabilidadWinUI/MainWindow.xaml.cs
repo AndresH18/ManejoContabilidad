@@ -80,9 +80,9 @@ namespace ContabilidadWinUI
             }
         }
 
-        private void NavView_Navigate(string navItemTag, NavigationTransitionInfo transitionInfo)
+        private void NavView_Navigate(string? navItemTag, NavigationTransitionInfo transitionInfo)
         {
-            Type _page = null;
+            Type? _page = null;
             if (navItemTag == "settings")
             {
                 // _page = typeof(SettingsPage);

@@ -4,6 +4,7 @@ using DbContextLibrary;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DbContextLibrary.Migrations
 {
     [DbContext(typeof(ContabilidadDbContext))]
-    partial class ContabilidadDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220829020749_AddedRelationship_ProductoFactura_With_Marca_Categoria")]
+    partial class AddedRelationship_ProductoFactura_With_Marca_Categoria
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,7 +41,7 @@ namespace DbContextLibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categorias", (string)null);
+                    b.ToTable("Categorias");
                 });
 
             modelBuilder.Entity("ModelEntities.Cliente", b =>
@@ -85,7 +87,7 @@ namespace DbContextLibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clientes", (string)null);
+                    b.ToTable("Clientes");
 
                     b.HasData(
                         new
@@ -109,17 +111,18 @@ namespace DbContextLibrary.Migrations
                     b.Property<int>("FacturaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductoId")
+                    b.Property<int>("ProductoFacturaId")
                         .HasColumnType("int");
 
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.HasKey("FacturaId", "ProductoId");
+                    b.HasKey("FacturaId", "ProductoFacturaId");
 
-                    b.HasIndex("ProductoId");
+                    b.HasIndex("ProductoFacturaId")
+                        .IsUnique();
 
-                    b.ToTable("DetallesFactura", (string)null);
+                    b.ToTable("DetallesFactura");
                 });
 
             modelBuilder.Entity("ModelEntities.Factura", b =>
@@ -137,7 +140,7 @@ namespace DbContextLibrary.Migrations
 
                     b.HasIndex("ClienteId");
 
-                    b.ToTable("Facturas", (string)null);
+                    b.ToTable("Facturas");
                 });
 
             modelBuilder.Entity("ModelEntities.InfoFactura", b =>
@@ -177,7 +180,7 @@ namespace DbContextLibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("InfoFactura", (string)null);
+                    b.ToTable("InfoFactura");
                 });
 
             modelBuilder.Entity("ModelEntities.Marca", b =>
@@ -197,7 +200,7 @@ namespace DbContextLibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Marcas", (string)null);
+                    b.ToTable("Marcas");
                 });
 
             modelBuilder.Entity("ModelEntities.Producto", b =>
@@ -238,7 +241,48 @@ namespace DbContextLibrary.Migrations
 
                     b.HasIndex("MarcaId");
 
-                    b.ToTable("Productos", (string)null);
+                    b.ToTable("Productos");
+                });
+
+            modelBuilder.Entity("ModelEntities.ProductoFactura", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("CategoriaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Codigo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MarcaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("PrecioUnitario")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Referencia")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoriaId");
+
+                    b.HasIndex("MarcaId");
+
+                    b.ToTable("ProductoFactura");
                 });
 
             modelBuilder.Entity("ModelEntities.DetallesFactura", b =>
@@ -249,15 +293,15 @@ namespace DbContextLibrary.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ModelEntities.Producto", "Producto")
-                        .WithMany("DetallesFacturas")
-                        .HasForeignKey("ProductoId")
+                    b.HasOne("ModelEntities.ProductoFactura", "ProductoFactura")
+                        .WithOne("DetallesFactura")
+                        .HasForeignKey("ModelEntities.DetallesFactura", "ProductoFacturaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Factura");
 
-                    b.Navigation("Producto");
+                    b.Navigation("ProductoFactura");
                 });
 
             modelBuilder.Entity("ModelEntities.Factura", b =>
@@ -299,6 +343,23 @@ namespace DbContextLibrary.Migrations
                     b.Navigation("Marca");
                 });
 
+            modelBuilder.Entity("ModelEntities.ProductoFactura", b =>
+                {
+                    b.HasOne("ModelEntities.Categoria", "Categoria")
+                        .WithMany()
+                        .HasForeignKey("CategoriaId");
+
+                    b.HasOne("ModelEntities.Marca", "Marca")
+                        .WithMany()
+                        .HasForeignKey("MarcaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Categoria");
+
+                    b.Navigation("Marca");
+                });
+
             modelBuilder.Entity("ModelEntities.Categoria", b =>
                 {
                     b.Navigation("Productos");
@@ -313,7 +374,8 @@ namespace DbContextLibrary.Migrations
                 {
                     b.Navigation("DetallesFacturas");
 
-                    b.Navigation("InfoFactura");
+                    b.Navigation("InfoFactura")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ModelEntities.Marca", b =>
@@ -321,9 +383,10 @@ namespace DbContextLibrary.Migrations
                     b.Navigation("Productos");
                 });
 
-            modelBuilder.Entity("ModelEntities.Producto", b =>
+            modelBuilder.Entity("ModelEntities.ProductoFactura", b =>
                 {
-                    b.Navigation("DetallesFacturas");
+                    b.Navigation("DetallesFactura")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

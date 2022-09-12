@@ -4,6 +4,8 @@ using ModelEntities;
 
 namespace WebApi.Controllers;
 
+[ApiController]
+[Route("[Controller]")]
 public class DetallesFacturaController : Controller
 {
     private readonly IDetallesFacturaRepository _repository;
@@ -17,10 +19,10 @@ public class DetallesFacturaController : Controller
     [HttpGet]
     public ActionResult<List<DetallesFactura>> GetAll() => _repository.GetAll().ToList();
 
-    [HttpGet("{facturaId; productoFacturaId}")]
-    public ActionResult<DetallesFactura?> Get(int facturaId, int productoFacturaId)
+    [HttpGet("factura/{facturaId}/producto_factura/{productoId}")]
+    public ActionResult<DetallesFactura?> Get(int facturaId, int productoId)
     {
-        var df = _repository.GetById(facturaId, productoFacturaId);
+        var df = _repository.GetById(facturaId, productoId);
         if (df == null)
             NotFound();
 
@@ -32,34 +34,34 @@ public class DetallesFacturaController : Controller
     public ActionResult Create(DetallesFactura detallesFactura)
     {
         _repository.Create(detallesFactura);
-        return CreatedAtAction(nameof(Create), new {detallesFactura.FacturaId, detallesFactura.ProductoFacturaId},
+        return CreatedAtAction(nameof(Create), new {detallesFactura.FacturaId, detallesFactura.ProductoId},
             detallesFactura);
     }
 
     // PUT
-    [HttpPut("{facturaId; productoFacturaId}")]
-    public ActionResult Update(int facturaId, int productoFacturaId, DetallesFactura detallesFactura)
+    [HttpPut("factura/{facturaId}/producto_factura/{productoId}")]
+    public ActionResult Update(int facturaId, int productoId, DetallesFactura detallesFactura)
     {
-        if (facturaId != detallesFactura.FacturaId || productoFacturaId != detallesFactura.ProductoFacturaId)
+        if (facturaId != detallesFactura.FacturaId || productoId != detallesFactura.ProductoId)
             return BadRequest();
-
-        var df = _repository.GetById(facturaId, productoFacturaId);
+    
+        var df = _repository.GetById(facturaId, productoId);
         if (df == null)
             return NotFound();
-
+    
         _repository.Update(detallesFactura);
         return NoContent();
     }
-
+    
     // DELETE
-    [HttpDelete("{facturaId; productoFacturaId}")]
-    public ActionResult Delete(int facturaId, int productoFacturaId, DetallesFactura detallesFactura)
+    [HttpDelete("factura/{facturaId}/producto_factura/{productoId}")]
+    public ActionResult Delete(int facturaId, int productoId, DetallesFactura detallesFactura)
     {
-        var df = _repository.GetById(facturaId, productoFacturaId);
+        var df = _repository.GetById(facturaId, productoId);
         if (df == null)
             return NotFound();
-
-        _repository.Delete(facturaId, productoFacturaId);
+    
+        _repository.Delete(facturaId, productoId);
         return NoContent();
     }
 }

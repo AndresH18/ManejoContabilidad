@@ -9,10 +9,16 @@ public interface IClienteRepository : IRepository<Cliente>
 
 public class ClienteRepository : IClienteRepository
 {
-    private readonly ContabilidadDbContext _db = new();
+    private readonly ContabilidadDbContext _db;
+
+    public ClienteRepository(ContabilidadDbContext db)
+    {
+        _db = db;
+    }
 
     public Cliente Create(Cliente entity)
     {
+        entity.Id = 0;
         _db.Clientes.Add(entity);
         _db.SaveChanges();
         return entity;
@@ -20,7 +26,7 @@ public class ClienteRepository : IClienteRepository
 
     public IEnumerable<Cliente> GetAll()
     {
-        return _db.Clientes.AsNoTracking();
+        return _db.Clientes.AsNoTracking().ToList();
     }
 
     public Cliente? GetById(int id)

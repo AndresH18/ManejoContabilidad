@@ -9,7 +9,12 @@ public interface IInfoFacturaRepository : IRepository<InfoFactura>
 
 public class InfoFacturaRepository : IInfoFacturaRepository
 {
-    private readonly ContabilidadDbContext _db = new();
+    private readonly ContabilidadDbContext _db;
+
+    public InfoFacturaRepository(ContabilidadDbContext db)
+    {
+        _db = db;
+    }
 
     public InfoFactura Create(InfoFactura entity)
     {
@@ -20,7 +25,7 @@ public class InfoFacturaRepository : IInfoFacturaRepository
 
     public IEnumerable<InfoFactura> GetAll()
     {
-        return _db.InfoFactura.AsNoTracking();
+        return _db.InfoFactura.AsNoTracking().ToList();
     }
 
     public InfoFactura? GetById(int id)

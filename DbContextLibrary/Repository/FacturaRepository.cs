@@ -9,10 +9,16 @@ public interface IFacturaRepository : IRepository<Factura>
 
 public class FacturaRepository : IFacturaRepository
 {
-    private readonly ContabilidadDbContext _db = new();
+    private readonly ContabilidadDbContext _db;
+
+    public FacturaRepository(ContabilidadDbContext db)
+    {
+        _db = db;
+    }
 
     public Factura Create(Factura entity)
     {
+        entity.Id = 0;
         _db.Facturas.Add(entity);
         _db.SaveChanges();
         return entity;
@@ -20,7 +26,7 @@ public class FacturaRepository : IFacturaRepository
 
     public IEnumerable<Factura> GetAll()
     {
-        return _db.Facturas.AsNoTracking();
+        return _db.Facturas.AsNoTracking().ToList();
     }
 
     public Factura? GetById(int id)

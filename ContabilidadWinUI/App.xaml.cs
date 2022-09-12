@@ -15,6 +15,9 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using DbContextLibrary;
+using DbContextLibrary.Repository;
+using Microsoft.Extensions.DependencyInjection;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -32,6 +35,8 @@ namespace ContabilidadWinUI
         /// </summary>
         public App()
         {
+            Services = ConfigureServices();
+
             this.InitializeComponent();
         }
 
@@ -42,10 +47,36 @@ namespace ContabilidadWinUI
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            _mainWindow = new MainWindow();
-            _mainWindow.Activate();
+            Window = new MainWindow();
+            Window.Activate();
         }
 
-        private Window _mainWindow;
+        public Window? Window { get; private set; }
+
+        /// <summary>
+        /// Gets the <see cref="IServiceProvider"/> instance to resolve application services.
+        /// </summary>
+        public IServiceProvider Services { get; }
+
+        /// <summary>
+        /// Gets the current <see cref="App"/> instance in use
+        /// </summary>
+        public new static App Current => (App) Application.Current;
+
+
+        /// <summary>
+        /// Configures the services for the application.
+        /// </summary>
+        private static IServiceProvider ConfigureServices()
+        {
+            var services = new ServiceCollection();
+
+            // Add Services Here
+            services.AddDbContext<ContabilidadDbContext>();
+
+            services.AddScoped<IClienteRepository, ClienteRepository>();
+
+            return services.BuildServiceProvider();
+        }
     }
 }

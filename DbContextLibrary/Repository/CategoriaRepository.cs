@@ -9,10 +9,15 @@ public interface ICategoriaRepository : IRepository<Categoria>
 
 public class CategoriaRepository : ICategoriaRepository
 {
-    private readonly ContabilidadDbContext _db = new();
+    private readonly ContabilidadDbContext _db;
 
+    public CategoriaRepository(ContabilidadDbContext db)
+    {
+        _db = db;
+    }
     public Categoria Create(Categoria entity)
     {
+        entity.Id = 0;
         _db.Categorias.Add(entity);
         _db.SaveChanges();
         return entity;
@@ -20,7 +25,7 @@ public class CategoriaRepository : ICategoriaRepository
 
     public IEnumerable<Categoria> GetAll()
     {
-        return _db.Categorias.AsNoTracking();
+        return _db.Categorias.AsNoTracking().ToList();
     }
 
     public Categoria? GetById(int id)

@@ -7,14 +7,19 @@ public interface IDetallesFacturaRepository
 {
     DetallesFactura Create(DetallesFactura detallesFactura);
     IEnumerable<DetallesFactura> GetAll();
-    DetallesFactura? GetById(int facturaId, int productoFacturaId);
+    DetallesFactura? GetById(int facturaId, int productoId);
     void Update(DetallesFactura detallesFactura);
-    void Delete(int facturaId, int productoFacturaId);
+    void Delete(int facturaId, int productoId);
 }
 
 public class DetallesFacturaRepositoryRepository : IDetallesFacturaRepository
 {
-    private readonly ContabilidadDbContext _db = new();
+    private readonly ContabilidadDbContext _db;
+
+    public DetallesFacturaRepositoryRepository(ContabilidadDbContext db)
+    {
+        _db = db;
+    }
 
     public DetallesFactura Create(DetallesFactura entity)
     {
@@ -25,13 +30,13 @@ public class DetallesFacturaRepositoryRepository : IDetallesFacturaRepository
 
     public IEnumerable<DetallesFactura> GetAll()
     {
-        return _db.DetallesFactura.AsNoTracking();
+        return _db.DetallesFactura.AsNoTracking().ToList();
     }
 
-    public DetallesFactura? GetById(int facturaId, int productoFacturaId)
+    public DetallesFactura? GetById(int facturaId, int productoId)
     {
         return _db.DetallesFactura.AsNoTracking()
-            .FirstOrDefault(d => d.FacturaId == facturaId && d.ProductoFacturaId == productoFacturaId);
+            .FirstOrDefault(d => d.FacturaId == facturaId && d.ProductoId == productoId);
     }
 
     public void Update(DetallesFactura entity)
@@ -40,9 +45,9 @@ public class DetallesFacturaRepositoryRepository : IDetallesFacturaRepository
         _db.SaveChanges();
     }
 
-    public void Delete(int facturaId, int productoFacturaId)
+    public void Delete(int facturaId, int productoId)
     {
-        var d = GetById(facturaId, productoFacturaId);
+        var d = GetById(facturaId, productoId);
         if (d != null)
         {
             _db.DetallesFactura.Remove(d);

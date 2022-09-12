@@ -4,6 +4,7 @@ using DbContextLibrary;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DbContextLibrary.Migrations
 {
     [DbContext(typeof(ContabilidadDbContext))]
-    partial class ContabilidadDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220901153046_Deleted_ProductoFactura_ModifiedRelationshipsTo_Producto")]
+    partial class Deleted_ProductoFactura_ModifiedRelationshipsTo_Producto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,7 +41,7 @@ namespace DbContextLibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categorias", (string)null);
+                    b.ToTable("Categorias");
                 });
 
             modelBuilder.Entity("ModelEntities.Cliente", b =>
@@ -85,7 +87,7 @@ namespace DbContextLibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clientes", (string)null);
+                    b.ToTable("Clientes");
 
                     b.HasData(
                         new
@@ -119,7 +121,7 @@ namespace DbContextLibrary.Migrations
 
                     b.HasIndex("ProductoId");
 
-                    b.ToTable("DetallesFactura", (string)null);
+                    b.ToTable("DetallesFactura");
                 });
 
             modelBuilder.Entity("ModelEntities.Factura", b =>
@@ -137,7 +139,7 @@ namespace DbContextLibrary.Migrations
 
                     b.HasIndex("ClienteId");
 
-                    b.ToTable("Facturas", (string)null);
+                    b.ToTable("Facturas");
                 });
 
             modelBuilder.Entity("ModelEntities.InfoFactura", b =>
@@ -177,7 +179,7 @@ namespace DbContextLibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("InfoFactura", (string)null);
+                    b.ToTable("InfoFactura");
                 });
 
             modelBuilder.Entity("ModelEntities.Marca", b =>
@@ -197,7 +199,7 @@ namespace DbContextLibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Marcas", (string)null);
+                    b.ToTable("Marcas");
                 });
 
             modelBuilder.Entity("ModelEntities.Producto", b =>
@@ -238,7 +240,7 @@ namespace DbContextLibrary.Migrations
 
                     b.HasIndex("MarcaId");
 
-                    b.ToTable("Productos", (string)null);
+                    b.ToTable("Productos");
                 });
 
             modelBuilder.Entity("ModelEntities.DetallesFactura", b =>

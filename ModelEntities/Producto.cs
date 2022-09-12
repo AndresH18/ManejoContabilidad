@@ -13,11 +13,13 @@ public class Producto : IModel, ICloneable
 
     // Categoria Relationship
     public int? CategoriaId { get; set; }
-    [JsonIgnore] public virtual Categoria Categoria { get; set; }
+    [JsonIgnore] public virtual Categoria? Categoria { get; set; }
 
     // Marca Relationship
     public int MarcaId { get; set; }
-    [JsonIgnore] public virtual Marca Marca { get; set; }
+    [JsonIgnore] public virtual Marca? Marca { get; set; }
+
+    [JsonIgnore] public List<DetallesFactura> DetallesFacturas { get; set; } = new();
 
     public object Clone()
     {
