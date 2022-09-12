@@ -10,7 +10,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-        <vm:ClientsViewModel x:Key="Vm" />
+        <vm:ClientsViewModel x:Key="Vm"  />
     </Page.Resources>
 
     <controls:DockPanel DataContext="{StaticResource Vm}">

@@ -19,8 +19,7 @@ public class ClientDialogService : IModelDialogService<Cliente>
 {
     public async Task<Cliente?> CreateDialog()
     {
-        var newCliente = new Cliente();
-        var content = ClientDialog.CreateDialog(newCliente);
+        var content = ClientDialog.CreateDialog(new Cliente());
 
         var dialog = new ContentDialog
         {
@@ -38,7 +37,7 @@ public class ClientDialogService : IModelDialogService<Cliente>
 
         var result = await dialog.ShowAsync();
 
-        return result == ContentDialogResult.Primary ? newCliente : null;
+        return result == ContentDialogResult.Primary ? content.Cliente : null;
     }
 
     public async void ShowDialog(Cliente model)
