@@ -4,7 +4,7 @@ using ModelEntities;
 
 namespace ContabilidadWinUI.ViewModel;
 
-public interface IBaseViewModel<TModel> : ITaskRunning
+public interface IBaseViewModel<TModel>
 {
     public ObservableCollection<TModel> Models { get; }
 

@@ -7,7 +7,7 @@ namespace WebApi.Controllers;
 [ApiController]
 [Route("[Controller]")]
 public abstract class AbstractController<TRepo, TModel> : Controller
-    where TRepo : IRepository<TModel> 
+    where TRepo : IRepository<TModel>
     where TModel : class, IModel
 {
     protected TRepo _repo;
@@ -56,7 +56,7 @@ public abstract class AbstractController<TRepo, TModel> : Controller
         _repo.Update(model);
         return NoContent();
     }
-    
+
     // DELETE
     [HttpDelete("{id}")]
     public ActionResult Delete(int id)

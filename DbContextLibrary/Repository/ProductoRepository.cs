@@ -9,10 +9,16 @@ public interface IProductoRepository : IRepository<Producto>
 
 public class ProductoRepository : IProductoRepository
 {
-    private readonly ContabilidadDbContext _db = new();
+    private readonly ContabilidadDbContext _db;
+
+    public ProductoRepository(ContabilidadDbContext db)
+    {
+        _db = db;
+    }
 
     public Producto Create(Producto entity)
     {
+        entity.Id = 0;
         _db.Productos.Add(entity);
         _db.SaveChanges();
         return entity;
@@ -20,7 +26,7 @@ public class ProductoRepository : IProductoRepository
 
     public IEnumerable<Producto> GetAll()
     {
-        return _db.Productos.AsNoTracking();
+        return _db.Productos.AsNoTracking().ToList();
     }
 
     public Producto? GetById(int id)

@@ -10,7 +10,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-        <vm:ClientsViewModel x:Key="Vm" />
+        <vm:ClientsViewModel x:Key="Vm"  />
     </Page.Resources>
 
     <controls:DockPanel DataContext="{StaticResource Vm}">
@@ -42,13 +42,6 @@
                 </AppBarButton.Icon>
             </AppBarButton>
         </CommandBar>
-
-        <ProgressBar Visibility="{Binding Path=TaskVisibility}"
-                 IsIndeterminate="True"
-                 ShowError="{Binding Path=IsTaskError, Mode=OneWay}"
-                 controls:DockPanel.Dock="Top" />
-
-
 
         <controls:DataGrid
             ItemsSource="{Binding Path=Models}"

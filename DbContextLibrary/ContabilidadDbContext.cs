@@ -19,7 +19,6 @@ public class ContabilidadDbContext : DbContext
     public DbSet<Factura> Facturas { get; set; }
     public DbSet<InfoFactura> InfoFactura { get; set; }
     public DbSet<DetallesFactura> DetallesFactura { get; set; }
-    public DbSet<ProductoFactura> ProductoFactura { get; set; }
 
     public ContabilidadDbContext()
     {
@@ -74,7 +73,7 @@ public class ContabilidadDbContext : DbContext
         );
 
         modelBuilder.Entity<DetallesFactura>()
-            .HasKey(df => new {df.FacturaId, df.ProductoFacturaId});
+            .HasKey(df => new {df.FacturaId, df.ProductoId});
     }
 
 

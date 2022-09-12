@@ -9,10 +9,16 @@ public interface IMarcaRepository : IRepository<Marca>
 
 public class MarcaRepository : IMarcaRepository
 {
-    private readonly ContabilidadDbContext _db = new();
+    private readonly ContabilidadDbContext _db;
+
+    public MarcaRepository(ContabilidadDbContext db)
+    {
+        _db = db;
+    }
 
     public Marca Create(Marca marca)
     {
+        marca.Id = 0;
         _db.Marcas.Add(marca);
         _db.SaveChanges();
         return marca;
@@ -20,7 +26,7 @@ public class MarcaRepository : IMarcaRepository
 
     public IEnumerable<Marca> GetAll()
     {
-        return _db.Marcas.AsNoTracking();
+        return _db.Marcas.AsNoTracking().ToList();
     }
 
     public Marca? GetById(int id)
