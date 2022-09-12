@@ -83,6 +83,19 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
         DialogService.ShowDialog(t);
     }
 
+    public async void Edit(Cliente t)
+    {
+        var c = await DialogService.UpdateDialog(t);
+        if (c is null)
+            return;
+
+        _repo.Update(c);
+
+        Models.Remove(SelectedModel!);
+        Models.Add(c);
+        SelectedModel = c;
+    }
+
     public async void Delete(Cliente t)
     {
         var delete = await DialogService.DeleteDialog(t);
@@ -93,19 +106,6 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
         SelectedModel = null;
         Models.Remove(t);
         _repo.Delete(t.Id);
-    }
-
-    public async void Edit(Cliente t)
-    {
-        var c = await DialogService.UpdateDialog(t);
-        if (c is null) 
-            return;
-
-        _repo.Update(c);
-
-        Models.Remove(SelectedModel!);
-        Models.Add(c);
-        SelectedModel = c;
     }
 
 

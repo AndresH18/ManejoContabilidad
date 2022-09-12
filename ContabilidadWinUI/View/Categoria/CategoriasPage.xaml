@@ -4,14 +4,77 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:modelEntities="using:ModelEntities"
+    xmlns:vm="using:ContabilidadWinUI.ViewModel"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <Button x:Name="Button"
-                Content="Click me"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                Click="ButtonBase_OnClick" />
+    <Page.Resources>
+        <vm:CategoriesViewModel x:Key="Vm" />
+    </Page.Resources>
+    <Grid DataContext="{StaticResource Vm}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <CommandBar
+            Background="Transparent"
+            IsOpen="False"
+            DefaultLabelPosition="Right"
+            Grid.Row="0">
+
+            <AppBarButton Label="Add"
+                          Icon="Add"
+                          Command="{Binding Path=CreateCommand}"
+                          CommandParameter="{Binding Path=SelectedModel}" />
+            <AppBarButton Icon="Edit"
+                          Label="Editar"
+                          Command="{Binding Path=EditCommand}"
+                          CommandParameter="{Binding Path=SelectedModel}" />
+            <AppBarButton Label="Borrar"
+                          Command="{Binding Path=DeleteCommand}"
+                          CommandParameter="{Binding Path=SelectedModel}">
+                <AppBarButton.Icon>
+                    <SymbolIcon Symbol="Delete" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+
+            <AppBarButton Label="Ver"
+                          Command="{Binding Path=ViewCommand}"
+                          CommandParameter="{Binding Path=SelectedModel}">
+                <AppBarButton.Icon>
+                    <SymbolIcon Symbol="View" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+        </CommandBar>
+
+        <ListView Name="ListView"
+                  ItemsSource="{Binding Path=Models}"
+                  SelectedItem="{Binding Path=SelectedModel, Mode=TwoWay}"
+                  Grid.Row="1">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="modelEntities:Categoria">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock
+                            Text="{Binding Path=Name}"
+                            Style="{ThemeResource BaseTextBlockStyle}"
+                            Grid.Row="0"
+                            Margin="0, 5, 0, 5" />
+                        <TextBlock
+                            Text="{Binding Path=Description}"
+                            Style="{ThemeResource BodyTextBlockStyle}"
+                            Grid.Row="1"
+                            Margin="0, 0, 0, 10" />
+
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

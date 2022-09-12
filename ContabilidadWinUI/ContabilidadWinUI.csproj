@@ -72,6 +72,16 @@
 	  <PRIResource Remove="View\Dialogs\**" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Page Update="View\Categoria\CategoriaDialog.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
+	<ItemGroup>
+	  <Page Update="View\Categoria\CategoriaDialog.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
+	<ItemGroup>
 	  <Page Update="Controls\HeaderTile.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </Page>

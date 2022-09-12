@@ -75,6 +75,7 @@ namespace ContabilidadWinUI
             services.AddDbContext<ContabilidadDbContext>();
 
             services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 
             return services.BuildServiceProvider();
         }
