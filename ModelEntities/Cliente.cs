@@ -8,7 +8,7 @@ public class Cliente : IModel, ICloneable
     [Key] public int Id { get; set; }
     public string Nombre { get; set; } = string.Empty;
     public TipoDocumento TipoDocumento { get; set; } = default;
-    public string NumeroDocumento { get; set; } = "123 233 9888";
+    public string NumeroDocumento { get; set; } = string.Empty;
     [JsonIgnore] public string? Direccion { get; set; }
 
     // [Required] 

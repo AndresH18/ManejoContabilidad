@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -36,23 +37,23 @@ namespace ContabilidadWinUI.View.Client
         }
 
         public static ClientDialog CreateDialog(Cliente cliente, bool isReadOnly = false) =>
-            new(cliente) { IsReadOnly = isReadOnly };
+            new(cliente) {IsReadOnly = isReadOnly};
 
         private void DocumentTypeComboBox_OnLoaded(object sender, RoutedEventArgs e)
         {
-            DocumentTypeComboBox.SelectedIndex = (int)Cliente.TipoDocumento;
+            DocumentTypeComboBox.SelectedIndex = (int) Cliente.TipoDocumento;
         }
 
         private void DepartamentoComboBox_OnLoaded(object sender, RoutedEventArgs e)
         {
             if (ReferenceEquals(sender, DepartamentoComboBox))
             {
-                DepartamentoComboBox.ItemsSource = new[] { "Departamento" };
+                DepartamentoComboBox.ItemsSource = new[] {"Departamento"};
                 DepartamentoComboBox.SelectedIndex = 0;
             }
             else if (ReferenceEquals(sender, MunicipioComboBox))
             {
-                MunicipioComboBox.ItemsSource = new[] { "Municipio" };
+                MunicipioComboBox.ItemsSource = new[] {"Municipio"};
                 MunicipioComboBox.SelectedIndex = 0;
             }
         }
