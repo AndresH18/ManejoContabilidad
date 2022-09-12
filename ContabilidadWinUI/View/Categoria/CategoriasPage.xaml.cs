@@ -11,17 +11,11 @@ namespace ContabilidadWinUI.View.Categoria
     /// </summary>
     public sealed partial class CategoriasPage : Page
     {
-        private int _counter = 0;
-
         public CategoriasPage()
         {
             this.InitializeComponent();
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            _counter++;
-            Button.Content = _counter == 1 ? $"Clicked {_counter} time" : $"Clicked {_counter} times";
-        }
+
     }
 }

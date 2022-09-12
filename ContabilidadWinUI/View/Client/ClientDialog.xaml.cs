@@ -28,7 +28,7 @@ namespace ContabilidadWinUI.View.Client
         public bool IsReadOnly { get; private init; }
         public bool IsEditEnabled => !IsReadOnly;
 
-        public Cliente Cliente { get; set; }
+        public Cliente Cliente { get; }
 
         private ClientDialog(Cliente cliente)
         {

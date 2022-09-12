@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="ContabilidadWinUI.View.Categoria.CategoriaDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ContabilidadWinUI.View.Categoria"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+
+    <StackPanel Margin="10"
+                Spacing="10">
+
+        <TextBox x:Name="NameTextBox"
+                 Text="{Binding Path=Categoria.Name, Mode=TwoWay}"
+                 Header="Nombre"
+                 IsReadOnly="{Binding Path=IsReadOnly}"
+                 Grid.Row="0" />
+
+        <TextBox x:Name="DescriptionTextBox"
+                 Text="{Binding Path=Categoria.Description,  Mode=TwoWay}"
+                 Header="Descripcion"
+                 IsReadOnly="{Binding Path=IsReadOnly}"
+                 Grid.Row="1" />
+
+    </StackPanel>
+</Page>

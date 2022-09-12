@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using ContabilidadWinUI.View.Categoria;
 using ContabilidadWinUI.View.Client;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -15,6 +16,8 @@ public interface IModelDialogService<T>
     Task<bool> DeleteDialog(T model);
 }
 
+#region ClientDialogService
+
 public class ClientDialogService : IModelDialogService<Cliente>
 {
     public async Task<Cliente?> CreateDialog()
@@ -24,7 +27,7 @@ public class ClientDialogService : IModelDialogService<Cliente>
         var dialog = new ContentDialog
         {
             // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
-            XamlRoot = (Application.Current as App)?.Window?.Content.XamlRoot,
+            XamlRoot = App.Current.Window?.Content.XamlRoot,
             Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
             Title = "Agregar Cliente",
             PrimaryButtonText = "Guardar",
@@ -48,7 +51,7 @@ public class ClientDialogService : IModelDialogService<Cliente>
         var dialog = new ContentDialog
         {
             // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
-            XamlRoot = (Application.Current as App)?.Window?.Content.XamlRoot,
+            XamlRoot = App.Current.Window?.Content.XamlRoot,
             Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
             Title = model.Nombre,
             // Title = model.Nombre,
@@ -64,13 +67,13 @@ public class ClientDialogService : IModelDialogService<Cliente>
 
     public async Task<Cliente?> UpdateDialog(Cliente model)
     {
-        var clientToUpdate = (Cliente)model.Clone();
-        var content = ClientDialog.CreateDialog(clientToUpdate);
+        var toUpdate = (Cliente)model.Clone();
+        var content = ClientDialog.CreateDialog(toUpdate);
 
         var dialog = new ContentDialog
         {
             // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
-            XamlRoot = (Application.Current as App)?.Window?.Content.XamlRoot,
+            XamlRoot = App.Current.Window?.Content.XamlRoot,
             Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
             Title = "Actualizar",
             // Title = model.Nombre,
@@ -83,7 +86,7 @@ public class ClientDialogService : IModelDialogService<Cliente>
 
         var result = await dialog.ShowAsync();
 
-        return result == ContentDialogResult.Primary ? clientToUpdate : null;
+        return result == ContentDialogResult.Primary ? toUpdate : null;
     }
 
     public async Task<bool> DeleteDialog(Cliente model)
@@ -92,7 +95,7 @@ public class ClientDialogService : IModelDialogService<Cliente>
         var dialog = new ContentDialog
         {
             // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
-            XamlRoot = (Application.Current as App)?.Window?.Content.XamlRoot,
+            XamlRoot = App.Current.Window?.Content.XamlRoot,
             Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
             Title = "Eliminar Cliente?",
             // Title = model.Nombre,
@@ -108,3 +111,100 @@ public class ClientDialogService : IModelDialogService<Cliente>
         return result == ContentDialogResult.Primary;
     }
 }
+
+#endregion
+
+#region CategoriaDialogService
+
+public class CategoriaDialogService : IModelDialogService<Categoria>
+{
+    public async Task<Categoria?> CreateDialog()
+    {
+        var content = CategoriaDialog.CreateDialog(new Categoria());
+
+        var dialog = new ContentDialog
+        {
+            // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
+            XamlRoot = App.Current.Window?.Content.XamlRoot,
+            Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+            Title = "Agregar Cliente",
+            PrimaryButtonText = "Guardar",
+            // dialog.SecondaryButtonText = "Don't Save";
+            CloseButtonText = "Cancel",
+            DefaultButton = ContentDialogButton.Primary,
+            Content = content
+        };
+
+
+        var result = await dialog.ShowAsync();
+
+        return result == ContentDialogResult.Primary ? content.Categoria : null;
+    }
+
+    public async void ShowDialog(Categoria model)
+    {
+        var content = CategoriaDialog.CreateDialog(model, isReadOnly: true);
+
+        var dialog = new ContentDialog
+        {
+            // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
+            XamlRoot = App.Current.Window?.Content.XamlRoot,
+            Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+            Title = model.Name,
+            // Title = model.Nombre,
+            // PrimaryButtonText = "Guardar",
+            // dialog.SecondaryButtonText = "Don't Save";
+            CloseButtonText = "Cancel",
+            DefaultButton = ContentDialogButton.Primary,
+            Content = content
+        };
+
+        await dialog.ShowAsync();
+    }
+
+    public async Task<Categoria?> UpdateDialog(Categoria model)
+    {
+        var toUpdate = (Categoria)model.Clone();
+        var content = CategoriaDialog.CreateDialog(toUpdate);
+
+        var dialog = new ContentDialog
+        {
+            // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
+            XamlRoot = App.Current.Window?.Content.XamlRoot,
+            Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+            Title = "Actualizar",
+            PrimaryButtonText = "Guardar",
+            CloseButtonText = "Cancel",
+            DefaultButton = ContentDialogButton.Primary,
+            Content = content
+        };
+
+        var result = await dialog.ShowAsync();
+
+        return result == ContentDialogResult.Primary ? toUpdate : null;
+    }
+
+    public async Task<bool> DeleteDialog(Categoria model)
+    {
+        var content = CategoriaDialog.CreateDialog(model, isReadOnly: true);
+        var dialog = new ContentDialog
+        {
+            // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
+            XamlRoot = App.Current.Window?.Content.XamlRoot,
+            Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+            Title = "Eliminar Cliente?",
+            // Title = model.Nombre,
+            PrimaryButtonText = "Eliminar",
+            // dialog.SecondaryButtonText = "Don't Save";
+            CloseButtonText = "Cancel",
+            DefaultButton = ContentDialogButton.Primary,
+            Content = content,
+        };
+
+        var result = await dialog.ShowAsync();
+
+        return result == ContentDialogResult.Primary;
+    }
+}
+
+#endregion
