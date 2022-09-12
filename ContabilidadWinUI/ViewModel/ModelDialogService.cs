@@ -127,7 +127,7 @@ public class CategoriaDialogService : IModelDialogService<Categoria>
             // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
             XamlRoot = App.Current.Window?.Content.XamlRoot,
             Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
-            Title = "Agregar Cliente",
+            Title = "Agregar Categoria",
             PrimaryButtonText = "Guardar",
             // dialog.SecondaryButtonText = "Don't Save";
             CloseButtonText = "Cancel",
@@ -192,7 +192,7 @@ public class CategoriaDialogService : IModelDialogService<Categoria>
             // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
             XamlRoot = App.Current.Window?.Content.XamlRoot,
             Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
-            Title = "Eliminar Cliente?",
+            Title = "Eliminar Categoria?",
             // Title = model.Nombre,
             PrimaryButtonText = "Eliminar",
             // dialog.SecondaryButtonText = "Don't Save";
