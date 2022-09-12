@@ -85,13 +85,18 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
 
     public async void Delete(Cliente t)
     {
-        // TODO: Implement Delete Client
-        var r = await DialogService.DeleteDialog(t);
+        var delete = await DialogService.DeleteDialog(t);
+
+        if (!delete)
+            return;
+
+        SelectedModel = null;
+        Models.Remove(t);
+        _repo.Delete(t.Id);
     }
 
     public async void Edit(Cliente t)
     {
-        // TODO: Implement Edit Client
         var c = await DialogService.UpdateDialog(t);
         if (c is null) 
             return;
