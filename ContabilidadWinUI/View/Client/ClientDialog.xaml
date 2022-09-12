@@ -25,7 +25,7 @@
                  PlaceholderText="Nombre"
                  IsReadOnly="{Binding Path=IsReadOnly}"
                  MaxLength="150"
-                 Text="{Binding Path=Cliente.Nombre, FallbackValue='', Mode=TwoWay}" />
+                 Text="{Binding Path=Cliente.Nombre, FallbackValue=''}" />
 
         <ComboBox Name="DocumentTypeComboBox"
                   HorizontalAlignment="Stretch"
@@ -75,7 +75,7 @@
         </Grid>
 
         <TextBox Name="PhoneTextBox"
-                 Text="{Binding Path=Cliente.Telefono, Mode=TwoWay}"
+                 Text="{Binding Path=Cliente.Telefono}"
                  Header="Numero de Telefono"
                  IsReadOnly="{Binding Path=IsReadOnly}"
                  PlaceholderText="123-456-7890"
@@ -84,7 +84,7 @@
                  RelativePanel.AlignRightWithPanel="True" />
 
         <TextBox Name="EmailTextBox"
-                 Text="{Binding Path=Cliente.Correo, Mode=TwoWay}"
+                 Text="{Binding Path=Cliente.Correo}"
                  Header="Email"
                  IsReadOnly="{Binding Path=IsReadOnly}"
                  PlaceholderText="something@example.com"
