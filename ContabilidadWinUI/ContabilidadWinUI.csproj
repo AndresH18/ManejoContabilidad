@@ -15,6 +15,7 @@
 
 	<ItemGroup>
 		<None Remove="Controls\AppBarControl.xaml" />
+		<None Remove="View\Marca\MarcaDialog.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -70,6 +71,11 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <PRIResource Remove="View\Dialogs\**" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Page Update="View\Marca\MarcaDialog.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
 	</ItemGroup>
 	<ItemGroup>
 	  <Page Update="View\Categoria\CategoriaDialog.xaml">
