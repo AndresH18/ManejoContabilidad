@@ -9,6 +9,12 @@ public class Marca : IModel, ICloneable
     public string? Description { get; set; }
     [JsonIgnore] public virtual ICollection<Producto> Productos { get; set; } = new List<Producto>();
 
+    public void CopyFrom(Marca marca)
+    {
+        this.Name = marca.Name;
+        this.Description = marca.Description;
+    }
+
     public object Clone()
     {
         return new Marca

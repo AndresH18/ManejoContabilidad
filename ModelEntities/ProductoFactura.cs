@@ -2,6 +2,7 @@
 
 namespace ModelEntities;
 
+[Obsolete]
 public class ProductoFactura : IModel
 {
     public int Id { get; set; }
@@ -18,7 +19,7 @@ public class ProductoFactura : IModel
     // Marca Relationship
     public int MarcaId { get; set; }
     [JsonIgnore] public virtual Marca? Marca { get; set; }
-    
+
     // DetallesFactura Relationship
     [JsonIgnore] public virtual DetallesFactura? DetallesFactura { get; set; }
 }

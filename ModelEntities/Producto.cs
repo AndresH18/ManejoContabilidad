@@ -21,6 +21,17 @@ public class Producto : IModel, ICloneable
 
     [JsonIgnore] public List<DetallesFactura> DetallesFacturas { get; set; } = new();
 
+    public void CopyFrom(Producto producto)
+    {
+        this.Nombre = producto.Nombre;
+        this.Codigo = producto.Codigo;
+        this.Referencia = producto.Referencia;
+        this.PrecioUnitario = producto.PrecioUnitario;
+        this.Descripcion = producto.Descripcion;
+        this.CategoriaId = producto.CategoriaId;
+        this.MarcaId = producto.MarcaId;
+    }
+
     public object Clone()
     {
         return new Producto
