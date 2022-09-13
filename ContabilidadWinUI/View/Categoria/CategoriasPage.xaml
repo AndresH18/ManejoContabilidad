@@ -49,8 +49,7 @@
             </AppBarButton>
         </CommandBar>
 
-        <ListView Name="ListView"
-                  ItemsSource="{Binding Path=Models}"
+        <ListView ItemsSource="{Binding Path=Models}"
                   SelectedItem="{Binding Path=SelectedModel, Mode=TwoWay}"
                   Grid.Row="1">
             <ListView.ItemTemplate>

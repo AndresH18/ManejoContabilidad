@@ -89,7 +89,6 @@ public class CategoriesViewModel : IBaseViewModel<Categoria>, INotifyPropertyCha
         _repo.Delete(t.Id);
     }
 
-
     private void NotifyPropertyChanged(string name)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
