@@ -19,10 +19,10 @@
                  TextWrapping="Wrap"
                  MaxLength="60" />
 
+        <TextBlock HorizontalAlignment="Left" Text="Descripcion" />
         <ScrollViewer MaxHeight="100">
             <TextBox x:Name="DescriptionTextBox"
                      Text="{Binding Path=Marca.Description,  Mode=TwoWay}"
-                     Header="Descripcion"
                      IsReadOnly="{Binding Path=IsReadOnly}"
                      AcceptsReturn="True"
                      TextWrapping="Wrap"

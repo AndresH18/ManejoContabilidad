@@ -15,6 +15,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using ContabilidadWinUI.Services;
 using DbContextLibrary;
 using DbContextLibrary.Repository;
 using Microsoft.Extensions.DependencyInjection;
@@ -77,6 +78,9 @@ namespace ContabilidadWinUI
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
             services.AddScoped<IMarcaRepository, MarcaRepository>();
+            services.AddScoped<IProductoRepository, ProductoRepository>();
+
+            services.AddScoped<IProductsService, ProductsService>();
 
             return services.BuildServiceProvider();
         }

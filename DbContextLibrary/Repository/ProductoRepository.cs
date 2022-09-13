@@ -26,12 +26,20 @@ public class ProductoRepository : IProductoRepository
 
     public IEnumerable<Producto> GetAll()
     {
-        return _db.Productos.AsNoTracking().ToList();
+        return _db.Productos
+            .Include(p => p.Categoria)
+            .Include(p => p.Marca)
+            .AsNoTracking()
+            .ToList();
     }
 
     public Producto? GetById(int id)
     {
-        return _db.Productos.AsNoTracking().FirstOrDefault(p => p.Id == id);
+        return _db.Productos
+            .Include(p => p.Categoria)
+            .Include(p => p.Marca)
+            .AsNoTracking()
+            .FirstOrDefault(p => p.Id == id);
     }
 
     public void Update(Producto entity)

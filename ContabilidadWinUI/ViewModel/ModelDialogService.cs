@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using ContabilidadWinUI.View.Categoria;
 using ContabilidadWinUI.View.Client;
 using ContabilidadWinUI.View.Marca;
+using ContabilidadWinUI.View.Producto;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using ModelEntities;
@@ -34,7 +35,7 @@ public class ClientDialogService : IModelDialogService<Cliente>
             PrimaryButtonText = "Guardar",
             // dialog.SecondaryButtonText = "Don't Save";
             CloseButtonText = "Cancel",
-            DefaultButton = ContentDialogButton.Primary,
+
             Content = content
         };
 
@@ -59,7 +60,7 @@ public class ClientDialogService : IModelDialogService<Cliente>
             // PrimaryButtonText = "Guardar",
             // dialog.SecondaryButtonText = "Don't Save";
             CloseButtonText = "Cancel",
-            DefaultButton = ContentDialogButton.Primary,
+            DefaultButton = ContentDialogButton.Close,
             Content = content
         };
 
@@ -81,7 +82,7 @@ public class ClientDialogService : IModelDialogService<Cliente>
             PrimaryButtonText = "Guardar",
             // dialog.SecondaryButtonText = "Don't Save";
             CloseButtonText = "Cancel",
-            DefaultButton = ContentDialogButton.Primary,
+
             Content = content
         };
 
@@ -101,9 +102,9 @@ public class ClientDialogService : IModelDialogService<Cliente>
             Title = "Eliminar Cliente?",
             // Title = model.Nombre,
             PrimaryButtonText = "Eliminar",
-            // dialog.SecondaryButtonText = "Don't Save";
+            DefaultButton = ContentDialogButton.Close,
             CloseButtonText = "Cancel",
-            DefaultButton = ContentDialogButton.Primary,
+
             Content = content,
         };
 
@@ -132,7 +133,7 @@ public class CategoriaDialogService : IModelDialogService<Categoria>
             PrimaryButtonText = "Guardar",
             // dialog.SecondaryButtonText = "Don't Save";
             CloseButtonText = "Cancel",
-            DefaultButton = ContentDialogButton.Primary,
+
             Content = content
         };
 
@@ -156,7 +157,7 @@ public class CategoriaDialogService : IModelDialogService<Categoria>
             // PrimaryButtonText = "Guardar",
             // dialog.SecondaryButtonText = "Don't Save";
             CloseButtonText = "Cancel",
-            DefaultButton = ContentDialogButton.Primary,
+            DefaultButton = ContentDialogButton.Close,
             Content = content
         };
 
@@ -176,7 +177,6 @@ public class CategoriaDialogService : IModelDialogService<Categoria>
             Title = "Actualizar",
             PrimaryButtonText = "Guardar",
             CloseButtonText = "Cancel",
-            DefaultButton = ContentDialogButton.Primary,
             Content = content
         };
 
@@ -198,7 +198,7 @@ public class CategoriaDialogService : IModelDialogService<Categoria>
             PrimaryButtonText = "Eliminar",
             // dialog.SecondaryButtonText = "Don't Save";
             CloseButtonText = "Cancel",
-            DefaultButton = ContentDialogButton.Primary,
+            DefaultButton = ContentDialogButton.Close,
             Content = content,
         };
 
@@ -227,7 +227,6 @@ public class MarcaDialogService : IModelDialogService<Marca>
             PrimaryButtonText = "Guardar",
             // dialog.SecondaryButtonText = "Don't Save";
             CloseButtonText = "Cancel",
-            DefaultButton = ContentDialogButton.Primary,
             Content = content
         };
 
@@ -251,7 +250,7 @@ public class MarcaDialogService : IModelDialogService<Marca>
             // PrimaryButtonText = "Guardar",
             // dialog.SecondaryButtonText = "Don't Save";
             CloseButtonText = "Cancel",
-            DefaultButton = ContentDialogButton.Primary,
+            DefaultButton = ContentDialogButton.Close,
             Content = content
         };
 
@@ -271,7 +270,6 @@ public class MarcaDialogService : IModelDialogService<Marca>
             Title = "Actualizar",
             PrimaryButtonText = "Guardar",
             CloseButtonText = "Cancel",
-            DefaultButton = ContentDialogButton.Primary,
             Content = content
         };
 
@@ -293,7 +291,108 @@ public class MarcaDialogService : IModelDialogService<Marca>
             PrimaryButtonText = "Eliminar",
             // dialog.SecondaryButtonText = "Don't Save";
             CloseButtonText = "Cancel",
-            DefaultButton = ContentDialogButton.Primary,
+            DefaultButton = ContentDialogButton.Close,
+            Content = content,
+        };
+
+        var result = await dialog.ShowAsync();
+
+        return result == ContentDialogResult.Primary;
+    }
+}
+
+#endregion
+
+#region ProductoDialogService
+
+public class ProductoDialogService : IModelDialogService<Producto>
+{
+    public async Task<Producto?> CreateDialog()
+    {
+        var content = ProductoDialog.CreateDialog(new Producto());
+
+        var dialog = new ContentDialog
+        {
+            // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
+            XamlRoot = App.Current.Window?.Content.XamlRoot,
+            Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+            Title = "Agregar Producto",
+            PrimaryButtonText = "Guardar",
+            // SecondaryButtonText = "Don't Save",
+            CloseButtonText = "Cancel",
+
+            /*
+             TODO: Look here, this is what is causing the dialog to close when ENTER is pressed
+                DefaultButton = ContentDialogButton.Primary,
+
+             You can read more here
+                https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.contentdialog?view=winrt-22621
+            */
+            Content = content
+        };
+
+
+        var result = await dialog.ShowAsync();
+
+        return result == ContentDialogResult.Primary ? content.Producto : null;
+    }
+
+    public async void ShowDialog(Producto model)
+    {
+        var content = ProductoDialog.CreateDialog(model, isReadOnly: true);
+
+        var dialog = new ContentDialog
+        {
+            // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
+            XamlRoot = App.Current.Window?.Content.XamlRoot,
+            Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+            Title = model.Nombre,
+            // Title = model.Nombre,
+            // PrimaryButtonText = "Guardar",
+            // dialog.SecondaryButtonText = "Don't Save";
+            CloseButtonText = "Cancel",
+            DefaultButton = ContentDialogButton.Close,
+            Content = content
+        };
+
+        await dialog.ShowAsync();
+    }
+
+    public async Task<Producto?> UpdateDialog(Producto model)
+    {
+        var toUpdate = (Producto) model.Clone();
+        var content = ProductoDialog.CreateDialog(toUpdate);
+
+        var dialog = new ContentDialog
+        {
+            // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
+            XamlRoot = App.Current.Window?.Content.XamlRoot,
+            Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+            Title = "Actualizar",
+            PrimaryButtonText = "Guardar",
+            CloseButtonText = "Cancel",
+            Content = content
+        };
+
+        var result = await dialog.ShowAsync();
+
+        return result == ContentDialogResult.Primary ? toUpdate : null;
+    }
+
+    public async Task<bool> DeleteDialog(Producto model)
+    {
+        var content = ProductoDialog.CreateDialog(model, isReadOnly: true);
+        var dialog = new ContentDialog
+        {
+            // XamlRoot must be set in the case of a ContentDialog running in a Desktop app
+            XamlRoot = App.Current.Window?.Content.XamlRoot,
+            Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+            Title = "Eliminar Producto?",
+            // Title = model.Nombre,
+            PrimaryButtonText = "Eliminar",
+            // dialog.SecondaryButtonText = "Don't Save";
+            CloseButtonText = "Cancel",
+            DefaultButton = ContentDialogButton.Close,
             Content = content,
         };
 

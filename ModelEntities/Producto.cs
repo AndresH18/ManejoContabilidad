@@ -12,7 +12,7 @@ public class Producto : IModel, ICloneable
     public string? Descripcion { get; set; }
 
     // Categoria Relationship
-    public int? CategoriaId { get; set; }
+    public int CategoriaId { get; set; }
     [JsonIgnore] public virtual Categoria? Categoria { get; set; }
 
     // Marca Relationship
