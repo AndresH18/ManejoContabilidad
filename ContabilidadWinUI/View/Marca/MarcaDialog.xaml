@@ -16,13 +16,18 @@
                  Text="{Binding Path=Marca.Name, Mode=TwoWay}"
                  Header="Nombre"
                  IsReadOnly="{Binding Path=IsReadOnly}"
-                 Grid.Row="0" />
+                 TextWrapping="Wrap"
+                 MaxLength="60" />
 
-        <TextBox x:Name="DescriptionTextBox"
-                 Text="{Binding Path=Marca.Description,  Mode=TwoWay}"
-                 Header="Descripcion"
-                 IsReadOnly="{Binding Path=IsReadOnly}"
-                 Grid.Row="1" />
+        <ScrollViewer MaxHeight="100">
+            <TextBox x:Name="DescriptionTextBox"
+                     Text="{Binding Path=Marca.Description,  Mode=TwoWay}"
+                     Header="Descripcion"
+                     IsReadOnly="{Binding Path=IsReadOnly}"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"
+                     MaxLength="200" />
+        </ScrollViewer>
 
     </StackPanel>
 </Page>
