@@ -13,7 +13,7 @@
                     Loaded="NavView_OnLoaded"
                     BackRequested="NavView_BackRequested"
                     IsSettingsVisible="False"
-                    Background="Blue">
+                    Background="Red">
 
         <NavigationView.MenuItems>
 
