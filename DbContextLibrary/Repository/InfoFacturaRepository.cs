@@ -25,12 +25,12 @@ public class InfoFacturaRepository : IInfoFacturaRepository
 
     public IEnumerable<InfoFactura> GetAll()
     {
-        return _db.InfoFactura.AsNoTracking().ToList();
+        return _db.InfoFactura.ToList();
     }
 
     public InfoFactura? GetById(int id)
     {
-        return _db.InfoFactura.AsNoTracking().FirstOrDefault(i => i.Id == id);
+        return _db.InfoFactura.FirstOrDefault(i => i.Id == id);
     }
 
     public void Update(InfoFactura entity)

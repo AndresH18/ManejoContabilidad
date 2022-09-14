@@ -29,7 +29,6 @@ public class ProductoRepository : IProductoRepository
         return _db.Productos
             .Include(p => p.Categoria)
             .Include(p => p.Marca)
-            .AsNoTracking()
             .ToList();
     }
 
@@ -38,7 +37,6 @@ public class ProductoRepository : IProductoRepository
         return _db.Productos
             .Include(p => p.Categoria)
             .Include(p => p.Marca)
-            .AsNoTracking()
             .FirstOrDefault(p => p.Id == id);
     }
 

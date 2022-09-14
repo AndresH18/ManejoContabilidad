@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using ContabilidadWinUI.ViewModel.Commands;
 using DbContextLibrary.Repository;
 using Microsoft.Extensions.DependencyInjection;
@@ -52,10 +53,16 @@ public class CategoriesViewModel : IBaseViewModel<Categoria>, INotifyPropertyCha
 
         if (c is null)
             return;
+        try
+        {
+            c = _repo.Create(c);
 
-        c = _repo.Create(c);
-
-        Models.Add(c);
+            Models.Add(c);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+        }
     }
 
     public void Show(Categoria t)
@@ -64,18 +71,28 @@ public class CategoriesViewModel : IBaseViewModel<Categoria>, INotifyPropertyCha
     }
 
 
-    public async void Edit(Categoria t)
+    public async void Edit(Categoria categoria)
     {
-        var c = await DialogService.UpdateDialog(t);
-        if (c is null)
+        var result = await DialogService.UpdateDialog(categoria);
+        if (result is null)
             return;
 
-        _repo.Update(c);
+        categoria.CopyFrom(result);
 
-        Models.Remove(SelectedModel!);
-        Models.Add(c);
-        SelectedModel = c;
+        try
+        {
+            _repo.Update(categoria);
+
+            Models.Remove(SelectedModel!);
+            Models.Add(categoria);
+            SelectedModel = categoria;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+        }
     }
+
 
     public async void Delete(Categoria t)
     {
@@ -86,7 +103,14 @@ public class CategoriesViewModel : IBaseViewModel<Categoria>, INotifyPropertyCha
 
         SelectedModel = null;
         Models.Remove(t);
-        _repo.Delete(t.Id);
+        try
+        {
+            _repo.Delete(t.Id);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+        }
     }
 
     private void NotifyPropertyChanged(string name)

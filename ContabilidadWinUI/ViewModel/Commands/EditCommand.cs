@@ -21,7 +21,16 @@ public class EditCommand<T> : ICommand
 
     public void Execute(object? parameter)
     {
-        _viewModel.Edit((T)parameter!);
+        // try
+        // {
+        var t = (T) parameter!;
+        _viewModel.Show(t);
+        // }
+        // catch (Exception ex)
+        // {
+        //     Debug.WriteLine(ex);
+        //     throw;
+        // }
     }
 
     public event EventHandler? CanExecuteChanged;

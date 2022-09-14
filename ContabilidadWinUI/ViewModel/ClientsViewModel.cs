@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using ContabilidadWinUI.ViewModel.Commands;
@@ -48,20 +49,6 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
         DeleteCommand = new DeleteCommand<Cliente>(this);
         EditCommand = new EditCommand<Cliente>(this);
 
-        // Models = new ObservableCollection<Cliente>
-        // {
-        //     new()
-        //     {
-        //         Nombre = "Imporcom", NumeroDocumento = "123-456-7890", TipoDocumento = TipoDocumento.Nit,
-        //         Direccion = "Cra impor #1", Correo = "imporcom@correo.com", Telefono = "123-456-7890",
-        //     },
-        //     new()
-        //     {
-        //         Nombre = "Andres' Programmers SAS", NumeroDocumento = "111-222-33-44",
-        //         TipoDocumento = TipoDocumento.Cc, Correo = "andres@correo.com", Telefono = "111-876-2394",
-        //         Direccion = "Calle 123 # 445 sur",
-        //     }
-        // };
         Models = new ObservableCollection<Cliente>(_repo.GetAll());
     }
 
@@ -73,7 +60,14 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
         if (c is null)
             return;
 
-        c = _repo.Create(c);
+        try
+        {
+            c = _repo.Create(c);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+        }
 
         Models.Add(c);
     }
@@ -83,17 +77,24 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
         DialogService.ShowDialog(t);
     }
 
-    public async void Edit(Cliente t)
+    public async void Edit(Cliente cliente)
     {
-        var c = await DialogService.UpdateDialog(t);
+        var c = await DialogService.UpdateDialog(cliente);
         if (c is null)
             return;
+        cliente.CopyFrom(c);
+        try
+        {
+            _repo.Update(cliente);
 
-        _repo.Update(c);
-
-        Models.Remove(SelectedModel!);
-        Models.Add(c);
-        SelectedModel = c;
+            Models.Remove(SelectedModel!);
+            Models.Add(cliente);
+            SelectedModel = cliente;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+        }
     }
 
     public async void Delete(Cliente t)
@@ -103,9 +104,16 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
         if (!delete)
             return;
 
-        SelectedModel = null;
-        Models.Remove(t);
-        _repo.Delete(t.Id);
+        try
+        {
+            SelectedModel = null;
+            Models.Remove(t);
+            _repo.Delete(t.Id);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+        }
     }
 
 

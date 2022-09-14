@@ -78,7 +78,8 @@
                     <controls:DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock
-                                Text="{Binding PrecioUnitario, Mode=OneWay, Converter={StaticResource MoneyConverter}}" />
+                                Text="{Binding PrecioUnitario, Mode=OneWay, Converter={StaticResource MoneyConverter}}"
+                                VerticalAlignment="Center"/>
                         </DataTemplate>
                     </controls:DataGridTemplateColumn.CellTemplate>
                 </controls:DataGridTemplateColumn>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using ContabilidadWinUI.ViewModel.Commands;
 using DbContextLibrary.Repository;
 using Microsoft.Extensions.DependencyInjection;
@@ -63,17 +64,25 @@ public class MarcasViewModel : IBaseViewModel<Marca>, INotifyPropertyChanged
     }
 
 
-    public async void Edit(Marca t)
+    public async void Edit(Marca marca)
     {
-        var c = await DialogService.UpdateDialog(t);
-        if (c is null)
+        var m = await DialogService.UpdateDialog(marca);
+        if (m is null)
             return;
 
-        _repo.Update(c);
+        marca.CopyFrom(m);
+        try
+        {
+            _repo.Update(marca);
 
-        Models.Remove(SelectedModel!);
-        Models.Add(c);
-        SelectedModel = c;
+            Models.Remove(SelectedModel!);
+            Models.Add(marca);
+            SelectedModel = marca;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+        }
     }
 
     public async void Delete(Marca t)
@@ -82,10 +91,16 @@ public class MarcasViewModel : IBaseViewModel<Marca>, INotifyPropertyChanged
 
         if (!delete)
             return;
-
-        SelectedModel = null;
-        Models.Remove(t);
-        _repo.Delete(t.Id);
+        try
+        {
+            SelectedModel = null;
+            Models.Remove(t);
+            _repo.Delete(t.Id);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+        }
     }
 
     private void NotifyPropertyChanged(string name)

@@ -26,7 +26,7 @@ public class ClienteRepository : IClienteRepository
 
     public IEnumerable<Cliente> GetAll()
     {
-        return _db.Clientes.AsNoTracking().ToList();
+        return _db.Clientes.ToList();
     }
 
     public Cliente? GetById(int id)

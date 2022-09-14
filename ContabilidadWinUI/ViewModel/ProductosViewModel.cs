@@ -55,47 +55,71 @@ public class ProductosViewModel : IBaseViewModel<Producto>, INotifyPropertyChang
         if (c is null)
             return;
 
-        c = _repo.Create(c);
-        c = _repo.GetById(c.Id);
+        try
+        {
+            c = _repo.Create(c);
+            c = _repo.GetById(c.Id);
 
-        Models.Add(c);
+            Models.Add(c);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
     }
 
     public void Show(Producto t)
     {
-        DialogService.ShowDialog(t);
+        try
+        {
+            DialogService.ShowDialog(t);
+        }
+        catch (Exception e)
+        {
+            Debug.WriteLine(e);
+        }
     }
 
 
-    public async void Edit(Producto t)
+    public async void Edit(Producto producto)
     {
-        var c = await DialogService.UpdateDialog(t);
-        if (c is null)
+        var p = await DialogService.UpdateDialog(producto);
+        if (p is null)
             return;
+
+        producto.CopyFrom(p);
+
         try
         {
-            _repo.Update(c);
+            _repo.Update(producto);
+
+            Models.Remove(SelectedModel!);
+            Models.Add(producto);
+            SelectedModel = producto;
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex);
         }
-
-        Models.Remove(SelectedModel!);
-        Models.Add(c);
-        SelectedModel = c;
     }
 
     public async void Delete(Producto t)
     {
-        // var delete = await DialogService.DeleteDialog(t);
-        //
-        // if (!delete)
-        //     return;
-        //
-        // SelectedModel = null;
-        // Models.Remove(t);
-        // _repo.Delete(t.Id);
+        var delete = await DialogService.DeleteDialog(t);
+
+        if (!delete)
+            return;
+
+        try
+        {
+            SelectedModel = null;
+            Models.Remove(t);
+            _repo.Delete(t.Id);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+        }
     }
 
     private void NotifyPropertyChanged(string name)
