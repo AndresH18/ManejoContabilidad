@@ -13,7 +13,6 @@
 
     <Page.Resources>
         <vm:ProductosViewModel x:Key="Vm" />
-        <models:Producto x:Key="Producto" />
         <local:MoneyConverter x:Key="MoneyConverter" />
     </Page.Resources>
 
