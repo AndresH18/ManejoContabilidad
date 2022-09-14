@@ -94,6 +94,7 @@
 
         <TextBlock Name="Header1"
                    Text="Descripcion"
+                   Margin="0, 5"
                    RelativePanel.AlignLeftWithPanel="True"
                    RelativePanel.Below="Grid2" />
         <ScrollViewer MaxHeight="70"

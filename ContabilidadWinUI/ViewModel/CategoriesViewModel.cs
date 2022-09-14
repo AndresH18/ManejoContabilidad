@@ -14,7 +14,7 @@ public class CategoriesViewModel : IBaseViewModel<Categoria>, INotifyPropertyCha
     private Categoria? _categoria;
     private ICategoriaRepository _repo;
 
-    public ObservableCollection<Categoria> Models { get; }
+    public ObservableCollection<Categoria> Models { get; private set; }
 
     public Categoria? SelectedModel
     {
@@ -77,14 +77,17 @@ public class CategoriesViewModel : IBaseViewModel<Categoria>, INotifyPropertyCha
         if (result is null)
             return;
 
+        SelectedModel = null;
+
         categoria.CopyFrom(result);
 
         try
         {
             _repo.Update(categoria);
 
-            Models.Remove(SelectedModel!);
-            Models.Add(categoria);
+            Models = new ObservableCollection<Categoria>(_repo.GetAll());
+
+            NotifyPropertyChanged(nameof(Models));
             SelectedModel = categoria;
         }
         catch (Exception ex)

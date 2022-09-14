@@ -17,7 +17,7 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
 {
     private Cliente? _model;
     private IClienteRepository _repo;
-    public ObservableCollection<Cliente> Models { get; }
+    public ObservableCollection<Cliente> Models { get; private set; }
 
     public Cliente? SelectedModel
     {
@@ -82,13 +82,16 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
         var c = await DialogService.UpdateDialog(cliente);
         if (c is null)
             return;
+
+        SelectedModel = null;
+
         cliente.CopyFrom(c);
+
         try
         {
             _repo.Update(cliente);
-
-            Models.Remove(SelectedModel!);
-            Models.Add(cliente);
+            Models = new ObservableCollection<Cliente>(_repo.GetAll());
+            NotifyPropertyChanged(nameof(Models));
             SelectedModel = cliente;
         }
         catch (Exception ex)

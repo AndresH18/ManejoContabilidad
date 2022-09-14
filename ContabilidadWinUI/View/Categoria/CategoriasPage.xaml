@@ -49,8 +49,8 @@
             </AppBarButton>
         </CommandBar>
 
-        <ListView ItemsSource="{Binding Path=Models}"
-                  SelectedItem="{Binding Path=SelectedModel, Mode=TwoWay}"
+        <ListView ItemsSource="{Binding Path=Models, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Path=SelectedModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="modelEntities:Categoria">

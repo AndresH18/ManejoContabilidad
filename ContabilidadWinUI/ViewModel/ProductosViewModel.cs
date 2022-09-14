@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -7,6 +8,7 @@ using ContabilidadWinUI.ViewModel.Commands;
 using DbContextLibrary.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using ModelEntities;
+using System.Linq;
 
 namespace ContabilidadWinUI.ViewModel;
 
@@ -26,7 +28,7 @@ public class ProductosViewModel : IBaseViewModel<Producto>, INotifyPropertyChang
         }
     }
 
-    public ObservableCollection<Producto> Models { get; }
+    public ObservableCollection<Producto> Models { get; private set; }
     public IModelDialogService<Producto> DialogService { get; }
     public ViewCommand<Producto> ViewCommand { get; }
     public CreateCommand<Producto> CreateCommand { get; }
@@ -87,14 +89,17 @@ public class ProductosViewModel : IBaseViewModel<Producto>, INotifyPropertyChang
         if (p is null)
             return;
 
+        SelectedModel = null;
+
         producto.CopyFrom(p);
 
         try
         {
             _repo.Update(producto);
 
-            Models.Remove(SelectedModel!);
-            Models.Add(producto);
+            Models = new ObservableCollection<Producto>(_repo.GetAll());
+
+            NotifyPropertyChanged(nameof(Models));
             SelectedModel = producto;
         }
         catch (Exception ex)

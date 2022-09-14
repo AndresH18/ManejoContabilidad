@@ -24,7 +24,7 @@ public class MarcasViewModel : IBaseViewModel<Marca>, INotifyPropertyChanged
         }
     }
 
-    public ObservableCollection<Marca> Models { get; }
+    public ObservableCollection<Marca> Models { get; private set; }
     public IModelDialogService<Marca> DialogService { get; }
     public ViewCommand<Marca> ViewCommand { get; }
     public CreateCommand<Marca> CreateCommand { get; }
@@ -70,13 +70,15 @@ public class MarcasViewModel : IBaseViewModel<Marca>, INotifyPropertyChanged
         if (m is null)
             return;
 
+        SelectedModel = null;
+
         marca.CopyFrom(m);
+
         try
         {
             _repo.Update(marca);
-
-            Models.Remove(SelectedModel!);
-            Models.Add(marca);
+            Models = new ObservableCollection<Marca>(_repo.GetAll());
+            NotifyPropertyChanged(nameof(Models));
             SelectedModel = marca;
         }
         catch (Exception ex)

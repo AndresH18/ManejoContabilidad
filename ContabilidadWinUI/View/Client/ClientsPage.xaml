@@ -44,7 +44,7 @@
         </CommandBar>
 
         <controls:DataGrid
-            ItemsSource="{Binding Path=Models}"
+            ItemsSource="{Binding Path=Models, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             IsReadOnly="True"
             SelectedItem="{Binding Path=SelectedModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             SelectionMode="Single"

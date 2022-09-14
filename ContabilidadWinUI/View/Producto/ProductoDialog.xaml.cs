@@ -47,18 +47,20 @@ namespace ContabilidadWinUI.View.Producto
         }
 
         public static ProductoDialog CreateDialog(Model::Producto producto, bool isReadOnly = false) =>
-            new(producto) {IsReadOnly = isReadOnly};
+            new(producto) { IsReadOnly = isReadOnly };
 
         private void CategoriasComboBox_OnLoaded(object sender, RoutedEventArgs e)
         {
-            CategoriaComboBox.ItemsSource = _service.GetAllCategorias();
-            CategoriaComboBox.SelectedIndex = Producto.CategoriaId != 0 ? Producto.CategoriaId - 1 : 0;
+            var categorias = _service.GetAllCategorias().ToList();
+            CategoriaComboBox.ItemsSource = categorias;
+            CategoriaComboBox.SelectedItem = categorias.FirstOrDefault(c => c.Id == Producto.CategoriaId);
         }
 
         private void MarcasComboBox_OnLoaded(object sender, RoutedEventArgs e)
         {
-            MarcasComboBox.ItemsSource = _service.GetAllMarcas();
-            MarcasComboBox.SelectedIndex = Producto.MarcaId != 0 ? Producto.MarcaId - 1 : 0;
+            var marcas = _service.GetAllMarcas().ToList();
+            MarcasComboBox.ItemsSource = marcas;
+            MarcasComboBox.SelectedItem = marcas.FirstOrDefault(m => m.Id == Producto.MarcaId);
         }
 
 
@@ -72,12 +74,12 @@ namespace ContabilidadWinUI.View.Producto
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return System.Convert.ToDouble((decimal) value);
+            return System.Convert.ToDouble((decimal)value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            return System.Convert.ToDecimal((double) value);
+            return System.Convert.ToDecimal((double)value);
         }
     }
 }
