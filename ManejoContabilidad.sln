@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbContextLibrary", "DbConte
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContabilidadWinUI", "ContabilidadWinUI\ContabilidadWinUI.csproj", "{A6A19DF2-AAAB-4EBC-B493-45EC32A0313E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{2079274B-A642-4B4F-8589-568F7F4872B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{A6A19DF2-AAAB-4EBC-B493-45EC32A0313E}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{A6A19DF2-AAAB-4EBC-B493-45EC32A0313E}.Release|Any CPU.ActiveCfg = Release|x86
 		{A6A19DF2-AAAB-4EBC-B493-45EC32A0313E}.Release|Any CPU.Build.0 = Release|x86
+		{2079274B-A642-4B4F-8589-568F7F4872B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2079274B-A642-4B4F-8589-568F7F4872B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2079274B-A642-4B4F-8589-568F7F4872B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2079274B-A642-4B4F-8589-568F7F4872B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
