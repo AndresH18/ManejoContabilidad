@@ -62,7 +62,7 @@ public class ProductosViewModel : IBaseViewModel<Producto>, INotifyPropertyChang
             c = _repo.Create(c);
             c = _repo.GetById(c.Id);
 
-            Models.Add(c);
+            Models.Add(c!);
         }
         catch (Exception e)
         {

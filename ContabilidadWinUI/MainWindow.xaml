@@ -52,6 +52,12 @@
                 </NavigationViewItem.MenuItems>
             </NavigationViewItem>
 
+            <NavigationViewItem Content="Facturas" Tag="facturas" >
+                <NavigationViewItem.Icon>
+                    <SymbolIcon Symbol="Document"></SymbolIcon>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+
         </NavigationView.MenuItems>
 
         <Frame Name="ContentFrame" IsTabStop="True" />
