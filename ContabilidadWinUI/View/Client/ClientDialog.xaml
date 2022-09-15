@@ -48,38 +48,38 @@
                  Margin="20,0,0,0"
                  Header="Numero Documento" />
 
-        <Grid Name="LocationGrid"
-              RelativePanel.Below="DocumentTypeComboBox"
-              RelativePanel.AlignLeftWithPanel="True"
-              RelativePanel.AlignRightWithPanel="True">
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <!-- TODO: Bind to Departamentos -->
-            <ComboBox Grid.Column="0" Name="DepartamentoComboBox"
-                      Header="Departamento"
-                      IsEnabled="{Binding Path=IsEditEnabled}"
-                      Loaded="DepartamentoComboBox_OnLoaded"
-                      HorizontalAlignment="Stretch" />
-
-            <!-- TODO: Bind to Municipios -->
-            <ComboBox Grid.Column="1" Name="MunicipioComboBox"
-                      Header="Municipio"
-                      IsEnabled="{Binding Path=IsEditEnabled}"
-                      Loaded="DepartamentoComboBox_OnLoaded"
-                      HorizontalAlignment="Stretch"
-                      Margin="20,0,0,0" />
-        </Grid>
+        <!-- <Grid Name="LocationGrid" -->
+        <!--       RelativePanel.Below="DocumentTypeComboBox" -->
+        <!--       RelativePanel.AlignLeftWithPanel="True" -->
+        <!--       RelativePanel.AlignRightWithPanel="True"> -->
+        <!-- -->
+        <!--     <Grid.ColumnDefinitions> -->
+        <!--         <ColumnDefinition Width="*" /> -->
+        <!--         <ColumnDefinition Width="*" /> -->
+        <!--     </Grid.ColumnDefinitions> -->
+        <!-- -->
+        <!--     ~1~ TODO: Bind to Departamentos @1@ -->
+        <!--     <ComboBox Grid.Column="0" Name="DepartamentoComboBox" -->
+        <!--               Header="Departamento" -->
+        <!--               IsEnabled="{Binding Path=IsEditEnabled}" -->
+        <!--               Loaded="DepartamentoComboBox_OnLoaded" -->
+        <!--               HorizontalAlignment="Stretch" /> -->
+        <!-- -->
+        <!--     ~1~ TODO: Bind to Municipios @1@ -->
+        <!--     <ComboBox Grid.Column="1" Name="MunicipioComboBox" -->
+        <!--               Header="Municipio" -->
+        <!--               IsEnabled="{Binding Path=IsEditEnabled}" -->
+        <!--               Loaded="DepartamentoComboBox_OnLoaded" -->
+        <!--               HorizontalAlignment="Stretch" -->
+        <!--               Margin="20,0,0,0" /> -->
+        <!-- </Grid> -->
 
         <TextBox Name="PhoneTextBox"
                  Text="{Binding Path=Cliente.Telefono, Mode=TwoWay}"
                  Header="Numero de Telefono"
                  IsReadOnly="{Binding Path=IsReadOnly}"
                  PlaceholderText="123-456-7890"
-                 RelativePanel.Below="LocationGrid"
+                 RelativePanel.Below="DocumentTypeComboBox"
                  RelativePanel.AlignLeftWithPanel="True"
                  RelativePanel.AlignRightWithPanel="True" />
 

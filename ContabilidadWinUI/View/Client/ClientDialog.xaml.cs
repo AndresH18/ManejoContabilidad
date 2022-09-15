@@ -43,19 +43,19 @@ namespace ContabilidadWinUI.View.Client
         {
             DocumentTypeComboBox.SelectedIndex = (int) Cliente.TipoDocumento;
         }
-
-        private void DepartamentoComboBox_OnLoaded(object sender, RoutedEventArgs e)
-        {
-            if (ReferenceEquals(sender, DepartamentoComboBox))
-            {
-                DepartamentoComboBox.ItemsSource = new[] {"Departamento"};
-                DepartamentoComboBox.SelectedIndex = 0;
-            }
-            else if (ReferenceEquals(sender, MunicipioComboBox))
-            {
-                MunicipioComboBox.ItemsSource = new[] {"Municipio"};
-                MunicipioComboBox.SelectedIndex = 0;
-            }
-        }
+        
+        // private void DepartamentoComboBox_OnLoaded(object sender, RoutedEventArgs e)
+        // {
+        //     if (ReferenceEquals(sender, DepartamentoComboBox))
+        //     {
+        //         DepartamentoComboBox.ItemsSource = new[] {"Departamento"};
+        //         DepartamentoComboBox.SelectedIndex = 0;
+        //     }
+        //     else if (ReferenceEquals(sender, MunicipioComboBox))
+        //     {
+        //         MunicipioComboBox.ItemsSource = new[] {"Municipio"};
+        //         MunicipioComboBox.SelectedIndex = 0;
+        //     }
+        // }
     }
 }
