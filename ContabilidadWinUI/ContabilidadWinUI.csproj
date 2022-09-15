@@ -15,6 +15,7 @@
 
 	<ItemGroup>
 		<None Remove="Controls\AppBarControl.xaml" />
+		<None Remove="View\Facturas\FacturasPage.xaml" />
 		<None Remove="View\Marca\MarcaDialog.xaml" />
 		<None Remove="View\Producto\ProductoDialog.xaml" />
 	</ItemGroup>
@@ -95,6 +96,11 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Services\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Page Update="View\Facturas\FacturasPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
 	</ItemGroup>
 	<ItemGroup>
 	  <Page Update="View\Producto\ProductoDialog.xaml">

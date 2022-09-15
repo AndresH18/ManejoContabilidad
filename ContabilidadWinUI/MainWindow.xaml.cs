@@ -16,6 +16,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using ContabilidadWinUI.View.Categoria;
 using ContabilidadWinUI.View.Client;
+using ContabilidadWinUI.View.Facturas;
 using ContabilidadWinUI.View.Home;
 using ContabilidadWinUI.View.Marca;
 using ContabilidadWinUI.View.Producto;
@@ -40,6 +41,7 @@ namespace ContabilidadWinUI
             ("productos", typeof(ProductosPage)),
             ("categorias", typeof(CategoriasPage)),
             ("marcas", typeof(MarcasPage)),
+            ("facturas", typeof(FacturasPage))
         };
 
         public MainWindow()
