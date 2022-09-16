@@ -62,7 +62,7 @@ namespace ContabilidadWinUI
         /// <summary>
         /// Gets the current <see cref="App"/> instance in use
         /// </summary>
-        public new static App Current => (App) Application.Current;
+        public new static App Current => (App)Application.Current;
 
 
         /// <summary>
@@ -72,15 +72,20 @@ namespace ContabilidadWinUI
         {
             var services = new ServiceCollection();
 
-            // Add Services Here
+            /* Add Services Here */
+
+            // DbContext
             services.AddDbContext<ContabilidadDbContext>();
 
+            // Repositories
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
             services.AddScoped<IMarcaRepository, MarcaRepository>();
             services.AddScoped<IProductoRepository, ProductoRepository>();
 
+            // Services
             services.AddScoped<IProductsService, ProductsService>();
+            services.AddScoped<IFacturasService, FacturasService>();
 
             return services.BuildServiceProvider();
         }

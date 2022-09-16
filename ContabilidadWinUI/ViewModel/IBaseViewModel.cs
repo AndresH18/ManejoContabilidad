@@ -26,6 +26,5 @@ public interface IBaseViewModel<TModel>
 
     public void Edit(TModel t);
 
-    //
     public void Create();
 }
