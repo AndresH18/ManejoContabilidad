@@ -85,6 +85,11 @@ public class FacturasViewModel : INotifyPropertyChanged
         throw new NotImplementedException();
     }
 
+    private void Scan()
+    {
+        throw new NotImplementedException();
+    }
+
     private static bool CanExecute(object? o)
     {
         return o?.GetType().IsAssignableTo(typeof(FacturaDto)) ?? false;
