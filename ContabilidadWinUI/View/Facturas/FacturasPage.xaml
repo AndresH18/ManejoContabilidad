@@ -20,36 +20,35 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!-- TODO: Uncomment when commands are implemented in Vm -->
-        <!-- <CommandBar Background="Transparent" -->
-        <!--             IsOpen="False" -->
-        <!--             DefaultLabelPosition="Right" -->
-        <!--             Grid.Row="0"> -->
-        <!-- -->
-        <!--     <AppBarButton Label="Add" -->
-        <!--                   Icon="Add" -->
-        <!--                   Command="{Binding Path=CreateCommand}" -->
-        <!--                   CommandParameter="{Binding Path=SelectedModel}" /> -->
-        <!--     <AppBarButton Icon="Edit" -->
-        <!--                   Label="Editar" -->
-        <!--                   Command="{Binding Path=EditCommand}" -->
-        <!--                   CommandParameter="{Binding Path=SelectedModel}" /> -->
-        <!--     <AppBarButton Label="Borrar" -->
-        <!--                   Command="{Binding Path=DeleteCommand}" -->
-        <!--                   CommandParameter="{Binding Path=SelectedModel}"> -->
-        <!--         <AppBarButton.Icon> -->
-        <!--             <SymbolIcon Symbol="Delete" /> -->
-        <!--         </AppBarButton.Icon> -->
-        <!--     </AppBarButton> -->
-        <!-- -->
-        <!--     <AppBarButton Label="Ver" -->
-        <!--                   Command="{Binding Path=ViewCommand}" -->
-        <!--                   CommandParameter="{Binding Path=SelectedModel}"> -->
-        <!--         <AppBarButton.Icon> -->
-        <!--             <SymbolIcon Symbol="View" /> -->
-        <!--         </AppBarButton.Icon> -->
-        <!--     </AppBarButton> -->
-        <!-- </CommandBar> -->
+        <CommandBar Background="Transparent"
+                    IsOpen="False"
+                    DefaultLabelPosition="Right"
+                    Grid.Row="0">
+
+            <AppBarButton Label="Add"
+                          Icon="Add"
+                          Command="{Binding Path=CreateCommand}"
+                          CommandParameter="{Binding Path=SelectedFactura}" />
+            <AppBarButton Icon="Edit"
+                          Label="Editar"
+                          Command="{Binding Path=EditCommand}"
+                          CommandParameter="{Binding Path=SelectedFactura}" />
+            <AppBarButton Label="Borrar"
+                          Command="{Binding Path=DeleteCommand}"
+                          CommandParameter="{Binding Path=SelectedFactura}">
+                <AppBarButton.Icon>
+                    <SymbolIcon Symbol="Delete" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+
+            <AppBarButton Label="Ver"
+                          Command="{Binding Path=ViewCommand}"
+                          CommandParameter="{Binding Path=SelectedFactura}">
+                <AppBarButton.Icon>
+                    <SymbolIcon Symbol="View" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+        </CommandBar>
 
 
         <controls:DataGrid ItemsSource="{Binding Path=Facturas, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"

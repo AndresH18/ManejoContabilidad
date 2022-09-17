@@ -27,7 +27,11 @@ public class FacturasViewModel : INotifyPropertyChanged
 
     public ObservableCollection<FacturaDto> Facturas { get; private set; }
 
-    // public ViewCommand<FacturaDto> ViewCommand { get; }
+    public ActionCommand ViewCommand { get; }
+    public ActionCommand CreateCommand { get; }
+    public ActionCommand EditCommand { get; }
+    public ActionCommand DeleteCommand { get; }
+
     // public CreateCommand<FacturaDto> CreateCommand { get; }
     // public DeleteCommand<FacturaDto> DeleteCommand { get; }
     // public EditCommand<FacturaDto> EditCommand { get; }
@@ -39,32 +43,40 @@ public class FacturasViewModel : INotifyPropertyChanged
                    throw new ArgumentNullException($"Service {typeof(IFacturasService)} is not registered");
 
 
-        // ViewCommand = new ViewCommand<FacturaDto>(this);
+        ViewCommand = new ActionCommand {ActionToExecute = Show, CanExecuteFunc = CanExecute};
+        CreateCommand = new ActionCommand {ActionToExecute = Create, CanExecuteFunc = CanExecute};
+        DeleteCommand = new ActionCommand {ActionToExecute = Delete, CanExecuteFunc = CanExecute};
+        EditCommand = new ActionCommand {ActionToExecute = Edit, CanExecuteFunc = CanExecute};
+
         // CreateCommand = new CreateCommand<FacturaDto>(this);
         // DeleteCommand = new DeleteCommand<FacturaDto>(this);
         // EditCommand = new EditCommand<FacturaDto>(this);
-
         Facturas = new ObservableCollection<FacturaDto>(_service.GetAllFacturas());
     }
 
-    public void Show()
+    private void Show()
     {
         throw new NotImplementedException();
     }
 
-    public void Delete()
+    private void Delete()
     {
         throw new NotImplementedException();
     }
 
-    public void Edit()
+    private void Edit()
     {
         throw new NotImplementedException();
     }
 
-    public void Create()
+    private void Create()
     {
         throw new NotImplementedException();
+    }
+
+    private static bool CanExecute(object? o)
+    {
+        return o?.GetType().IsAssignableTo(typeof(FacturaDto)) ?? false;
     }
 
 
@@ -74,26 +86,4 @@ public class FacturasViewModel : INotifyPropertyChanged
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
-}
-
-internal class CreateCommand : ICommand
-{
-    private readonly FacturasViewModel _viewModel;
-
-    public CreateCommand(FacturasViewModel viewModel)
-    {
-        _viewModel = viewModel;
-    }
-
-    public bool CanExecute(object? parameter)
-    {
-        return parameter is FacturaDto;
-    }
-
-    public void Execute(object? parameter)
-    {
-        _viewModel.Create();
-    }
-
-    public event EventHandler? CanExecuteChanged;
 }
