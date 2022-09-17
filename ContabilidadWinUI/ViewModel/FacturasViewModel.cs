@@ -32,6 +32,8 @@ public class FacturasViewModel : INotifyPropertyChanged
     public ActionCommand EditCommand { get; }
     public ActionCommand DeleteCommand { get; }
 
+    public ActionCommand ScannCommand { get; }
+
     // public CreateCommand<FacturaDto> CreateCommand { get; }
     // public DeleteCommand<FacturaDto> DeleteCommand { get; }
     // public EditCommand<FacturaDto> EditCommand { get; }
@@ -48,9 +50,8 @@ public class FacturasViewModel : INotifyPropertyChanged
         DeleteCommand = new ActionCommand {ActionToExecute = Delete, CanExecuteFunc = CanExecute};
         EditCommand = new ActionCommand {ActionToExecute = Edit, CanExecuteFunc = CanExecute};
 
-        // CreateCommand = new CreateCommand<FacturaDto>(this);
-        // DeleteCommand = new DeleteCommand<FacturaDto>(this);
-        // EditCommand = new EditCommand<FacturaDto>(this);
+        ScannCommand = new ActionCommand {ActionToExecute = Scan, CanExecuteFunc = _ => true};
+
         Facturas = new ObservableCollection<FacturaDto>(_service.GetAllFacturas());
     }
 
@@ -74,11 +75,15 @@ public class FacturasViewModel : INotifyPropertyChanged
         throw new NotImplementedException();
     }
 
+    private void Scan()
+    {
+        throw new NotImplementedException();
+    }
+
     private static bool CanExecute(object? o)
     {
         return o?.GetType().IsAssignableTo(typeof(FacturaDto)) ?? false;
     }
-
 
     private void NotifyPropertyChanged(string name)
     {

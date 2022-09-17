@@ -20,10 +20,22 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
+
         <CommandBar Background="Transparent"
                     IsOpen="False"
                     DefaultLabelPosition="Right"
                     Grid.Row="0">
+
+            <AppBarButton Label="Add"
+                          Command="{Binding Path=ScannCommand}">
+                <AppBarButton.Icon>
+                    <!-- <SymbolIcon Symbol="Account"/> -->
+                    <SymbolIcon Symbol="Camera" />
+                    <!-- <SymbolIcon Symbol="BrowsePhotos" /> -->
+                </AppBarButton.Icon>
+            </AppBarButton>
+
+            <AppBarSeparator />
 
             <AppBarButton Label="Add"
                           Icon="Add"
