@@ -20,8 +20,7 @@ public class FacturasService : IFacturasService
         _db = db;
     }
 
-    public IEnumerable<FacturaDto>
-        GetAllFacturas()
+    public IEnumerable<FacturaDto> GetAllFacturas()
     {
         var s = _db.Facturas.Include(f => f.Cliente).Include(f => f.InfoFactura).ToList();
 
