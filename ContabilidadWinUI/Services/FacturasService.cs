@@ -28,16 +28,6 @@ public class FacturasService : IFacturasService
         return (from entry in s
             select new FacturaDto(entry.Id, entry.InfoFactura!.NumeroFactura, entry.ClienteId, entry.Cliente!.Nombre,
                 entry.Cliente.NumeroDocumento)).ToList();
-        //
-        // List<(int facturaId, string? numeroFactura, string nombreCliente, string documentoCliente)> tuples =
-        //     (from entry in s
-        //         select (entry.Id,
-        //             entry.InfoFactura!.NumeroFactura,
-        //             entry.Cliente!.Nombre,
-        //             entry.Cliente.NumeroDocumento)
-        //     ).ToList();
-        //
-        // return tuples;
     }
 }
 
