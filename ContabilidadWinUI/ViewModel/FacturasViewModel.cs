@@ -32,6 +32,8 @@ public class FacturasViewModel : INotifyPropertyChanged
     public ActionCommand EditCommand { get; }
     public ActionCommand DeleteCommand { get; }
 
+    public ActionCommand ScannCommand { get; }
+
     // public CreateCommand<FacturaDto> CreateCommand { get; }
     // public DeleteCommand<FacturaDto> DeleteCommand { get; }
     // public EditCommand<FacturaDto> EditCommand { get; }
@@ -48,29 +50,38 @@ public class FacturasViewModel : INotifyPropertyChanged
         DeleteCommand = new ActionCommand {ActionToExecute = Delete, CanExecuteFunc = CanExecute};
         EditCommand = new ActionCommand {ActionToExecute = Edit, CanExecuteFunc = CanExecute};
 
-        // CreateCommand = new CreateCommand<FacturaDto>(this);
-        // DeleteCommand = new DeleteCommand<FacturaDto>(this);
-        // EditCommand = new EditCommand<FacturaDto>(this);
+        ScannCommand = new ActionCommand {ActionToExecute = Scan, CanExecuteFunc = _ => true};
+
         Facturas = new ObservableCollection<FacturaDto>(_service.GetAllFacturas());
     }
 
     private void Show()
     {
+        // TODO: Implement show factura
         throw new NotImplementedException();
     }
 
     private void Delete()
     {
+        // TODO: Implement delete factura
         throw new NotImplementedException();
     }
 
     private void Edit()
     {
+        // TODO: Implement edit factura
         throw new NotImplementedException();
     }
 
     private void Create()
     {
+        // TODO: Implement create factura
+        throw new NotImplementedException();
+    }
+
+    private void Scan()
+    {
+        // TODO: Implment scan factura. Use a service class with an interface to call Azure's Form Recognizer
         throw new NotImplementedException();
     }
 
@@ -78,7 +89,6 @@ public class FacturasViewModel : INotifyPropertyChanged
     {
         return o?.GetType().IsAssignableTo(typeof(FacturaDto)) ?? false;
     }
-
 
     private void NotifyPropertyChanged(string name)
     {
