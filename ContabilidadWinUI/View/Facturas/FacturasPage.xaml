@@ -5,11 +5,71 @@
     xmlns:local="using:ContabilidadWinUI.View.Facturas"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:ContabilidadWinUI.ViewModel"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid
-        Background="Red">
+    <Page.Resources>
+        <vm:FacturasViewModel x:Key="Vm" />
+    </Page.Resources>
+
+    <Grid DataContext="{StaticResource Vm}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- TODO: Uncomment when commands are implemented in Vm -->
+        <!-- <CommandBar Background="Transparent" -->
+        <!--             IsOpen="False" -->
+        <!--             DefaultLabelPosition="Right" -->
+        <!--             Grid.Row="0"> -->
+        <!-- -->
+        <!--     <AppBarButton Label="Add" -->
+        <!--                   Icon="Add" -->
+        <!--                   Command="{Binding Path=CreateCommand}" -->
+        <!--                   CommandParameter="{Binding Path=SelectedModel}" /> -->
+        <!--     <AppBarButton Icon="Edit" -->
+        <!--                   Label="Editar" -->
+        <!--                   Command="{Binding Path=EditCommand}" -->
+        <!--                   CommandParameter="{Binding Path=SelectedModel}" /> -->
+        <!--     <AppBarButton Label="Borrar" -->
+        <!--                   Command="{Binding Path=DeleteCommand}" -->
+        <!--                   CommandParameter="{Binding Path=SelectedModel}"> -->
+        <!--         <AppBarButton.Icon> -->
+        <!--             <SymbolIcon Symbol="Delete" /> -->
+        <!--         </AppBarButton.Icon> -->
+        <!--     </AppBarButton> -->
+        <!-- -->
+        <!--     <AppBarButton Label="Ver" -->
+        <!--                   Command="{Binding Path=ViewCommand}" -->
+        <!--                   CommandParameter="{Binding Path=SelectedModel}"> -->
+        <!--         <AppBarButton.Icon> -->
+        <!--             <SymbolIcon Symbol="View" /> -->
+        <!--         </AppBarButton.Icon> -->
+        <!--     </AppBarButton> -->
+        <!-- </CommandBar> -->
+
+
+        <controls:DataGrid ItemsSource="{Binding Path=Facturas, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                           IsReadOnly="True"
+                           SelectedItem="{Binding Path=SelectedFactura, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                           SelectionMode="Single"
+                           AutoGenerateColumns="False"
+                           Grid.Row="1">
+            <controls:DataGrid.Columns>
+                <controls:DataGridTextColumn Header="Numero Factura"
+                                             Binding="{Binding  NumeroFactura}"
+                                             Width="*" />
+                <controls:DataGridTextColumn Header="Cliente "
+                                             Binding="{Binding  NombreCliente}"
+                                             Width="*" />
+                <controls:DataGridTextColumn Header="Documento Cliente"
+                                             Binding="{Binding  DocumentoCliente}"
+                                             Width="*" />
+            </controls:DataGrid.Columns>
+        </controls:DataGrid>
 
 
     </Grid>
