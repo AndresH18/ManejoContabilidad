@@ -38,8 +38,8 @@ public class DbContext_Categorias
         repo.Create(categoria);
 
         // Assert
+        // Id must not be 0 after inserting
         Assert.NotEqual(0, categoria.Id);
-        Assert.NotEqual(oldId, categoria.Id);
     }
 
     public static IEnumerable<object[]> CategoriasNoId()
