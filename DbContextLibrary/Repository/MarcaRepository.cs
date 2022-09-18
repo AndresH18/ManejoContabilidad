@@ -26,12 +26,12 @@ public class MarcaRepository : IMarcaRepository
 
     public IEnumerable<Marca> GetAll()
     {
-        return _db.Marcas.AsNoTracking();
+        return _db.Marcas.ToList();
     }
 
     public Marca? GetById(int id)
     {
-        return _db.Marcas.AsNoTracking().FirstOrDefault(m => m.Id == id);
+        return _db.Marcas.FirstOrDefault(m => m.Id == id);
     }
 
     public void Update(Marca marca)

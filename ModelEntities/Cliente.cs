@@ -7,8 +7,8 @@ public class Cliente : IModel, ICloneable
 {
     [Key] public int Id { get; set; }
     public string Nombre { get; set; } = string.Empty;
-    public TipoDocumento TipoDocumento { get; set; } = default;
-    public string NumeroDocumento { get; set; } = "123 233 9888";
+    public TipoDocumento TipoDocumento { get; set; }
+    public string NumeroDocumento { get; set; } = string.Empty;
     [JsonIgnore] public string? Direccion { get; set; }
 
     // [Required] 
@@ -21,6 +21,19 @@ public class Cliente : IModel, ICloneable
     [JsonIgnore] public string? Responsabilidad { get; set; }
 
     [JsonIgnore] public virtual List<Factura> Facturas { get; set; } = new();
+
+    public void CopyFrom(Cliente cliente)
+    {
+        this.TipoDocumento = cliente.TipoDocumento;
+        this.Nombre = cliente.Nombre;
+        this.NumeroDocumento = cliente.NumeroDocumento;
+        this.Direccion = cliente.Direccion;
+        this.Correo = cliente.Correo;
+        this.Telefono = cliente.Telefono;
+        this.TipoContribuyente = cliente.TipoContribuyente;
+        this.RegimenContable = cliente.RegimenContable;
+        this.Responsabilidad = cliente.Responsabilidad;
+    }
 
     public object Clone()
     {

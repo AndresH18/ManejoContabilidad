@@ -22,4 +22,19 @@ public class InfoFactura : IModel
     [JsonIgnore] public string? Plazo { get; set; }
 
     [JsonIgnore] public virtual Factura? Factura { get; set; }
+
+
+    public void CopyFrom(InfoFactura infoFactura)
+    {
+        this.NumeroFactura = infoFactura.NumeroFactura;
+        this.FechaEmision = infoFactura.FechaEmision;
+        this.TipoOperacion = infoFactura.TipoOperacion;
+        this.TipoNegociacion = infoFactura.TipoNegociacion;
+        this.TipoEntrega = infoFactura.TipoEntrega;
+        this.FechaRecepcion = infoFactura.FechaRecepcion;
+        this.FechaVencimiento = infoFactura.FechaVencimiento;
+        this.Prefijo = infoFactura.Prefijo;
+        this.MedioPago = infoFactura.MedioPago;
+        this.Plazo = infoFactura.Plazo;
+    }
 }

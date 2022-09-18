@@ -15,7 +15,7 @@ public class ClienteRepository : IClienteRepository
     {
         _db = db;
     }
-    
+
     public Cliente Create(Cliente entity)
     {
         entity.Id = 0;
@@ -26,7 +26,7 @@ public class ClienteRepository : IClienteRepository
 
     public IEnumerable<Cliente> GetAll()
     {
-        return _db.Clientes.AsNoTracking();
+        return _db.Clientes.ToList();
     }
 
     public Cliente? GetById(int id)

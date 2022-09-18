@@ -26,12 +26,12 @@ public class FacturaRepository : IFacturaRepository
 
     public IEnumerable<Factura> GetAll()
     {
-        return _db.Facturas.AsNoTracking();
+        return _db.Facturas.ToList();
     }
 
     public Factura? GetById(int id)
     {
-        return _db.Facturas.AsNoTracking().FirstOrDefault(f => f.Id == id);
+        return _db.Facturas.FirstOrDefault(f => f.Id == id);
     }
 
     public void Update(Factura entity)

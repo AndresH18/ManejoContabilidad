@@ -15,7 +15,6 @@ public class CategoriaRepository : ICategoriaRepository
     {
         _db = db;
     }
-    
     public Categoria Create(Categoria entity)
     {
         entity.Id = 0;
@@ -26,12 +25,12 @@ public class CategoriaRepository : ICategoriaRepository
 
     public IEnumerable<Categoria> GetAll()
     {
-        return _db.Categorias.AsNoTracking();
+        return _db.Categorias.ToList();
     }
 
     public Categoria? GetById(int id)
     {
-        return _db.Categorias.AsNoTracking().FirstOrDefault(c => c.Id == id);
+        return _db.Categorias.FirstOrDefault(c => c.Id == id);
     }
 
     public void Update(Categoria entity)

@@ -4,6 +4,7 @@ using DbContextLibrary;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DbContextLibrary.Migrations
 {
     [DbContext(typeof(ContabilidadDbContext))]
-    partial class ContabilidadDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220913045707_Removed_Nullable_From_Producto_CategoriaId")]
+    partial class Removed_Nullable_From_Producto_CategoriaId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -212,6 +214,7 @@ namespace DbContextLibrary.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Codigo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Descripcion")
@@ -228,6 +231,7 @@ namespace DbContextLibrary.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Referencia")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
