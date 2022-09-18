@@ -104,13 +104,29 @@ public class MarcasControllerTests
     }
 
     [Fact]
-    public void Update_Exists_IsNoContentResult()
+    public void Delete_Exists_IsNoContentResult()
     {
         // arrange
-        var actionResult = _controller.Update(1, new Marca {Id = 1, Description = "Hiii", Name = "Hello"});
+        var actionResult = _controller.Delete(1);
 
         // act
         // assert
         Assert.IsAssignableFrom<NoContentResult>(actionResult);
+    }
+
+    [Theory]
+    [InlineData(3)]
+    [InlineData(4)]
+    [InlineData(5)]
+    [InlineData(6)]
+    [InlineData(7)]
+    public void Delete_NotExists_IsNotFoundResult(int id)
+    {
+        // arrange
+        var actionResult = _controller.Delete(id);
+        
+        // act
+        // assert
+        Assert.IsAssignableFrom<NotFoundResult>(actionResult);
     }
 }
