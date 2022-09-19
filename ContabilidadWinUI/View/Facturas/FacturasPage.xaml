@@ -27,7 +27,7 @@
                     Grid.Row="0">
 
             <AppBarButton Label="Add"
-                          Command="{Binding Path=ScannCommand}">
+                          Command="{Binding Path=ScanCommand}">
                 <AppBarButton.Icon>
                     <!-- <SymbolIcon Symbol="Account"/> -->
                     <SymbolIcon Symbol="Camera" />

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 using ContabilidadWinUI.Services;
+using ContabilidadWinUI.Services.JsonModels;
 using ContabilidadWinUI.ViewModel.Commands;
 using Microsoft.Extensions.DependencyInjection;
 using ModelEntities;
@@ -32,7 +33,7 @@ public class FacturasViewModel : INotifyPropertyChanged
     public ActionCommand EditCommand { get; }
     public ActionCommand DeleteCommand { get; }
 
-    public ActionCommand ScannCommand { get; }
+    public ActionCommand ScanCommand { get; }
 
     // public CreateCommand<FacturaDto> CreateCommand { get; }
     // public DeleteCommand<FacturaDto> DeleteCommand { get; }
@@ -42,15 +43,15 @@ public class FacturasViewModel : INotifyPropertyChanged
     public FacturasViewModel()
     {
         _service = App.Current.Services.GetService<IFacturasService>() ??
-                   throw new ArgumentNullException($"Service {typeof(IFacturasService)} is not registered");
+                   throw new($"Service {typeof(IFacturasService)} is not registered");
 
 
-        ViewCommand = new ActionCommand {ActionToExecute = Show, CanExecuteFunc = CanExecute};
-        CreateCommand = new ActionCommand {ActionToExecute = Create, CanExecuteFunc = CanExecute};
-        DeleteCommand = new ActionCommand {ActionToExecute = Delete, CanExecuteFunc = CanExecute};
-        EditCommand = new ActionCommand {ActionToExecute = Edit, CanExecuteFunc = CanExecute};
+        ViewCommand = new ActionCommand { ActionToExecute = Show, CanExecuteFunc = CanExecute };
+        CreateCommand = new ActionCommand { ActionToExecute = Create, CanExecuteFunc = CanExecute };
+        DeleteCommand = new ActionCommand { ActionToExecute = Delete, CanExecuteFunc = CanExecute };
+        EditCommand = new ActionCommand { ActionToExecute = Edit, CanExecuteFunc = CanExecute };
 
-        ScannCommand = new ActionCommand {ActionToExecute = Scan, CanExecuteFunc = _ => true};
+        ScanCommand = new ActionCommand { ActionToExecute = Scan, CanExecuteFunc = _ => true };
 
         Facturas = new ObservableCollection<FacturaDto>(_service.GetAllFacturas());
     }
@@ -79,10 +80,17 @@ public class FacturasViewModel : INotifyPropertyChanged
         throw new NotImplementedException();
     }
 
-    private void Scan()
+    private async void Scan()
     {
-        // TODO: Implment scan factura. Use a service class with an interface to call Azure's Form Recognizer
-        throw new NotImplementedException();
+        var storage = App.Current.Services.GetService<StorageService>();
+        if (storage != null)
+        {
+            await storage.AddApi(new Api { Name = "test-api", Endpoint = "My Endpoint", Key = "My Key" });
+            var api = await storage.GetApi("test-api");
+            
+        }
+        else
+            throw new ArgumentNullException($"{typeof(StorageService)} was not found in services.");
     }
 
 
