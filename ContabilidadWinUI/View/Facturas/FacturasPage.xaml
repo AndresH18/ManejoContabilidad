@@ -14,7 +14,8 @@
         <vm:FacturasViewModel x:Key="Vm" />
     </Page.Resources>
 
-    <Grid DataContext="{StaticResource Vm}">
+    <Grid Name="Grid"
+          DataContext="{StaticResource Vm}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -26,8 +27,8 @@
                     DefaultLabelPosition="Right"
                     Grid.Row="0">
 
-            <AppBarButton Label="Add"
-                          Command="{Binding Path=ScanCommand}">
+            <AppBarButton Label="Escanear"
+                          Click="ScannButton_OnClick">
                 <AppBarButton.Icon>
                     <!-- <SymbolIcon Symbol="Account"/> -->
                     <SymbolIcon Symbol="Camera" />

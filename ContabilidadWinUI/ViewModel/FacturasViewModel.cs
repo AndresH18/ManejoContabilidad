@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using ContabilidadWinUI.Services;
 using ContabilidadWinUI.Services.JsonModels;
@@ -33,7 +34,6 @@ public class FacturasViewModel : INotifyPropertyChanged
     public ActionCommand EditCommand { get; }
     public ActionCommand DeleteCommand { get; }
 
-    public ActionCommand ScanCommand { get; }
 
     // public CreateCommand<FacturaDto> CreateCommand { get; }
     // public DeleteCommand<FacturaDto> DeleteCommand { get; }
@@ -46,15 +46,16 @@ public class FacturasViewModel : INotifyPropertyChanged
                    throw new($"Service {typeof(IFacturasService)} is not registered");
 
 
-        ViewCommand = new ActionCommand { ActionToExecute = Show, CanExecuteFunc = CanExecute };
-        CreateCommand = new ActionCommand { ActionToExecute = Create, CanExecuteFunc = CanExecute };
-        DeleteCommand = new ActionCommand { ActionToExecute = Delete, CanExecuteFunc = CanExecute };
-        EditCommand = new ActionCommand { ActionToExecute = Edit, CanExecuteFunc = CanExecute };
+        ViewCommand = new ActionCommand {ActionToExecute = Show, CanExecuteFunc = CanExecute};
+        CreateCommand = new ActionCommand {ActionToExecute = Create, CanExecuteFunc = CanExecute};
+        DeleteCommand = new ActionCommand {ActionToExecute = Delete, CanExecuteFunc = CanExecute};
+        EditCommand = new ActionCommand {ActionToExecute = Edit, CanExecuteFunc = CanExecute};
 
-        ScanCommand = new ActionCommand { ActionToExecute = Scan, CanExecuteFunc = _ => true };
 
         Facturas = new ObservableCollection<FacturaDto>(_service.GetAllFacturas());
     }
+
+
 
     private void Show()
     {
@@ -82,17 +83,9 @@ public class FacturasViewModel : INotifyPropertyChanged
 
     private async void Scan()
     {
-        var storage = App.Current.Services.GetService<StorageService>();
-        if (storage != null)
-        {
-            await storage.AddApi(new Api { Name = "test-api", Endpoint = "My Endpoint", Key = "My Key" });
-            var api = await storage.GetApi("test-api");
-            
-        }
-        else
-            throw new ArgumentNullException($"{typeof(StorageService)} was not found in services.");
+        // TODO: Implement scan
+        throw new NotImplementedException();
     }
-
 
     private static bool CanExecute(object? o)
     {

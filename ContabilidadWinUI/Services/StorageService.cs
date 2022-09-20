@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using ContabilidadWinUI.Services.JsonModels;
 using Newtonsoft.Json;
+using static System.Net.WebRequestMethods;
 
 namespace ContabilidadWinUI.Services;
 
@@ -66,33 +67,60 @@ internal sealed class StorageService
         return default;
     }
 
-    public async Task AddApi(Api api)
+    public async Task AddApiAsync(Api api)
     {
+        StorageFile apiFile = default!;
         try
         {
+            apiFile = await _storageFolder.GetFileAsync(API_KEY_FILE);
+        }
+        catch (FileNotFoundException)
+        {
+            Debug.Fail($"Api file was not found.");
+            await CreateApiStorage();
             // get api file
-            StorageFile apiFile = await _storageFolder.GetFileAsync(API_KEY_FILE);
-            Debug.WriteLine($"Api File location {apiFile.Path}");
+            apiFile = await _storageFolder.GetFileAsync(API_KEY_FILE);
+        }
+        finally
+        {
             // read file and store in string
-            string jsonString = await FileIO.ReadTextAsync(apiFile);
-            // convert json to string 
-            ApiHelper? apiHelper = JsonConvert.DeserializeObject<ApiHelper>(jsonString);
+            string json = await FileIO.ReadTextAsync(apiFile);
+            // convert json to object
+            ApiHelper? apiHelper = JsonConvert.DeserializeObject<ApiHelper>(json);
             if (apiHelper != null)
             {
                 // add api to apis
                 apiHelper.Apis.Add(api);
                 // serialize ApiHelper
-                jsonString = JsonConvert.SerializeObject(apiHelper);
-                // create new Api file
+                json = JsonConvert.SerializeObject(apiHelper);
+                // overwrite api file
                 apiFile = await _storageFolder.CreateFileAsync(API_KEY_FILE, CreationCollisionOption.ReplaceExisting);
                 // write to file
-                await FileIO.WriteTextAsync(apiFile, jsonString);
+                await FileIO.WriteTextAsync(apiFile, json);
+
+#if DEBUG
+                Debug.WriteLine($"{apiFile.Path}");
+#endif
             }
         }
-        catch (FileNotFoundException)
-        {
-            Debug.WriteLine("File was not found.");
-            throw;
-        }
+    }
+
+
+    private async Task CreateApiStorage()
+    {
+        Debug.WriteLine("Creating Api File.");
+
+        // create empty object
+        string jsonString = JsonConvert.SerializeObject(new ApiHelper());
+        // create api storagefile
+        StorageFile file = await _storageFolder.CreateFileAsync(API_KEY_FILE, CreationCollisionOption.ReplaceExisting);
+        // write to File
+        await FileIO.WriteTextAsync(file, jsonString);
+
+        Debug.WriteLine("Api file created succesfully.");
+
+#if DEBUG
+        Debug.WriteLine($"{file.Path}");
+#endif
     }
 }
