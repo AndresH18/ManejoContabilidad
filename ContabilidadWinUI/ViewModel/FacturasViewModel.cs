@@ -16,7 +16,6 @@ namespace ContabilidadWinUI.ViewModel;
 public class FacturasViewModel : INotifyPropertyChanged
 {
     private readonly IFacturasService _service;
-
     private FacturaDto? _factura;
 
     public FacturaDto? SelectedFactura
@@ -48,10 +47,10 @@ public class FacturasViewModel : INotifyPropertyChanged
                    throw new($"Service {typeof(IFacturasService)} is not registered");
 
 
-        ViewCommand = new ActionCommand {ActionToExecute = Show, CanExecuteFunc = CanExecute};
-        CreateCommand = new ActionCommand {ActionToExecute = Create, CanExecuteFunc = CanExecute};
-        DeleteCommand = new ActionCommand {ActionToExecute = Delete, CanExecuteFunc = CanExecute};
-        EditCommand = new ActionCommand {ActionToExecute = Edit, CanExecuteFunc = CanExecute};
+        ViewCommand = new ActionCommand { ActionToExecute = Show, CanExecuteFunc = CanExecute };
+        CreateCommand = new ActionCommand { ActionToExecute = Create, CanExecuteFunc = CanExecute };
+        DeleteCommand = new ActionCommand { ActionToExecute = Delete, CanExecuteFunc = CanExecute };
+        EditCommand = new ActionCommand { ActionToExecute = Edit, CanExecuteFunc = CanExecute };
 
 
         Facturas = new ObservableCollection<FacturaDto>(_service.GetAllFacturas());

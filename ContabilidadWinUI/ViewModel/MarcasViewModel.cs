@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using ContabilidadWinUI.ViewModel.Commands;
 using DbContextLibrary.Repository;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,7 +12,7 @@ namespace ContabilidadWinUI.ViewModel;
 
 public class MarcasViewModel : IBaseViewModel<Marca>, INotifyPropertyChanged
 {
-    private IMarcaRepository _repo;
+    private readonly IMarcaRepository _repo;
     private Marca? _marca;
 
     public Marca? SelectedModel
@@ -43,8 +44,16 @@ public class MarcasViewModel : IBaseViewModel<Marca>, INotifyPropertyChanged
         DeleteCommand = new DeleteCommand<Marca>(this);
         EditCommand = new EditCommand<Marca>(this);
 
-        Models = new ObservableCollection<Marca>(_repo.GetAll());
+        GetData();
     }
+
+    private async void GetData()
+    {
+        var data = await Task.Run(() => _repo.GetAllAsync());
+        Models = new ObservableCollection<Marca>(data);
+        NotifyPropertyChanged(nameof(Models));
+    }
+
 
     public async void Create()
     {
@@ -52,10 +61,21 @@ public class MarcasViewModel : IBaseViewModel<Marca>, INotifyPropertyChanged
 
         if (c is null)
             return;
+        try
+        {
+            c = await Task.Run(async () =>
+            {
+                var ac = await _repo.CreateAsync(c);
+                ac = await _repo.GetByIdAsync(ac.Id);
+                return ac;
+            });
 
-        c = _repo.Create(c);
-
-        Models.Add(c);
+            Models.Add(c!);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error creating. {ex}");
+        }
     }
 
     public void Show(Marca t)
@@ -76,9 +96,17 @@ public class MarcasViewModel : IBaseViewModel<Marca>, INotifyPropertyChanged
 
         try
         {
-            _repo.Update(marca);
-            Models = new ObservableCollection<Marca>(_repo.GetAll());
+            var collection = await Task.Run(async () =>
+            {
+                await _repo.UpdateAsync(marca);
+
+                return await _repo.GetAllAsync();
+            });
+
+            Models = new ObservableCollection<Marca>(collection);
+
             NotifyPropertyChanged(nameof(Models));
+
             SelectedModel = marca;
         }
         catch (Exception ex)
@@ -97,7 +125,7 @@ public class MarcasViewModel : IBaseViewModel<Marca>, INotifyPropertyChanged
         {
             SelectedModel = null;
             Models.Remove(t);
-            _repo.Delete(t.Id);
+            await Task.Run(() => _repo.DeleteAsync(t.Id));
         }
         catch (Exception ex)
         {

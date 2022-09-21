@@ -15,8 +15,9 @@ namespace ContabilidadWinUI.ViewModel;
 
 public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
 {
+    private readonly IClienteRepository _repo;
+
     private Cliente? _model;
-    private IClienteRepository _repo;
     public ObservableCollection<Cliente> Models { get; private set; }
 
     public Cliente? SelectedModel
@@ -49,7 +50,15 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
         DeleteCommand = new DeleteCommand<Cliente>(this);
         EditCommand = new EditCommand<Cliente>(this);
 
-        Models = new ObservableCollection<Cliente>(_repo.GetAll());
+        GetData();
+    }
+
+    private async void GetData()
+    {
+        var data = await Task.Run(() => _repo.GetAllAsync());
+        Models = new ObservableCollection<Cliente>(data);
+
+        NotifyPropertyChanged(nameof(Models));
     }
 
 
@@ -62,14 +71,18 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
 
         try
         {
-            c = _repo.Create(c);
+            c = await Task.Run(async () =>
+            {
+                var ac = await _repo.CreateAsync(c);
+                ac = await _repo.GetByIdAsync(ac.Id);
+                return ac;
+            });
+            Models.Add(c!);
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex);
         }
-
-        Models.Add(c);
     }
 
     public void Show(Cliente t)
@@ -89,9 +102,17 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
 
         try
         {
-            _repo.Update(cliente);
-            Models = new ObservableCollection<Cliente>(_repo.GetAll());
+            var collection = await Task.Run(async () =>
+            {
+                await _repo.UpdateAsync(cliente);
+
+                return await _repo.GetAllAsync();
+            });
+
+            Models = new ObservableCollection<Cliente>(collection);
+
             NotifyPropertyChanged(nameof(Models));
+
             SelectedModel = cliente;
         }
         catch (Exception ex)
@@ -111,7 +132,7 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
         {
             SelectedModel = null;
             Models.Remove(t);
-            _repo.Delete(t.Id);
+            await Task.Run(() => _repo.DeleteAsync(t.Id));
         }
         catch (Exception ex)
         {

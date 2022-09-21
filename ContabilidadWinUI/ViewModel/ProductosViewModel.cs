@@ -15,8 +15,7 @@ namespace ContabilidadWinUI.ViewModel;
 
 public class ProductosViewModel : IBaseViewModel<Producto>, INotifyPropertyChanged
 {
-    private IProductoRepository _repo;
-
+    private readonly IProductoRepository _repo;
     private Producto? _producto;
 
     public Producto? SelectedModel
@@ -28,6 +27,7 @@ public class ProductosViewModel : IBaseViewModel<Producto>, INotifyPropertyChang
             NotifyPropertyChanged(nameof(SelectedModel));
         }
     }
+
 
     public ObservableCollection<Producto> Models { get; private set; } = new();
     public IModelDialogService<Producto> DialogService { get; }
@@ -49,13 +49,13 @@ public class ProductosViewModel : IBaseViewModel<Producto>, INotifyPropertyChang
         EditCommand = new EditCommand<Producto>(this);
 
         // Models = new ObservableCollection<Producto>(_repo.GetAll());
-        SetData();
+        GetData();
     }
 
-    private async void SetData()
+    private async void GetData()
     {
-        var r = await Task.Run(async () => await _repo.GetAllAsync());
-        Models = new ObservableCollection<Producto>(r);
+        var data = await Task.Run(() =>  _repo.GetAllAsync());
+        Models = new ObservableCollection<Producto>(data);
         NotifyPropertyChanged(nameof(Models));
     }
 
@@ -69,9 +69,9 @@ public class ProductosViewModel : IBaseViewModel<Producto>, INotifyPropertyChang
         {
             c = await Task.Run(async () =>
             {
-                c = await _repo.CreateAsync(c);
-                c = await _repo.GetByIdAsync(c.Id);
-                return c;
+                var ac = await _repo.CreateAsync(c);
+                ac = await _repo.GetByIdAsync(ac.Id);
+                return ac;
             });
 
             Models.Add(c!);
@@ -79,7 +79,6 @@ public class ProductosViewModel : IBaseViewModel<Producto>, INotifyPropertyChang
         catch (Exception ex)
         {
             Debug.WriteLine($"Error creating. {ex}");
-            throw;
         }
     }
 

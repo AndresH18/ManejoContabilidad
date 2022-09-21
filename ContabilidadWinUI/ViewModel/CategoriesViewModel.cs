@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using ContabilidadWinUI.ViewModel.Commands;
 using DbContextLibrary.Repository;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,8 +12,9 @@ namespace ContabilidadWinUI.ViewModel;
 
 public class CategoriesViewModel : IBaseViewModel<Categoria>, INotifyPropertyChanged
 {
+    private readonly ICategoriaRepository _repo;
+
     private Categoria? _categoria;
-    private ICategoriaRepository _repo;
 
     public ObservableCollection<Categoria> Models { get; private set; }
 
@@ -44,7 +46,14 @@ public class CategoriesViewModel : IBaseViewModel<Categoria>, INotifyPropertyCha
         DeleteCommand = new DeleteCommand<Categoria>(this);
         EditCommand = new EditCommand<Categoria>(this);
 
-        Models = new ObservableCollection<Categoria>(_repo.GetAll());
+        GetData();
+    }
+
+    private async void GetData()
+    {
+        var data = await Task.Run(() => _repo.GetAllAsync());
+        Models = new ObservableCollection<Categoria>(data);
+        NotifyPropertyChanged(nameof(Models));
     }
 
     public async void Create()
@@ -55,13 +64,18 @@ public class CategoriesViewModel : IBaseViewModel<Categoria>, INotifyPropertyCha
             return;
         try
         {
-            c = _repo.Create(c);
+            c = await Task.Run(async () =>
+            {
+                var ac = await _repo.CreateAsync(c);
+                ac = await _repo.GetByIdAsync(ac.Id);
+                return ac;
+            });
 
-            Models.Add(c);
+            Models.Add(c!);
         }
         catch (Exception ex)
         {
-            Debug.WriteLine(ex);
+            Debug.WriteLine($"Error creating. {ex}");
         }
     }
 
@@ -83,11 +97,17 @@ public class CategoriesViewModel : IBaseViewModel<Categoria>, INotifyPropertyCha
 
         try
         {
-            _repo.Update(categoria);
+            var collection = await Task.Run(async () =>
+            {
+                await _repo.UpdateAsync(categoria);
 
-            Models = new ObservableCollection<Categoria>(_repo.GetAll());
+                return await _repo.GetAllAsync();
+            });
+
+            Models = new ObservableCollection<Categoria>(collection);
 
             NotifyPropertyChanged(nameof(Models));
+
             SelectedModel = categoria;
         }
         catch (Exception ex)
@@ -108,7 +128,7 @@ public class CategoriesViewModel : IBaseViewModel<Categoria>, INotifyPropertyCha
         Models.Remove(t);
         try
         {
-            _repo.Delete(t.Id);
+            await Task.Run(() => _repo.DeleteAsync(t.Id));
         }
         catch (Exception ex)
         {

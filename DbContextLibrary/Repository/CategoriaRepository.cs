@@ -31,7 +31,7 @@ public class CategoriaRepository : ICategoriaRepository
         await _db.SaveChangesAsync();
         return entity;
     }
-
+     
     public IEnumerable<Categoria> GetAll()
     {
         return _db.Categorias.ToList();
