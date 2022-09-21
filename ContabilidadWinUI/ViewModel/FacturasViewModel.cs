@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.Storage;
 using ContabilidadWinUI.Services;
 using ContabilidadWinUI.Services.JsonModels;
 using ContabilidadWinUI.ViewModel.Commands;
@@ -56,7 +58,6 @@ public class FacturasViewModel : INotifyPropertyChanged
     }
 
 
-
     private void Show()
     {
         // TODO: Implement show factura
@@ -81,10 +82,11 @@ public class FacturasViewModel : INotifyPropertyChanged
         throw new NotImplementedException();
     }
 
-    private async void Scan()
+    internal async void Scan(StorageFile storageFile)
     {
-        // TODO: Implement scan
-        throw new NotImplementedException();
+        await using Stream stream = await storageFile.OpenStreamForReadAsync();
+
+        // TODO: call recognizer api
     }
 
     private static bool CanExecute(object? o)

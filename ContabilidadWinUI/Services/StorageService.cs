@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using ContabilidadWinUI.Services.JsonModels;
 using Newtonsoft.Json;
-using static System.Net.WebRequestMethods;
 
 namespace ContabilidadWinUI.Services;
 

@@ -15,6 +15,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage.Pickers;
 using Windows.Storage;
+using ContabilidadWinUI.Services;
 using ContabilidadWinUI.ViewModel;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -38,24 +39,10 @@ namespace ContabilidadWinUI.View.Facturas
 
         private async void ScannButton_OnClick(object sender, RoutedEventArgs e)
         {
-            try
+            var file = await FileService.SelectFile(App.Current.Window!);
+            if (file != null)
             {
-                FileOpenPicker openPicker = new FileOpenPicker();
-                openPicker.ViewMode = PickerViewMode.Thumbnail;
-                openPicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
-                openPicker.FileTypeFilter.Add("*");
-
-                var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.Current.Window);
-
-                WinRT.Interop.InitializeWithWindow.Initialize(openPicker, hwnd);
-
-                StorageFile? file = await openPicker.PickSingleFileAsync();
-
-                Debug.WriteLine(file?.Path);
-            }
-            catch (Exception ex)
-            {
-                Debug.Fail(ex.Message);
+                _viewModel.Scan(file);
             }
         }
     }
