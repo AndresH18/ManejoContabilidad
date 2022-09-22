@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 using ContabilidadWinUI.ViewModel.Commands;
 using DbContextLibrary.Repository;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI.Xaml;
 using ModelEntities;
 
 namespace ContabilidadWinUI.ViewModel;
 
-public class CategoriesViewModel : IBaseViewModel<Categoria>, INotifyPropertyChanged
+public class CategoriesViewModel : IBaseViewModel<Categoria>, ITaskRunning, INotifyPropertyChanged
 {
     private readonly ICategoriaRepository _repo;
 
+    private Visibility _taskVisibility;
+    private bool _isError;
     private Categoria? _categoria;
 
     public ObservableCollection<Categoria> Models { get; private set; }
@@ -28,11 +31,48 @@ public class CategoriesViewModel : IBaseViewModel<Categoria>, INotifyPropertyCha
         }
     }
 
+
     public IModelDialogService<Categoria> DialogService { get; }
     public ViewCommand<Categoria> ViewCommand { get; }
     public CreateCommand<Categoria> CreateCommand { get; }
     public DeleteCommand<Categoria> DeleteCommand { get; }
     public EditCommand<Categoria> EditCommand { get; }
+
+    /// <summary>
+    /// <p>
+    /// Gets the <see cref="Visibility"/> based on the <see cref="_taskCounter"/>.
+    /// </p>
+    /// <p>
+    /// This is used for bindings in which the user should know that there is an operation running
+    /// </p>
+    /// </summary>
+    public Visibility TaskVisibility
+    {
+        get => _taskVisibility;
+        private set
+        {
+            _taskVisibility = value;
+            NotifyPropertyChanged(nameof(TaskVisibility));
+        }
+    }
+    // public Visibility TaskVisibility => _taskCounter > 0 ? Visibility.Visible : Visibility.Collapsed;
+
+
+    /// <summary>
+    /// <p>
+    /// Gets the error state from <see cref="_isError"/>.
+    /// </p>
+    /// <p>This is used for bindings in which the user should know that an operation was unsuccessful</p>
+    /// </summary>
+    public bool IsTaskError
+    {
+        get => _isError;
+        private set
+        {
+            _isError = value;
+            NotifyPropertyChanged(nameof(IsTaskError));
+        }
+    }
 
     public CategoriesViewModel()
     {
@@ -51,13 +91,24 @@ public class CategoriesViewModel : IBaseViewModel<Categoria>, INotifyPropertyCha
 
     private async void GetData()
     {
-        var data = await Task.Run(() => _repo.GetAllAsync());
-        Models = new ObservableCollection<Categoria>(data);
-        NotifyPropertyChanged(nameof(Models));
+        TaskVisibility = Visibility.Visible;
+        try
+        {
+            var data = await Task.Run(() => _repo.GetAllAsync());
+            Models = new ObservableCollection<Categoria>(data);
+            NotifyPropertyChanged(nameof(Models));
+            TaskVisibility = Visibility.Collapsed;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            IsTaskError = true;
+        }
     }
 
     public async void Create()
     {
+        TaskVisibility = Visibility.Visible;
         var c = await DialogService.CreateDialog();
 
         if (c is null)
@@ -71,11 +122,13 @@ public class CategoriesViewModel : IBaseViewModel<Categoria>, INotifyPropertyCha
                 return ac;
             });
 
+            TaskVisibility = Visibility.Collapsed;
             Models.Add(c!);
         }
         catch (Exception ex)
         {
             Debug.WriteLine($"Error creating. {ex}");
+            IsTaskError = true;
         }
     }
 
@@ -84,9 +137,9 @@ public class CategoriesViewModel : IBaseViewModel<Categoria>, INotifyPropertyCha
         DialogService.ShowDialog(t);
     }
 
-
     public async void Edit(Categoria categoria)
     {
+        TaskVisibility = Visibility.Visible;
         var result = await DialogService.UpdateDialog(categoria);
         if (result is null)
             return;
@@ -109,16 +162,18 @@ public class CategoriesViewModel : IBaseViewModel<Categoria>, INotifyPropertyCha
             NotifyPropertyChanged(nameof(Models));
 
             SelectedModel = categoria;
+            TaskVisibility = Visibility.Collapsed;
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex);
+            IsTaskError = true;
         }
     }
 
-
     public async void Delete(Categoria t)
     {
+        TaskVisibility = Visibility.Visible;
         var delete = await DialogService.DeleteDialog(t);
 
         if (!delete)
@@ -129,10 +184,12 @@ public class CategoriesViewModel : IBaseViewModel<Categoria>, INotifyPropertyCha
         try
         {
             await Task.Run(() => _repo.DeleteAsync(t.Id));
+            TaskVisibility = Visibility.Collapsed;
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex);
+            IsTaskError = true;
         }
     }
 

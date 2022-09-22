@@ -18,6 +18,8 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
     private readonly IClienteRepository _repo;
 
     private Cliente? _model;
+    private Visibility _taskVisibility;
+    private bool _isError;
     public ObservableCollection<Cliente> Models { get; private set; }
 
     public Cliente? SelectedModel
@@ -37,6 +39,41 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
     public DeleteCommand<Cliente> DeleteCommand { get; }
     public EditCommand<Cliente> EditCommand { get; }
 
+    /// <summary>
+    /// <p>
+    /// Gets the <see cref="Visibility"/> based on the <see cref="_taskCounter"/>.
+    /// </p>
+    /// <p>
+    /// This is used for bindings in which the user should know that there is an operation running
+    /// </p>
+    /// </summary>
+    public Visibility TaskVisibility
+    {
+        get => _taskVisibility;
+        private set
+        {
+            _taskVisibility = value;
+            NotifyPropertyChanged(nameof(TaskVisibility));
+        }
+    }
+    // public Visibility TaskVisibility => _taskCounter > 0 ? Visibility.Visible : Visibility.Collapsed;
+
+
+    /// <summary>
+    /// <p>
+    /// Gets the error state from <see cref="_isError"/>.
+    /// </p>
+    /// <p>This is used for bindings in which the user should know that an operation was unsuccessful</p>
+    /// </summary>
+    public bool IsTaskError
+    {
+        get => _isError;
+        private set
+        {
+            _isError = value;
+            NotifyPropertyChanged(nameof(IsTaskError));
+        }
+    }
 
     public ClientsViewModel()
     {
@@ -55,15 +92,26 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
 
     private async void GetData()
     {
-        var data = await Task.Run(() => _repo.GetAllAsync());
-        Models = new ObservableCollection<Cliente>(data);
+        TaskVisibility = Visibility.Visible;
+        try
+        {
+            var data = await Task.Run(() => _repo.GetAllAsync());
+            Models = new ObservableCollection<Cliente>(data);
 
-        NotifyPropertyChanged(nameof(Models));
+            NotifyPropertyChanged(nameof(Models));
+            TaskVisibility = Visibility.Collapsed;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            IsTaskError = true;
+        }
     }
 
 
     public async void Create()
     {
+        TaskVisibility = Visibility.Visible;
         var c = await DialogService.CreateDialog();
 
         if (c is null)
@@ -78,10 +126,12 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
                 return ac;
             });
             Models.Add(c!);
+            TaskVisibility = Visibility.Collapsed;
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex);
+            IsTaskError = true;
         }
     }
 
@@ -92,6 +142,7 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
 
     public async void Edit(Cliente cliente)
     {
+        TaskVisibility = Visibility.Visible;
         var c = await DialogService.UpdateDialog(cliente);
         if (c is null)
             return;
@@ -114,15 +165,20 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
             NotifyPropertyChanged(nameof(Models));
 
             SelectedModel = cliente;
+
+            TaskVisibility = Visibility.Collapsed;
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex);
+            IsTaskError = true;
         }
     }
 
     public async void Delete(Cliente t)
     {
+        TaskVisibility = Visibility.Visible;
+
         var delete = await DialogService.DeleteDialog(t);
 
         if (!delete)
@@ -133,10 +189,12 @@ public class ClientsViewModel : IBaseViewModel<Cliente>, INotifyPropertyChanged
             SelectedModel = null;
             Models.Remove(t);
             await Task.Run(() => _repo.DeleteAsync(t.Id));
+            TaskVisibility = Visibility.Collapsed;
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex);
+            IsTaskError = true;
         }
     }
 

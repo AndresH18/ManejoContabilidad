@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using ContabilidadWinUI.ViewModel.Commands;
 using DbContextLibrary.Repository;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI.Xaml;
 using ModelEntities;
+using Exception = System.Exception;
 
 namespace ContabilidadWinUI.ViewModel;
 
@@ -14,6 +16,8 @@ public class MarcasViewModel : IBaseViewModel<Marca>, INotifyPropertyChanged
 {
     private readonly IMarcaRepository _repo;
     private Marca? _marca;
+    private Visibility _taskVisibility;
+    private bool _isError;
 
     public Marca? SelectedModel
     {
@@ -32,6 +36,42 @@ public class MarcasViewModel : IBaseViewModel<Marca>, INotifyPropertyChanged
     public DeleteCommand<Marca> DeleteCommand { get; }
     public EditCommand<Marca> EditCommand { get; }
 
+    /// <summary>
+    /// <p>
+    /// Gets the <see cref="Visibility"/> based on the <see cref="_taskCounter"/>.
+    /// </p>
+    /// <p>
+    /// This is used for bindings in which the user should know that there is an operation running
+    /// </p>
+    /// </summary>
+    public Visibility TaskVisibility
+    {
+        get => _taskVisibility;
+        private set
+        {
+            _taskVisibility = value;
+            NotifyPropertyChanged(nameof(TaskVisibility));
+        }
+    }
+    // public Visibility TaskVisibility => _taskCounter > 0 ? Visibility.Visible : Visibility.Collapsed;
+
+
+    /// <summary>
+    /// <p>
+    /// Gets the error state from <see cref="_isError"/>.
+    /// </p>
+    /// <p>This is used for bindings in which the user should know that an operation was unsuccessful</p>
+    /// </summary>
+    public bool IsTaskError
+    {
+        get => _isError;
+        private set
+        {
+            _isError = value;
+            NotifyPropertyChanged(nameof(IsTaskError));
+        }
+    }
+
     public MarcasViewModel()
     {
         _repo = App.Current.Services.GetService<IMarcaRepository>() ??
@@ -49,14 +89,25 @@ public class MarcasViewModel : IBaseViewModel<Marca>, INotifyPropertyChanged
 
     private async void GetData()
     {
-        var data = await Task.Run(() => _repo.GetAllAsync());
-        Models = new ObservableCollection<Marca>(data);
-        NotifyPropertyChanged(nameof(Models));
+        TaskVisibility = Visibility.Visible;
+        try
+        {
+            var data = await Task.Run(() => _repo.GetAllAsync());
+            Models = new ObservableCollection<Marca>(data);
+            NotifyPropertyChanged(nameof(Models));
+            TaskVisibility = Visibility.Collapsed;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            IsTaskError = true;
+        }
     }
 
 
     public async void Create()
     {
+        TaskVisibility = Visibility.Visible;
         var c = await DialogService.CreateDialog();
 
         if (c is null)
@@ -71,10 +122,12 @@ public class MarcasViewModel : IBaseViewModel<Marca>, INotifyPropertyChanged
             });
 
             Models.Add(c!);
+            TaskVisibility = Visibility.Collapsed;
         }
         catch (Exception ex)
         {
             Debug.WriteLine($"Error creating. {ex}");
+            IsTaskError = true;
         }
     }
 
@@ -86,6 +139,7 @@ public class MarcasViewModel : IBaseViewModel<Marca>, INotifyPropertyChanged
 
     public async void Edit(Marca marca)
     {
+        TaskVisibility = Visibility.Visible;
         var m = await DialogService.UpdateDialog(marca);
         if (m is null)
             return;
@@ -108,15 +162,19 @@ public class MarcasViewModel : IBaseViewModel<Marca>, INotifyPropertyChanged
             NotifyPropertyChanged(nameof(Models));
 
             SelectedModel = marca;
+
+            TaskVisibility = Visibility.Collapsed;
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex);
+            IsTaskError = true;
         }
     }
 
     public async void Delete(Marca t)
     {
+        TaskVisibility = Visibility.Visible;
         var delete = await DialogService.DeleteDialog(t);
 
         if (!delete)
@@ -126,10 +184,12 @@ public class MarcasViewModel : IBaseViewModel<Marca>, INotifyPropertyChanged
             SelectedModel = null;
             Models.Remove(t);
             await Task.Run(() => _repo.DeleteAsync(t.Id));
+            TaskVisibility = Visibility.Collapsed;
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex);
+            IsTaskError = true;
         }
     }
 

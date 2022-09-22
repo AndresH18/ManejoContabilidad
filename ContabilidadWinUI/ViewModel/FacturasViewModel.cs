@@ -10,6 +10,7 @@ using ContabilidadWinUI.Services.JsonModels;
 using ContabilidadWinUI.ViewModel.Commands;
 using Microsoft.Extensions.DependencyInjection;
 using ModelEntities;
+using Microsoft.UI.Xaml;
 
 namespace ContabilidadWinUI.ViewModel;
 
@@ -17,6 +18,8 @@ public class FacturasViewModel : INotifyPropertyChanged
 {
     private readonly IFacturasService _service;
     private FacturaDto? _factura;
+    private Visibility _taskVisibility;
+    private bool _isError;
 
     public FacturaDto? SelectedFactura
     {
@@ -35,11 +38,41 @@ public class FacturasViewModel : INotifyPropertyChanged
     public ActionCommand EditCommand { get; }
     public ActionCommand DeleteCommand { get; }
 
+    /// <summary>
+    /// <p>
+    /// Gets the <see cref="Visibility"/> based on the <see cref="_taskCounter"/>.
+    /// </p>
+    /// <p>
+    /// This is used for bindings in which the user should know that there is an operation running
+    /// </p>
+    /// </summary>
+    public Visibility TaskVisibility
+    {
+        get => _taskVisibility;
+        private set
+        {
+            _taskVisibility = value;
+            NotifyPropertyChanged(nameof(TaskVisibility));
+        }
+    }
+    // public Visibility TaskVisibility => _taskCounter > 0 ? Visibility.Visible : Visibility.Collapsed;
 
-    // public CreateCommand<FacturaDto> CreateCommand { get; }
-    // public DeleteCommand<FacturaDto> DeleteCommand { get; }
-    // public EditCommand<FacturaDto> EditCommand { get; }
 
+    /// <summary>
+    /// <p>
+    /// Gets the error state from <see cref="_isError"/>.
+    /// </p>
+    /// <p>This is used for bindings in which the user should know that an operation was unsuccessful</p>
+    /// </summary>
+    public bool IsTaskError
+    {
+        get => _isError;
+        private set
+        {
+            _isError = value;
+            NotifyPropertyChanged(nameof(IsTaskError));
+        }
+    }
 
     public FacturasViewModel()
     {
@@ -47,12 +80,12 @@ public class FacturasViewModel : INotifyPropertyChanged
                    throw new($"Service {typeof(IFacturasService)} is not registered");
 
 
-        ViewCommand = new ActionCommand { ActionToExecute = Show, CanExecuteFunc = CanExecute };
-        CreateCommand = new ActionCommand { ActionToExecute = Create, CanExecuteFunc = CanExecute };
-        DeleteCommand = new ActionCommand { ActionToExecute = Delete, CanExecuteFunc = CanExecute };
-        EditCommand = new ActionCommand { ActionToExecute = Edit, CanExecuteFunc = CanExecute };
+        ViewCommand = new ActionCommand {ActionToExecute = Show, CanExecuteFunc = CanExecute};
+        CreateCommand = new ActionCommand {ActionToExecute = Create, CanExecuteFunc = CanExecute};
+        DeleteCommand = new ActionCommand {ActionToExecute = Delete, CanExecuteFunc = CanExecute};
+        EditCommand = new ActionCommand {ActionToExecute = Edit, CanExecuteFunc = CanExecute};
 
-
+        // TODO: async
         Facturas = new ObservableCollection<FacturaDto>(_service.GetAllFacturas());
     }
 
