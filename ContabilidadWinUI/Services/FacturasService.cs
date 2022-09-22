@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DbContextLibrary;
 using Microsoft.EntityFrameworkCore;
+using ModelEntities;
 
 namespace ContabilidadWinUI.Services;
 
@@ -45,5 +46,15 @@ public class FacturaDto
         ClienteId = clienteId;
         NombreCliente = nombreCliente;
         DocumentoCliente = documentoCliente;
+    }
+
+    /// <summary>
+    /// <p>Calls to this method will throw <see cref="NotImplementedException"/></p>
+    /// </summary>
+    /// <param name="o"></param>
+    /// <exception cref="NotImplementedException"></exception>
+    public void CopyFrom(object o)
+    {
+        throw new NotImplementedException();
     }
 }
