@@ -31,7 +31,7 @@ internal static class FileService
         {
             Debug.WriteLine($"Error while trying to open the File picker. {ex}");
 
-            return default;
+            throw;
         }
     }
 }
