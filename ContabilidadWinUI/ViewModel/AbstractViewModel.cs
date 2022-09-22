@@ -90,7 +90,6 @@ public abstract class AbstractViewModel<T> : IBaseViewModel<T>, ITaskRunning, IN
             Models = new ObservableCollection<T>(data);
             NotifyPropertyChanged(nameof(Models));
 
-
             TaskVisibility = Visibility.Collapsed;
         }
         catch (Exception ex)

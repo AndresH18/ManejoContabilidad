@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -14,9 +15,10 @@ using Microsoft.UI.Xaml;
 
 namespace ContabilidadWinUI.ViewModel;
 
-public class FacturasViewModel : INotifyPropertyChanged
+public class FacturasViewModel : ITaskRunning, INotifyPropertyChanged
 {
     private readonly IFacturasService _service;
+
     private FacturaDto? _factura;
     private Visibility _taskVisibility;
     private bool _isError;
@@ -85,8 +87,26 @@ public class FacturasViewModel : INotifyPropertyChanged
         DeleteCommand = new ActionCommand {ActionToExecute = Delete, CanExecuteFunc = CanExecute};
         EditCommand = new ActionCommand {ActionToExecute = Edit, CanExecuteFunc = CanExecute};
 
-        // TODO: async
-        Facturas = new ObservableCollection<FacturaDto>(_service.GetAllFacturas());
+        GetData();
+    }
+
+    private async void GetData()
+    {
+        TaskVisibility = Visibility.Visible;
+        try
+        {
+            var data = await Task.Run(() => _service.GetAllFacturas());
+            Facturas = new ObservableCollection<FacturaDto>(data);
+
+            NotifyPropertyChanged(nameof(Facturas));
+
+            TaskVisibility = Visibility.Collapsed;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            IsTaskError = true;
+        }
     }
 
 
