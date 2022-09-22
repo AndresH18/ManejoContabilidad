@@ -24,8 +24,10 @@ public class InfoFactura : IModel
     [JsonIgnore] public virtual Factura? Factura { get; set; }
 
 
-    public void CopyFrom(InfoFactura infoFactura)
+    public void CopyFrom(object o)
     {
+        if (o is not InfoFactura infoFactura)
+            return;
         this.NumeroFactura = infoFactura.NumeroFactura;
         this.FechaEmision = infoFactura.FechaEmision;
         this.TipoOperacion = infoFactura.TipoOperacion;

@@ -12,8 +12,10 @@ public class Factura : IModel
     [JsonIgnore] public virtual Cliente? Cliente { get; set; }
     [JsonIgnore] public virtual List<DetallesFactura> DetallesFacturas { get; set; } = new();
 
-    public void CopyFrom(Factura factura)
+    public void CopyFrom(object o)
     {
+        if (o is not Factura factura)
+            return;
         this.ClienteId = factura.ClienteId;
     }
 }

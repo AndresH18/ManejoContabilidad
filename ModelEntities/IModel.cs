@@ -1,6 +1,6 @@
 ﻿namespace ModelEntities;
 
-public interface IModel
+public interface IModel : ICopy
 {
     public int Id { get; set; }
 }
