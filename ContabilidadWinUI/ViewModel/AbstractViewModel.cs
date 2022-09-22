@@ -13,7 +13,7 @@ namespace ContabilidadWinUI.ViewModel;
 public abstract class AbstractViewModel<T> : IBaseViewModel<T>, ITaskRunning, INotifyPropertyChanged
     where T : class, IModel
 {
-    private readonly IRepository<T> _repo;
+    protected IRepository<T> Repository { get; init; } = default!;
 
     private Visibility _taskVisibility;
     private bool _isError;
@@ -30,8 +30,8 @@ public abstract class AbstractViewModel<T> : IBaseViewModel<T>, ITaskRunning, IN
         }
     }
 
-    public ObservableCollection<T> Models { get; private set; }
-    public IModelDialogService<T> DialogService { get; }
+    public ObservableCollection<T> Models { get; private set; } = new();
+    public IModelDialogService<T> DialogService { get; protected init; } = default!;
     public ViewCommand<T> ViewCommand { get; }
     public CreateCommand<T> CreateCommand { get; }
     public DeleteCommand<T> DeleteCommand { get; }
@@ -39,7 +39,7 @@ public abstract class AbstractViewModel<T> : IBaseViewModel<T>, ITaskRunning, IN
 
     /// <summary>
     /// <p>
-    /// Gets the <see cref="Visibility"/> based on the <see cref="_taskCounter"/>.
+    /// Gets the <see cref="Visibility"/> based on the <see cref="_taskVisibility"/>.
     /// </p>
     /// <p>
     /// This is used for bindings in which the user should know that there is an operation running
@@ -73,24 +73,24 @@ public abstract class AbstractViewModel<T> : IBaseViewModel<T>, ITaskRunning, IN
         }
     }
 
-    public AbstractViewModel()
+    protected AbstractViewModel()
     {
         ViewCommand = new ViewCommand<T>(this);
         CreateCommand = new CreateCommand<T>(this);
         DeleteCommand = new DeleteCommand<T>(this);
         EditCommand = new EditCommand<T>(this);
-
-        GetData();
     }
 
-    private async void GetData()
+    protected async void GetData()
     {
         TaskVisibility = Visibility.Visible;
         try
         {
-            var data = await Task.Run(() => _repo.GetAllAsync());
+            var data = await Task.Run(() => Repository.GetAllAsync());
             Models = new ObservableCollection<T>(data);
             NotifyPropertyChanged(nameof(Models));
+
+
             TaskVisibility = Visibility.Collapsed;
         }
         catch (Exception ex)
@@ -102,7 +102,7 @@ public abstract class AbstractViewModel<T> : IBaseViewModel<T>, ITaskRunning, IN
 
     public virtual void Show(T t)
     {
-        DialogService.ShowDialog(t);
+        DialogService?.ShowDialog(t);
     }
 
     public virtual async void Delete(T t)
@@ -118,7 +118,7 @@ public abstract class AbstractViewModel<T> : IBaseViewModel<T>, ITaskRunning, IN
         {
             SelectedModel = null;
             Models.Remove(t);
-            await Task.Run(() => _repo.DeleteAsync(t.Id));
+            await Task.Run(() => Repository.DeleteAsync(t.Id));
             TaskVisibility = Visibility.Collapsed;
         }
         catch (Exception ex)
@@ -144,9 +144,9 @@ public abstract class AbstractViewModel<T> : IBaseViewModel<T>, ITaskRunning, IN
         {
             var collection = await Task.Run(async () =>
             {
-                await _repo.UpdateAsync(t);
+                await Repository.UpdateAsync(t);
 
-                return await _repo.GetAllAsync();
+                return await Repository.GetAllAsync();
             });
 
             Models = new ObservableCollection<T>(collection);
@@ -175,8 +175,8 @@ public abstract class AbstractViewModel<T> : IBaseViewModel<T>, ITaskRunning, IN
         {
             c = await Task.Run(async () =>
             {
-                var ac = await _repo.CreateAsync(c);
-                ac = await _repo.GetByIdAsync(ac.Id);
+                var ac = await Repository.CreateAsync(c);
+                ac = await Repository.GetByIdAsync(ac.Id);
                 return ac;
             });
 

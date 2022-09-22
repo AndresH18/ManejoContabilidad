@@ -43,6 +43,12 @@
             </AppBarButton>
         </CommandBar>
 
+        <ProgressBar IsIndeterminate="True"
+                     ShowError="{Binding Path=IsTaskError}"
+                     Visibility="{Binding Path=TaskVisibility}"
+                     controls:DockPanel.Dock="Top">
+        </ProgressBar>
+
         <controls:DataGrid
             ItemsSource="{Binding Path=Models, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             IsReadOnly="True"
