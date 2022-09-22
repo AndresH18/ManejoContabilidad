@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace ContabilidadWinUI.Services;
 
-internal sealed class StorageService
+internal sealed class ApiService
 {
     // ReSharper disable once InconsistentNaming
     private const string API_KEY_FILE = "keys.json";
@@ -18,21 +18,28 @@ internal sealed class StorageService
     private Windows.Storage.ApplicationDataContainer _localSettings;
     private Windows.Storage.StorageFolder _storageFolder;
 
-    public StorageService()
+    public ApiService()
     {
         _localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
         _storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
     }
 
-    public async void ReadFile(string fileName)
+    public async Task<Stream?> ReadFile(string fileName)
     {
         try
         {
             Windows.Storage.StorageFile file = await _storageFolder.GetFileAsync(fileName);
+            Stream stream = await file.OpenStreamForReadAsync();
+            return stream;
         }
-        catch (Exception)
+        catch (FileNotFoundException)
         {
-            Debug.WriteLine("File was not found.");
+            Debug.WriteLine($"File {fileName} not found.");
+            return null;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
             throw;
         }
     }

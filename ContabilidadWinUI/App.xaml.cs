@@ -16,6 +16,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using ContabilidadWinUI.Services;
+using ContabilidadWinUI.Services.JsonModels;
 using DbContextLibrary;
 using DbContextLibrary.Repository;
 using Microsoft.Extensions.DependencyInjection;
@@ -87,8 +88,8 @@ namespace ContabilidadWinUI
             services.AddScoped<IProductsService, ProductsService>();
             services.AddScoped<IFacturasService, FacturasService>();
 
-            // Storage Service
-            services.AddScoped<StorageService>();
+            // Api Service
+            services.AddScoped<ApiService>();
 
             return services.BuildServiceProvider();
         }
