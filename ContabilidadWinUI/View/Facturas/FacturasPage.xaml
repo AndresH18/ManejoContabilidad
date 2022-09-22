@@ -14,8 +14,10 @@
         <vm:FacturasViewModel x:Key="Vm" />
     </Page.Resources>
 
-    <Grid DataContext="{StaticResource Vm}">
+    <Grid Name="Grid"
+          DataContext="{StaticResource Vm}">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -26,8 +28,8 @@
                     DefaultLabelPosition="Right"
                     Grid.Row="0">
 
-            <AppBarButton Label="Add"
-                          Command="{Binding Path=ScannCommand}">
+            <AppBarButton Label="Escanear"
+                          Click="ScannButton_OnClick">
                 <AppBarButton.Icon>
                     <!-- <SymbolIcon Symbol="Account"/> -->
                     <SymbolIcon Symbol="Camera" />
@@ -62,13 +64,19 @@
             </AppBarButton>
         </CommandBar>
 
+        <ProgressBar IsIndeterminate="True"
+                     ShowError="{Binding Path=IsTaskError}"
+                     Visibility="{Binding Path=TaskVisibility}"
+                     Grid.Row="1">
+        </ProgressBar>
+
 
         <controls:DataGrid ItemsSource="{Binding Path=Facturas, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                            IsReadOnly="True"
                            SelectedItem="{Binding Path=SelectedFactura, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                            SelectionMode="Single"
                            AutoGenerateColumns="False"
-                           Grid.Row="1">
+                           Grid.Row="2">
             <controls:DataGrid.Columns>
                 <controls:DataGridTextColumn Header="Numero Factura"
                                              Binding="{Binding  NumeroFactura}"

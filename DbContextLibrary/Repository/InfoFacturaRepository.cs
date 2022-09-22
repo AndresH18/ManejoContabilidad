@@ -23,9 +23,21 @@ public class InfoFacturaRepository : IInfoFacturaRepository
         return entity;
     }
 
+    public async Task<InfoFactura> CreateAsync(InfoFactura entity)
+    {
+        _db.InfoFactura.Add(entity);
+        await _db.SaveChangesAsync();
+        return entity;
+    }
+
     public IEnumerable<InfoFactura> GetAll()
     {
         return _db.InfoFactura.ToList();
+    }
+
+    public async Task<IEnumerable<InfoFactura>> GetAllAsync()
+    {
+        return await _db.InfoFactura.ToListAsync();
     }
 
     public InfoFactura? GetById(int id)
@@ -33,10 +45,21 @@ public class InfoFacturaRepository : IInfoFacturaRepository
         return _db.InfoFactura.FirstOrDefault(i => i.Id == id);
     }
 
+    public async Task<InfoFactura?> GetByIdAsync(int id)
+    {
+        return await _db.InfoFactura.FirstOrDefaultAsync(i => i.Id == id);
+    }
+
     public void Update(InfoFactura entity)
     {
         _db.InfoFactura.Update(entity);
         _db.SaveChanges();
+    }
+
+    public async Task UpdateAsync(InfoFactura entity)
+    {
+        _db.InfoFactura.Update(entity);
+        await _db.SaveChangesAsync();
     }
 
     public void Delete(int id)
@@ -46,6 +69,16 @@ public class InfoFacturaRepository : IInfoFacturaRepository
         {
             _db.InfoFactura.Remove(entity);
             _db.SaveChanges();
+        }
+    }
+
+    public async Task DeleteAsync(int id)
+    {
+        var entity = await GetByIdAsync(id);
+        if (entity != null)
+        {
+            _db.InfoFactura.Remove(entity);
+            await _db.SaveChangesAsync();
         }
     }
 }

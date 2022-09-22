@@ -22,8 +22,10 @@ public class Cliente : IModel, ICloneable
 
     [JsonIgnore] public virtual List<Factura> Facturas { get; set; } = new();
 
-    public void CopyFrom(Cliente cliente)
+    public void CopyFrom(object o)
     {
+        if (o is not Cliente cliente)
+            return;
         this.TipoDocumento = cliente.TipoDocumento;
         this.Nombre = cliente.Nombre;
         this.NumeroDocumento = cliente.NumeroDocumento;

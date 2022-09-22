@@ -19,6 +19,7 @@
     <Grid DataContext="{StaticResource Vm}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -53,13 +54,19 @@
             </AppBarButton>
         </CommandBar>
 
+        <ProgressBar IsIndeterminate="True"
+                     ShowError="{Binding Path=IsTaskError}"
+                     Visibility="{Binding Path=TaskVisibility}"
+                     Grid.Row="1">
+        </ProgressBar>
+
         <controls:DataGrid DataContext="{StaticResource Vm}"
                            ItemsSource="{Binding Path=Models, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                            IsReadOnly="True"
                            SelectedItem="{Binding Path=SelectedModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                            SelectionMode="Single"
                            AutoGenerateColumns="False"
-                           Grid.Row="1">
+                           Grid.Row="2">
 
             <controls:DataGrid.Columns>
 
@@ -78,7 +85,7 @@
                         <DataTemplate>
                             <TextBlock
                                 Text="{Binding PrecioUnitario, Mode=OneWay, Converter={StaticResource MoneyConverter}}"
-                                VerticalAlignment="Center"/>
+                                VerticalAlignment="Center" />
                         </DataTemplate>
                     </controls:DataGridTemplateColumn.CellTemplate>
                 </controls:DataGridTemplateColumn>

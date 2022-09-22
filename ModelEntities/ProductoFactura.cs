@@ -3,7 +3,7 @@
 namespace ModelEntities;
 
 [Obsolete]
-public class ProductoFactura : IModel
+public class ProductoFactura
 {
     public int Id { get; set; }
     public string Nombre { get; set; }

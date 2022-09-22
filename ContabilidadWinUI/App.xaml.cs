@@ -87,6 +87,9 @@ namespace ContabilidadWinUI
             services.AddScoped<IProductsService, ProductsService>();
             services.AddScoped<IFacturasService, FacturasService>();
 
+            // Storage Service
+            services.AddScoped<StorageService>();
+
             return services.BuildServiceProvider();
         }
     }

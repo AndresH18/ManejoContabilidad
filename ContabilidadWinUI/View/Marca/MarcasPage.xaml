@@ -16,6 +16,7 @@
     <Grid DataContext="{StaticResource Vm}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -52,7 +53,7 @@
 
         <ListView ItemsSource="{Binding Path=Models, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   SelectedItem="{Binding Path=SelectedModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                  Grid.Row="1">
+                  Grid.Row="2">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="modelEntities:Marca">
                     <Grid>
@@ -76,5 +77,11 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <ProgressBar IsIndeterminate="True"
+                     ShowError="{Binding Path=IsTaskError}"
+                     Visibility="{Binding Path=TaskVisibility}"
+                     Grid.Row="1">
+        </ProgressBar>
     </Grid>
 </Page>
