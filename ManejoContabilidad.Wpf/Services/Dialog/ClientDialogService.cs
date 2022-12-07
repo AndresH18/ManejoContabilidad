@@ -9,12 +9,11 @@ public class ClientDialogService : IDialogService<Client>
     {
         var dialog = new ClientWindow(client, isReadOnly: true);
         dialog.Show();
-        
     }
 
-    public Client Add(Client client)
+    public Client Add()
     {
-        throw new System.NotImplementedException();
+        var dialog = new ClientWindow()
     }
 
     public Client Edit(Client client)
