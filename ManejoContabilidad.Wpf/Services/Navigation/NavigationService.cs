@@ -10,13 +10,16 @@ public class NavigationService : INavigationService
 {
     private readonly IServiceProvider _services = App.Current.Services;
 
+
     public void NavigateTo<T>() where T : class
     {
         var service = _services.GetRequiredService<T>();
+        MainWindow.Current?.NavigationFrame.Navigate(service);
     }
 
     public void NavigateTo<T>(IDictionary<string, object>? dictionary) where T : class
     {
-        var service = _services.GetService<T>();
+        var service = _services.GetRequiredService<T>();
+        MainWindow.Current?.NavigationFrame.Navigate(service);
     }
 }

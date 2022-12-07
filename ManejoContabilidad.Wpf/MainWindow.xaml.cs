@@ -12,22 +12,30 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ManejoContabilidad.Wpf.Services.Navigation;
+using ManejoContabilidad.Wpf.Views.Client;
 
-namespace ManejoContabilidad.Wpf
+namespace ManejoContabilidad.Wpf;
+
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+    public static MainWindow? Current { get; private set; }
+    private readonly INavigationService _navigation;
 
-        private void ClientesMenuItem_OnClick(object sender, RoutedEventArgs e)
-        {
-                
-        }
+    public MainWindow(INavigationService navigationService)
+    {
+        _navigation = navigationService;
+
+        InitializeComponent();
+
+        Current = this;
+    }
+
+    private void ClientsMenuItem_OnClick(object sender, RoutedEventArgs e)
+    {
+        _navigation.NavigateTo<ClientsPage>();
     }
 }

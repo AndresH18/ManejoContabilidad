@@ -9,7 +9,8 @@
 
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Clientes" Click="ClientesMenuItem_OnClick"></MenuItem>
+            <MenuItem Header="Clientes" 
+                      Click="ClientsMenuItem_OnClick" />
         </Menu>
 
         <Frame x:Name="NavigationFrame" NavigationUIVisibility="Hidden"/>
