@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 
 namespace ManejoContabilidad.Wpf.Services.Client;
 
-public class ClientService : IClientService
+public class ClientServiceTest : IClientService
 {
     private readonly List<Shared.Models.Client> _clients;
 
-    public ClientService()
+    public ClientServiceTest()
     {
         _clients = new List<Shared.Models.Client>
         {

@@ -12,6 +12,9 @@ public static class ServiceConfigurationExtensions
 {
     public static void RegisterViewModels(this ServiceCollection services)
     {
+        // Singleton
+
+        // Transient
         services.AddTransient<ClientsViewModel>();
     }
 
@@ -19,7 +22,7 @@ public static class ServiceConfigurationExtensions
     {
         // Singleton
         services.AddSingleton<INavigationService, NavigationService>();
-        services.AddSingleton<IClientService, ClientService>();
+        services.AddSingleton<IClientService, ClientServiceTest>();
 
         // Transient
     }
@@ -34,11 +37,17 @@ public static class ServiceConfigurationExtensions
 
     public static void RegisterWindows(this IServiceCollection services)
     {
+        // Singleton
         services.AddSingleton<MainWindow>();
+
+        // Transient
     }
 
     public static void RegisterPages(this IServiceCollection services)
     {
+        // Singleton
+
+        // Transient
         services.AddTransient<ClientsPage>();
     }
 }
