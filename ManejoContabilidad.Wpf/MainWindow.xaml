@@ -9,10 +9,23 @@
 
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Clientes" 
+            <MenuItem Header="Clientes"
                       Click="ClientsMenuItem_OnClick" />
         </Menu>
 
-        <Frame x:Name="NavigationFrame" NavigationUIVisibility="Hidden"/>
+        <StatusBar DockPanel.Dock="Bottom"
+                   HorizontalAlignment="Center"
+                   Visibility="Collapsed">
+
+            <StatusBarItem>
+                <TextBlock Text="Notification" />
+            </StatusBarItem>
+            <Separator />
+            <StatusBarItem>
+                <ProgressBar Width="100" Height="15" />
+            </StatusBarItem>
+        </StatusBar>
+
+        <Frame x:Name="NavigationFrame" NavigationUIVisibility="Hidden" />
     </DockPanel>
 </Window>

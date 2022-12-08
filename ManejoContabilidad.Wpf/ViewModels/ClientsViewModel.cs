@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ManejoContabilidad.Wpf.Helpers.Dialog;
+using ManejoContabilidad.Wpf.Services.Client;
 using Shared.Models;
 
 namespace ManejoContabilidad.Wpf.ViewModels;
@@ -10,6 +11,7 @@ namespace ManejoContabilidad.Wpf.ViewModels;
 public partial class ClientsViewModel
 {
     private readonly IDialogHelper<Client> _dialog;
+    private readonly IClientService _clientService;
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(EditClientCommand))]
@@ -17,37 +19,72 @@ public partial class ClientsViewModel
     [NotifyCanExecuteChangedFor(nameof(ShowClientCommand))]
     private Client? _selectedClient;
 
-    public ObservableCollection<Client> Clients { get; private set; }
+    public ObservableCollection<Client> Clients { get; private set; } = new();
 
-    public ClientsViewModel(IDialogHelper<Client> dialogHelper)
+    public ClientsViewModel(IClientService clientService, IDialogHelper<Client> dialogHelper)
     {
+        _clientService = clientService;
         _dialog = dialogHelper;
 
-        Clients = new ObservableCollection<Client>
+
+        GetClientsAsync();
+    }
+
+    private async void GetClientsAsync()
+    {
+        var list = await _clientService.GetAllAsync();
+        foreach (var client in list)
         {
-            new() {Name = "Andres", Document = "1", Email = "andres@email.com"},
-            new() {Name = "David", Document = "2", Email = "david@email.com"}
-        };
+            Clients.Add(client);
+        }
     }
 
     [RelayCommand]
-    private void AddClient()
+    private async void AddClient()
     {
-        var result = _dialog.Add();
-        // TODO: add client
+        var client = _dialog.Add();
+        if (client is null)
+            return;
+
+        client = await _clientService.AddAsync(client);
+
+        if (client is not null)
+        {
+            Clients.Add(client);
+        }
+        // TODO: notify error
     }
 
     [RelayCommand(CanExecute = nameof(IsClientSelected))]
-    private void EditClient(Client client)
+    private async void EditClient(Client client)
     {
         var result = _dialog.Edit(client);
-        // TODO: edit client
+        if (result is null)
+            return;
+
+        result = await _clientService.EditAsync(result);
+
+        if (result is not null)
+        {
+            Clients.Remove(client);
+            Clients.Add(result);
+        }
+        // TODO: notify error
     }
 
     [RelayCommand(CanExecute = nameof(IsClientSelected))]
-    private void DeleteClient(Client client)
+    private async void DeleteClient(Client client)
     {
         var result = _dialog.Delete(client);
+        if (result)
+            return;
+
+        var deleteResult = await _clientService.DeleteAsync(client);
+
+        if (deleteResult is not null)
+        {
+            Clients.Remove(deleteResult);
+        }
         // TODO: delete client
     }
 
