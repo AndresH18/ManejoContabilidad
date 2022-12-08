@@ -14,7 +14,8 @@
     <DockPanel>
         <StackPanel DockPanel.Dock="Top"
                     Orientation="Horizontal"
-                    HorizontalAlignment="Center">
+                    HorizontalAlignment="Center"
+                    Margin="0, 10">
             <StackPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Margin" Value="5,0"></Setter>
@@ -22,13 +23,20 @@
             </StackPanel.Resources>
 
             <Button Content="Mostrar Cliente"
-                    Command="{Binding Path=ShowClientCommand}" />
+                    Command="{Binding Path=ShowClientCommand}"
+                    CommandParameter="{Binding Path=SelectedClient}" />
+            
             <Button Content="Agregar Cliente"
                     Command="{Binding Path=AddClientCommand}" />
+            
             <Button Content="Editar Cliente"
-                    Command="{Binding Path=EditClientCommand}" />
+                    Command="{Binding Path=EditClientCommand}"
+                    CommandParameter="{Binding Path=SelectedClient}" />
+            
             <Button Content="Eliminar Cliente"
-                    Command="{Binding Path=DeleteClientCommand}" />
+                    Command="{Binding Path=DeleteClientCommand}"
+                    CommandParameter="{Binding Path=SelectedClient}" />
+            
         </StackPanel>
 
         <DataGrid AutoGenerateColumns="False"
@@ -36,7 +44,8 @@
                   SelectionMode="Single"
                   CanUserResizeRows="False"
                   SelectedItem="{Binding Path=SelectedClient, UpdateSourceTrigger=PropertyChanged}"
-                  ItemsSource="{Binding Path=Clients}">
+                  ItemsSource="{Binding Path=Clients}"
+                  Margin="5, 0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nombre"
                                     Width="*"

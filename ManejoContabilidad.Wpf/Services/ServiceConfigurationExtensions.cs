@@ -1,4 +1,4 @@
-﻿using ManejoContabilidad.Wpf.Services.Dialog;
+﻿using ManejoContabilidad.Wpf.Helpers.Dialog;
 using ManejoContabilidad.Wpf.Services.Navigation;
 using ManejoContabilidad.Wpf.ViewModels;
 using ManejoContabilidad.Wpf.Views.Client;
@@ -18,9 +18,16 @@ public static class ServiceConfigurationExtensions
     {
         // Singleton
         services.AddSingleton<INavigationService, NavigationService>();
-        
+
         // Transient
-        services.AddTransient<IDialogService<Client>, ClientDialogService>();
+    }
+
+    public static void RegisterHelpers(this IServiceCollection services)
+    {
+        // Singleton
+
+        // Transient
+        services.AddTransient<IDialogHelper<Client>, ClientDialogHelper>();
     }
 
     public static void RegisterWindows(this IServiceCollection services)

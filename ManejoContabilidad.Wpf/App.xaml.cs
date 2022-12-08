@@ -13,7 +13,7 @@ public partial class App : Application
     public App()
     {
         Services = ConfigureServices();
-        
+
         Application.Current.MainWindow = Services.GetRequiredService<MainWindow>();
         Application.Current.MainWindow.Show();
     }
@@ -34,6 +34,7 @@ public partial class App : Application
         var services = new ServiceCollection();
 
         services.RegisterAppServices();
+        services.RegisterHelpers();
         services.RegisterWindows();
         services.RegisterPages();
         services.RegisterViewModels();
