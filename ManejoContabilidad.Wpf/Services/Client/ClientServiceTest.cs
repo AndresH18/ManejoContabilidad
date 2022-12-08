@@ -1,34 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Shared;
 
 namespace ManejoContabilidad.Wpf.Services.Client;
 
 public class ClientServiceTest : IClientService
 {
-    private readonly List<Shared.Models.Client> _clients;
-
-    public ClientServiceTest()
-    {
-        _clients = new List<Shared.Models.Client>
-        {
-            new() {Id = 1, Name = "Andres", Document = "1", Email = "andres@email.com"},
-            new() {Id = 2, Name = "David", Document = "2", Email = "david@email.com"}
-        };
-    }
-
     public async Task<List<Shared.Models.Client>> GetAllAsync()
     {
         await Task.Run(() => Thread.Sleep(2000));
-
-        return new List<Shared.Models.Client>(_clients);
+        await using var db = new TestDbContext();
+        return await db.Clients.ToListAsync();
     }
 
     public async Task<Shared.Models.Client?> AddAsync(Shared.Models.Client client)
     {
         await Task.Run(() => Thread.Sleep(2000));
-        _clients.Add(client);
-        client.Id = _clients.Count;
+        await using var db = new TestDbContext();
+        await db.Clients.AddAsync(client);
+        await db.SaveChangesAsync();
 
         return client;
     }
@@ -36,9 +28,13 @@ public class ClientServiceTest : IClientService
     public async Task<Shared.Models.Client?> EditAsync(Shared.Models.Client client)
     {
         await Task.Run(() => Thread.Sleep(2000));
-        var index = _clients.FindIndex(c => c.Id == client.Id);
-        if (index >= 0)
-            _clients[index] = client;
+        await using var db = new TestDbContext();
+        // testing how ""update"" or ""db.Entry(client).CurrentValues.SetValues(..);"" works
+        var old = await db.Clients.FirstAsync(c => c.Id == client.Id);
+
+        db.Entry(old).CurrentValues.SetValues(client);
+
+        await db.SaveChangesAsync();
 
         return client;
     }
@@ -46,7 +42,12 @@ public class ClientServiceTest : IClientService
     public async Task<Shared.Models.Client?> DeleteAsync(Shared.Models.Client client)
     {
         await Task.Run(() => Thread.Sleep(2000));
-        
-        return _clients.Remove(client) ? client : null;
+
+        await using var db = new TestDbContext();
+
+        db.Clients.Remove(client);
+        await db.SaveChangesAsync();
+
+        return client;
     }
 }

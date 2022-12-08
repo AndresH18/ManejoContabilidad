@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
+using Shared;
 using static ManejoContabilidad.Wpf.Services.ServiceConfigurationExtensions;
 
 namespace ManejoContabilidad.Wpf;
@@ -17,6 +18,15 @@ public partial class App
         Application.Current.MainWindow = Services.GetRequiredService<MainWindow>();
         Application.Current.MainWindow.Show();
     }
+
+    protected override void OnStartup(StartupEventArgs e)
+    {
+        base.OnStartup(e);
+
+        // Testing Purposes
+        TestDbContext.EnsureDatabaseCreated();
+    }
+
 
     /// <summary>
     ///     Gets the <see cref="IServiceProvider" /> instance to resolve application services.

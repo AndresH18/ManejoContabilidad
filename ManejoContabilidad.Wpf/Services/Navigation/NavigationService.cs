@@ -20,4 +20,16 @@ public class NavigationService : INavigationService
         var service = _services.GetRequiredService<T>();
         MainWindow.Current?.NavigationFrame.Navigate(service);
     }
+
+    public void NavigateTo(Type type)
+    {
+        var service = _services.GetRequiredService(type);
+        MainWindow.Current?.NavigationFrame.Navigate(service);
+    }
+
+    public void NavigateTo(Type type, IDictionary<string, object>? dictionary)
+    {
+        var service = _services.GetRequiredService(type);
+        MainWindow.Current?.NavigationFrame.Navigate(service);
+    }
 }

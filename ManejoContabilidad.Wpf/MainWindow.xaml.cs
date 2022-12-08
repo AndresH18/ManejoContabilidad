@@ -1,6 +1,11 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using ManejoContabilidad.Wpf.Services.Navigation;
 using ManejoContabilidad.Wpf.Views.Client;
+using ManejoContabilidad.Wpf.Views.Invoice;
 
 namespace ManejoContabilidad.Wpf;
 
@@ -9,8 +14,15 @@ namespace ManejoContabilidad.Wpf;
 /// </summary>
 public partial class MainWindow
 {
-    public static MainWindow? Current { get; private set; }
     private readonly INavigationService _navigation;
+
+    private readonly List<(string Tag, Type Page)> _pages = new()
+    {
+        ("clients", typeof(ClientsPage)),
+        ("invoices", typeof(InvoicesPage))
+    };
+
+    public static MainWindow? Current { get; private set; }
 
     public MainWindow(INavigationService navigationService)
     {
@@ -21,8 +33,22 @@ public partial class MainWindow
         Current = this;
     }
 
-    private void ClientsMenuItem_OnClick(object sender, RoutedEventArgs e)
+    private void MenuItem_OnClick(object sender, RoutedEventArgs e)
     {
-        _navigation.NavigateTo<ClientsPage>();
+        if (sender is MenuItem menuItem)
+        {
+            var tag = menuItem.Tag as string ?? string.Empty;
+            Navigate(tag);
+        }
+    }
+
+    private void Navigate(string tag)
+    {
+        var tuple = _pages.FirstOrDefault(t => t.Tag == tag);
+        var page = tuple.Page;
+        if (page != null)
+        {
+            _navigation.NavigateTo(page);
+        }
     }
 }

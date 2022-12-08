@@ -10,7 +10,11 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Clientes"
-                      Click="ClientsMenuItem_OnClick" />
+                      Click="MenuItem_OnClick"
+                      Tag="clients"/>
+            <MenuItem Header="Facturas"
+                      Click="MenuItem_OnClick"
+                      Tag="invoices" />
         </Menu>
 
         <StatusBar DockPanel.Dock="Bottom"

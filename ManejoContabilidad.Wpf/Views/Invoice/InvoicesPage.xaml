@@ -1,0 +1,56 @@
+﻿<Page x:Class="ManejoContabilidad.Wpf.Views.Invoice.InvoicesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:ManejoContabilidad.Wpf.Views.Invoice"
+      xmlns:viewModels="clr-namespace:ManejoContabilidad.Wpf.ViewModels"
+      mc:Ignorable="d"
+      d:DataContext="{d:DesignInstance Type=viewModels:InvoicesViewModel }"
+      d:DesignHeight="450" d:DesignWidth="800"
+      d:Background="White"
+      Title="InvoicesPage">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0, 10">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="5,0" />
+                </Style>
+            </StackPanel.Resources>
+
+            <Button Content="Mostrar Factura"
+                    Command="{Binding Path=ShowInvoiceCommand}"
+                    CommandParameter="{Binding Path=SelectedInvoice}" />
+
+            <Button Content="Crear Factura"
+                    Command="{Binding Path=AddInvoiceCommand}" />
+
+            <Button Content="Editar Factura"
+                    Command="{Binding Path=EditInvoiceCommand}"
+                    CommandParameter="{Binding Path=SelectedInvoice}" />
+
+            <Button Content="Eliminar Factura"
+                    Command="{Binding Path=DeleteInvoiceCommand}"
+                    CommandParameter="{Binding Path=SelectedInvoice}" />
+
+        </StackPanel>
+
+        <DataGrid AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  CanUserResizeRows="False"
+                  SelectedItem="{Binding Path=SelectedInvoice, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Path=Invoices}"
+                  Margin="5, 0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Cliente"
+                                    Binding="{Binding Path=Client.Name}"
+                                    Width="*"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</Page>
