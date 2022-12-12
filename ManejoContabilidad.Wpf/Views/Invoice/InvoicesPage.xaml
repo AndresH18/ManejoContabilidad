@@ -4,12 +4,17 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:ManejoContabilidad.Wpf.Views.Invoice"
+      xmlns:converters="clr-namespace:ManejoContabilidad.Wpf.Converters"
       xmlns:viewModels="clr-namespace:ManejoContabilidad.Wpf.ViewModels"
       mc:Ignorable="d"
       d:DataContext="{d:DesignInstance Type=viewModels:InvoicesViewModel }"
       d:DesignHeight="450" d:DesignWidth="800"
       d:Background="White"
       Title="InvoicesPage">
+
+    <Page.Resources>
+        <converters:StringUriConverter x:Key="StringUriConverter" />
+    </Page.Resources>
     <DockPanel>
         <StackPanel DockPanel.Dock="Top"
                     Orientation="Horizontal"
@@ -48,7 +53,16 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Cliente"
                                     Binding="{Binding Path=Client.Name}"
-                                    Width="*"/>
+                                    Width="*" />
+                <DataGridTextColumn Header="Factura"
+                                    Binding="{Binding Path=InvoiceNumber}"
+                                    Width="*" />
+                <DataGridTextColumn Header="Valor"
+                                    Binding="{Binding Path=Price, StringFormat={}{0:C}}"
+                                    Width="*" />
+                <DataGridTextColumn Header="Archivo"
+                                    Binding="{Binding Path=Path}"
+                                    Width="*" />
 
             </DataGrid.Columns>
         </DataGrid>

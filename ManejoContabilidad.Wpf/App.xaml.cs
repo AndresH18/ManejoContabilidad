@@ -27,7 +27,6 @@ public partial class App
         TestDbContext.EnsureDatabaseCreated();
     }
 
-
     /// <summary>
     ///     Gets the <see cref="IServiceProvider" /> instance to resolve application services.
     /// </summary>

@@ -34,7 +34,7 @@ public class ClientDialogHelper : IDialogHelper<Client>
 
     public bool Delete(Client client)
     {
-        var result = MessageBox.Show($"Eliminar {client.Name}?",
+        var result = MessageBox.Show(App.Current.MainWindow!, $"Eliminar {client.Name}?",
             "Borrar Cliente", MessageBoxButton.YesNo);
 
         return result == MessageBoxResult.Yes;

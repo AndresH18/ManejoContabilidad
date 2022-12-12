@@ -62,7 +62,7 @@ public partial class InvoicesViewModel
     private async void DeleteInvoice(Invoice invoice)
     {
         var result = _dialogHelper.Delete(invoice);
-        if (result)
+        if (!result)
             return;
 
         var deleteResult = await _invoiceService.DeleteAsync(invoice);

@@ -76,7 +76,7 @@ public partial class ClientsViewModel
     private async void DeleteClient(Client client)
     {
         var result = _dialog.Delete(client);
-        if (result)
+        if (!result)
             return;
 
         var deleteResult = await _clientService.DeleteAsync(client);

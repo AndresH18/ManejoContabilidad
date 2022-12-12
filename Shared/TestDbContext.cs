@@ -1,11 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shared.Models;
 
 namespace Shared;
 
 public class TestDbContext : DbContext
 {
-    private const string TestConnectionString = "Data Source=../../../contab.db";
+    private const string TestDbDirectory = "../../..";
+    private const string TestDbName = "contab.db";
+    private const string TestConnectionString = $"Data Source={TestDbDirectory}/{TestDbName}";
+
+    private static readonly (string, string) TestDbAuxNames = ($"{TestDbName}-shm", $"{TestDbName}-wal");
 
     public DbSet<Client> Clients { get; set; } = null!;
     public DbSet<Invoice> Invoices { get; set; } = null!;
@@ -33,7 +38,11 @@ public class TestDbContext : DbContext
             });
 
         await db.Invoices.AddRangeAsync(new Invoice {Id = 1, ClientId = 1},
-            new Invoice {Id = 2, ClientId = 1},
+            new Invoice
+            {
+                Id = 2, ClientId = 1,
+                Path = @"C:\Users\andre\Desktop\Blazor-for-ASP-NET-Web-Forms-Developers.pdf"
+            },
             new Invoice {Id = 3, ClientId = 1},
             new Invoice {Id = 4, ClientId = 2});
 
@@ -48,5 +57,13 @@ public class TestDbContext : DbContext
         {
             optionsBuilder.UseSqlite(TestConnectionString);
         }
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        // uri 
+        // modelBuilder.Entity<Invoice>(i => i.Property(p => p.Path).HasConversion<UriToStringConverter>());
     }
 }
