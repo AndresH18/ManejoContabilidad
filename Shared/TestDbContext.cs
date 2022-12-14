@@ -26,25 +26,29 @@ public class TestDbContext : DbContext
 
     private static async Task InitializeTestDataAsync(TestDbContext db)
     {
-        await db.Clients.AddRangeAsync(new Client
+        /*await db.Clients.AddRangeAsync(new Client
             {
-                Id = 1, Name = "Andres",
-                Document = "1", Email = "andres@email.com"
+                Id = 1,
+                Name = "Andres",
+                Document = "1",
+                Email = "andres@email.com"
             },
             new Client
             {
-                Id = 2, Name = "David",
-                Document = "2", Email = "david@email.com"
-            });
+                Id = 2,
+                Name = "David",
+                Document = "2",
+                Email = "david@email.com"
+            });*/
 
-        await db.Invoices.AddRangeAsync(new Invoice {Id = 1, ClientId = 1},
+        await db.Invoices.AddRangeAsync(new Invoice {Id = 1, ClientName = "Andres"},
             new Invoice
             {
-                Id = 2, ClientId = 1,
+                Id = 2, ClientName = "Andres",
                 Path = @"C:\Users\andre\Desktop\Blazor-for-ASP-NET-Web-Forms-Developers.pdf"
             },
-            new Invoice {Id = 3, ClientId = 1},
-            new Invoice {Id = 4, ClientId = 2});
+            new Invoice {Id = 3, ClientName = "David"},
+            new Invoice {Id = 4, ClientName = "Juan Manuel"});
 
         await db.SaveChangesAsync();
     }

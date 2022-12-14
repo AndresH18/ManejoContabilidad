@@ -8,10 +8,11 @@
         Title="MainWindow" Height="450" Width="800">
 
     <DockPanel>
-        <Menu DockPanel.Dock="Top">
+        <Menu Visibility="Collapsed"
+              DockPanel.Dock="Top">
             <MenuItem Header="Clientes"
                       Click="MenuItem_OnClick"
-                      Tag="clients"/>
+                      Tag="clients" />
             <MenuItem Header="Facturas"
                       Click="MenuItem_OnClick"
                       Tag="invoices" />
@@ -30,6 +31,7 @@
             </StatusBarItem>
         </StatusBar>
 
-        <Frame x:Name="NavigationFrame" NavigationUIVisibility="Hidden" />
+        <Frame x:Name="NavigationFrame" NavigationUIVisibility="Hidden"
+               Loaded="NavigationFrame_OnLoaded" />
     </DockPanel>
 </Window>

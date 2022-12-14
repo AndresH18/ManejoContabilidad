@@ -51,4 +51,9 @@ public partial class MainWindow
             _navigation.NavigateTo(page);
         }
     }
+
+    private void NavigationFrame_OnLoaded(object sender, RoutedEventArgs e)
+    {
+        Navigate("invoices");
+    }
 }

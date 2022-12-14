@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ManejoContabilidad.Wpf.Helpers.Dialog;
@@ -32,13 +34,20 @@ public partial class InvoicesViewModel
 
     private async void GetInvoicesAsync()
     {
-        var list = await _invoiceService.GetAllAsync();
-
-        Invoices.Clear();
-
-        foreach (var invoice in list)
+        try
         {
-            Invoices.Add(invoice);
+            var list = await _invoiceService.GetAllAsync();
+
+            Invoices.Clear();
+
+            foreach (var invoice in list)
+            {
+                Invoices.Add(invoice);
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
         }
     }
 

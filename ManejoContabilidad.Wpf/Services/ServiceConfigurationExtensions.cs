@@ -17,7 +17,7 @@ public static class ServiceConfigurationExtensions
         // Singleton
 
         // Transient
-        services.AddTransient<ClientsViewModel>();
+        // services.AddTransient<ClientsViewModel>();
         services.AddTransient<InvoicesViewModel>();
     }
 
@@ -26,7 +26,7 @@ public static class ServiceConfigurationExtensions
         // Singleton
         services.AddSingleton<INavigationService, NavigationService>();
 
-        services.AddSingleton<IClientService, ClientServiceTest>();
+        // services.AddSingleton<IClientService, ClientServiceTest>();
         services.AddSingleton<IInvoiceService, InvoiceServiceTest>();
 
 
@@ -38,7 +38,7 @@ public static class ServiceConfigurationExtensions
         // Singleton
 
         // Transient
-        services.AddTransient<IDialogHelper<Models::Client>, ClientDialogHelper>();
+        // services.AddTransient<IDialogHelper<Models::Client>, ClientDialogHelper>();
         services.AddTransient<IDialogHelper<Models::Invoice>, InvoiceDialogHelper>();
     }
 
@@ -55,7 +55,7 @@ public static class ServiceConfigurationExtensions
         // Singleton
 
         // Transient
-        services.AddTransient<ClientsPage>();
+        // services.AddTransient<ClientsPage>();
         services.AddTransient<InvoicesPage>();
     }
 }

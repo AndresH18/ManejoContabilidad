@@ -14,7 +14,9 @@ public class InvoiceServiceTest : IInvoiceService
         await Task.Run(() => Thread.Sleep(2000));
 
         await using var db = new TestDbContext();
-        return await db.Invoices.Include(i => i.Client).ToListAsync();
+
+        // return await db.Invoices.Include(i => i.Client).ToListAsync();
+        return await db.Invoices.ToListAsync();
     }
 
     public Task<Shared.Models.Invoice?> AddAsync(Shared.Models.Invoice invoice)
