@@ -74,7 +74,7 @@
                                     Binding="{Binding Path=ClientName}"
                                     Width="*" />
                 <DataGridTextColumn Header="Factura"
-                                    Binding="{Binding Path=InvoiceNumber}"
+                                    Binding="{Binding Path=InvoiceNumber, StringFormat=#{0}}"
                                     Width="*" />
                 <DataGridTextColumn Header="Valor"
                                     Binding="{Binding Path=Price, StringFormat={}{0:C}}"

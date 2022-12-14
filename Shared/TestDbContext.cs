@@ -41,14 +41,15 @@ public class TestDbContext : DbContext
                 Email = "david@email.com"
             });*/
 
-        await db.Invoices.AddRangeAsync(new Invoice {Id = 1, ClientName = "Andres"},
+        await db.Invoices.AddRangeAsync(new Invoice {Id = 1, ClientName = "Andres", InvoiceNumber = 2},
             new Invoice
             {
                 Id = 2, ClientName = "Andres",
-                Path = @"C:\Users\andre\Desktop\Blazor-for-ASP-NET-Web-Forms-Developers.pdf"
+                Path = @"C:\Users\andre\Desktop\Blazor-for-ASP-NET-Web-Forms-Developers.pdf",
+                InvoiceNumber = 344
             },
-            new Invoice {Id = 3, ClientName = "David"},
-            new Invoice {Id = 4, ClientName = "Juan Manuel"});
+            new Invoice {Id = 3, ClientName = "David", InvoiceNumber = 1234},
+            new Invoice {Id = 4, ClientName = "Juan Manuel", InvoiceNumber = 9856});
 
         await db.SaveChangesAsync();
     }
