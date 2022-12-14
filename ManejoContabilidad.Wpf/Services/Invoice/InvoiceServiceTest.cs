@@ -19,30 +19,35 @@ public class InvoiceServiceTest : IInvoiceService
         return await db.Invoices.ToListAsync();
     }
 
-    public Task<Shared.Models.Invoice?> AddAsync(Shared.Models.Invoice invoice)
+    public async Task<Shared.Models.Invoice?> AddAsync(Shared.Models.Invoice invoice)
     {
         // await Task.Run(() => Thread.Sleep(2000));
-        // await using var db = new TestDbContext();
-        // TODO : Implement
-
-        return Task.FromResult(invoice)!;
+        await using var db = new TestDbContext();
+        await db.Invoices.AddAsync(invoice);
+        await db.SaveChangesAsync();
+        return invoice;
     }
 
     public async Task<Shared.Models.Invoice?> DeleteAsync(Shared.Models.Invoice invoice)
     {
         await Task.Run(() => Thread.Sleep(2000));
-        // await using var db = new TestDbContext();
-        // db.Invoices.Remove(invoice);
+        await using var db = new TestDbContext();
+        db.Invoices.Remove(invoice);
+        await db.SaveChangesAsync();
         return invoice;
     }
 
-    public Task<Shared.Models.Invoice?> EditAsync(Shared.Models.Invoice invoice)
+    public async Task<Shared.Models.Invoice?> EditAsync(Shared.Models.Invoice invoice)
     {
         // await Task.Run(() => Thread.Sleep(2000));
-        // var index = _invoices.FindIndex(i => i.Id == invoice.Id);
-        // if (index >= 0)
-        //     _invoices[index] = invoice;
-        // TODO: implement
-        return Task.FromResult(invoice)!;
+        /*var index = _invoices.FindIndex(i => i.Id == invoice.Id);
+        if (index >= 0)
+            _invoices[index] = invoice;*/
+
+        await using var db = new TestDbContext();
+        db.Invoices.Update(invoice);
+        await db.SaveChangesAsync();
+
+        return invoice;
     }
 }

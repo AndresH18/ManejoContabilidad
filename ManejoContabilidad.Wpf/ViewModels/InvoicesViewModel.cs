@@ -22,6 +22,10 @@ public partial class InvoicesViewModel
     [NotifyCanExecuteChangedFor(nameof(ShowInvoiceCommand))]
     private Invoice? _selectedInvoice;
 
+    [ObservableProperty,
+     NotifyCanExecuteChangedFor(nameof(GoBackCommand))]
+    private int _pageIndex;
+
     public ObservableCollection<Invoice> Invoices { get; private set; } = new();
 
     public InvoicesViewModel(IInvoiceService invoiceService, IDialogHelper<Invoice> dialogHelper)
@@ -32,7 +36,7 @@ public partial class InvoicesViewModel
         GetInvoicesAsync();
     }
 
-    private async void GetInvoicesAsync()
+    private async void GetInvoicesAsync(int page = 0)
     {
         try
         {
@@ -106,8 +110,27 @@ public partial class InvoicesViewModel
         _dialogHelper.Show(invoice);
     }
 
+    [RelayCommand(CanExecute = nameof(CanGoBack))]
+    private void GoBack()
+    {
+        PageIndex--;
+        // TODO: Implement Pagination's GoBack
+    }
+
+    [RelayCommand]
+    private void GoForward()
+    {
+        PageIndex++;
+        // TODO: Implement Pagination's GoForward
+    }
+
     private bool IsInvoiceSelected()
     {
         return SelectedInvoice is not null;
+    }
+
+    private bool CanGoBack()
+    {
+        return _pageIndex > 0;
     }
 }

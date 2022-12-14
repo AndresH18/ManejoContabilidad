@@ -13,5 +13,10 @@ public class Invoice
     /* Relationships */
     // public int ClientId { get; set; }
     // public virtual Client Client { get; set; } = default!;
-    [StringLength(100)] public string ClientName { get; set; } = default!;
+    [StringLength(100)] [Required] public string ClientName { get; set; } = default!;
+
+    public Invoice Clone()
+    {
+        return (Invoice) MemberwiseClone();
+    }
 }
