@@ -18,7 +18,7 @@ public class StringUriConverter : IValueConverter
                 : new Uri(str);
         }
 
-        return value;
+        return null;
         // throw new ArgumentException(
         //     $"The {nameof(targetType)} must be of type {typeof(Uri)} and {nameof(value)} must be of type {typeof(string)}");
     }
