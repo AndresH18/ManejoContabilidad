@@ -1,0 +1,120 @@
+﻿<Window x:Class="ManejoContabilidad.Wpf.Views.Invoice.InvoiceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ManejoContabilidad.Wpf.Views.Invoice"
+        xmlns:converters="clr-namespace:ManejoContabilidad.Wpf.Converters"
+        mc:Ignorable="d"
+        Title="InvoiceWindow"
+        MinWidth="100"
+        d:DesignHeight="300"
+        d:DesignWidth="500"
+        Width="500"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        ShowInTaskbar="False"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Window.Resources>
+
+        <Style TargetType="Grid">
+            <Setter Property="Margin" Value="0, 10" />
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center"  />
+            <Setter Property="Margin" Value="5, 0"  />
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5,0" />
+        </Style>
+    </Window.Resources>
+
+    <StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Column 0 -->
+            <Label Content="Nombre Cliente"
+                   Grid.Row="0"
+                   Grid.Column="0" />
+            <Label Content="Numero Factura"
+                   Grid.Row="1"
+                   Grid.Column="0" />
+            <Label Content="Valor"
+                   Grid.Row="2"
+                   Grid.Column="0" />
+            <Label Content="Ruta"
+                   Grid.Row="3"
+                   Grid.Column="0" />
+
+            <!-- Column 1 -->
+            <TextBox x:Name="ClientNameTextBox"
+                     Text="{Binding Invoice.ClientName, Mode=TwoWay}"
+                     IsReadOnly="{Binding Path=IsReadOnly}"
+                     Grid.Column="1"
+                     Grid.Row="0" />
+            <TextBox x:Name="InvoiceNumberTextBox"
+                     Text="{Binding Invoice.InvoiceNumber, Mode=TwoWay}"
+                     IsReadOnly="{Binding Path=IsReadOnly}"
+                     Grid.Column="1"
+                     Grid.Row="1" />
+            <TextBox x:Name="PriceTextBox"
+                     Text="{Binding Invoice.Price, Mode=TwoWay, StringFormat={}{0:C}}"
+                     IsReadOnly="{Binding Path=IsReadOnly}"
+                     Grid.Column="1"
+                     Grid.Row="2" />
+
+            <Grid Grid.Column="1"
+                  Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBox IsReadOnly="True"
+                         VerticalAlignment="Center" d:Text="C:\Program"
+                         Text="{Binding Path=FilePath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                         Grid.Column="0" />
+                <Button
+                    Content="Anexar"
+                    Command="{Binding Path=SearchFileCommand}"
+                    Visibility="{Binding Path=IsConfirmVisible}"
+                    Padding="15, 0"
+                    Grid.Column="1" />
+            </Grid>
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Button Content="Escanear"
+                    Visibility="{Binding Path=IsConfirmVisible}"
+                    Grid.Column="0" />
+            <Button Content="Confirmar"
+                    Visibility="{Binding Path=IsConfirmVisible}"
+                    Command="{Binding Path=ConfirmCommand}"
+                    Grid.Column="1" />
+            <Button Content="Cancelar"
+                    Command="{Binding Path=CancelCommand}"
+                    Grid.Column="2" />
+
+        </Grid>
+    </StackPanel>
+</Window>

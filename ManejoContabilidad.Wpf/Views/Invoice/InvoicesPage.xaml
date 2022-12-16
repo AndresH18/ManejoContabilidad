@@ -1,0 +1,95 @@
+﻿<Page x:Class="ManejoContabilidad.Wpf.Views.Invoice.InvoicesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:ManejoContabilidad.Wpf.Views.Invoice"
+      xmlns:converters="clr-namespace:ManejoContabilidad.Wpf.Converters"
+      xmlns:viewModels="clr-namespace:ManejoContabilidad.Wpf.ViewModels"
+      xmlns:models="clr-namespace:Shared.Models;assembly=Shared"
+      xmlns:controls="clr-namespace:ManejoContabilidad.Wpf.Views.Controls"
+      mc:Ignorable="d"
+      d:DataContext="{d:DesignInstance Type=viewModels:InvoicesViewModel }"
+      d:DesignHeight="450" d:DesignWidth="800"
+      d:Background="White"
+      Title="InvoicesPage">
+
+    <Page.Resources>
+        <converters:StringUriConverter x:Key="StringUriConverter" />
+        <DataTemplate x:Key="DetailsTemplate" DataType="models:Invoice">
+            <controls:InvoiceDetailsControl />
+        </DataTemplate>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0"
+              Margin="0, 10">
+            <Grid.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="5,0" />
+                    <Setter Property="Padding" Value="10, 5" />
+                </Style>
+            </Grid.Resources>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="0">
+                <Button Content="Mostrar Factura"
+                        Command="{Binding Path=ShowInvoiceCommand}"
+                        CommandParameter="{Binding Path=SelectedInvoice}" />
+
+                <Button Content="Crear Factura"
+                        Command="{Binding Path=AddInvoiceCommand}" />
+
+                <Button Content="Editar Factura"
+                        Command="{Binding Path=EditInvoiceCommand}"
+                        CommandParameter="{Binding Path=SelectedInvoice}" />
+
+                <Button Content="Eliminar Factura"
+                        Command="{Binding Path=DeleteInvoiceCommand}"
+                        CommandParameter="{Binding Path=SelectedInvoice}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="2">
+                <Button Content="Anterior"
+                        Command="{Binding Path=GoBackCommand}" />
+                <Button Content="Ir a..." />
+                <Button Content="Siguiente"
+                        Command="{Binding Path=GoForwardCommand}" />
+            </StackPanel>
+        </Grid>
+
+        <DataGrid AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  CanUserResizeRows="False"
+                  SelectedItem="{Binding Path=SelectedInvoice, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Path=Invoices}"
+                  RowDetailsTemplate="{StaticResource DetailsTemplate}"
+                  Margin="5, 0"
+                  Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Factura"
+                                    Binding="{Binding Path=InvoiceNumber, StringFormat=#{0}}"
+                                    Width="Auto" />
+                <DataGridTextColumn Header="Cliente"
+                                    Binding="{Binding Path=ClientName}"
+                                    Width="*" />
+                <DataGridTextColumn Header="Valor"
+                                    Binding="{Binding Path=Price, StringFormat={}{0:C}}"
+                                    Width="*" />
+                <DataGridTextColumn Header="Archivo"
+                                    Binding="{Binding Path=Path}"
+                                    Width="*" />
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

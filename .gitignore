@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/.idea/.idea.ManejoContabilidad/.idea/dictionaries
+/ManejoContabilidad.Wpf/contab.db-wal
+/ManejoContabilidad.Wpf/contab.db-shm
+/ManejoContabilidad.Wpf/contab.db
