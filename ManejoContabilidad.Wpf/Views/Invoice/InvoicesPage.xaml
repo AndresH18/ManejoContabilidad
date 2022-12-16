@@ -70,11 +70,11 @@
                   Margin="5, 0"
                   Grid.Row="1">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Cliente"
-                                    Binding="{Binding Path=ClientName}"
-                                    Width="*" />
                 <DataGridTextColumn Header="Factura"
                                     Binding="{Binding Path=InvoiceNumber, StringFormat=#{0}}"
+                                    Width="Auto" />
+                <DataGridTextColumn Header="Cliente"
+                                    Binding="{Binding Path=ClientName}"
                                     Width="*" />
                 <DataGridTextColumn Header="Valor"
                                     Binding="{Binding Path=Price, StringFormat={}{0:C}}"

@@ -99,7 +99,7 @@ public partial class InvoicesViewModel
         if (result is not null)
         {
             Invoices.Remove(invoice);
-            Invoices.Add(invoice);
+            Invoices.Add(result);
         }
         // TODO: notify error
     }

@@ -36,10 +36,10 @@ public partial class InvoiceWindow : Window
     public bool IsReadOnly { get; }
     public Models::Invoice Invoice { get; private set; }
 
-    public InvoiceWindow(Models::Invoice invoice, bool isReadOnly = false)
+    public InvoiceWindow(Models::Invoice? invoice = null, bool isReadOnly = false)
     {
         IsReadOnly = isReadOnly;
-        Invoice = invoice.Clone();
+        Invoice = invoice?.Clone() ?? new Models::Invoice();
 
         InitializeComponent();
 

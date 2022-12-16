@@ -8,7 +8,7 @@ public class InvoiceDialogHelper : IDialogHelper<Invoice>
 {
     public Invoice? Add()
     {
-        var dialog = new InvoiceWindow(new Invoice(), isReadOnly: false);
+        var dialog = new InvoiceWindow(isReadOnly: false);
         var dialogResult = dialog.ShowDialog();
 
         return dialogResult == true
@@ -26,12 +26,17 @@ public class InvoiceDialogHelper : IDialogHelper<Invoice>
 
     public Invoice? Edit(Invoice t)
     {
-        return null;
+        var dialog = new InvoiceWindow(t, isReadOnly: false);
+        var dialogResult = dialog.ShowDialog();
+
+        return dialogResult == true
+            ? dialog.Invoice
+            : null;
     }
 
     public void Show(Invoice invoice)
     {
-        var dialog = new InvoiceWindow(invoice, true);
+        var dialog = new InvoiceWindow(invoice, isReadOnly: true);
         dialog.ShowDialog();
     }
 }
