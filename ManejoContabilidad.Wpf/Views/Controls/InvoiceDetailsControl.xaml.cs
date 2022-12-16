@@ -23,7 +23,7 @@ namespace ManejoContabilidad.Wpf.Views.Controls
             {
                 UseShellExecute = true
             };
-            var process = Process.Start(processStartInfo);
+            Process.Start(processStartInfo);
             e.Handled = true;
         }
     }
