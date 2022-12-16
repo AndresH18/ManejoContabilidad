@@ -6,6 +6,8 @@
       xmlns:local="clr-namespace:ManejoContabilidad.Wpf.Views.Invoice"
       xmlns:converters="clr-namespace:ManejoContabilidad.Wpf.Converters"
       xmlns:viewModels="clr-namespace:ManejoContabilidad.Wpf.ViewModels"
+      xmlns:models="clr-namespace:Shared.Models;assembly=Shared"
+      xmlns:controls="clr-namespace:ManejoContabilidad.Wpf.Views.Controls"
       mc:Ignorable="d"
       d:DataContext="{d:DesignInstance Type=viewModels:InvoicesViewModel }"
       d:DesignHeight="450" d:DesignWidth="800"
@@ -14,6 +16,9 @@
 
     <Page.Resources>
         <converters:StringUriConverter x:Key="StringUriConverter" />
+        <DataTemplate x:Key="DetailsTemplate" DataType="models:Invoice">
+            <controls:InvoiceDetailsControl />
+        </DataTemplate>
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -67,6 +72,7 @@
                   CanUserResizeRows="False"
                   SelectedItem="{Binding Path=SelectedInvoice, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Path=Invoices}"
+                  RowDetailsTemplate="{StaticResource DetailsTemplate}"
                   Margin="5, 0"
                   Grid.Row="1">
             <DataGrid.Columns>
