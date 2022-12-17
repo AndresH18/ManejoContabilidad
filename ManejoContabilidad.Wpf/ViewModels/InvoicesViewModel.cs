@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ManejoContabilidad.Wpf.Helpers.Dialog;
 using ManejoContabilidad.Wpf.Services.Invoice;
 using Shared.Models;
+using System;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace ManejoContabilidad.Wpf.ViewModels;
 
@@ -18,7 +18,6 @@ public partial class InvoicesViewModel
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(EditInvoiceCommand))]
     [NotifyCanExecuteChangedFor(nameof(DeleteInvoiceCommand))]
-    [NotifyCanExecuteChangedFor(nameof(ShowInvoiceCommand))]
     private Invoice? _selectedInvoice;
 
     [ObservableProperty,
@@ -32,16 +31,16 @@ public partial class InvoicesViewModel
         _invoiceService = invoiceService;
         _dialogHelper = dialogHelper;
 
-        GetInvoicesAsync();
+        GetInvoices();
     }
 
-    private async void GetInvoicesAsync(int page = 0)
+    private async void GetInvoices(int page = 0)
     {
         try
         {
-            var list = await _invoiceService.GetAllAsync();
-
             Invoices.Clear();
+
+            var list = await _invoiceService.GetAllAsync(page);
 
             foreach (var invoice in list)
             {
@@ -104,9 +103,9 @@ public partial class InvoicesViewModel
     }
 
     [RelayCommand(CanExecute = nameof(IsInvoiceSelected))]
-    private void ShowInvoice(Invoice invoice)
+    private void Print(Invoice invoice)
     {
-        _dialogHelper.Show(invoice);
+        // TODO: Implement 
     }
 
     [RelayCommand(CanExecute = nameof(CanGoBack))]

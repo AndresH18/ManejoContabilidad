@@ -75,6 +75,8 @@
             <TextBox x:Name="PriceTextBox"
                      Text="{Binding Invoice.Price, Mode=TwoWay, StringFormat={}{0:C}}"
                      IsReadOnly="{Binding Path=IsReadOnly}"
+                     GotFocus="PriceTextBox_OnGotFocus"
+                     GotMouseCapture="PriceTextBox_OnGotFocus"
                      Grid.Column="1"
                      Grid.Row="2" />
 

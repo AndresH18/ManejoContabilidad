@@ -1,21 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Windows;
+using System.Windows.Controls;
 using Models = Shared.Models;
 using ValidationResult = System.ComponentModel.DataAnnotations.ValidationResult;
 
@@ -101,5 +91,10 @@ public partial class InvoiceWindow : Window
         var results = new List<ValidationResult>();
         var isValid = Validator.TryValidateObject(Invoice, context, results, true);
         return isValid;
+    }
+
+    private void PriceTextBox_OnGotFocus(object sender, RoutedEventArgs e)
+    {
+        PriceTextBox.SelectAll();
     }
 }

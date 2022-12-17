@@ -1,9 +1,6 @@
 ﻿using System.Diagnostics;
-using System.Threading;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using Models = Shared.Models;
 
 namespace ManejoContabilidad.Wpf.Views.Controls
 {

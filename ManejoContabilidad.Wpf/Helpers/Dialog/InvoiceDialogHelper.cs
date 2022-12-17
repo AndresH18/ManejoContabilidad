@@ -18,7 +18,8 @@ public class InvoiceDialogHelper : IDialogHelper<Invoice>
 
     public bool Delete(Invoice invoice)
     {
-        var result = MessageBox.Show(App.Current.MainWindow!, $"Eliminar {invoice.InvoiceNumber}?",
+        var result = MessageBox.Show(App.Current.MainWindow!,
+            $"Eliminar #{invoice.InvoiceNumber} de '{invoice.ClientName}'?",
             "Borrar Cliente", MessageBoxButton.YesNo);
 
         return result == MessageBoxResult.Yes;

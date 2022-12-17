@@ -1,22 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Shared;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ManejoContabilidad.Wpf.Services.Invoice;
 
 public class InvoiceServiceTest : IInvoiceService
 {
-    public async Task<List<Shared.Models.Invoice>> GetAllAsync()
+    // public const int RowsPerPage = 2;
+
+    public async Task<List<Shared.Models.Invoice>> GetAllAsync(int page)
     {
-        await Task.Run(() => Thread.Sleep(2000));
+        // await Task.Run(() => Thread.Sleep(2000));
 
         await using var db = new TestDbContext();
 
-        // return await db.Invoices.Include(i => i.Client).ToListAsync();
-        return await db.Invoices.ToListAsync();
+        return await db.Invoices
+            .OrderBy(i => i.InvoiceNumber)
+            // .Skip(page * RowsPerPage)
+            // .Take(RowsPerPage)
+            .ToListAsync();
     }
 
     public async Task<Shared.Models.Invoice?> AddAsync(Shared.Models.Invoice invoice)
@@ -30,7 +34,7 @@ public class InvoiceServiceTest : IInvoiceService
 
     public async Task<Shared.Models.Invoice?> DeleteAsync(Shared.Models.Invoice invoice)
     {
-        await Task.Run(() => Thread.Sleep(2000));
+        // await Task.Run(() => Thread.Sleep(2000));
         await using var db = new TestDbContext();
         db.Invoices.Remove(invoice);
         await db.SaveChangesAsync();

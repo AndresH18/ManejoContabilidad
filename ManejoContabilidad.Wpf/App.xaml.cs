@@ -1,7 +1,7 @@
-﻿using System;
-using System.Windows;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Shared;
+using System;
+using System.Windows;
 using static ManejoContabilidad.Wpf.Services.ServiceConfigurationExtensions;
 
 namespace ManejoContabilidad.Wpf;
