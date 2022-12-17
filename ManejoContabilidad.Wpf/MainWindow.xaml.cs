@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using ManejoContabilidad.Wpf.Services.Navigation;
-using ManejoContabilidad.Wpf.Views.Client;
 using ManejoContabilidad.Wpf.Views.Invoice;
 
 namespace ManejoContabilidad.Wpf;
@@ -18,7 +17,7 @@ public partial class MainWindow
 
     private readonly List<(string Tag, Type Page)> _pages = new()
     {
-        ("clients", typeof(ClientsPage)),
+        // ("clients", typeof(ClientsPage)),
         ("invoices", typeof(InvoicesPage))
     };
 

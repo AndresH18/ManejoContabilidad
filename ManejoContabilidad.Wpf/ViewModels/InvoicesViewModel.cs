@@ -4,7 +4,6 @@ using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ManejoContabilidad.Wpf.Helpers.Dialog;
-using ManejoContabilidad.Wpf.Services.Client;
 using ManejoContabilidad.Wpf.Services.Invoice;
 using Shared.Models;
 

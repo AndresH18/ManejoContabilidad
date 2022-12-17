@@ -12,7 +12,7 @@ public class TestDbContext : DbContext
 
     private static readonly (string, string) TestDbAuxNames = ($"{TestDbName}-shm", $"{TestDbName}-wal");
 
-    public DbSet<Client> Clients { get; set; } = null!;
+    // public DbSet<Client> Clients { get; set; } = null!;
     public DbSet<Invoice> Invoices { get; set; } = null!;
 
     public static async void EnsureDatabaseCreated()

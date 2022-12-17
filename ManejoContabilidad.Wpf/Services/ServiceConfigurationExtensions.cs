@@ -1,9 +1,7 @@
 ﻿using ManejoContabilidad.Wpf.Helpers.Dialog;
-using ManejoContabilidad.Wpf.Services.Client;
 using ManejoContabilidad.Wpf.Services.Invoice;
 using ManejoContabilidad.Wpf.Services.Navigation;
 using ManejoContabilidad.Wpf.ViewModels;
-using ManejoContabilidad.Wpf.Views.Client;
 using ManejoContabilidad.Wpf.Views.Invoice;
 using Microsoft.Extensions.DependencyInjection;
 using Models = Shared.Models;
@@ -55,7 +53,6 @@ public static class ServiceConfigurationExtensions
         // Singleton
 
         // Transient
-        // services.AddTransient<ClientsPage>();
         services.AddTransient<InvoicesPage>();
     }
 }

@@ -43,7 +43,8 @@
             <StackPanel Orientation="Horizontal" Grid.Column="0">
                 <Button Content="Mostrar Factura"
                         Command="{Binding Path=ShowInvoiceCommand}"
-                        CommandParameter="{Binding Path=SelectedInvoice}" />
+                        CommandParameter="{Binding Path=SelectedInvoice}"
+                        Visibility="Collapsed"/>
 
                 <Button Content="Crear Factura"
                         Command="{Binding Path=AddInvoiceCommand}" />
@@ -55,6 +56,9 @@
                 <Button Content="Eliminar Factura"
                         Command="{Binding Path=DeleteInvoiceCommand}"
                         CommandParameter="{Binding Path=SelectedInvoice}" />
+
+                <Button Content="Imprimir"
+                        CommandParameter="{Binding Path=SelectedInvoice}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Column="2">
