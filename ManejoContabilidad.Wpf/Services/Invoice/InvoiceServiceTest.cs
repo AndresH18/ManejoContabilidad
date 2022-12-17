@@ -2,6 +2,7 @@
 using Shared;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ManejoContabilidad.Wpf.Services.Invoice;
@@ -25,7 +26,7 @@ public class InvoiceServiceTest : IInvoiceService
 
     public async Task<Shared.Models.Invoice?> AddAsync(Shared.Models.Invoice invoice)
     {
-        // await Task.Run(() => Thread.Sleep(2000));
+        await Task.Run(() => Thread.Sleep(5000));
         await using var db = new TestDbContext();
         await db.Invoices.AddAsync(invoice);
         await db.SaveChangesAsync();

@@ -1,6 +1,8 @@
 ﻿using ManejoContabilidad.Wpf.Helpers.Dialog;
+using ManejoContabilidad.Wpf.Services.AppEnvironment;
 using ManejoContabilidad.Wpf.Services.Invoice;
 using ManejoContabilidad.Wpf.Services.Navigation;
+using ManejoContabilidad.Wpf.Services.RequestProvider;
 using ManejoContabilidad.Wpf.ViewModels;
 using ManejoContabilidad.Wpf.Views.Invoice;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,25 +12,21 @@ namespace ManejoContabilidad.Wpf.Services;
 
 public static class ServiceConfigurationExtensions
 {
+    public static void RegisterAppServices(this IServiceCollection services)
+    {
+        // Singleton
+        services.AddSingleton<INavigationService, NavigationService>();
+        services.AddSingleton<IInvoiceService, InvoiceServiceTest>();
+        services.AddSingleton<IRequestProvider, RequestProvider.RequestProvider>();
+        services.AddSingleton<AppEnvironmentService>();
+    }
+
     public static void RegisterViewModels(this ServiceCollection services)
     {
         // Singleton
 
         // Transient
-        // services.AddTransient<ClientsViewModel>();
         services.AddTransient<InvoicesViewModel>();
-    }
-
-    public static void RegisterAppServices(this IServiceCollection services)
-    {
-        // Singleton
-        services.AddSingleton<INavigationService, NavigationService>();
-
-        // services.AddSingleton<IClientService, ClientServiceTest>();
-        services.AddSingleton<IInvoiceService, InvoiceServiceTest>();
-
-
-        // Transient
     }
 
     public static void RegisterHelpers(this IServiceCollection services)
@@ -36,7 +34,6 @@ public static class ServiceConfigurationExtensions
         // Singleton
 
         // Transient
-        // services.AddTransient<IDialogHelper<Models::Client>, ClientDialogHelper>();
         services.AddTransient<IDialogHelper<Models::Invoice>, InvoiceDialogHelper>();
     }
 

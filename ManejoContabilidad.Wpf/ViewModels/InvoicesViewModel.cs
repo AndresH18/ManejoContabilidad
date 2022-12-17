@@ -6,6 +6,7 @@ using Shared.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace ManejoContabilidad.Wpf.ViewModels;
 
