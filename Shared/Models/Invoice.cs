@@ -6,6 +6,7 @@ public class Invoice
 {
     public int Id { get; set; }
     public int InvoiceNumber { get; set; }
+    public DateTime CreationDate { get; set; } = DateTime.Now;
     [Range(0, double.PositiveInfinity)] public double Price { get; set; } = 0;
 
     public string? Path { get; set; }

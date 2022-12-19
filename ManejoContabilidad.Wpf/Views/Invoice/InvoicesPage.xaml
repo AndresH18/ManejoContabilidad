@@ -54,7 +54,7 @@
 
                 <Button Content="Imprimir"
                         Command="{Binding Path=PrintCommand}"
-                        CommandParameter="{Binding Path=SelectedInvoice}"/>
+                        CommandParameter="{Binding Path=SelectedInvoice}" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Column="2">
@@ -79,14 +79,14 @@
                 <DataGridTextColumn Header="Factura"
                                     Binding="{Binding Path=InvoiceNumber, StringFormat=#{0}}"
                                     Width="Auto" />
+                <DataGridTextColumn Header="Fecha"
+                                    Binding="{Binding Path=CreationDate}"
+                                    Width="Auto"/>
                 <DataGridTextColumn Header="Cliente"
                                     Binding="{Binding Path=ClientName}"
                                     Width="*" />
                 <DataGridTextColumn Header="Valor"
                                     Binding="{Binding Path=Price, StringFormat={}{0:C}}"
-                                    Width="*" />
-                <DataGridTextColumn Header="Archivo"
-                                    Binding="{Binding Path=Path}"
                                     Width="*" />
 
             </DataGrid.Columns>

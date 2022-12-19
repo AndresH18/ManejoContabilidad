@@ -50,7 +50,7 @@ public partial class InvoicesViewModel
         }
         catch (Exception ex)
         {
-            Debug.WriteLine(ex);
+            Debug.WriteLine("Failed to get invoices. {0}", ex);
         }
     }
 

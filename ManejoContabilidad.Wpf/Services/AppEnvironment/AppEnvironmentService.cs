@@ -29,6 +29,21 @@ internal class AppEnvironmentService
 
     private static IConfiguration CreateConfiguration()
     {
+        return ConfigureFromFile();
+    }
+
+    private static IConfigurationRoot ConfigureFromFile()
+    {
+        var configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+        return configuration.Build();
+    }
+
+    [Obsolete]
+    private static IConfigurationRoot ConfigureFromStream()
+    {
         var assembly = Assembly.GetAssembly(typeof(App));
         var stream = assembly?.GetManifestResourceStream(typeof(App), "appsettings.json");
 
