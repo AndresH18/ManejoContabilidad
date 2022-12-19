@@ -17,6 +17,14 @@ public class ExcelWriter : IExcelWriter, IDisposable
 
     ~ExcelWriter() => Dispose();
 
+    public void Write(Shared.Models.Invoice invoice)
+    {
+        WriteClient(invoice.ClientName);
+        WritePrice(invoice.Price);
+        WriteInvoiceNumber(invoice.InvoiceNumber);
+        WriteDate(invoice.CreationDate);
+    }
+
     public void WriteClient(string client)
     {
         var cell = GetClientCell();
