@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using ExcelModule;
 using ManejoContabilidad.Wpf.Services.Invoice;
 using ManejoContabilidad.Wpf.Services.Navigation;
 using ManejoContabilidad.Wpf.Services.RequestProvider;
@@ -25,6 +26,15 @@ internal class AppEnvironmentService
     {
         var section = Configuration.GetRequiredSection("AppHost:uri");
         return section.Value!;
+    }
+
+    public ExcelData GetExcelData()
+    {
+        var section = Configuration.GetRequiredSection("ExcelData");
+
+        var excelData = new ExcelData();
+        section.Bind(excelData);
+        return excelData;
     }
 
     private static IConfiguration CreateConfiguration()

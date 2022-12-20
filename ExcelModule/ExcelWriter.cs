@@ -51,9 +51,10 @@ public class ExcelWriter : IExcelWriter, IDisposable
 
     public void Print()
     {
-        var sheet = (Excel.Worksheet) _app.Workbooks["ExcelTest.xlsx"].Sheets["Sheet1"];
+        var sheet = (Excel.Worksheet) _app.Workbooks[ExcelData.WorkbookName].Sheets[ExcelData.WorksheetName];
         sheet.PrintOut(1, 1, 1, true);
     }
+
 
     public void Dispose()
     {

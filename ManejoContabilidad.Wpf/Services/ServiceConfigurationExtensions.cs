@@ -1,4 +1,5 @@
-﻿using ManejoContabilidad.Wpf.Helpers.Dialog;
+﻿using ExcelModule;
+using ManejoContabilidad.Wpf.Helpers.Dialog;
 using ManejoContabilidad.Wpf.Services.AppEnvironment;
 using ManejoContabilidad.Wpf.Services.Invoice;
 using ManejoContabilidad.Wpf.Services.Navigation;
@@ -19,6 +20,16 @@ public static class ServiceConfigurationExtensions
         services.AddSingleton<IInvoiceService, InvoiceServiceTest>();
         services.AddSingleton<IRequestProvider, RequestProvider.RequestProvider>();
         services.AddSingleton<AppEnvironmentService>();
+
+        // services.AddSingleton<IExcelWriter, ExcelWriter>(x =>
+        // {
+        //     var environment = x.GetRequiredService<AppEnvironmentService>();
+        //     return new ExcelWriter
+        //     {
+        //         ExcelData = environment.GetExcelData(),
+        //     };
+        // });
+        services.AddSingleton<IExcelWriter, EmptyExcelWriter>();
     }
 
     public static void RegisterViewModels(this ServiceCollection services)

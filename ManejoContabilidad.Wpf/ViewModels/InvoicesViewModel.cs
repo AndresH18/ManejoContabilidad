@@ -2,17 +2,20 @@
 using CommunityToolkit.Mvvm.Input;
 using ManejoContabilidad.Wpf.Helpers.Dialog;
 using ManejoContabilidad.Wpf.Services.Invoice;
-using Shared.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
+using ExcelModule;
+using Invoice = Shared.Models.Invoice;
 
 namespace ManejoContabilidad.Wpf.ViewModels;
 
 [INotifyPropertyChanged]
 public partial class InvoicesViewModel
 {
+    private readonly IExcelWriter _excel;
     private readonly IInvoiceService _invoiceService;
     private readonly IDialogHelper<Invoice> _dialogHelper;
 
@@ -25,10 +28,14 @@ public partial class InvoicesViewModel
      NotifyCanExecuteChangedFor(nameof(GoBackCommand))]
     private int _pageIndex;
 
+    public int? SearchNumber { get; set; }
+
     public ObservableCollection<Invoice> Invoices { get; private set; } = new();
 
-    public InvoicesViewModel(IInvoiceService invoiceService, IDialogHelper<Invoice> dialogHelper)
+    public InvoicesViewModel(IInvoiceService invoiceService, IDialogHelper<Invoice> dialogHelper,
+        IExcelWriter excelWriter)
     {
+        _excel = excelWriter;
         _invoiceService = invoiceService;
         _dialogHelper = dialogHelper;
 
@@ -103,10 +110,20 @@ public partial class InvoicesViewModel
         // TODO: notify error
     }
 
+    [RelayCommand]
+    private void SearchInvoice()
+    {
+        var invoice = Invoices.FirstOrDefault(i => i.InvoiceNumber == SearchNumber);
+        if (invoice == null)
+            return;
+        SelectedInvoice = invoice;
+    }
+
     [RelayCommand(CanExecute = nameof(IsInvoiceSelected))]
     private void Print(Invoice invoice)
     {
-        // TODO: Implement 
+        _excel.Write(invoice);
+        _excel.Print();
     }
 
     [RelayCommand(CanExecute = nameof(CanGoBack))]
