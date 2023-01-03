@@ -1,0 +1,101 @@
+﻿<Window x:Class="ManejoContabilidad.Wpf.Views.Invoice.InvoicePrintDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ManejoContabilidad.Wpf.Views.Invoice"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
+        SizeToContent="WidthAndHeight"
+        d:DesignHeight="200" d:DesignWidth="400"
+        MinHeight="150" MinWidth="250"
+        MaxHeight="500" MaxWidth="500"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
+        Title="InvoicePrintDialog">
+
+    <Window.Resources>
+
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="10, 5" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel HorizontalAlignment="Center"
+                    Grid.Row="0">
+
+            <TextBox Text="{Binding Path=InvoiceDto.Name, Mode=TwoWay}"
+                     ToolTip="{Binding Path=NameTooltip}" />
+
+            <TextBox Text="{Binding Path=InvoiceDto.InvoiceNumber}"
+                     ToolTip="{Binding Path=InvoiceNumberTooltip}" />
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBox Text="{Binding Path=InvoiceDto.Price, Mode=TwoWay, StringFormat='$ {0}'}"
+                         ToolTip="{Binding Path=PriceTooltip}"
+                         Grid.Column="0" />
+
+                <CheckBox Visibility="Collapsed"
+                          Content="Total"
+                          Checked="TotalToggleButton_OnChecked"
+                          VerticalContentAlignment="Center"
+                          Grid.Column="1" />
+            </Grid>
+
+            <DatePicker SelectedDate="{Binding Path=InvoiceDto.DateTime, Mode=TwoWay}"
+                        ToolTip="{Binding Path=DateTooltip}"
+                        Margin="5" />
+
+            <!-- radiobuttons para decidir si es pago o abono -->
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <RadioButton Content="Pago"
+                             IsChecked="True"
+                             Checked="PagoRadioButton_OnChecked"
+                             Grid.Column="0" />
+
+                <RadioButton Content="Abono"
+                             Checked="AbonoRadioButton_OnChecked"
+                             Grid.Column="1" />
+            </Grid>
+
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Grid.Row="1">
+
+            <Button Content="Imprimir"
+                    Click="AcceptButton_OnClick" />
+
+            <Button Visibility="Collapsed"
+                    Content="Repetir Impresión"
+                    ToolTip="{Binding Path=SimplePrintTooltip}" />
+
+            <Button Content="Cancelar"
+                    Click="CancelButton_OnClick"/>
+
+        </StackPanel>
+    </Grid>
+</Window>

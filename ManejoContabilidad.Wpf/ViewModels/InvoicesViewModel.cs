@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using ExcelModule;
+using ManejoContabilidad.Wpf.Views.Invoice;
 using Invoice = Shared.Models.Invoice;
 
 namespace ManejoContabilidad.Wpf.ViewModels;
@@ -27,6 +28,8 @@ public partial class InvoicesViewModel
     [ObservableProperty,
      NotifyCanExecuteChangedFor(nameof(GoBackCommand))]
     private int _pageIndex;
+
+    private DateTime _lastPrintedDateTime = DateTime.Now;
 
     public int? SearchNumber { get; set; }
 
@@ -122,8 +125,19 @@ public partial class InvoicesViewModel
     [RelayCommand(CanExecute = nameof(IsInvoiceSelected))]
     private void Print(Invoice invoice)
     {
-        _excel.Write(invoice);
-        _excel.Print();
+        var dialog = new InvoicePrintDialog(invoice, _lastPrintedDateTime)
+        {
+            Owner = App.Current.MainWindow,
+        };
+        var result = dialog.ShowDialog();
+
+        if (result == true)
+        {
+            // print
+            _excel.Write(invoice);
+            _excel.Print();
+            _lastPrintedDateTime = dialog.InvoiceDto.DateTime;
+        }
     }
 
     [RelayCommand(CanExecute = nameof(CanGoBack))]

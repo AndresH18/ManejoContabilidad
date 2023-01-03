@@ -29,6 +29,7 @@ public static class ServiceConfigurationExtensions
         //         ExcelData = environment.GetExcelData(),
         //     };
         // });
+        // TODO: replace for production version of Excel Writer
         services.AddSingleton<IExcelWriter, EmptyExcelWriter>();
     }
 
