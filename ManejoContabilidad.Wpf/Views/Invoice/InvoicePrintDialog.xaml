@@ -32,6 +32,11 @@
 
     </Window.Resources>
 
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding Path=CancelCommand}"
+                    Key="Escape" />
+    </Window.InputBindings>
+
     <Grid>
 
         <Grid.RowDefinitions>

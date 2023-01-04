@@ -71,10 +71,16 @@ public partial class InvoicePrintDialog : Window
                 Close();
                 break;
             case "cancel":
-                DialogResult = false;
-                Close();
+                Cancel();
                 break;
         }
+    }
+
+    [RelayCommand]
+    private void Cancel()
+    {
+        DialogResult = false;
+        Close();
     }
     
 }

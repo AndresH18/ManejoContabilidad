@@ -107,8 +107,7 @@ public partial class InvoicesViewModel
 
         if (result is not null)
         {
-            Invoices.Remove(invoice);
-            Invoices.Add(result);
+            invoice.CopyFrom(result);
         }
         // TODO: notify error
     }

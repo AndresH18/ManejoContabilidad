@@ -37,6 +37,14 @@
         </Style>
     </Window.Resources>
 
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding Path=ConfirmCommand}"
+                    Modifiers="Control"
+                    Key="Enter" />
+        <KeyBinding Command="{Binding Path=CancelCommand}"
+                    Key="Escape" />
+    </Window.InputBindings>
+
     <StackPanel>
         <Grid>
             <Grid.ColumnDefinitions>
