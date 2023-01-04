@@ -58,17 +58,23 @@ public partial class InvoicePrintDialog : Window
     {
         InvoiceDto.PaymentType = Models::InvoicePrintDto.TipoPago.Abono;
     }
-
-    private void AcceptButton_OnClick(object sender, RoutedEventArgs e)
+    
+    private void PrintButton_OnClick(object sender, RoutedEventArgs e)
     {
-        // TODO: verify model state
-        DialogResult = true;
-        Close();
-    }
+        var printTag = (sender as Button)?.Tag as string;
 
-    private void CancelButton_OnClick(object sender, RoutedEventArgs e)
-    {
-        DialogResult = false;
-        Close();
+        switch (printTag)
+        {
+            case "print":
+                // TODO: verify model State
+                DialogResult = true;
+                Close();
+                break;
+            case "cancel":
+                DialogResult = false;
+                Close();
+                break;
+        }
     }
+    
 }

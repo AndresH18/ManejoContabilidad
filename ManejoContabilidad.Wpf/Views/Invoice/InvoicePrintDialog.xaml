@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
         SizeToContent="WidthAndHeight"
-        d:DesignHeight="200" d:DesignWidth="400"
+        d:DesignHeight="250" d:DesignWidth="400"
         MinHeight="150" MinWidth="250"
         MaxHeight="500" MaxWidth="500"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
@@ -25,24 +25,58 @@
             <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
 
+        <Style TargetType="Label">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
     </Window.Resources>
 
     <Grid>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel HorizontalAlignment="Center"
-                    Grid.Row="0">
+        <Grid HorizontalAlignment="Center"
+              Grid.Row="0">
 
+            <!-- Column Definitions -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Row Definitions -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Column 0: labels -->
+
+            <Label Content="Nombre" Grid.Row="0" Grid.Column="0" />
+            <Label Content="Numero Factura" Grid.Row="1" Grid.Column="0" />
+            <Label Content="Valor" Grid.Row="2" Grid.Column="0" />
+            <Label Content="Fecha Pago" Grid.Row="3" Grid.Column="0" />
+
+            <!-- Column 1: inputs -->
             <TextBox Text="{Binding Path=InvoiceDto.Name, Mode=TwoWay}"
-                     ToolTip="{Binding Path=NameTooltip}" />
+                     ToolTip="{Binding Path=NameTooltip}"
+                     Grid.Row="0"
+                     Grid.Column="1" />
 
             <TextBox Text="{Binding Path=InvoiceDto.InvoiceNumber}"
-                     ToolTip="{Binding Path=InvoiceNumberTooltip}" />
+                     ToolTip="{Binding Path=InvoiceNumberTooltip}"
+                     Grid.Row="1"
+                     Grid.Column="1" />
 
-            <Grid>
+            <Grid Grid.Column="1"
+                  Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
@@ -61,10 +95,15 @@
 
             <DatePicker SelectedDate="{Binding Path=InvoiceDto.DateTime, Mode=TwoWay}"
                         ToolTip="{Binding Path=DateTooltip}"
-                        Margin="5" />
+                        Margin="5"
+                        Grid.Column="1"
+                        Grid.Row="3" />
 
             <!-- radiobuttons para decidir si es pago o abono -->
-            <Grid Margin="5">
+            <Grid Margin="5"
+                  Grid.Row="4"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -80,21 +119,23 @@
                              Grid.Column="1" />
             </Grid>
 
-        </StackPanel>
+        </Grid>
 
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     Grid.Row="1">
 
             <Button Content="Imprimir"
-                    Click="AcceptButton_OnClick" />
+                    Tag="print"
+                    Click="PrintButton_OnClick" />
 
-            <Button Visibility="Collapsed"
-                    Content="Repetir Impresión"
-                    ToolTip="{Binding Path=SimplePrintTooltip}" />
+            <!-- <Button Visibility="Collapsed" -->
+            <!--         Content="Repetir Impresión" -->
+            <!--         ToolTip="{Binding Path=SimplePrintTooltip}" /> -->
 
             <Button Content="Cancelar"
-                    Click="CancelButton_OnClick"/>
+                    Tag="cancel"
+                    Click="PrintButton_OnClick" />
 
         </StackPanel>
     </Grid>
