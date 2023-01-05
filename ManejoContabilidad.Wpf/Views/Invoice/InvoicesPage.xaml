@@ -19,6 +19,7 @@
         <DataTemplate x:Key="DetailsTemplate" DataType="models:Invoice">
             <controls:InvoiceDetailsControl />
         </DataTemplate>
+
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -99,6 +100,20 @@
                   RowDetailsTemplate="{StaticResource DetailsTemplate}"
                   Margin="5, 0"
                   Grid.Row="1">
+
+            <DataGrid.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick"
+                              Command="{Binding Path=EditInvoiceCommand}"
+                              CommandParameter="{Binding Path=SelectedInvoice}" />
+                <MouseBinding MouseAction="RightDoubleClick"
+                              Command="{Binding Path=PrintCommand}"
+                              CommandParameter="{Binding Path=SelectedInvoice}" />
+
+                <KeyBinding Key="P"
+                            Modifiers="Control"
+                            Command="{Binding Path=PrintCommand}"
+                            CommandParameter="{Binding Path=SelectedInvoice}" />
+            </DataGrid.InputBindings>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Factura"
                                     Binding="{Binding Path=InvoiceNumber, StringFormat=#{0}}"
