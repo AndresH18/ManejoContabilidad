@@ -1,16 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using CommunityToolkit.Mvvm.Input;
 using Models = Shared.Models;
 
@@ -34,14 +24,6 @@ public partial class InvoicePrintDialog : Window
         InvoiceDto = new Models.InvoicePrintDto(invoice) {DateTime = lastDateTime};
 
         InitializeComponent();
-    }
-
-    public static InvoicePrintDialog CreatePrintDialog(Models::Invoice invoice, DateTime lastDateTime)
-    {
-        return new InvoicePrintDialog(invoice, lastDateTime)
-        {
-            Owner = App.Current.MainWindow,
-        };
     }
 
     private void TotalToggleButton_OnChecked(object sender, RoutedEventArgs e)

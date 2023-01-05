@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using ExcelModule;
-using ManejoContabilidad.Wpf.Services.Invoice;
-using ManejoContabilidad.Wpf.Services.Navigation;
-using ManejoContabilidad.Wpf.Services.RequestProvider;
 using Microsoft.Extensions.Configuration;
 
 namespace ManejoContabilidad.Wpf.Services.AppEnvironment;
 
 internal class AppEnvironmentService
 {
-    public IConfiguration Configuration { get; private set; }
+    public IConfiguration Configuration { get; }
 
     public AppEnvironmentService()
     {
@@ -52,6 +45,7 @@ internal class AppEnvironmentService
     }
 
     [Obsolete]
+    // ReSharper disable once UnusedMember.Local
     private static IConfigurationRoot ConfigureFromStream()
     {
         var assembly = Assembly.GetAssembly(typeof(App));

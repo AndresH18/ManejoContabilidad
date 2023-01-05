@@ -72,6 +72,7 @@ public partial class InvoiceWindow : Window
         return VerifyModel();
     }
 
+    // ReSharper disable once UnusedMember.Local
     private bool VerifyView()
     {
         return !(Validation.GetHasError(PriceTextBox) ||

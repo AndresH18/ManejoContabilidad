@@ -17,7 +17,7 @@ public static class ServiceConfigurationExtensions
     {
         // Singleton
         services.AddSingleton<INavigationService, NavigationService>();
-        services.AddSingleton<IInvoiceService, InvoiceServiceTest>();
+        services.AddSingleton<IInvoiceService, InvoiceService>();
         services.AddSingleton<IRequestProvider, RequestProvider.RequestProvider>();
         services.AddSingleton<AppEnvironmentService>();
 

@@ -72,6 +72,6 @@ public class Invoice : ObservableValidator
 
     public bool IsValid()
     {
-        return HasErrors && !string.IsNullOrWhiteSpace(_clientName);
+        return !(HasErrors || string.IsNullOrWhiteSpace(_clientName));
     }
 }

@@ -65,7 +65,7 @@ public partial class InvoicesViewModel
     }
 
     [RelayCommand]
-    private async void AddInvoice()
+    private async Task AddInvoice()
     {
         var invoice = _dialogHelper.Add();
         if (invoice is null)
@@ -81,7 +81,7 @@ public partial class InvoicesViewModel
     }
 
     [RelayCommand(CanExecute = nameof(IsInvoiceSelected))]
-    private async void DeleteInvoice(Invoice invoice)
+    private async Task DeleteInvoice(Invoice invoice)
     {
         var result = _dialogHelper.Delete(invoice);
         if (!result)
@@ -97,7 +97,7 @@ public partial class InvoicesViewModel
     }
 
     [RelayCommand(CanExecute = nameof(IsInvoiceSelected))]
-    private async void EditInvoice(Invoice invoice)
+    private async Task EditInvoice(Invoice invoice)
     {
         var result = _dialogHelper.Edit(invoice);
         if (result is null)
