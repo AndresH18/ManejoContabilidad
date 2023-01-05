@@ -1,75 +1,59 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Runtime.CompilerServices;
+﻿using System.ComponentModel.DataAnnotations;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Shared.Models;
 
-public class Invoice : INotifyPropertyChanged
+public class Invoice : ObservableValidator
 {
     private int _invoiceNumber;
     private double _price;
-    private DateTime _creationTime;
+    private DateTime _creationDate;
     private string? _path;
-    private string _clientName = default!;
+    private string _clientName;
 
     public int Id { get; set; }
 
     public int InvoiceNumber
     {
         get => _invoiceNumber;
-        set
-        {
-            _invoiceNumber = value;
-            OnPropertyChanged();
-        }
+        set => SetProperty(ref _invoiceNumber, value, true);
     }
 
     public DateTime CreationDate
     {
-        get => _creationTime;
-        set
-        {
-            _creationTime = value;
-            OnPropertyChanged();
-        }
+        get => _creationDate;
+        set => SetProperty(ref _creationDate, value, true);
     }
 
     [Range(0, double.PositiveInfinity)]
     public double Price
     {
         get => _price;
-        set
-        {
-            if (value < 0)
-                return;
-            _price = value;
-            OnPropertyChanged();
-        }
+        set => SetProperty(ref _price, value, true);
     }
 
     public string? Path
     {
         get => _path;
-        set
-        {
-            _path = value;
-            OnPropertyChanged();
-        }
+        set => SetProperty(ref _path, value, true);
     }
 
     /* Relationships */
     // public int ClientId { get; set; }
     // public virtual Client Client { get; set; } = default!;
-    [StringLength(100)]
+    [StringLength(100), MinLength(1)]
     [Required]
     public string ClientName
     {
         get => _clientName;
-        set
-        {
-            _clientName = value;
-            OnPropertyChanged();
-        }
+        set => SetProperty(ref _clientName, value);
+    }
+
+
+    public Invoice()
+    {
+        _creationDate = DateTime.Now;
+        _clientName = string.Empty;
     }
 
     public Invoice Clone()
@@ -86,10 +70,8 @@ public class Invoice : INotifyPropertyChanged
         ClientName = source.ClientName;
     }
 
-    private void OnPropertyChanged([CallerMemberName] string name = "")
+    public bool IsValid()
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        return HasErrors && !string.IsNullOrWhiteSpace(_clientName);
     }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
 }
