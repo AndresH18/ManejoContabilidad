@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shared.Models;
 
 namespace Shared;
@@ -10,9 +9,7 @@ public class TestDbContext : DbContext
     private const string TestDbName = "contab.db";
     private const string TestConnectionString = $"Data Source={TestDbDirectory}/{TestDbName}";
 
-    private static readonly (string, string) TestDbAuxNames = ($"{TestDbName}-shm", $"{TestDbName}-wal");
-
-    public DbSet<Client> Clients { get; set; } = null!;
+    // public DbSet<Client> Clients { get; set; } = null!;
     public DbSet<Invoice> Invoices { get; set; } = null!;
 
     public static async void EnsureDatabaseCreated()
@@ -44,11 +41,13 @@ public class TestDbContext : DbContext
         await db.Invoices.AddRangeAsync(new Invoice {Id = 1, ClientName = "Andres", InvoiceNumber = 2},
             new Invoice
             {
-                Id = 2, ClientName = "Andres",
+                Id = 2,
+                ClientName = "Andres",
                 Path = @"C:\Users\andre\Desktop\Blazor-for-ASP-NET-Web-Forms-Developers.pdf",
-                InvoiceNumber = 344
+                InvoiceNumber = 344,
+                Price = 123_676
             },
-            new Invoice {Id = 3, ClientName = "David", InvoiceNumber = 1234},
+            new Invoice {Id = 3, ClientName = "David", InvoiceNumber = 1_234_567, Price = 93_451_222},
             new Invoice {Id = 4, ClientName = "Juan Manuel", InvoiceNumber = 9856});
 
         await db.SaveChangesAsync();

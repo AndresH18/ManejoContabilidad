@@ -1,9 +1,6 @@
 ﻿using System.Diagnostics;
-using System.Threading;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using Models = Shared.Models;
 
 namespace ManejoContabilidad.Wpf.Views.Controls
 {
@@ -23,7 +20,7 @@ namespace ManejoContabilidad.Wpf.Views.Controls
             {
                 UseShellExecute = true
             };
-            var process = Process.Start(processStartInfo);
+            Process.Start(processStartInfo);
             e.Handled = true;
         }
     }

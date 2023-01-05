@@ -1,48 +1,57 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ManejoContabilidad.Wpf.Helpers.Dialog;
-using ManejoContabilidad.Wpf.Services.Client;
 using ManejoContabilidad.Wpf.Services.Invoice;
-using Shared.Models;
+using System;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using ExcelModule;
+using ManejoContabilidad.Wpf.Views.Invoice;
+using Invoice = Shared.Models.Invoice;
 
 namespace ManejoContabilidad.Wpf.ViewModels;
 
 [INotifyPropertyChanged]
 public partial class InvoicesViewModel
 {
+    private readonly IExcelWriter _excel;
     private readonly IInvoiceService _invoiceService;
     private readonly IDialogHelper<Invoice> _dialogHelper;
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(EditInvoiceCommand))]
     [NotifyCanExecuteChangedFor(nameof(DeleteInvoiceCommand))]
-    [NotifyCanExecuteChangedFor(nameof(ShowInvoiceCommand))]
     private Invoice? _selectedInvoice;
 
     [ObservableProperty,
      NotifyCanExecuteChangedFor(nameof(GoBackCommand))]
     private int _pageIndex;
 
+    private DateTime _lastPrintedDateTime = DateTime.Now;
+
+    public int? SearchNumber { get; set; }
+
     public ObservableCollection<Invoice> Invoices { get; private set; } = new();
 
-    public InvoicesViewModel(IInvoiceService invoiceService, IDialogHelper<Invoice> dialogHelper)
+    public InvoicesViewModel(IInvoiceService invoiceService, IDialogHelper<Invoice> dialogHelper,
+        IExcelWriter excelWriter)
     {
+        _excel = excelWriter;
         _invoiceService = invoiceService;
         _dialogHelper = dialogHelper;
 
-        GetInvoicesAsync();
+        GetInvoices();
     }
 
-    private async void GetInvoicesAsync(int page = 0)
+    private async void GetInvoices(int page = 0)
     {
         try
         {
-            var list = await _invoiceService.GetAllAsync();
-
             Invoices.Clear();
+
+            var list = await _invoiceService.GetAllAsync(page);
 
             foreach (var invoice in list)
             {
@@ -51,12 +60,12 @@ public partial class InvoicesViewModel
         }
         catch (Exception ex)
         {
-            Debug.WriteLine(ex);
+            Debug.WriteLine("Failed to get invoices. {0}", ex);
         }
     }
 
     [RelayCommand]
-    private async void AddInvoice()
+    private async Task AddInvoice()
     {
         var invoice = _dialogHelper.Add();
         if (invoice is null)
@@ -72,7 +81,7 @@ public partial class InvoicesViewModel
     }
 
     [RelayCommand(CanExecute = nameof(IsInvoiceSelected))]
-    private async void DeleteInvoice(Invoice invoice)
+    private async Task DeleteInvoice(Invoice invoice)
     {
         var result = _dialogHelper.Delete(invoice);
         if (!result)
@@ -88,7 +97,7 @@ public partial class InvoicesViewModel
     }
 
     [RelayCommand(CanExecute = nameof(IsInvoiceSelected))]
-    private async void EditInvoice(Invoice invoice)
+    private async Task EditInvoice(Invoice invoice)
     {
         var result = _dialogHelper.Edit(invoice);
         if (result is null)
@@ -98,16 +107,36 @@ public partial class InvoicesViewModel
 
         if (result is not null)
         {
-            Invoices.Remove(invoice);
-            Invoices.Add(result);
+            invoice.CopyFrom(result);
         }
         // TODO: notify error
     }
 
-    [RelayCommand(CanExecute = nameof(IsInvoiceSelected))]
-    private void ShowInvoice(Invoice invoice)
+    [RelayCommand]
+    private void SearchInvoice()
     {
-        _dialogHelper.Show(invoice);
+        var invoice = Invoices.FirstOrDefault(i => i.InvoiceNumber == SearchNumber);
+        if (invoice == null)
+            return;
+        SelectedInvoice = invoice;
+    }
+
+    [RelayCommand(CanExecute = nameof(IsInvoiceSelected))]
+    private void Print(Invoice invoice)
+    {
+        var dialog = new InvoicePrintDialog(invoice, _lastPrintedDateTime)
+        {
+            Owner = App.Current.MainWindow,
+        };
+        var result = dialog.ShowDialog();
+
+        if (result == true)
+        {
+            // print
+            _excel.Write(invoice);
+            _excel.Print();
+            _lastPrintedDateTime = dialog.InvoiceDto.DateTime;
+        }
     }
 
     [RelayCommand(CanExecute = nameof(CanGoBack))]

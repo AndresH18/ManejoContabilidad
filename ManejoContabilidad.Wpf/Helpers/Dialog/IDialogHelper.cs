@@ -6,11 +6,11 @@
 /// <typeparam name="T">Type of the object to display in dialogs</typeparam>
 public interface IDialogHelper<T>
 {
-    /// <summary>
-    /// Show <paramref name="t"/> on a dialog
-    /// </summary>
-    /// <param name="t">the object to display</param>
-    void Show(T t);
+    // /// <summary>
+    // /// Show <paramref name="t"/> on a dialog
+    // /// </summary>
+    // /// <param name="t">the object to display</param>
+    // void Show(T t);
 
     /// <summary>
     /// Display a dialog to create a new <typeparamref name="T"/>

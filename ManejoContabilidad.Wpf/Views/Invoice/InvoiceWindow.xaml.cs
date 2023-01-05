@@ -1,23 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
+using System;
+using System.Windows;
+using System.Windows.Controls;
 using Models = Shared.Models;
-using ValidationResult = System.ComponentModel.DataAnnotations.ValidationResult;
 
 
 namespace ManejoContabilidad.Wpf.Views.Invoice;
@@ -81,9 +68,11 @@ public partial class InvoiceWindow : Window
 
     private bool Verify()
     {
-        return VerifyView() && VerifyModel();
+        // return VerifyView() && VerifyModel();
+        return VerifyModel();
     }
 
+    // ReSharper disable once UnusedMember.Local
     private bool VerifyView()
     {
         return !(Validation.GetHasError(PriceTextBox) ||
@@ -94,12 +83,14 @@ public partial class InvoiceWindow : Window
     /// <summary>
     /// Verifies that the annotations on <see cref="Invoice"/> are Valid
     /// </summary>
-    /// <returns><b>true</b> if the <see cref="Invoice"/> is valid; <b>false</b> otherwise</returns>
+    /// <returns><b>true</b> if <see cref="Invoice"/> is valid; <b>false</b> otherwise</returns>
     private bool VerifyModel()
     {
-        var context = new ValidationContext(Invoice);
-        var results = new List<ValidationResult>();
-        var isValid = Validator.TryValidateObject(Invoice, context, results, true);
-        return isValid;
+        return Invoice.IsValid();
+    }
+
+    private void PriceTextBox_OnGotFocus(object sender, RoutedEventArgs e)
+    {
+        PriceTextBox.SelectAll();
     }
 }

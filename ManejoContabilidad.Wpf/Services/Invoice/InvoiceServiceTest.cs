@@ -1,39 +1,63 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Shared;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ManejoContabilidad.Wpf.Services.Invoice;
 
-public class InvoiceServiceTest : IInvoiceService
+public class InvoiceServiceTest : IInvoiceService, IDisposable
 {
-    public async Task<List<Shared.Models.Invoice>> GetAllAsync()
+    // public const int RowsPerPage = 2;
+
+    private readonly SemaphoreSlim _semaphore = new(1);
+
+    public async Task<List<Shared.Models.Invoice>> GetAllAsync(int page)
     {
-        await Task.Run(() => Thread.Sleep(2000));
+        await _semaphore.WaitAsync();
+        // await Task.Run(() => Thread.Sleep(2000));
 
         await using var db = new TestDbContext();
 
-        // return await db.Invoices.Include(i => i.Client).ToListAsync();
-        return await db.Invoices.ToListAsync();
+        var list = await db.Invoices
+            .OrderBy(i => i.InvoiceNumber)
+            // .Skip(page * RowsPerPage)
+            // .Take(RowsPerPage)
+            .ToListAsync();
+
+        _semaphore.Release();
+
+        return list;
     }
 
     public async Task<Shared.Models.Invoice?> AddAsync(Shared.Models.Invoice invoice)
     {
-        // await Task.Run(() => Thread.Sleep(2000));
+        await _semaphore.WaitAsync();
+
+        await Task.Run(() => Thread.Sleep(10000));
         await using var db = new TestDbContext();
         await db.Invoices.AddAsync(invoice);
         await db.SaveChangesAsync();
+
+        _semaphore.Release();
+
         return invoice;
     }
 
     public async Task<Shared.Models.Invoice?> DeleteAsync(Shared.Models.Invoice invoice)
     {
+        await _semaphore.WaitAsync();
+
         await Task.Run(() => Thread.Sleep(2000));
+
         await using var db = new TestDbContext();
         db.Invoices.Remove(invoice);
         await db.SaveChangesAsync();
+
+        _semaphore.Release();
+
         return invoice;
     }
 
@@ -49,5 +73,10 @@ public class InvoiceServiceTest : IInvoiceService
         await db.SaveChangesAsync();
 
         return invoice;
+    }
+
+    public void Dispose()
+    {
+        _semaphore.Dispose();
     }
 }

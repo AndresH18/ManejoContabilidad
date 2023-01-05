@@ -24,14 +24,26 @@
         </Style>
 
         <Style TargetType="TextBox">
-            <Setter Property="VerticalContentAlignment" Value="Center"  />
-            <Setter Property="Margin" Value="5, 0"  />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Margin" Value="5, 1" />
+        </Style>
+
+        <Style TargetType="DatePicker">
+            <Setter Property="Margin" Value="5, 1" />
         </Style>
 
         <Style TargetType="Button">
-            <Setter Property="Margin" Value="5,0" />
+            <Setter Property="Margin" Value="5,1" />
         </Style>
     </Window.Resources>
+
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding Path=ConfirmCommand}"
+                    Modifiers="Control"
+                    Key="Enter" />
+        <KeyBinding Command="{Binding Path=CancelCommand}"
+                    Key="Escape" />
+    </Window.InputBindings>
 
     <StackPanel>
         <Grid>
@@ -41,6 +53,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -57,8 +70,11 @@
             <Label Content="Valor"
                    Grid.Row="2"
                    Grid.Column="0" />
-            <Label Content="Ruta"
+            <Label Content="Fecha de Generación"
                    Grid.Row="3"
+                   Grid.Column="0" />
+            <Label Content="Ruta"
+                   Grid.Row="4"
                    Grid.Column="0" />
 
             <!-- Column 1 -->
@@ -75,11 +91,18 @@
             <TextBox x:Name="PriceTextBox"
                      Text="{Binding Invoice.Price, Mode=TwoWay, StringFormat={}{0:C}}"
                      IsReadOnly="{Binding Path=IsReadOnly}"
+                     GotFocus="PriceTextBox_OnGotFocus"
+                     GotMouseCapture="PriceTextBox_OnGotFocus"
                      Grid.Column="1"
                      Grid.Row="2" />
 
+            <DatePicker SelectedDate="{Binding Path=Invoice.CreationDate, Mode=TwoWay}"
+                        Grid.Row="3"
+                        Grid.Column="1">
+            </DatePicker>
+
             <Grid Grid.Column="1"
-                  Grid.Row="3">
+                  Grid.Row="4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*" />
                     <ColumnDefinition Width="Auto" />

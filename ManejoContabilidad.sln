@@ -5,9 +5,13 @@ VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManejoContabilidad.WinUi", "ManejoContabilidad.WinUi\ManejoContabilidad.WinUi.csproj", "{61831BD0-D68D-428E-AAC3-0A9F8B0150E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManejoContabilidad.Wpf", "ManejoContabilidad.Wpf\ManejoContabilidad.Wpf.csproj", "{D1A09785-F08A-497E-8101-359F7F174C02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManejoContabilidad.Wpf", "ManejoContabilidad.Wpf\ManejoContabilidad.Wpf.csproj", "{D1A09785-F08A-497E-8101-359F7F174C02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{413C2A13-CED6-4FC2-9700-1E2BA2E86B4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{413C2A13-CED6-4FC2-9700-1E2BA2E86B4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelModule", "ExcelModule\ExcelModule.csproj", "{FF3D0DA1-D393-48AF-B3F5-8A6D6AE55450}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{693A4A77-4668-4130-8632-7BB8EC9425A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +81,38 @@ Global
 		{413C2A13-CED6-4FC2-9700-1E2BA2E86B4F}.Release|x64.Build.0 = Release|Any CPU
 		{413C2A13-CED6-4FC2-9700-1E2BA2E86B4F}.Release|x86.ActiveCfg = Release|Any CPU
 		{413C2A13-CED6-4FC2-9700-1E2BA2E86B4F}.Release|x86.Build.0 = Release|Any CPU
+		{FF3D0DA1-D393-48AF-B3F5-8A6D6AE55450}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF3D0DA1-D393-48AF-B3F5-8A6D6AE55450}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF3D0DA1-D393-48AF-B3F5-8A6D6AE55450}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{FF3D0DA1-D393-48AF-B3F5-8A6D6AE55450}.Debug|arm64.Build.0 = Debug|Any CPU
+		{FF3D0DA1-D393-48AF-B3F5-8A6D6AE55450}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FF3D0DA1-D393-48AF-B3F5-8A6D6AE55450}.Debug|x64.Build.0 = Debug|Any CPU
+		{FF3D0DA1-D393-48AF-B3F5-8A6D6AE55450}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FF3D0DA1-D393-48AF-B3F5-8A6D6AE55450}.Debug|x86.Build.0 = Debug|Any CPU
+		{FF3D0DA1-D393-48AF-B3F5-8A6D6AE55450}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF3D0DA1-D393-48AF-B3F5-8A6D6AE55450}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF3D0DA1-D393-48AF-B3F5-8A6D6AE55450}.Release|arm64.ActiveCfg = Release|Any CPU
+		{FF3D0DA1-D393-48AF-B3F5-8A6D6AE55450}.Release|arm64.Build.0 = Release|Any CPU
+		{FF3D0DA1-D393-48AF-B3F5-8A6D6AE55450}.Release|x64.ActiveCfg = Release|Any CPU
+		{FF3D0DA1-D393-48AF-B3F5-8A6D6AE55450}.Release|x64.Build.0 = Release|Any CPU
+		{FF3D0DA1-D393-48AF-B3F5-8A6D6AE55450}.Release|x86.ActiveCfg = Release|Any CPU
+		{FF3D0DA1-D393-48AF-B3F5-8A6D6AE55450}.Release|x86.Build.0 = Release|Any CPU
+		{693A4A77-4668-4130-8632-7BB8EC9425A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{693A4A77-4668-4130-8632-7BB8EC9425A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{693A4A77-4668-4130-8632-7BB8EC9425A1}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{693A4A77-4668-4130-8632-7BB8EC9425A1}.Debug|arm64.Build.0 = Debug|Any CPU
+		{693A4A77-4668-4130-8632-7BB8EC9425A1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{693A4A77-4668-4130-8632-7BB8EC9425A1}.Debug|x64.Build.0 = Debug|Any CPU
+		{693A4A77-4668-4130-8632-7BB8EC9425A1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{693A4A77-4668-4130-8632-7BB8EC9425A1}.Debug|x86.Build.0 = Debug|Any CPU
+		{693A4A77-4668-4130-8632-7BB8EC9425A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{693A4A77-4668-4130-8632-7BB8EC9425A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{693A4A77-4668-4130-8632-7BB8EC9425A1}.Release|arm64.ActiveCfg = Release|Any CPU
+		{693A4A77-4668-4130-8632-7BB8EC9425A1}.Release|arm64.Build.0 = Release|Any CPU
+		{693A4A77-4668-4130-8632-7BB8EC9425A1}.Release|x64.ActiveCfg = Release|Any CPU
+		{693A4A77-4668-4130-8632-7BB8EC9425A1}.Release|x64.Build.0 = Release|Any CPU
+		{693A4A77-4668-4130-8632-7BB8EC9425A1}.Release|x86.ActiveCfg = Release|Any CPU
+		{693A4A77-4668-4130-8632-7BB8EC9425A1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

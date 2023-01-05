@@ -24,32 +24,35 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid>
-        <StackPanel Grid.Column="0">
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Nombre Cliente" />
-                <TextBlock Text="{Binding Path=ClientName}" />
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Numero Factura" />
-                <TextBlock Text="{Binding  Path=InvoiceNumber}" />
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Valor" />
-                <TextBlock Text="{Binding Path=Price, StringFormat={}{0:C}}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Ruta" />
-                <TextBlock>
-                    <Hyperlink
-                        NavigateUri="{Binding Path=Path, Converter={StaticResource StringUriConverter}, TargetNullValue=''}"
-                        RequestNavigate="Path_OnRequestNavigate">
-                        <TextBlock Text="{Binding Path=Path}" />
-                    </Hyperlink>
-                </TextBlock>
-            </StackPanel>
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Nombre Cliente" />
+            <TextBlock Text="{Binding Path=ClientName}" />
         </StackPanel>
-    </Grid>
+
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Numero Factura" />
+            <TextBlock Text="{Binding  Path=InvoiceNumber}" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Valor" />
+            <TextBlock Text="{Binding Path=Price, StringFormat={}{0:C}}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Fecha Creación" />
+            <TextBlock Text="{Binding Path=CreationDate, StringFormat={}{0:d}}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Ruta" />
+            <TextBlock>
+                <Hyperlink
+                    NavigateUri="{Binding Path=Path, Converter={StaticResource StringUriConverter}, TargetNullValue=''}"
+                    RequestNavigate="Path_OnRequestNavigate">
+                    <TextBlock Text="{Binding Path=Path}" />
+                </Hyperlink>
+            </TextBlock>
+        </StackPanel>
+    </StackPanel>
+
 </UserControl>

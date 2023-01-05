@@ -1,7 +1,7 @@
-﻿using System;
-using System.Windows;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Shared;
+using System;
+using System.Windows;
 using static ManejoContabilidad.Wpf.Services.ServiceConfigurationExtensions;
 
 namespace ManejoContabilidad.Wpf;
@@ -11,6 +11,16 @@ namespace ManejoContabilidad.Wpf;
 /// </summary>
 public partial class App
 {
+    /// <summary>
+    ///     Gets the current <see cref="App" /> instance in use
+    /// </summary>
+    public new static App Current => (App) Application.Current;
+
+    /// <summary>
+    ///     Gets the <see cref="IServiceProvider" /> instance to resolve application services.
+    /// </summary>
+    public IServiceProvider Services { get; }
+
     public App()
     {
         Services = ConfigureServices();
@@ -26,17 +36,6 @@ public partial class App
         // Testing Purposes
         TestDbContext.EnsureDatabaseCreated();
     }
-
-    /// <summary>
-    ///     Gets the <see cref="IServiceProvider" /> instance to resolve application services.
-    /// </summary>
-    public IServiceProvider Services { get; }
-
-    /// <summary>
-    ///     Gets the current <see cref="App" /> instance in use
-    /// </summary>
-    public new static App Current => (App) Application.Current;
-
 
     private static IServiceProvider ConfigureServices()
     {
