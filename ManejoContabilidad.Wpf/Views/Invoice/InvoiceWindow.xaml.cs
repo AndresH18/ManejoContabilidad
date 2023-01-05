@@ -2,13 +2,9 @@
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Models = Shared.Models;
-using ValidationResult = System.ComponentModel.DataAnnotations.ValidationResult;
 
 
 namespace ManejoContabilidad.Wpf.Views.Invoice;
