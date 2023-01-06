@@ -17,12 +17,12 @@ public class ExcelWriter : IExcelWriter, IDisposable
 
     ~ExcelWriter() => Dispose();
 
-    public void Write(Shared.Models.Invoice invoice)
+    public void Write(Shared.Models.InvoicePrintDto invoice)
     {
-        WriteClient(invoice.ClientName);
+        WriteClient(invoice.Name);
         WritePrice(invoice.Price);
         WriteInvoiceNumber(invoice.InvoiceNumber);
-        WriteDate(invoice.CreationDate);
+        WriteDate(invoice.DateTime);
     }
 
     public void WriteClient(string client)

@@ -4,7 +4,7 @@ namespace ExcelModule;
 
 public interface IExcelWriter
 {
-    public void Write(Models::Invoice invoice);
+    public void Write(Models::InvoicePrintDto invoiceDto);
     public void WriteClient(string client);
     public void WriteDate(DateTime date);
     public void WritePrice(double price);
