@@ -7,7 +7,7 @@ public class EmptyExcelWriter : IExcelWriter
         
     }
 
-    public void Write(Shared.Models.Invoice invoice)
+    public void Write(Shared.Models.InvoicePrintDto invoice)
     {
         
     }

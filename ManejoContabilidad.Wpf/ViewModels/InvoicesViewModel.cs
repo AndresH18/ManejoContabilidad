@@ -133,7 +133,7 @@ public partial class InvoicesViewModel
         if (result == true)
         {
             // print
-            _excel.Write(invoice);
+            _excel.Write(dialog.InvoiceDto);
             _excel.Print();
             _lastPrintedDateTime = dialog.InvoiceDto.DateTime;
         }

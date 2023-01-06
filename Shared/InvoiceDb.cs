@@ -25,5 +25,6 @@ public class InvoiceDb : DbContext
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<Invoice>().ToTable(t => t.IsTemporal());
+        modelBuilder.Entity<Invoice>().Property(i => i.CreationDate).HasDefaultValueSql("GETDATE()");
     }
 }
