@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using ExcelModule;
+using ManejoContabilidad.Wpf.Helpers;
 using ManejoContabilidad.Wpf.Views.Invoice;
 using Invoice = Shared.Models.Invoice;
 
@@ -47,21 +48,31 @@ public partial class InvoicesViewModel
 
     private async void GetInvoices(int page = 0)
     {
-        try
+        var serviceResult = await _invoiceService.GetAllAsync(page);
+
+        if (serviceResult.Status == ResultStatus.Ok)
         {
             Invoices.Clear();
-
-            var list = await _invoiceService.GetAllAsync(page);
-
-            foreach (var invoice in list)
+            foreach (var invoice in serviceResult.Value!)
             {
                 Invoices.Add(invoice);
             }
         }
-        catch (Exception ex)
-        {
-            Debug.WriteLine("Failed to get invoices. {0}", ex);
-        }
+        // try
+        // {
+        //     Invoices.Clear();
+        //
+        //     var list = await _invoiceService.GetAllAsync(page);
+        //
+        //     foreach (var invoice in list)
+        //     {
+        //         Invoices.Add(invoice);
+        //     }
+        // }
+        // catch (Exception ex)
+        // {
+        //     Debug.WriteLine("Failed to get invoices. {0}", ex);
+        // }
     }
 
     [RelayCommand]
@@ -71,12 +82,13 @@ public partial class InvoicesViewModel
         if (invoice is null)
             return;
 
-        invoice = await _invoiceService.AddAsync(invoice);
+        var serviceResult = await _invoiceService.AddAsync(invoice);
 
-        if (invoice is not null)
+        if (serviceResult.Status == ResultStatus.Ok)
         {
-            Invoices.Add(invoice);
+            Invoices.Add(serviceResult.Value!);
         }
+
         // TODO: notify error
     }
 
@@ -89,9 +101,9 @@ public partial class InvoicesViewModel
 
         var deleteResult = await _invoiceService.DeleteAsync(invoice);
 
-        if (deleteResult is not null)
+        if (deleteResult.Status == ResultStatus.Ok)
         {
-            Invoices.Remove(deleteResult);
+            Invoices.Remove(deleteResult.Value!);
         }
         // TODO: delete client
     }
@@ -99,16 +111,17 @@ public partial class InvoicesViewModel
     [RelayCommand(CanExecute = nameof(IsInvoiceSelected))]
     private async Task EditInvoice(Invoice invoice)
     {
-        var result = _dialogHelper.Edit(invoice);
-        if (result is null)
+        var dialogResult = _dialogHelper.Edit(invoice);
+        if (dialogResult is null)
             return;
 
-        result = await _invoiceService.EditAsync(result);
+        var serviceResult = await _invoiceService.EditAsync(dialogResult);
 
-        if (result is not null)
+        if (serviceResult.Status == ResultStatus.Ok)
         {
-            invoice.CopyFrom(result);
+            invoice.CopyFrom(serviceResult.Value!);
         }
+
         // TODO: notify error
     }
 
