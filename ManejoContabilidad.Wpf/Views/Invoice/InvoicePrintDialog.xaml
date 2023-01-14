@@ -130,6 +130,10 @@
                     HorizontalAlignment="Center"
                     Grid.Row="1">
 
+            <CheckBox Content="Preview print"
+                      IsChecked="{Binding Path=PreviewPrint}"
+                      VerticalAlignment="Center" />
+
             <Button Content="Imprimir"
                     Tag="print"
                     Click="PrintButton_OnClick" />
@@ -139,8 +143,7 @@
             <!--         ToolTip="{Binding Path=SimplePrintTooltip}" /> -->
 
             <Button Content="Cancelar"
-                    Tag="cancel"
-                    Click="PrintButton_OnClick" />
+                    Command="{Binding Path=CancelCommand}" />
 
         </StackPanel>
     </Grid>

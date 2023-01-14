@@ -16,10 +16,10 @@ public static class ServiceConfigurationExtensions
     public static void RegisterAppServices(this IServiceCollection services)
     {
         // Singleton
+        services.AddSingleton<AppEnvironmentService>();
         services.AddSingleton<INavigationService, NavigationService>();
         services.AddSingleton<IInvoiceService, InvoiceService>();
         services.AddSingleton<IRequestProvider, RequestProvider.RequestProvider>();
-        services.AddSingleton<AppEnvironmentService>();
 
         // services.AddSingleton<IExcelWriter, ExcelWriter>(x =>
         // {
@@ -31,6 +31,7 @@ public static class ServiceConfigurationExtensions
         // });
         // TODO: replace for production version of Excel Writer
         services.AddSingleton<IExcelWriter, EmptyExcelWriter>();
+        services.AddSingleton<PrintService>();
     }
 
     public static void RegisterViewModels(this ServiceCollection services)

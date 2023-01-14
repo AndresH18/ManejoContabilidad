@@ -9,5 +9,5 @@ public interface IExcelWriter
     public void WriteDate(DateTime date);
     public void WritePrice(double price);
     public void WriteInvoiceNumber(int invoiceNumber);
-    public void Print();
+    public void Print(bool preview = true);
 }

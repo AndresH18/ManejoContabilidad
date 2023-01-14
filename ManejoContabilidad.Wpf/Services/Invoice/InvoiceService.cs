@@ -4,7 +4,6 @@ using System.Data.Common;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using ManejoContabilidad.Wpf.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Shared;
 
@@ -30,6 +29,7 @@ public class InvoiceService : IInvoiceService
             (ex is OperationCanceledException or DbUpdateException or DbUpdateConcurrencyException or DbException)
         {
             result.Status = ResultStatus.Failed;
+            result.ErrorMessage = ex.Message;
         }
 
         _semaphore.Release();
@@ -53,6 +53,7 @@ public class InvoiceService : IInvoiceService
             (ex is OperationCanceledException or DbUpdateException or DbUpdateConcurrencyException or DbException)
         {
             result.Status = ResultStatus.Failed;
+            result.ErrorMessage = ex.Message;
         }
 
         _semaphore.Release();
@@ -76,6 +77,7 @@ public class InvoiceService : IInvoiceService
             (ex is OperationCanceledException or DbUpdateException or DbUpdateConcurrencyException or DbException)
         {
             result.Status = ResultStatus.Failed;
+            result.ErrorMessage = ex.Message;
         }
 
         _semaphore.Release();
@@ -98,6 +100,7 @@ public class InvoiceService : IInvoiceService
             (ex is OperationCanceledException or ArgumentNullException or DbException)
         {
             result.Status = ResultStatus.Failed;
+            result.ErrorMessage = ex.Message;
         }
 
         _semaphore.Release();

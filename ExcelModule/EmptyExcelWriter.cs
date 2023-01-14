@@ -2,9 +2,9 @@
 
 public class EmptyExcelWriter : IExcelWriter
 {
-    public void Print()
+    public void Print(bool preview = true)
     {
-        
+        Thread.Sleep(5000);
     }
 
     public void Write(Shared.Models.InvoicePrintDto invoice)

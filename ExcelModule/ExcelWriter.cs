@@ -49,10 +49,10 @@ public class ExcelWriter : IExcelWriter, IDisposable
         cell.Value = price;
     }
 
-    public void Print()
+    public void Print(bool preview = true)
     {
         var sheet = (Excel.Worksheet) _app.Workbooks[ExcelData.WorkbookName].Sheets[ExcelData.WorksheetName];
-        sheet.PrintOut(1, 1, 1, true);
+        sheet.PrintOut(1, 1, 1, preview);
     }
 
 
