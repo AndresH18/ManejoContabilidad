@@ -18,6 +18,7 @@ public partial class InvoicePrintDialog : Window
     public static string SimplePrintTooltip => "Imprime el recibo sin registrarlo en el sistema.";
 
     public Models::InvoicePrintDto InvoiceDto { get; }
+    public static bool PreviewPrint { get; set; }
 
     public InvoicePrintDialog(Models::Invoice invoice, DateTime lastDateTime)
     {
@@ -47,13 +48,9 @@ public partial class InvoicePrintDialog : Window
 
         switch (printTag)
         {
-            case "print" when InvoiceDto.HasErrors:
-                // TODO: verify model State
+            case "print" when !InvoiceDto.HasErrors:
                 DialogResult = true;
                 Close();
-                break;
-            case "cancel":
-                Cancel();
                 break;
         }
     }

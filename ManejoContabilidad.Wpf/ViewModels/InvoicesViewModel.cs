@@ -4,21 +4,20 @@ using ManejoContabilidad.Wpf.Helpers.Dialog;
 using ManejoContabilidad.Wpf.Services.Invoice;
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using ExcelModule;
 using ManejoContabilidad.Wpf.Views.Invoice;
 using Invoice = Shared.Models.Invoice;
+using ManejoContabilidad.Wpf.Services;
 
 namespace ManejoContabilidad.Wpf.ViewModels;
 
 [INotifyPropertyChanged]
 public partial class InvoicesViewModel
 {
-    private readonly IExcelWriter _excel;
     private readonly IInvoiceService _invoiceService;
     private readonly IDialogHelper<Invoice> _dialogHelper;
+    private readonly PrintService _printService;
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(EditInvoiceCommand))]
@@ -36,9 +35,9 @@ public partial class InvoicesViewModel
     public ObservableCollection<Invoice> Invoices { get; private set; } = new();
 
     public InvoicesViewModel(IInvoiceService invoiceService, IDialogHelper<Invoice> dialogHelper,
-        IExcelWriter excelWriter)
+        PrintService printService)
     {
-        _excel = excelWriter;
+        _printService = printService;
         _invoiceService = invoiceService;
         _dialogHelper = dialogHelper;
 
@@ -47,20 +46,19 @@ public partial class InvoicesViewModel
 
     private async void GetInvoices(int page = 0)
     {
-        try
+        var serviceResult = await _invoiceService.GetAllAsync(page);
+
+        if (serviceResult.Status == ResultStatus.Ok)
         {
             Invoices.Clear();
-
-            var list = await _invoiceService.GetAllAsync(page);
-
-            foreach (var invoice in list)
+            foreach (var invoice in serviceResult.Value!)
             {
                 Invoices.Add(invoice);
             }
         }
-        catch (Exception ex)
+        else
         {
-            Debug.WriteLine("Failed to get invoices. {0}", ex);
+            NotifyError();
         }
     }
 
@@ -71,13 +69,16 @@ public partial class InvoicesViewModel
         if (invoice is null)
             return;
 
-        invoice = await _invoiceService.AddAsync(invoice);
+        var serviceResult = await _invoiceService.AddAsync(invoice);
 
-        if (invoice is not null)
+        if (serviceResult.Status == ResultStatus.Ok)
         {
-            Invoices.Add(invoice);
+            Invoices.Add(serviceResult.Value!);
         }
-        // TODO: notify error
+        else
+        {
+            NotifyError();
+        }
     }
 
     [RelayCommand(CanExecute = nameof(IsInvoiceSelected))]
@@ -89,27 +90,33 @@ public partial class InvoicesViewModel
 
         var deleteResult = await _invoiceService.DeleteAsync(invoice);
 
-        if (deleteResult is not null)
+        if (deleteResult.Status == ResultStatus.Ok)
         {
-            Invoices.Remove(deleteResult);
+            Invoices.Remove(deleteResult.Value!);
         }
-        // TODO: delete client
+        else
+        {
+            NotifyError();
+        }
     }
 
     [RelayCommand(CanExecute = nameof(IsInvoiceSelected))]
     private async Task EditInvoice(Invoice invoice)
     {
-        var result = _dialogHelper.Edit(invoice);
-        if (result is null)
+        var dialogResult = _dialogHelper.Edit(invoice);
+        if (dialogResult is null)
             return;
 
-        result = await _invoiceService.EditAsync(result);
+        var serviceResult = await _invoiceService.EditAsync(dialogResult);
 
-        if (result is not null)
+        if (serviceResult.Status == ResultStatus.Ok)
         {
-            invoice.CopyFrom(result);
+            invoice.CopyFrom(serviceResult.Value!);
         }
-        // TODO: notify error
+        else
+        {
+            NotifyError();
+        }
     }
 
     [RelayCommand]
@@ -122,7 +129,7 @@ public partial class InvoicesViewModel
     }
 
     [RelayCommand(CanExecute = nameof(IsInvoiceSelected))]
-    private void Print(Invoice invoice)
+    private async void Print(Invoice invoice)
     {
         var dialog = new InvoicePrintDialog(invoice, _lastPrintedDateTime)
         {
@@ -133,8 +140,7 @@ public partial class InvoicesViewModel
         if (result == true)
         {
             // print
-            _excel.Write(dialog.InvoiceDto);
-            _excel.Print();
+            await _printService.Print(dialog.InvoiceDto, InvoicePrintDialog.PreviewPrint);
             _lastPrintedDateTime = dialog.InvoiceDto.DateTime;
         }
     }
@@ -161,5 +167,10 @@ public partial class InvoicesViewModel
     private bool CanGoBack()
     {
         return _pageIndex > 0;
+    }
+
+    private void NotifyError()
+    {
+        // TODO: notify error
     }
 }

@@ -29,14 +29,6 @@ public partial class App
         Application.Current.MainWindow.Show();
     }
 
-    protected override void OnStartup(StartupEventArgs e)
-    {
-        base.OnStartup(e);
-
-        // Testing Purposes
-        TestDbContext.EnsureDatabaseCreated();
-    }
-
     private static IServiceProvider ConfigureServices()
     {
         var services = new ServiceCollection();
