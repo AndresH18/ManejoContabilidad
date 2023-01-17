@@ -18,9 +18,12 @@ public static class ServiceConfigurationExtensions
         // Singleton
         services.AddSingleton<AppEnvironmentService>();
         services.AddSingleton<INavigationService, NavigationService>();
-        services.AddSingleton<IInvoiceService, InvoiceService>();
         services.AddSingleton<IRequestProvider, RequestProvider.RequestProvider>();
+        
+        services.AddSingleton<PrintService>();
 
+        // TODO: replace for production version of Excel Writer
+        services.AddSingleton<IExcelWriter, EmptyExcelWriter>();
         // services.AddSingleton<IExcelWriter, ExcelWriter>(x =>
         // {
         //     var environment = x.GetRequiredService<AppEnvironmentService>();
@@ -29,9 +32,11 @@ public static class ServiceConfigurationExtensions
         //         ExcelData = environment.GetExcelData(),
         //     };
         // });
-        // TODO: replace for production version of Excel Writer
-        services.AddSingleton<IExcelWriter, EmptyExcelWriter>();
-        services.AddSingleton<PrintService>();
+
+        // TODO: replace for production version of DbContext
+        services.AddSingleton<IInvoiceService, SqliteInvoiceService>();
+        // services.AddSingleton<IInvoiceService, InvoiceService>();
+
     }
 
     public static void RegisterViewModels(this ServiceCollection services)

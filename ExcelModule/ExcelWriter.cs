@@ -10,7 +10,7 @@ public class ExcelWriter : IExcelWriter, IDisposable
 
     public ExcelWriter()
     {
-        _app = new Excel.Application {Visible = true};
+        _app = new Excel.Application { Visible = true };
         _app.Workbooks.Open(
             Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "ExcelTest.xlsx"));
     }
@@ -51,7 +51,7 @@ public class ExcelWriter : IExcelWriter, IDisposable
 
     public void Print(bool preview = true)
     {
-        var sheet = (Excel.Worksheet) _app.Workbooks[ExcelData.WorkbookName].Sheets[ExcelData.WorksheetName];
+        var sheet = (Excel.Worksheet)_app.Workbooks[ExcelData.WorkbookName].Sheets[ExcelData.WorksheetName];
         sheet.PrintOut(1, 1, 1, preview);
     }
 
