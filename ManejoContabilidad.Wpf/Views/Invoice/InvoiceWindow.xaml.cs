@@ -17,16 +17,14 @@ public partial class InvoiceWindow : Window
 {
     private const string FileFilter = "PDF (*.pdf)|*.pdf";
     public Visibility IsConfirmVisible => IsReadOnly ? Visibility.Collapsed : Visibility.Visible;
-
     public string? FilePath => Invoice.Path;
-
     public bool IsReadOnly { get; }
     public Models::Invoice Invoice { get; private set; }
 
-    public InvoiceWindow(Models::Invoice? invoice = null, bool isReadOnly = false)
+    public InvoiceWindow(Models::Invoice? invoice = null, int invoiceNumber = 0, bool isReadOnly = false)
     {
         IsReadOnly = isReadOnly;
-        Invoice = invoice?.Clone() ?? new Models::Invoice();
+        Invoice = invoice?.Clone() ?? new Models::Invoice { InvoiceNumber = invoiceNumber };
 
         InitializeComponent();
 
@@ -92,5 +90,10 @@ public partial class InvoiceWindow : Window
     private void PriceTextBox_OnGotFocus(object sender, RoutedEventArgs e)
     {
         PriceTextBox.SelectAll();
+    }
+
+    private void InvoiceNumberTextBox_OnGotFocus(object sender, RoutedEventArgs e)
+    {
+        InvoiceNumberTextBox.SelectAll();
     }
 }

@@ -8,6 +8,13 @@ public class InvoiceDb : DbContext
     private const string ConnectionString =
         "Data Source=localhost; Initial Catalog=InvoiceManagement; TrustServerCertificate=true; Trusted_Connection=true";
 
+    private readonly string _connectionString;
+
+    public InvoiceDb(string connectionString)
+    {
+        _connectionString = connectionString;
+    }
+
     public DbSet<Invoice> Invoices { get; set; } = default!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -16,7 +23,7 @@ public class InvoiceDb : DbContext
 
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseSqlServer(ConnectionString);
+            optionsBuilder.UseSqlServer(_connectionString);
         }
     }
 

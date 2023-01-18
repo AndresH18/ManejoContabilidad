@@ -10,9 +10,16 @@ using InvoiceModel = Shared.Models.Invoice;
 
 namespace ManejoContabilidad.Wpf.Services.Invoice;
 
-public class SqliteInvoiceService : IInvoiceService
+internal class SqliteInvoiceService : IInvoiceService
 {
     private readonly SemaphoreSlim _semaphore = new(1);
+    private readonly DbContextOptions<SqliteDbContext> _dbContextOptions;
+
+
+    public SqliteInvoiceService(DbContextOptions<SqliteDbContext> dbContextOptions)
+    {
+        _dbContextOptions = dbContextOptions;
+    }
 
     public async Task<ServiceResult<List<InvoiceModel>>> GetAllAsync(int page)
     {
@@ -21,7 +28,7 @@ public class SqliteInvoiceService : IInvoiceService
         var result = new ServiceResult<List<InvoiceModel>>();
         try
         {
-            await using var db = new SqliteDbContext();
+            await using var db = new SqliteDbContext(_dbContextOptions);
             result.Value = await db.Invoices.OrderBy(i => i.InvoiceNumber).ToListAsync();
             result.Status = ResultStatus.Ok;
         }
@@ -43,7 +50,7 @@ public class SqliteInvoiceService : IInvoiceService
 
         try
         {
-            await using var db = new SqliteDbContext();
+            await using var db = new SqliteDbContext(_dbContextOptions);
             await db.Invoices.AddAsync(invoice);
             await db.SaveChangesAsync();
             result.Status = ResultStatus.Ok;
@@ -65,7 +72,7 @@ public class SqliteInvoiceService : IInvoiceService
         var result = new ServiceResult<InvoiceModel>();
         try
         {
-            await using var db = new SqliteDbContext();
+            await using var db = new SqliteDbContext(_dbContextOptions);
             db.Invoices.Update(invoice);
             await db.SaveChangesAsync();
             result.Value = invoice;
@@ -89,7 +96,7 @@ public class SqliteInvoiceService : IInvoiceService
         var result = new ServiceResult<InvoiceModel>();
         try
         {
-            await using var db = new SqliteDbContext();
+            await using var db = new SqliteDbContext(_dbContextOptions);
             db.Invoices.Remove(invoice);
             await db.SaveChangesAsync();
             result.Value = invoice;
@@ -106,19 +113,33 @@ public class SqliteInvoiceService : IInvoiceService
 
         return result;
     }
+
+    public void EnsureCreated()
+    {
+        using var db = new SqliteDbContext(_dbContextOptions);
+        db.EnsureCreated();
+    }
 }
 
 internal class SqliteDbContext : DbContext
 {
-    private const string ConnectionString = "";
+    private const string ConnectionString = "Data Source=localhost";
     public DbSet<InvoiceModel> Invoices { get; set; } = default!;
+
+    public SqliteDbContext(DbContextOptions options) : base(options)
+    {
+    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        base.OnConfiguring(optionsBuilder);
         if (!optionsBuilder.IsConfigured)
         {
             optionsBuilder.UseSqlite(ConnectionString);
         }
+    }
+
+    internal void EnsureCreated()
+    {
+        Database.EnsureCreated();
     }
 }

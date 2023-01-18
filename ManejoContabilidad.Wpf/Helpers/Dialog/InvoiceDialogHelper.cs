@@ -4,11 +4,16 @@ using Shared.Models;
 
 namespace ManejoContabilidad.Wpf.Helpers.Dialog;
 
-public class InvoiceDialogHelper : IDialogHelper<Invoice>
+public class InvoiceDialogHelper
 {
-    public Invoice? Add()
+    /// <summary>
+    /// Display a dialog to create a new <see cref="Invoice"/>
+    /// </summary>
+    /// <param name="invoiceNumber">The suggested invoice number.</param>
+    /// <returns>A new instance of <see cref="Invoice"/> or <b>null</b> if no instance is to be created.</returns>
+    public Invoice? Add(int invoiceNumber)
     {
-        var dialog = new InvoiceWindow(isReadOnly: false);
+        var dialog = new InvoiceWindow(invoiceNumber: invoiceNumber, isReadOnly: false);
         var dialogResult = dialog.ShowDialog();
 
         return dialogResult == true
@@ -16,6 +21,11 @@ public class InvoiceDialogHelper : IDialogHelper<Invoice>
             : null;
     }
 
+    /// <summary>
+    /// Displays a dialog to confirm deletion of <see cref="Invoice"/>
+    /// </summary>
+    /// <param name="invoice">The <see cref="Invoice"/> to delete.</param>
+    /// <returns><b>true</b> if the invoice should be deleted, <b>false</b> otherwise.</returns>
     public bool Delete(Invoice invoice)
     {
         var result = MessageBox.Show(App.Current.MainWindow!,
@@ -25,19 +35,18 @@ public class InvoiceDialogHelper : IDialogHelper<Invoice>
         return result == MessageBoxResult.Yes;
     }
 
-    public Invoice? Edit(Invoice t)
+    /// <summary>
+    /// Display a dialog to edit the <see cref="Invoice"/>
+    /// </summary>
+    /// <param name="invoice">The <see cref="Invoice"/> to delete.</param>
+    /// <returns><paramref name="invoice"/> if it should be deleted, <b>null</b> otherwise.</returns>
+    public Invoice? Edit(Invoice invoice)
     {
-        var dialog = new InvoiceWindow(t, isReadOnly: false);
+        var dialog = new InvoiceWindow(invoice, isReadOnly: false);
         var dialogResult = dialog.ShowDialog();
 
         return dialogResult == true
             ? dialog.Invoice
             : null;
-    }
-
-    public void Show(Invoice invoice)
-    {
-        var dialog = new InvoiceWindow(invoice, isReadOnly: true);
-        dialog.ShowDialog();
     }
 }

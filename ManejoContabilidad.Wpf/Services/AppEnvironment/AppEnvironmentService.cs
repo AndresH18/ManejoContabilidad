@@ -15,6 +15,11 @@ internal class AppEnvironmentService
         Configuration = CreateConfiguration();
     }
 
+    public string? GetConnectionString(string name)
+    {
+        return Configuration.GetConnectionString(name);
+    }
+
     public string GetHostString()
     {
         var section = Configuration.GetRequiredSection("AppHost:uri");

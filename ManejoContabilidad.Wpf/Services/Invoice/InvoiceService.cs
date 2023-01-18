@@ -13,13 +13,20 @@ public class InvoiceService : IInvoiceService
 {
     private readonly SemaphoreSlim _semaphore = new(1);
 
+    private readonly string _connectionString;
+
+    public InvoiceService(string connectionString)
+    {
+        _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
+    }
+
     public async Task<ServiceResult<Shared.Models.Invoice>> AddAsync(Shared.Models.Invoice invoice)
     {
         await _semaphore.WaitAsync();
         var result = new ServiceResult<Shared.Models.Invoice>();
         try
         {
-            await using var db = new InvoiceDb();
+            await using var db = new InvoiceDb(_connectionString);
             await db.Invoices.AddAsync(invoice);
             await db.SaveChangesAsync();
             result.Value = invoice;
@@ -43,7 +50,7 @@ public class InvoiceService : IInvoiceService
         var result = new ServiceResult<Shared.Models.Invoice>();
         try
         {
-            await using var db = new InvoiceDb();
+            await using var db = new InvoiceDb(_connectionString);
             db.Invoices.Remove(invoice);
             await db.SaveChangesAsync();
             result.Value = invoice;
@@ -67,7 +74,7 @@ public class InvoiceService : IInvoiceService
         var result = new ServiceResult<Shared.Models.Invoice>();
         try
         {
-            await using var db = new InvoiceDb();
+            await using var db = new InvoiceDb(_connectionString);
             db.Invoices.Update(invoice);
             await db.SaveChangesAsync();
             result.Value = invoice;
@@ -91,7 +98,7 @@ public class InvoiceService : IInvoiceService
         var result = new ServiceResult<List<Shared.Models.Invoice>>();
         try
         {
-            await using var db = new InvoiceDb();
+            await using var db = new InvoiceDb(_connectionString);
 
             result.Value = await db.Invoices.OrderBy(i => i.InvoiceNumber).ToListAsync();
             result.Status = ResultStatus.Ok;

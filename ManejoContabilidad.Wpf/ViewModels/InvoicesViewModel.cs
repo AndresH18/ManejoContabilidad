@@ -16,7 +16,7 @@ namespace ManejoContabilidad.Wpf.ViewModels;
 public partial class InvoicesViewModel
 {
     private readonly IInvoiceService _invoiceService;
-    private readonly IDialogHelper<Invoice> _dialogHelper;
+    private readonly InvoiceDialogHelper _dialogHelper;
     private readonly PrintService _printService;
 
     [ObservableProperty]
@@ -34,7 +34,7 @@ public partial class InvoicesViewModel
 
     public ObservableCollection<Invoice> Invoices { get; private set; } = new();
 
-    public InvoicesViewModel(IInvoiceService invoiceService, IDialogHelper<Invoice> dialogHelper,
+    public InvoicesViewModel(IInvoiceService invoiceService, InvoiceDialogHelper dialogHelper,
         PrintService printService)
     {
         _printService = printService;
@@ -65,7 +65,7 @@ public partial class InvoicesViewModel
     [RelayCommand]
     private async Task AddInvoice()
     {
-        var invoice = _dialogHelper.Add();
+        var invoice = _dialogHelper.Add(Invoices.Max(i => i.InvoiceNumber) + 1);
         if (invoice is null)
             return;
 

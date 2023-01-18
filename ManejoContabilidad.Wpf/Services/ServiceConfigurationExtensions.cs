@@ -6,6 +6,7 @@ using ManejoContabilidad.Wpf.Services.Navigation;
 using ManejoContabilidad.Wpf.Services.RequestProvider;
 using ManejoContabilidad.Wpf.ViewModels;
 using ManejoContabilidad.Wpf.Views.Invoice;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Models = Shared.Models;
 
@@ -34,8 +35,28 @@ public static class ServiceConfigurationExtensions
         // });
 
         // TODO: replace for production version of DbContext
-        services.AddSingleton<IInvoiceService, SqliteInvoiceService>();
-        // services.AddSingleton<IInvoiceService, InvoiceService>();
+        services.AddSingleton<IInvoiceService, SqliteInvoiceService>(x =>
+        {
+            var environment = x.GetRequiredService<AppEnvironmentService>();
+            var cs = environment.GetConnectionString("sqlite");
+
+            var builder = new DbContextOptionsBuilder<SqliteDbContext>();
+            builder.UseSqlite(cs);
+
+            var service = new SqliteInvoiceService(builder.Options);
+            service.EnsureCreated();
+
+            return service;
+
+        });
+        services.AddSingleton<IInvoiceService, InvoiceService>(x =>
+        {
+            var environment = x.GetRequiredService<AppEnvironmentService>();
+            var cs = environment.GetConnectionString("sqlserver");
+
+            return new InvoiceService(cs!);
+        });
+
 
     }
 
@@ -52,7 +73,7 @@ public static class ServiceConfigurationExtensions
         // Singleton
 
         // Transient
-        services.AddTransient<IDialogHelper<Models::Invoice>, InvoiceDialogHelper>();
+        services.AddTransient<InvoiceDialogHelper>();
     }
 
     public static void RegisterWindows(this IServiceCollection services)
