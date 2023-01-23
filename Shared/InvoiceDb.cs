@@ -1,19 +1,25 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Reflection;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Shared.Models;
 
 namespace Shared;
 
 public class InvoiceDb : DbContext
 {
-    private const string ConnectionString =
-        "Data Source=localhost; Initial Catalog=InvoiceManagement; TrustServerCertificate=true; Trusted_Connection=true";
+    private const string DefaultConnectionName = "localdb";
 
-    private readonly string _connectionString;
+    public InvoiceDb()
+    {
+        ConnectionString = GetConnectionString();
+    }
 
     public InvoiceDb(string connectionString)
     {
-        _connectionString = connectionString;
+        ConnectionString = connectionString;
     }
+
+    private string ConnectionString { get; }
 
     public DbSet<Invoice> Invoices { get; set; } = default!;
 
@@ -21,10 +27,7 @@ public class InvoiceDb : DbContext
     {
         base.OnConfiguring(optionsBuilder);
 
-        if (!optionsBuilder.IsConfigured)
-        {
-            optionsBuilder.UseSqlServer(_connectionString);
-        }
+        if (!optionsBuilder.IsConfigured) optionsBuilder.UseSqlServer(ConnectionString);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -33,5 +36,20 @@ public class InvoiceDb : DbContext
 
         modelBuilder.Entity<Invoice>().ToTable(t => t.IsTemporal());
         modelBuilder.Entity<Invoice>().Property(i => i.CreationDate).HasDefaultValueSql("GETDATE()");
+    }
+
+    private static string GetConnectionString()
+    {
+        var assembly = Assembly.GetAssembly(typeof(InvoiceDb))
+                       ?? throw new NullReferenceException($"Could not find assembly of {typeof(InvoiceDb)}");
+        var stream = assembly.GetManifestResourceStream(typeof(InvoiceDb), "appsettings.json")
+                     ?? throw new NullReferenceException(
+                         $"'appsettings.json' file not found in assembly '{assembly.FullName}'");
+
+        var builder = new ConfigurationBuilder().AddJsonStream(stream);
+
+        var configuration = builder.Build();
+        return configuration.GetConnectionString(DefaultConnectionName)
+               ?? throw new ArgumentNullException($"Connection String for '{DefaultConnectionName}' was not found.");
     }
 }

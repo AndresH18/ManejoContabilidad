@@ -1,4 +1,5 @@
-﻿using ExcelModule;
+﻿using System;
+using ExcelModule;
 using ManejoContabilidad.Wpf.Helpers.Dialog;
 using ManejoContabilidad.Wpf.Services.AppEnvironment;
 using ManejoContabilidad.Wpf.Services.Invoice;
@@ -35,24 +36,24 @@ public static class ServiceConfigurationExtensions
         // });
 
         // TODO: replace for production version of DbContext
-        services.AddSingleton<IInvoiceService, SqliteInvoiceService>(x =>
-        {
-            var environment = x.GetRequiredService<AppEnvironmentService>();
-            var cs = environment.GetConnectionString("sqlite");
-
-            var builder = new DbContextOptionsBuilder<SqliteDbContext>();
-            builder.UseSqlite(cs);
-
-            var service = new SqliteInvoiceService(builder.Options);
-            service.EnsureCreated();
-
-            return service;
-
-        });
+        // services.AddSingleton<IInvoiceService, SqliteInvoiceService>(x =>
+        // {
+        //     var environment = x.GetRequiredService<AppEnvironmentService>();
+        //     var cs = environment.GetConnectionString("sqlite");
+        //
+        //     var builder = new DbContextOptionsBuilder<SqliteDbContext>();
+        //     builder.UseSqlite(cs);
+        //
+        //     var service = new SqliteInvoiceService(builder.Options);
+        //     service.EnsureCreated();
+        //
+        //     return service;
+        //
+        // });
         services.AddSingleton<IInvoiceService, InvoiceService>(x =>
         {
             var environment = x.GetRequiredService<AppEnvironmentService>();
-            var cs = environment.GetConnectionString("sqlserver");
+            var cs = environment.GetConnectionString("localdb");
 
             return new InvoiceService(cs!);
         });

@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using ExcelModule;
 using Microsoft.Extensions.Configuration;
+using Shared;
 
 namespace ManejoContabilidad.Wpf.Services.AppEnvironment;
 
@@ -17,7 +18,8 @@ internal class AppEnvironmentService
 
     public string? GetConnectionString(string name)
     {
-        return Configuration.GetConnectionString(name);
+        return Configuration.GetConnectionString(name) ??
+               throw new ArgumentNullException($"Connection String for {name} was not found.");
     }
 
     public string GetHostString()
@@ -37,7 +39,7 @@ internal class AppEnvironmentService
 
     private static IConfiguration CreateConfiguration()
     {
-        return ConfigureFromFile();
+        return ConfigureFromStream();
     }
 
     private static IConfigurationRoot ConfigureFromFile()
@@ -49,17 +51,11 @@ internal class AppEnvironmentService
         return configuration.Build();
     }
 
-    [Obsolete]
-    // ReSharper disable once UnusedMember.Local
     private static IConfigurationRoot ConfigureFromStream()
     {
-        var assembly = Assembly.GetAssembly(typeof(App));
-        var stream = assembly?.GetManifestResourceStream(typeof(App), "appsettings.json");
-
-        if (stream is null)
-        {
-            throw new FileNotFoundException("'appsettings.json' file not found in assembly");
-        }
+        var assembly = Assembly.GetAssembly(typeof(InvoiceDb));
+        var stream = assembly?.GetManifestResourceStream(typeof(InvoiceDb), "appsettings.json")
+                     ?? throw new FileNotFoundException($"'appsettings.json' file not found in assembly '{assembly?.FullName}'");
 
         var builder = new ConfigurationBuilder().AddJsonStream(stream);
         return builder.Build();

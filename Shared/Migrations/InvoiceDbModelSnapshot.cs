@@ -61,7 +61,7 @@ namespace Shared.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Invoices");
+                    b.ToTable("Invoices", (string)null);
 
                     b.ToTable(tb => tb.IsTemporal(ttb =>
                             {
