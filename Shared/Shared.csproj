@@ -7,11 +7,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="appsettingss.json" />
+	  <None Remove="appsettings.json" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="appsettingss.json">
+	  <EmbeddedResource Include="appsettings.json">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </EmbeddedResource>
 	</ItemGroup>
