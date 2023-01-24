@@ -119,7 +119,7 @@
                                     Binding="{Binding Path=InvoiceNumber, StringFormat=#{0}}"
                                     Width="Auto" />
                 <DataGridTextColumn Header="Fecha"
-                                    Binding="{Binding Path=CreationDate}"
+                                    Binding="{Binding Path=CreationDate, StringFormat={}{0:dd-MM-yyyy}}"
                                     Width="Auto" />
                 <DataGridTextColumn Header="Cliente"
                                     Binding="{Binding Path=ClientName}"

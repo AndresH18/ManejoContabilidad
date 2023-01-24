@@ -30,7 +30,7 @@ public class InvoiceDialogHelper
     {
         var result = MessageBox.Show(App.Current.MainWindow!,
             $"Eliminar #{invoice.InvoiceNumber} de '{invoice.ClientName}'?",
-            "Borrar Cliente", MessageBoxButton.YesNo);
+            "Borrar Cliente", MessageBoxButton.OKCancel);
 
         return result == MessageBoxResult.Yes;
     }
