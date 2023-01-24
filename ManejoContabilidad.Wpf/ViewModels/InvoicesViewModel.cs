@@ -65,7 +65,7 @@ public partial class InvoicesViewModel
     [RelayCommand]
     private async Task AddInvoice()
     {
-        var invoice = _dialogHelper.Add(Invoices.Max(i => i.InvoiceNumber) + 1);
+        var invoice = _dialogHelper.Add((Invoices.Any() ? Invoices.Max(i => i.InvoiceNumber) : 0) + 1);
         if (invoice is null)
             return;
 

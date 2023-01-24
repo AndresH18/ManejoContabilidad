@@ -15,8 +15,7 @@ namespace ManejoContabilidad.Wpf.Views.Invoice;
 [INotifyPropertyChanged]
 public partial class InvoiceWindow : Window
 {
-    private const string FileFilter = "PDF (*.pdf)|*.pdf";
-    public Visibility IsConfirmVisible => IsReadOnly ? Visibility.Collapsed : Visibility.Visible;
+    private string FileFilter = "PDF (*.pdf)|*.pdf|All Files (*.*)|*.*";
     public string? FilePath => Invoice.Path;
     public bool IsReadOnly { get; }
     public Models::Invoice Invoice { get; private set; }

@@ -80,19 +80,16 @@
             <!-- Column 1 -->
             <TextBox x:Name="ClientNameTextBox"
                      Text="{Binding Invoice.ClientName, Mode=TwoWay}"
-                     IsReadOnly="{Binding Path=IsReadOnly}"
                      Grid.Column="1"
                      Grid.Row="0" />
             <TextBox x:Name="InvoiceNumberTextBox"
                      Text="{Binding Invoice.InvoiceNumber, Mode=TwoWay}"
-                     IsReadOnly="{Binding Path=IsReadOnly}"
                      GotFocus="InvoiceNumberTextBox_OnGotFocus"
                      GotMouseCapture="InvoiceNumberTextBox_OnGotFocus"
                      Grid.Column="1"
                      Grid.Row="1" />
             <TextBox x:Name="PriceTextBox"
                      Text="{Binding Invoice.Price, Mode=TwoWay, StringFormat={}{0:C}}"
-                     IsReadOnly="{Binding Path=IsReadOnly}"
                      GotFocus="PriceTextBox_OnGotFocus"
                      GotMouseCapture="PriceTextBox_OnGotFocus"
                      Grid.Column="1"
@@ -109,9 +106,8 @@
                     <ColumnDefinition Width="5*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBox IsReadOnly="True"
+                <TextBox Text="{Binding Path=FilePath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                          VerticalAlignment="Center" d:Text="C:\Program"
-                         Text="{Binding Path=FilePath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                          Grid.Column="0" />
                 <Button
                     Content="Anexar"
@@ -124,16 +120,15 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
             <Button Content="Escanear"
-                    Visibility="{Binding Path=IsConfirmVisible}"
+                    Visibility="Collapsed"
                     Grid.Column="0" />
             <Button Content="Confirmar"
-                    Visibility="{Binding Path=IsConfirmVisible}"
                     Command="{Binding Path=ConfirmCommand}"
                     Grid.Column="1" />
             <Button Content="Cancelar"

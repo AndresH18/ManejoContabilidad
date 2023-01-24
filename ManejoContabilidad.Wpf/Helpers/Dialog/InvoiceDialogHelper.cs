@@ -13,7 +13,7 @@ public class InvoiceDialogHelper
     /// <returns>A new instance of <see cref="Invoice"/> or <b>null</b> if no instance is to be created.</returns>
     public Invoice? Add(int invoiceNumber)
     {
-        var dialog = new InvoiceWindow(invoiceNumber: invoiceNumber, isReadOnly: false);
+        var dialog = new InvoiceWindow(invoiceNumber: invoiceNumber);
         var dialogResult = dialog.ShowDialog();
 
         return dialogResult == true
@@ -42,7 +42,7 @@ public class InvoiceDialogHelper
     /// <returns><paramref name="invoice"/> if it should be deleted, <b>null</b> otherwise.</returns>
     public Invoice? Edit(Invoice invoice)
     {
-        var dialog = new InvoiceWindow(invoice, isReadOnly: false);
+        var dialog = new InvoiceWindow(invoice);
         var dialogResult = dialog.ShowDialog();
 
         return dialogResult == true
