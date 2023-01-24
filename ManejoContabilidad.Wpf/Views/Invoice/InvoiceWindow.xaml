@@ -19,6 +19,8 @@
 
     <Window.Resources>
 
+        <converters:ObjectNullConverter x:Key="StringNullConverter" />
+
         <Style TargetType="Grid">
             <Setter Property="Margin" Value="0, 10" />
         </Style>
@@ -106,13 +108,13 @@
                     <ColumnDefinition Width="5*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBox Text="{Binding Path=FilePath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                         VerticalAlignment="Center" d:Text="C:\Program"
-                         Grid.Column="0" />
+                <TextBox
+                    Text="{Binding Path=Invoice.Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, TargetNullValue='', Converter={StaticResource StringNullConverter}}"
+                    VerticalAlignment="Center" d:Text="C:\Program"
+                    Grid.Column="0" />
                 <Button
                     Content="Anexar"
                     Command="{Binding Path=SearchFileCommand}"
-                    Visibility="{Binding Path=IsConfirmVisible}"
                     Padding="15, 0"
                     Grid.Column="1" />
             </Grid>
