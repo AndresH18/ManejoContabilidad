@@ -7,7 +7,7 @@ namespace Shared;
 
 public class InvoiceDb : DbContext
 {
-    private const string DefaultConnectionName = "localdb";
+    private const string DefaultConnectionName = "sqlserver";
 
     public InvoiceDb()
     {

@@ -9,7 +9,6 @@ using ManejoContabilidad.Wpf.ViewModels;
 using ManejoContabilidad.Wpf.Views.Invoice;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Models = Shared.Models;
 
 namespace ManejoContabilidad.Wpf.Services;
 
@@ -21,7 +20,7 @@ public static class ServiceConfigurationExtensions
         services.AddSingleton<AppEnvironmentService>();
         services.AddSingleton<INavigationService, NavigationService>();
         services.AddSingleton<IRequestProvider, RequestProvider.RequestProvider>();
-        
+
         services.AddSingleton<PrintService>();
 
         // TODO: replace for production version of Excel Writer
@@ -53,12 +52,10 @@ public static class ServiceConfigurationExtensions
         services.AddSingleton<IInvoiceService, InvoiceService>(x =>
         {
             var environment = x.GetRequiredService<AppEnvironmentService>();
-            var cs = environment.GetConnectionString("localdb");
+            var cs = environment.GetConnectionString("sqlserver");
 
             return new InvoiceService(cs!);
         });
-
-
     }
 
     public static void RegisterViewModels(this ServiceCollection services)
