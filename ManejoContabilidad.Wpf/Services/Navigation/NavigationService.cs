@@ -32,4 +32,9 @@ public class NavigationService : INavigationService
         var service = _services.GetRequiredService(type);
         MainWindow.Current?.NavigationFrame.Navigate(service);
     }
+
+    public void Init()
+    {
+        var initPage = _services.GetRequiredService<>
+    }
 }

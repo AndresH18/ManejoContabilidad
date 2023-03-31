@@ -7,8 +7,10 @@ using ManejoContabilidad.Wpf.Services.Navigation;
 using ManejoContabilidad.Wpf.Services.RequestProvider;
 using ManejoContabilidad.Wpf.ViewModels;
 using ManejoContabilidad.Wpf.Views.Invoice;
+using ManejoContabilidad.Wpf.Views.Setup;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Shared;
 
 namespace ManejoContabilidad.Wpf.Services;
 
@@ -52,7 +54,7 @@ public static class ServiceConfigurationExtensions
         services.AddSingleton<IInvoiceService, InvoiceService>(x =>
         {
             var environment = x.GetRequiredService<AppEnvironmentService>();
-            var cs = environment.GetConnectionString("sqlserver");
+            var cs = environment.GetConnectionString(InvoiceDb.DefaultConnection);
 
             return new InvoiceService(cs!);
         });
@@ -88,5 +90,7 @@ public static class ServiceConfigurationExtensions
 
         // Transient
         services.AddTransient<InvoicesPage>();
+
+        services.AddTransient<SetupPage>();
     }
 }

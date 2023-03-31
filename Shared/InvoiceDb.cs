@@ -7,7 +7,7 @@ namespace Shared;
 
 public class InvoiceDb : DbContext
 {
-    private const string DefaultConnectionName = "sqlserver";
+    public const string DefaultConnection = "sqlserver";
 
     public InvoiceDb()
     {
@@ -49,7 +49,7 @@ public class InvoiceDb : DbContext
         var builder = new ConfigurationBuilder().AddJsonStream(stream);
 
         var configuration = builder.Build();
-        return configuration.GetConnectionString(DefaultConnectionName)
-               ?? throw new ArgumentNullException($"Connection String for '{DefaultConnectionName}' was not found.");
+        return configuration.GetConnectionString(DefaultConnection)
+               ?? throw new ArgumentNullException($"Connection String for '{DefaultConnection}' was not found.");
     }
 }

@@ -15,11 +15,10 @@ public partial class MainWindow
 {
     private readonly INavigationService _navigation;
 
-    private readonly List<(string Tag, Type Page)> _pages = new()
-    {
-        // ("clients", typeof(ClientsPage)),
-        ("invoices", typeof(InvoicesPage))
-    };
+    // private readonly List<(string Tag, Type Page)> _pages = new()
+    // {
+    //     ("invoices", typeof(InvoicesPage))
+    // };
 
     public static MainWindow? Current { get; private set; }
 
@@ -32,27 +31,27 @@ public partial class MainWindow
         Current = this;
     }
 
-    private void MenuItem_OnClick(object sender, RoutedEventArgs e)
-    {
-        if (sender is MenuItem menuItem)
-        {
-            var tag = menuItem.Tag as string ?? string.Empty;
-            Navigate(tag);
-        }
-    }
-
-    private void Navigate(string tag)
-    {
-        var tuple = _pages.FirstOrDefault(t => t.Tag == tag);
-        var page = tuple.Page;
-        if (page != null)
-        {
-            _navigation.NavigateTo(page);
-        }
-    }
+    // private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+    // {
+    //     if (sender is MenuItem menuItem)
+    //     {
+    //         var tag = menuItem.Tag as string ?? string.Empty;
+    //         Navigate(tag);
+    //     }
+    // }
+    //
+    // private void Navigate(string tag)
+    // {
+    //     var tuple = _pages.FirstOrDefault(t => t.Tag == tag);
+    //     var page = tuple.Page;
+    //     if (page != null)
+    //     {
+    //         _navigation.NavigateTo(page);
+    //     }
+    // }
 
     private void NavigationFrame_OnLoaded(object sender, RoutedEventArgs e)
     {
-        Navigate("invoices");
+        _navigation.Init();
     }
 }

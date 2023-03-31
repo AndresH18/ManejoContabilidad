@@ -12,4 +12,6 @@ public interface INavigationService
     public void NavigateTo(Type type);
 
     public void NavigateTo(Type type, IDictionary<string, object>? dictionary);
+
+    public void Init();
 }
