@@ -18,7 +18,6 @@ public partial class App : Application
 {
     public App()
     {
-        InitializeComponent();
         Services = RegisterServices();
         Application.Current.MainWindow = Services.GetRequiredService<MainWindow>();
         Application.Current.MainWindow.Show();

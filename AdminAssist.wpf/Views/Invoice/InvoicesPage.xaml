@@ -9,7 +9,7 @@
       mc:Ignorable="d"
       d:Background="DarkSlateGray"
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="{StaticResource InvoicePageTitle}"
+      Title="Invoices"
       d:DataContext="{d:DesignInstance Type=viewModels:InvoicesViewModel}">
 
     <Page.Resources>
