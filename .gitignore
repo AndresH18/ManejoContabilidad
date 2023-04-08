@@ -1,3 +1,7 @@
 **/.vs
 **/.vscode
 **/.idea
+
+*/bin
+*/obj
+/AdminAssist.wpf/AdminAssist.wpf.csproj.user
