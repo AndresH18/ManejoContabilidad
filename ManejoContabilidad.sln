@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{A0A2A565-B197-412A-8E07-E1635BB684BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminAssist.wpf", "AdminAssist.wpf\AdminAssist.wpf.csproj", "{B42BB0CB-7C18-4B40-9700-10FC739FF5C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{A0A2A565-B197-412A-8E07-E1635BB684BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0A2A565-B197-412A-8E07-E1635BB684BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0A2A565-B197-412A-8E07-E1635BB684BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B42BB0CB-7C18-4B40-9700-10FC739FF5C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B42BB0CB-7C18-4B40-9700-10FC739FF5C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B42BB0CB-7C18-4B40-9700-10FC739FF5C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B42BB0CB-7C18-4B40-9700-10FC739FF5C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
