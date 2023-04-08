@@ -2,7 +2,7 @@
 title: document title
 ---
 
-# `{{page.title}}`
+# {{page.title}}
 
 This project is a .NET application that generates PDF receipts using the PDFsharp library. The goal of the project is to provide 
 an efficient and reliable solution for generating receipts that can be printed on pre-printed forms.
