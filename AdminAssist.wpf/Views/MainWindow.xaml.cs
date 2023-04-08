@@ -10,8 +10,9 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AdminAssist.wpf.Services;
+using AdminAssist.wpf.Views.Invoice;
 
 namespace AdminAssist.wpf.Views;
 
@@ -20,13 +21,21 @@ namespace AdminAssist.wpf.Views;
 /// </summary>
 public partial class MainWindow : Window
 {
-    public MainWindow()
+    private readonly NavigationService _navigation;
+
+    public MainWindow(NavigationService navigationService)
     {
+        this._navigation = navigationService;
+
         InitializeComponent();
+        
+        Current = this;
     }
+
+    public static MainWindow? Current { get; private set; }
 
     private void Frame_OnLoaded(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _navigation.NavigateToPage<InvoicesPage>();
     }
 }

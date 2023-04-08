@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AdminAssist.wpf.Services;
 
-static class ServiceConfigurationExtensions
+internal static class ServiceConfigurationExtensions
 {
     /// <summary>
     /// Registers the app services into the <paramref name="services"/> instance.
@@ -18,6 +18,7 @@ static class ServiceConfigurationExtensions
     /// <param name="services"><see cref="IServiceCollection"/> in which to register the app services.</param>
     public static void RegisterAppServices(this IServiceCollection services)
     {
+        services.AddSingleton<NavigationService>();
     }
 
     /// <summary>

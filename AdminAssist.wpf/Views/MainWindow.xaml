@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <DockPanel>
 
-        <Frame x:Name="Frame" NavigationUIVisibility="Hidden"
+        <Frame x:Name="NavigationFrame" NavigationUIVisibility="Hidden"
                Loaded="Frame_OnLoaded"/>
     </DockPanel>
 </Window>
