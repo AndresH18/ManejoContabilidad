@@ -1,8 +1,11 @@
 ﻿<Application x:Class="AdminAssist.wpf.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:AdminAssist.wpf">
     <Application.Resources>
-         
+
+        <system:String x:Key="InvoicePageTitle">Invoices</system:String>
+
     </Application.Resources>
 </Application>

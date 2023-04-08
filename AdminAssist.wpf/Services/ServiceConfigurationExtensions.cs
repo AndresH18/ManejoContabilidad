@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AdminAssist.wpf.Views;
+using AdminAssist.wpf.Views.Invoice;
+using AdminAssist.wpf.Views.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AdminAssist.wpf.Services;
@@ -25,6 +27,7 @@ static class ServiceConfigurationExtensions
     public static void RegisterViews(this IServiceCollection services)
     {
         services.AddSingleton<MainWindow>();
+        services.AddSingleton<InvoicesPage>();
     }
 
     /// <summary>
@@ -33,5 +36,6 @@ static class ServiceConfigurationExtensions
     /// <param name="services"><see cref="IServiceCollection"/> in which to register the app viewModels.</param>
     public static void RegisterViewModels(this IServiceCollection services)
     {
+        services.AddSingleton<InvoicesViewModel>();
     }
 }

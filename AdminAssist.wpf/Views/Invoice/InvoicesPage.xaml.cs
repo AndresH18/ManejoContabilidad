@@ -12,21 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AdminAssist.wpf.Views.ViewModels;
 
-namespace AdminAssist.wpf.Views;
+namespace AdminAssist.wpf.Views.Invoice;
 
 /// <summary>
-/// Interaction logic for MainWindow.xaml
+/// Interaction logic for InvoicesPage.xaml
 /// </summary>
-public partial class MainWindow : Window
+public partial class InvoicesPage : Page
 {
-    public MainWindow()
+    public InvoicesPage(InvoicesViewModel viewModel)
     {
         InitializeComponent();
-    }
-
-    private void Frame_OnLoaded(object sender, RoutedEventArgs e)
-    {
-        throw new NotImplementedException();
+        DataContext = viewModel;
     }
 }

@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:AdminAssist.wpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <DockPanel>
 
-    </Grid>
+        <Frame x:Name="Frame" NavigationUIVisibility="Hidden"
+               Loaded="Frame_OnLoaded"/>
+    </DockPanel>
 </Window>
