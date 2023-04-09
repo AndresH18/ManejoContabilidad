@@ -1,4 +1,5 @@
-﻿using Excel = Microsoft.Office.Interop.Excel;
+﻿using System.Diagnostics;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace ExcelModule;
 
@@ -6,13 +7,23 @@ public class ExcelWriter : IExcelWriter, IDisposable
 {
     private readonly Excel.Application _app;
 
-    public required ExcelData ExcelData { get; init; }
+    private readonly ExcelData _excelData;
 
-    public ExcelWriter()
+    public ExcelWriter(ExcelData excelData)
     {
-        _app = new Excel.Application { Visible = true };
-        _app.Workbooks.Open(
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "ExcelTest.xlsx"));
+        _excelData = excelData;
+        try
+        {
+            _app = new Excel.Application { Visible = true };
+            // _app.Workbooks.Open(
+            //     Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "ExcelTest.xlsx"));
+            _app.Workbooks.Open(Path.Combine(_excelData.FileDirectory, _excelData.WorkbookName));
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            throw;
+        }
     }
 
     ~ExcelWriter() => Dispose();
@@ -51,7 +62,7 @@ public class ExcelWriter : IExcelWriter, IDisposable
 
     public void Print(bool preview = true)
     {
-        var sheet = (Excel.Worksheet)_app.Workbooks[ExcelData.WorkbookName].Sheets[ExcelData.WorksheetName];
+        var sheet = (Excel.Worksheet)_app.Workbooks[_excelData.WorkbookName].Sheets[_excelData.WorksheetName];
         sheet.PrintOut(1, 1, 1, preview);
     }
 
@@ -65,35 +76,35 @@ public class ExcelWriter : IExcelWriter, IDisposable
 
     private Excel.Range GetClientCell()
     {
-        var c = ExcelData.Cells.Client;
+        var c = _excelData.Cells.Client;
         var sheet = GetWorksheet();
         return sheet.Cells[c.Row, c.Column];
     }
 
     private Excel.Range GetInvoiceCell()
     {
-        var i = ExcelData.Cells.Invoice;
+        var i = _excelData.Cells.Invoice;
         var sheet = GetWorksheet();
         return sheet.Cells[i.Row, i.Column];
     }
 
     private Excel.Range GetDateCell()
     {
-        var d = ExcelData.Cells.Date;
+        var d = _excelData.Cells.Date;
         var sheet = GetWorksheet();
         return sheet.Cells[d.Row, d.Column];
     }
 
     private Excel.Range GetPriceCell()
     {
-        var p = ExcelData.Cells.Price;
+        var p = _excelData.Cells.Price;
         var sheet = GetWorksheet();
         return sheet.Cells[p.Row, p.Column];
     }
 
     private Excel.Worksheet GetWorksheet()
     {
-        return _app.Workbooks[ExcelData.WorkbookName].Sheets[ExcelData.WorksheetName];
+        return _app.Workbooks[_excelData.WorkbookName].Sheets[_excelData.WorksheetName];
     }
 
     private void Check()

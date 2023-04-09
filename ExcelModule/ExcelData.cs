@@ -1,7 +1,9 @@
-﻿namespace ExcelModule;
+﻿#pragma warning disable CS8618
+namespace ExcelModule;
 
 public class ExcelData
 {
+    public string FileDirectory { get; set; }
     public string WorkbookName { get; set; }
     public string WorksheetName { get; set; }
     public Cells Cells { get; set; }
@@ -38,3 +40,4 @@ public class Price
     public int Row { get; set; }
     public string Column { get; set; }
 }
+#pragma warning restore CS8618
