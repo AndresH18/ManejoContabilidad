@@ -23,7 +23,7 @@ public readonly struct Result<TValue, TError>
     }
 
     public bool IsError { get; }
-    
+
     public bool IsSuccess => !IsError;
 
     public TValue? Value => _value;
