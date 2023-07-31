@@ -20,98 +20,78 @@ public class InvoiceService : IInvoiceService
         _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
     }
 
-    public async Task<ServiceResult<Shared.Models.Invoice>> AddAsync(Shared.Models.Invoice invoice)
+    public async Task<Result<Shared.Models.Invoice, Exception>> AddAsync(Shared.Models.Invoice invoice)
     {
         await _semaphore.WaitAsync();
-        var result = new ServiceResult<Shared.Models.Invoice>();
         try
         {
             await using var db = new InvoiceDb(_connectionString);
             await db.Invoices.AddAsync(invoice);
             await db.SaveChangesAsync();
-            result.Value = invoice;
-            result.Status = ResultStatus.Ok;
+            _semaphore.Release();
+            return invoice;
         }
         catch (Exception ex) when
             (ex is OperationCanceledException or DbUpdateException or DbUpdateConcurrencyException or DbException)
         {
-            result.Status = ResultStatus.Failed;
-            result.ErrorMessage = ex.Message;
+            _semaphore.Release();
+            return ex;
         }
-
-        _semaphore.Release();
-
-        return result;
     }
 
-    public async Task<ServiceResult<Shared.Models.Invoice>> DeleteAsync(Shared.Models.Invoice invoice)
+    public async Task<Result<Shared.Models.Invoice, Exception>> DeleteAsync(Shared.Models.Invoice invoice)
     {
         await _semaphore.WaitAsync();
-        var result = new ServiceResult<Shared.Models.Invoice>();
         try
         {
             await using var db = new InvoiceDb(_connectionString);
             db.Invoices.Remove(invoice);
             await db.SaveChangesAsync();
-            result.Value = invoice;
-            result.Status = ResultStatus.Ok;
+            _semaphore.Release();
+            return invoice;
         }
         catch (Exception ex) when
             (ex is OperationCanceledException or DbUpdateException or DbUpdateConcurrencyException or DbException)
         {
-            result.Status = ResultStatus.Failed;
-            result.ErrorMessage = ex.Message;
+            _semaphore.Release();
+            return ex;
         }
-
-        _semaphore.Release();
-
-        return result;
     }
 
-    public async Task<ServiceResult<Shared.Models.Invoice>> EditAsync(Shared.Models.Invoice invoice)
+    public async Task<Result<Shared.Models.Invoice, Exception>> EditAsync(Shared.Models.Invoice invoice)
     {
         await _semaphore.WaitAsync();
-        var result = new ServiceResult<Shared.Models.Invoice>();
         try
         {
             await using var db = new InvoiceDb(_connectionString);
             db.Invoices.Update(invoice);
             await db.SaveChangesAsync();
-            result.Value = invoice;
-            result.Status = ResultStatus.Ok;
+            _semaphore.Release();
+            return invoice;
         }
         catch (Exception ex) when
             (ex is OperationCanceledException or DbUpdateException or DbUpdateConcurrencyException or DbException)
         {
-            result.Status = ResultStatus.Failed;
-            result.ErrorMessage = ex.Message;
+            _semaphore.Release();
+            return ex;
         }
-
-        _semaphore.Release();
-
-        return result;
     }
 
-    public async Task<ServiceResult<List<Shared.Models.Invoice>>> GetAllAsync(int page)
+    public async Task<Result<List<Shared.Models.Invoice>, Exception>> GetAllAsync(int page)
     {
         await _semaphore.WaitAsync();
-        var result = new ServiceResult<List<Shared.Models.Invoice>>();
         try
         {
             await using var db = new InvoiceDb(_connectionString);
-
-            result.Value = await db.Invoices.OrderBy(i => i.InvoiceNumber).ToListAsync();
-            result.Status = ResultStatus.Ok;
+            var list  = await db.Invoices.OrderBy(i => i.InvoiceNumber).ToListAsync();
+            _semaphore.Release();
+            return list;
         }
         catch (Exception ex) when
             (ex is OperationCanceledException or ArgumentNullException or DbException)
         {
-            result.Status = ResultStatus.Failed;
-            result.ErrorMessage = ex.Message;
+            _semaphore.Release();
+            return ex;
         }
-
-        _semaphore.Release();
-
-        return result;
     }
 }

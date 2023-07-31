@@ -16,25 +16,24 @@ public class PrintService
         _excelWriter = excelWriter;
     }
 
-    public async Task<ServiceResult> Print(InvoicePrintDto invoicePrintDto, bool preview)
+    public async Task<Result<bool, Exception>> Print(InvoicePrintDto invoicePrintDto, bool preview)
     {
         await _semaphore.WaitAsync();
 
-        var result = new ServiceResult();
         try
         {
             _excelWriter.Write(invoicePrintDto);
             _excelWriter.Print(preview);
-            result.Status = ResultStatus.Ok;
+
+            _semaphore.Release();
+
+            return true;
         }
         catch (Exception ex)
         {
-            result.Status = ResultStatus.Failed;
-            result.ErrorMessage = ex.Message;
+            _semaphore.Release();
+
+            return ex;
         }
-
-        _semaphore.Release();
-
-        return result;
     }
 }

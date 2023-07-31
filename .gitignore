@@ -365,3 +365,4 @@ FodyWeavers.xsd
 /ManejoContabilidad.Wpf/contab.db-wal
 /ManejoContabilidad.Wpf/contab.db-shm
 /ManejoContabilidad.Wpf/contab.db
+/ConsoleApp/appsettings.json

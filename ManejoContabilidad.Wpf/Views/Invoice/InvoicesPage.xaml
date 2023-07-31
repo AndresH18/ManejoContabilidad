@@ -52,7 +52,7 @@
                 <Button Content="Eliminar Factura"
                         Command="{Binding Path=DeleteInvoiceCommand}"
                         CommandParameter="{Binding Path=SelectedInvoice}" />
-                <Border BorderThickness="1" BorderBrush="Black">
+                <Border BorderThickness=".1" BorderBrush="Black">
 
                     <StackPanel Orientation="Horizontal">
                         <Button Content="Buscar"

@@ -46,12 +46,12 @@ public partial class InvoicesViewModel
 
     private async void GetInvoices(int page = 0)
     {
-        var serviceResult = await _invoiceService.GetAllAsync(page);
+        var result = await _invoiceService.GetAllAsync(page);
 
-        if (serviceResult.Status == ResultStatus.Ok)
+        if (result.IsSuccess)
         {
             Invoices.Clear();
-            foreach (var invoice in serviceResult.Value!)
+            foreach (var invoice in result.Value!)
             {
                 Invoices.Add(invoice);
             }
@@ -69,11 +69,11 @@ public partial class InvoicesViewModel
         if (invoice is null)
             return;
 
-        var serviceResult = await _invoiceService.AddAsync(invoice);
+        var result = await _invoiceService.AddAsync(invoice);
 
-        if (serviceResult.Status == ResultStatus.Ok)
+        if (result.IsSuccess)
         {
-            Invoices.Add(serviceResult.Value!);
+            Invoices.Add(result.Value!);
         }
         else
         {
@@ -84,15 +84,15 @@ public partial class InvoicesViewModel
     [RelayCommand(CanExecute = nameof(IsInvoiceSelected))]
     private async Task DeleteInvoice(Invoice invoice)
     {
-        var result = _dialogHelper.Delete(invoice);
-        if (!result)
+        var dialogResult = _dialogHelper.Delete(invoice);
+        if (!dialogResult)
             return;
 
-        var deleteResult = await _invoiceService.DeleteAsync(invoice);
+        var result = await _invoiceService.DeleteAsync(invoice);
 
-        if (deleteResult.Status == ResultStatus.Ok)
+        if (result.IsSuccess)
         {
-            Invoices.Remove(deleteResult.Value!);
+            Invoices.Remove(result.Value!);
         }
         else
         {
@@ -107,11 +107,11 @@ public partial class InvoicesViewModel
         if (dialogResult is null)
             return;
 
-        var serviceResult = await _invoiceService.EditAsync(dialogResult);
+        var result = await _invoiceService.EditAsync(dialogResult);
 
-        if (serviceResult.Status == ResultStatus.Ok)
+        if (result.IsSuccess)
         {
-            invoice.CopyFrom(serviceResult.Value!);
+            invoice.CopyFrom(result.Value!);
         }
         else
         {

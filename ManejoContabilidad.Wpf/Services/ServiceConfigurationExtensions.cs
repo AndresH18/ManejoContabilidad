@@ -24,28 +24,13 @@ public static class ServiceConfigurationExtensions
         services.AddSingleton<PrintService>();
 
         // TODO: replace for production version of Excel Writer
-        // services.AddSingleton<IExcelWriter, EmptyExcelWriter>();
-        services.AddSingleton<IExcelWriter, ExcelWriter>(x =>
-        {
-            var environment = x.GetRequiredService<AppEnvironmentService>();
-            return new ExcelWriter(environment.GetExcelData());
-        });
-
-        // TODO: replace for production version of DbContext
-        // services.AddSingleton<IInvoiceService, SqliteInvoiceService>(x =>
+        // services.AddSingleton<IExcelWriter, ExcelWriter>(x =>
         // {
         //     var environment = x.GetRequiredService<AppEnvironmentService>();
-        //     var cs = environment.GetConnectionString("sqlite");
-        //
-        //     var builder = new DbContextOptionsBuilder<SqliteDbContext>();
-        //     builder.UseSqlite(cs);
-        //
-        //     var service = new SqliteInvoiceService(builder.Options);
-        //     service.EnsureCreated();
-        //
-        //     return service;
-        //
+        //     return new ExcelWriter(environment.GetExcelData());
         // });
+        services.AddSingleton<IExcelWriter, EmptyExcelWriter>();
+
         services.AddSingleton<IInvoiceService, InvoiceService>(x =>
         {
             var environment = x.GetRequiredService<AppEnvironmentService>();
