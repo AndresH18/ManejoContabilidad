@@ -19,7 +19,6 @@ public static class ServiceConfigurationExtensions
         // Singleton
         services.AddSingleton<AppEnvironmentService>();
         services.AddSingleton<INavigationService, NavigationService>();
-        services.AddSingleton<IRequestProvider, RequestProvider.RequestProvider>();
 
         services.AddSingleton<PrintService>();
 
@@ -31,13 +30,7 @@ public static class ServiceConfigurationExtensions
         // });
         services.AddSingleton<IExcelWriter, EmptyExcelWriter>();
 
-        services.AddSingleton<IInvoiceService, InvoiceService>(x =>
-        {
-            var environment = x.GetRequiredService<AppEnvironmentService>();
-            var cs = environment.GetConnectionString("sqlserver");
-
-            return new InvoiceService(cs!);
-        });
+        services.AddSingleton<IInvoiceService, InvoiceService>();
     }
 
     public static void RegisterViewModels(this ServiceCollection services)

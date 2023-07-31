@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Shared;
+using ManejoContabilidad.Wpf.Properties;
 
 namespace ManejoContabilidad.Wpf.Services.Invoice;
 
@@ -13,19 +14,13 @@ public class InvoiceService : IInvoiceService
 {
     private readonly SemaphoreSlim _semaphore = new(1);
 
-    private readonly string _connectionString;
-
-    public InvoiceService(string connectionString)
-    {
-        _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
-    }
 
     public async Task<Result<Shared.Models.Invoice, Exception>> AddAsync(Shared.Models.Invoice invoice)
     {
         await _semaphore.WaitAsync();
         try
         {
-            await using var db = new InvoiceDb(_connectionString);
+            await using var db = new InvoiceDb(Settings.Default.InvoiceDb);
             await db.Invoices.AddAsync(invoice);
             await db.SaveChangesAsync();
             _semaphore.Release();
@@ -44,7 +39,7 @@ public class InvoiceService : IInvoiceService
         await _semaphore.WaitAsync();
         try
         {
-            await using var db = new InvoiceDb(_connectionString);
+            await using var db = new InvoiceDb(Settings.Default.InvoiceDb);
             db.Invoices.Remove(invoice);
             await db.SaveChangesAsync();
             _semaphore.Release();
@@ -63,7 +58,7 @@ public class InvoiceService : IInvoiceService
         await _semaphore.WaitAsync();
         try
         {
-            await using var db = new InvoiceDb(_connectionString);
+            await using var db = new InvoiceDb(Settings.Default.InvoiceDb);
             db.Invoices.Update(invoice);
             await db.SaveChangesAsync();
             _semaphore.Release();
@@ -82,8 +77,8 @@ public class InvoiceService : IInvoiceService
         await _semaphore.WaitAsync();
         try
         {
-            await using var db = new InvoiceDb(_connectionString);
-            var list  = await db.Invoices.OrderBy(i => i.InvoiceNumber).ToListAsync();
+            await using var db = new InvoiceDb(Settings.Default.InvoiceDb);
+            var list = await db.Invoices.OrderBy(i => i.InvoiceNumber).ToListAsync();
             _semaphore.Release();
             return list;
         }
