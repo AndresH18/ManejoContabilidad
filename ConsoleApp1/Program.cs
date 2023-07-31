@@ -12,6 +12,7 @@ Console.WriteLine("Hello, World!");
 //     excel.WriteInvoiceNumber(1234);
 //     excel.WritePrice(1_233_988);
 //     excel.Print();
-// }
+// } 
 
 Console.WriteLine("Outside of Scope");
+Console.WriteLine(ConsoleApp1.Properties.startsettings.Default.MySetting);
