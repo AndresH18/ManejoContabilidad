@@ -6,6 +6,7 @@ using ManejoContabilidad.Wpf.Services.Invoice;
 using ManejoContabilidad.Wpf.Services.Navigation;
 using ManejoContabilidad.Wpf.ViewModels;
 using ManejoContabilidad.Wpf.Views.Invoice;
+using ManejoContabilidad.Wpf.Views.Settings;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ManejoContabilidad.Wpf.Services;
@@ -46,6 +47,7 @@ public static class ServiceConfigurationExtensions
         
         // Pages
         services.AddTransient<InvoicesPage>();
+        services.AddTransient<SettingsPage>();
     }
 
     public static void RegisterHelpers(this IServiceCollection services)

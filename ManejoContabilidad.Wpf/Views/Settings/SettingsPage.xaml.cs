@@ -13,16 +13,25 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ManejoContabilidad.Wpf.Views.Settings
+namespace ManejoContabilidad.Wpf.Views.Settings;
+
+/// <summary>
+/// Interaction logic for SettingsPage.xaml
+/// </summary>
+public partial class SettingsPage : Page
 {
-    /// <summary>
-    /// Interaction logic for SettingsPage.xaml
-    /// </summary>
-    public partial class SettingsPage : Page
+    public SettingsPage()
     {
-        public SettingsPage()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
+
+    /// <summary>
+    /// Checks if the form has changed and has been saved.
+    /// </summary>
+    /// <returns><b>true</b> if the form has been saved or if nothing was changed. </returns>
+    public bool CanReturn()
+    {
+        // TODO: verify if data has been changed. 
+        return true;
     }
 }

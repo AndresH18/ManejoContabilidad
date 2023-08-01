@@ -29,5 +29,8 @@
     <Setting Name="Excel_Price_Col" Type="System.String" Scope="User">
       <Value Profile="(Default)">A</Value>
     </Setting>
+    <Setting Name="Recognizer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Recognizer URL</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

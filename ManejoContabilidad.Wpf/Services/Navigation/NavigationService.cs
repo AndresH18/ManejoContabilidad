@@ -1,6 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Windows.Controls;
+using ManejoContabilidad.Wpf.Views.Invoice;
+using ManejoContabilidad.Wpf.Views.Settings;
+using Views = ManejoContabilidad.Wpf.Views;
+
 
 namespace ManejoContabilidad.Wpf.Services.Navigation;
 
@@ -8,28 +14,53 @@ public class NavigationService : INavigationService
 {
     private readonly IServiceProvider _services = App.Current.Services;
 
+    private readonly IReadOnlyDictionary<string, Type> _pages;
 
-    public void NavigateTo<T>() where T : class
+    private Page _currentPage = null!;
+
+    public NavigationService()
     {
-        var service = _services.GetRequiredService<T>();
-        MainWindow.Current?.NavigationFrame.Navigate(service);
+        _pages = new Dictionary<string, Type>
+        {
+            {"invoices", typeof(InvoicesPage)},
+            {"settings", typeof(SettingsPage)}
+        }.ToImmutableDictionary();
     }
 
-    public void NavigateTo<T>(IDictionary<string, object>? dictionary) where T : class
+
+    public void NavigateTo(string page)
     {
-        var service = _services.GetRequiredService<T>();
-        MainWindow.Current?.NavigationFrame.Navigate(service);
+        if (_pages.TryGetValue(page, out var type))
+        {
+            Navigate(type);
+        }
     }
 
-    public void NavigateTo(Type type)
+    private void Navigate(Type type)
     {
-        var service = _services.GetRequiredService(type);
-        MainWindow.Current?.NavigationFrame.Navigate(service);
+        if (CanNavigateTo(type))
+        {
+            var service = _services.GetRequiredService(type) as Page ??
+                          throw new InvalidOperationException($"The service is not of type {typeof(Page)}.");
+
+            MainWindow.Current?.NavigationFrame.Navigate(service);
+            _currentPage = service;
+        }
     }
 
-    public void NavigateTo(Type type, IDictionary<string, object>? dictionary)
+    private bool CanNavigateTo(Type type)
     {
-        var service = _services.GetRequiredService(type);
-        MainWindow.Current?.NavigationFrame.Navigate(service);
+        // check if _currentPage is of the same type (or derived) as type
+        if (type.IsInstanceOfType(_currentPage))
+        {
+            return false;
+        }
+
+        if (_currentPage is SettingsPage settingsPage)
+        {
+            return settingsPage.CanReturn();
+        }
+
+        return true;
     }
 }

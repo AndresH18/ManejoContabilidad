@@ -15,18 +15,16 @@
     </Window.Resources>
 
     <DockPanel>
-        <Menu Visibility="Visible"
-              ItemsPanel="{StaticResource MenuPanelTemplate}"
-              DockPanel.Dock="Top">
 
-            <MenuItem Header="Clientes"
-                      Click="MenuItem_OnClick"
-                      Tag="clients" />
+        <Menu DockPanel.Dock="Top"
+              ItemsPanel="{StaticResource ResourceKey=MenuPanelTemplate}">
             <MenuItem Header="Facturas"
-                      Click="MenuItem_OnClick"
-                      Tag="invoices" />
+                      Tag="invoices"
+                      Click="MenuItem_OnClick" />
 
-            <MenuItem Header="Hello"
+            <MenuItem Header="Ajustes"
+                      Tag="settings"
+                      Click="MenuItem_OnClick"
                       HorizontalAlignment="Right" />
         </Menu>
 
