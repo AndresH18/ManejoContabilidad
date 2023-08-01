@@ -8,22 +8,23 @@
         Title="MainWindow" Height="450" Width="800">
 
     <Window.Resources>
+        <!-- Configuration to make the menu stretch horizontally. This allows its children to have "horizontalAlignment -->
         <ItemsPanelTemplate x:Key="MenuPanelTemplate">
             <DockPanel HorizontalAlignment="Stretch" />
         </ItemsPanelTemplate>
     </Window.Resources>
 
     <DockPanel>
-        <Menu Visibility="Collapsed"
+        <Menu Visibility="Visible"
               ItemsPanel="{StaticResource MenuPanelTemplate}"
               DockPanel.Dock="Top">
 
-            <!-- <MenuItem Header="Clientes" -->
-            <!--           Click="MenuItem_OnClick" -->
-            <!--           Tag="clients" /> -->
-            <!-- <MenuItem Header="Facturas" -->
-            <!--           Click="MenuItem_OnClick" -->
-            <!--           Tag="invoices" /> -->
+            <MenuItem Header="Clientes"
+                      Click="MenuItem_OnClick"
+                      Tag="clients" />
+            <MenuItem Header="Facturas"
+                      Click="MenuItem_OnClick"
+                      Tag="invoices" />
 
             <MenuItem Header="Hello"
                       HorizontalAlignment="Right" />
