@@ -1,0 +1,202 @@
+﻿<Page x:Class="ManejoContabilidad.Wpf.Views.Settings.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:ManejoContabilidad.Wpf.Views.Settings"
+      mc:Ignorable="d"
+      d:DesignHeight="450" d:DesignWidth="800"
+      d:Background="LightGray"
+      Title="SettingsPage">
+
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="80" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Database -->
+        <Label
+            Content="Database"
+            FontWeight="Bold"
+            HorizontalAlignment="Center"
+            Grid.Column="0"
+            Grid.Row="0" />
+        <Label
+            Content="Connection String"
+            Grid.Column="1"
+            Grid.Row="1" />
+        <TextBox
+            x:Name="ConnectionString"
+            d:Text="Connection String"
+            VerticalContentAlignment="Center"
+            Grid.ColumnSpan="5"
+            Grid.Column="2"
+            Grid.Row="1" />
+
+
+        <!-- Form Recognizer -->
+        <Label
+            Content="Recognizer"
+            FontWeight="Bold"
+            HorizontalAlignment="Center"
+            Grid.Column="0"
+            Grid.Row="2" />
+        <Label
+            Content="Api Key"
+            Grid.Column="1"
+            Grid.Row="3" />
+        <TextBox
+            x:Name="ApiKey"
+            d:Text="Api Key"
+            VerticalContentAlignment="Center"
+            Grid.Column="2"
+            Grid.ColumnSpan="5"
+            Grid.Row="3" />
+        <Label
+            Content="Endpoint"
+            Grid.Column="1"
+            Grid.Row="4" />
+        <TextBox
+            x:Name="Endpoint"
+            d:Text="Endpoint"
+            VerticalContentAlignment="Center"
+            Grid.Column="2"
+            Grid.ColumnSpan="5"
+            Grid.Row="4" />
+        <Label
+            Content="Model ID"
+            Grid.Column="1"
+            Grid.Row="5" />
+        <TextBox
+            x:Name="ModelId"
+            d:Text="Model ID"
+            VerticalContentAlignment="Center"
+            Grid.Column="2"
+            Grid.ColumnSpan="5"
+            Grid.Row="5" />
+
+
+        <!-- Excel -->
+        <Label
+            Content="Excel"
+            FontWeight="Bold"
+            HorizontalAlignment="Center"
+            Grid.Column="0"
+            Grid.Row="6" />
+        <!-- File  -->
+        <Label
+            Content="File Path"
+            Grid.Column="1"
+            Grid.Row="7" />
+        <TextBox
+            x:Name="ExcelFilePath"
+            d:Text="File path"
+            VerticalContentAlignment="Center"
+            Grid.Column="2"
+            Grid.ColumnSpan="5"
+            Grid.Row="7" />
+        <Button
+            Content="Examine"
+            Padding="5 0"
+            Grid.Column="6"
+            Grid.Row="7" />
+        <!-- Client -->
+        <Label
+            Content="Client Row"
+            Grid.Column="1"
+            Grid.Row="8" />
+        <TextBox
+            x:Name="ClientRow"
+            VerticalContentAlignment="Center"
+            Grid.Column="2"
+            Grid.Row="8" />
+        <Label
+            Content="Client Column"
+            Grid.Column="4"
+            Grid.Row="8" />
+        <TextBox
+            x:Name="ClientCol"
+            VerticalContentAlignment="Center"
+            Grid.Column="5"
+            Grid.Row="8" />
+        <!-- Invoice -->
+        <Label
+            Content="Invoice Row"
+            Grid.Column="1"
+            Grid.Row="9" />
+        <TextBox
+            x:Name="InvoiceRow"
+            VerticalContentAlignment="Center"
+            Grid.Column="2"
+            Grid.Row="9" />
+        <Label
+            Content="Invoice Column"
+            Grid.Column="4"
+            Grid.Row="9" />
+        <TextBox
+            x:Name="InvoiceCol"
+            VerticalContentAlignment="Center"
+            Grid.Column="5"
+            Grid.Row="9" />
+        <!-- Date -->
+        <Label
+            Content="Date Row"
+            Grid.Column="1"
+            Grid.Row="10" />
+        <TextBox
+            x:Name="DateRow"
+            VerticalContentAlignment="Center"
+            Grid.Column="2"
+            Grid.Row="10" />
+        <Label
+            Content="Date Column"
+            Grid.Column="4"
+            Grid.Row="10" />
+        <TextBox
+            x:Name="DateCol"
+            VerticalContentAlignment="Center"
+            Grid.Column="5"
+            Grid.Row="10" />
+        <!-- Price -->
+        <Label
+            Content="Price Row"
+            Grid.Column="1"
+            Grid.Row="11" />
+        <TextBox
+            x:Name="PriceRow"
+            VerticalContentAlignment="Center"
+            Grid.Column="2"
+            Grid.Row="11" />
+        <Label
+            Content="Price Column"
+            Grid.Column="4"
+            Grid.Row="11" />
+        <TextBox
+            x:Name="PriceCol"
+            VerticalContentAlignment="Center"
+            Grid.Column="5"
+            Grid.Row="11" />
+
+
+    </Grid>
+</Page>

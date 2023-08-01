@@ -4,10 +4,8 @@ using ManejoContabilidad.Wpf.Helpers.Dialog;
 using ManejoContabilidad.Wpf.Services.AppEnvironment;
 using ManejoContabilidad.Wpf.Services.Invoice;
 using ManejoContabilidad.Wpf.Services.Navigation;
-using ManejoContabilidad.Wpf.Services.RequestProvider;
 using ManejoContabilidad.Wpf.ViewModels;
 using ManejoContabilidad.Wpf.Views.Invoice;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ManejoContabilidad.Wpf.Services;
@@ -41,27 +39,20 @@ public static class ServiceConfigurationExtensions
         services.AddTransient<InvoicesViewModel>();
     }
 
+    public static void RegisterViews(this IServiceCollection services)
+    {
+        // Windows
+        services.AddSingleton<MainWindow>();
+        
+        // Pages
+        services.AddTransient<InvoicesPage>();
+    }
+
     public static void RegisterHelpers(this IServiceCollection services)
     {
         // Singleton
 
         // Transient
         services.AddTransient<InvoiceDialogHelper>();
-    }
-
-    public static void RegisterWindows(this IServiceCollection services)
-    {
-        // Singleton
-        services.AddSingleton<MainWindow>();
-
-        // Transient
-    }
-
-    public static void RegisterPages(this IServiceCollection services)
-    {
-        // Singleton
-
-        // Transient
-        services.AddTransient<InvoicesPage>();
     }
 }

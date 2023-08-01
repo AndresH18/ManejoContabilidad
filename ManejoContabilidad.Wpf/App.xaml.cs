@@ -35,8 +35,7 @@ public partial class App
 
         services.RegisterAppServices();
         services.RegisterHelpers();
-        services.RegisterWindows();
-        services.RegisterPages();
+        services.RegisterViews();
         services.RegisterViewModels();
 
         return services.BuildServiceProvider();
