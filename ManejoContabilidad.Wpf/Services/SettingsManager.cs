@@ -66,7 +66,7 @@ public class SettingsManager
 
 public class ExcelSettingsChangedEventArgs : EventArgs
 {
-    public ExcelConfigurationOptions ExcelConfigurationOptions { get; init; }
+    public required ExcelConfigurationOptions ExcelConfigurationOptions { get; init; }
 
     public static implicit operator ExcelSettingsChangedEventArgs(ExcelConfigurationOptions options)
     {
