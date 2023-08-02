@@ -10,6 +10,9 @@ using Views = ManejoContabilidad.Wpf.Views;
 
 namespace ManejoContabilidad.Wpf.Services.Navigation;
 
+/// <summary>
+/// Handles navigation to other components
+/// </summary>
 public class NavigationService : INavigationService
 {
     private readonly IServiceProvider _services = App.Current.Services;

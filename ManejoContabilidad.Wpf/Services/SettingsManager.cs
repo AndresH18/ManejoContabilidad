@@ -10,6 +10,9 @@ namespace ManejoContabilidad.Wpf.Services;
 /// </summary>
 public class SettingsManager
 {
+    /// <summary>
+    /// Holds current instance of <see cref="ExcelConfigurationOptions"/>
+    /// </summary>
     public ExcelConfigurationOptions ExcelConfigurationOptions { get; private set; }
 
     public SettingsManager()
@@ -24,20 +27,12 @@ public class SettingsManager
         Settings.Default.SettingsSaving -= SettingsSaved;
     }
 
+    /// <summary>
+    /// Creates a new instance of <see cref="ExcelConfigurationOptions"/> with the current settings
+    /// </summary>
+    /// <returns>New instance of <see cref="ExcelConfigurationOptions"/></returns>
     private static ExcelConfigurationOptions ConfigureExcelOptions()
     {
-        // return new ExcelConfigurationOptions
-        // {
-        //     ClientCol = Settings.Default.Excel_Client_Col,
-        //     ClientRow = Settings.Default.Excel_Client_Row,
-        //     InvoiceCol = Settings.Default.Excel_Invoice_Col,
-        //     InvoiceRow = Settings.Default.Excel_Invoice_Row,
-        //     DateCol = Settings.Default.Excel_Date_Col,
-        //     DateRow = Settings.Default.Excel_Date_Row,
-        //     PriceCol = Settings.Default.Excel_Price_Col,
-        //     PriceRow = Settings.Default.Excel_Price_Row
-        // };
-
         return new ExcelConfigurationOptions
         {
             ExcelFile = Settings.Default.ExcelFile,
@@ -51,6 +46,9 @@ public class SettingsManager
         };
     }
 
+    /// <summary>
+    /// Loads a new instance of the <see cref="ExcelConfigurationOptions"/> and notifies subscribers of <see cref="ExcelSettingsChanged"/>
+    /// </summary>
     private void SettingsSaved(object sender, System.ComponentModel.CancelEventArgs e)
     {
         ExcelConfigurationOptions = ConfigureExcelOptions();
@@ -70,7 +68,7 @@ public class ExcelSettingsChangedEventArgs : EventArgs
 public record ExcelConfigurationOptions
 {
     public required string ExcelFile { get; init; }
-    public required ImmutableDictionary<string, ExcelCell> Cells { get; init; }
+    public required IReadOnlyDictionary<string, ExcelCell> Cells { get; init; }
 }
 
 public readonly record struct ExcelCell(uint Row, string Col);
