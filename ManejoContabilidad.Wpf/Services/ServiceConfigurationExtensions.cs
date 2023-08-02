@@ -30,6 +30,8 @@ public static class ServiceConfigurationExtensions
         services.AddSingleton<IExcelWriter, EmptyExcelWriter>();
 
         services.AddSingleton<IInvoiceService, InvoiceService>();
+
+        services.AddSingleton<SettingsManager>();
     }
 
     public static void RegisterViewModels(this ServiceCollection services)
