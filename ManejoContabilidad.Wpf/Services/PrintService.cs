@@ -10,11 +10,26 @@ public class PrintService
 {
     private readonly SemaphoreSlim _semaphore = new(1);
     private readonly IExcelWriter _excelWriter;
+    private readonly SettingsManager _settings;
 
-    public PrintService(IExcelWriter excelWriter)
+    public PrintService(IExcelWriter excelWriter, SettingsManager settings)
     {
         _excelWriter = excelWriter;
+        _settings = settings;
+        _settings.ExcelSettingsChanged += ExcelSettingsChanged;
     }
+
+    private void ExcelSettingsChanged(object? sender, ExcelSettingsChangedEventArgs e)
+    {
+        _excelWriter.SettingsChanged(e.ExcelConfigurationOptions);
+    }
+
+
+    ~PrintService()
+    {
+        _settings.ExcelSettingsChanged -= ExcelSettingsChanged;
+    }
+
 
     public async Task<Result<bool, Exception>> Print(InvoicePrintDto invoicePrintDto, bool preview)
     {

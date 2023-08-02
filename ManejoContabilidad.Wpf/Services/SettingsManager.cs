@@ -52,17 +52,21 @@ public class SettingsManager
     private void SettingsSaved(object sender, System.ComponentModel.CancelEventArgs e)
     {
         ExcelConfigurationOptions = ConfigureExcelOptions();
-        ExcelSettingsChanged?.Invoke(this, EventArgs.Empty);
+        ExcelSettingsChanged?.Invoke(this, ExcelConfigurationOptions);
     }
 
 
-    public string? ConnectionString => Settings.Default.InvoiceDb;
+    public string ConnectionString => Settings.Default.InvoiceDb;
 
-    public event EventHandler? ExcelSettingsChanged;
+    public event EventHandler<ExcelSettingsChangedEventArgs>? ExcelSettingsChanged;
 }
 
 public class ExcelSettingsChangedEventArgs : EventArgs
 {
+    public ExcelConfigurationOptions ExcelConfigurationOptions { get; init; }
+
+    public static implicit operator ExcelSettingsChangedEventArgs(ExcelConfigurationOptions options) =>
+        new() {ExcelConfigurationOptions = options};
 }
 
 public record ExcelConfigurationOptions
