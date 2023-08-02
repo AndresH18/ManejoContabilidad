@@ -213,7 +213,7 @@
                     <Setter Property="Padding" Value="20 5"/>
                 </Style>
             </StackPanel.Resources>
-            <Button Content="Accept"/>
+            <Button Content="Save"/>
             <Button Content="Cancel"/>
         </StackPanel>
     </StackPanel>
