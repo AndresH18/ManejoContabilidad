@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using ExcelModule;
+using Shared;
 using Shared.Models;
 
 namespace ManejoContabilidad.Wpf.Services;
 
-public class PrintService
+public class PrintService : IDisposable
 {
     private readonly SemaphoreSlim _semaphore = new(1);
     private readonly IExcelWriter _excelWriter;
@@ -21,13 +21,13 @@ public class PrintService
 
     private void ExcelSettingsChanged(object? sender, ExcelSettingsChangedEventArgs e)
     {
-        _excelWriter.SettingsChanged(e.ExcelConfigurationOptions);
+        _excelWriter.ReloadSettings(e.ExcelConfigurationOptions);
     }
 
 
     ~PrintService()
     {
-        _settings.ExcelSettingsChanged -= ExcelSettingsChanged;
+        Dispose(false);
     }
 
 
@@ -50,5 +50,25 @@ public class PrintService
 
             return ex;
         }
+    }
+
+    private void ReleaseUnmanagedResources()
+    {
+        _excelWriter.Dispose();
+    }
+
+    private void Dispose(bool disposing)
+    {
+        ReleaseUnmanagedResources();
+        if (disposing)
+        {
+            _semaphore.Dispose();
+        }
+    }
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
     }
 }

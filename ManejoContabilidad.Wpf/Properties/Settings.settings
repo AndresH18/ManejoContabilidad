@@ -33,7 +33,7 @@
       <Value Profile="(Default)">Recognizer URL</Value>
     </Setting>
     <Setting Name="ExcelFile" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:/</Value>
+      <Value Profile="(Default)">C:\Users\andre\Desktop\ExcelTest.xlsx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

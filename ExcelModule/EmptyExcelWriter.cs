@@ -1,7 +1,9 @@
-﻿namespace ExcelModule;
+﻿namespace Shared;
 
 public class EmptyExcelWriter : IExcelWriter
 {
+    public bool IsVisible { get; set; }
+
     public void Print(bool preview = true)
     {
         Thread.Sleep(5000);
@@ -9,26 +11,13 @@ public class EmptyExcelWriter : IExcelWriter
 
     public void Write(Shared.Models.InvoicePrintDto invoice)
     {
-        
     }
 
-    public void WriteClient(string client)
+    public void ReloadSettings(ExcelConfigurationOptions options)
     {
-        
     }
 
-    public void WriteDate(DateTime date)
+    public void Dispose()
     {
-        
-    }
-
-    public void WriteInvoiceNumber(int invoiceNumber)
-    {
-        
-    }
-
-    public void WritePrice(double price)
-    {
-        
     }
 }

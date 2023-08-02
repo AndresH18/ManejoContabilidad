@@ -1,5 +1,5 @@
 ﻿#pragma warning disable CS8618
-namespace ExcelModule;
+namespace Shared;
 
 public class ExcelData
 {

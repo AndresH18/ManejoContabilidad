@@ -1,5 +1,5 @@
 ﻿using System;
-using ExcelModule;
+using Shared;
 using ManejoContabilidad.Wpf.Helpers.Dialog;
 using ManejoContabilidad.Wpf.Services.AppEnvironment;
 using ManejoContabilidad.Wpf.Services.Invoice;
@@ -27,7 +27,11 @@ public static class ServiceConfigurationExtensions
         //     var environment = x.GetRequiredService<AppEnvironmentService>();
         //     return new ExcelWriter(environment.GetExcelData());
         // });
-        services.AddSingleton<IExcelWriter, EmptyExcelWriter>();
+        services.AddSingleton<IExcelWriter, ExcelWriter>(x =>
+        {
+            var settingManager = x.GetRequiredService<SettingsManager>();
+            return new ExcelWriter(settingManager.ExcelConfigurationOptions);
+        });
 
         services.AddSingleton<IInvoiceService, InvoiceService>();
 
@@ -46,7 +50,7 @@ public static class ServiceConfigurationExtensions
     {
         // Windows
         services.AddSingleton<MainWindow>();
-        
+
         // Pages
         services.AddTransient<InvoicesPage>();
         services.AddTransient<SettingsPage>();
