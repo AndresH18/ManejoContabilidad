@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ManejoContabilidad.Wpf.Services;
 
 namespace ManejoContabilidad.Wpf.Views.Settings;
 
@@ -20,8 +21,11 @@ namespace ManejoContabilidad.Wpf.Views.Settings;
 /// </summary>
 public partial class SettingsPage : Page
 {
-    public SettingsPage()
+    private readonly SettingsManager _settingsManager;
+
+    public SettingsPage(SettingsManager settingsManager)
     {
+        _settingsManager = settingsManager;
         InitializeComponent();
     }
 
