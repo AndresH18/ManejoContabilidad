@@ -51,6 +51,7 @@
                 x:Name="ConnectionString"
                 d:Text="Connection String"
                 VerticalContentAlignment="Center"
+                TextChanged="OnTextChanged"
                 Grid.ColumnSpan="5"
                 Grid.Column="2"
                 Grid.Row="1" />
@@ -70,6 +71,7 @@
             <TextBox
                 x:Name="ApiKey"
                 d:Text="Api Key"
+                TextChanged="OnTextChanged"
                 VerticalContentAlignment="Center"
                 Grid.Column="2"
                 Grid.ColumnSpan="5"
@@ -81,6 +83,7 @@
             <TextBox
                 x:Name="Endpoint"
                 d:Text="Endpoint"
+                TextChanged="OnTextChanged"
                 VerticalContentAlignment="Center"
                 Grid.Column="2"
                 Grid.ColumnSpan="5"
@@ -92,6 +95,7 @@
             <TextBox
                 x:Name="ModelId"
                 d:Text="Model ID"
+                TextChanged="OnTextChanged"
                 VerticalContentAlignment="Center"
                 Grid.Column="2"
                 Grid.ColumnSpan="5"
@@ -113,6 +117,7 @@
             <TextBox
                 x:Name="ExcelFilePath"
                 d:Text="File path"
+                TextChanged="OnTextChanged"
                 VerticalContentAlignment="Center"
                 Grid.Column="2"
                 Grid.ColumnSpan="5"
@@ -129,6 +134,7 @@
                 Grid.Row="8" />
             <TextBox
                 x:Name="ClientRow"
+                TextChanged="OnTextChanged"
                 VerticalContentAlignment="Center"
                 Grid.Column="2"
                 Grid.Row="8" />
@@ -138,6 +144,7 @@
                 Grid.Row="8" />
             <TextBox
                 x:Name="ClientCol"
+                TextChanged="OnTextChanged"
                 VerticalContentAlignment="Center"
                 Grid.Column="5"
                 Grid.Row="8" />
@@ -148,6 +155,7 @@
                 Grid.Row="9" />
             <TextBox
                 x:Name="InvoiceRow"
+                TextChanged="OnTextChanged"
                 VerticalContentAlignment="Center"
                 Grid.Column="2"
                 Grid.Row="9" />
@@ -157,6 +165,7 @@
                 Grid.Row="9" />
             <TextBox
                 x:Name="InvoiceCol"
+                TextChanged="OnTextChanged"
                 VerticalContentAlignment="Center"
                 Grid.Column="5"
                 Grid.Row="9" />
@@ -167,6 +176,7 @@
                 Grid.Row="10" />
             <TextBox
                 x:Name="DateRow"
+                TextChanged="OnTextChanged"
                 VerticalContentAlignment="Center"
                 Grid.Column="2"
                 Grid.Row="10" />
@@ -176,6 +186,7 @@
                 Grid.Row="10" />
             <TextBox
                 x:Name="DateCol"
+                TextChanged="OnTextChanged"
                 VerticalContentAlignment="Center"
                 Grid.Column="5"
                 Grid.Row="10" />
@@ -186,6 +197,7 @@
                 Grid.Row="11" />
             <TextBox
                 x:Name="PriceRow"
+                TextChanged="OnTextChanged"
                 VerticalContentAlignment="Center"
                 Grid.Column="2"
                 Grid.Row="11" />
@@ -195,17 +207,15 @@
                 Grid.Row="11" />
             <TextBox
                 x:Name="PriceCol"
+                TextChanged="OnTextChanged"
                 VerticalContentAlignment="Center"
                 Grid.Column="5"
                 Grid.Row="11" />
-
-
         </Grid>
 
         <StackPanel
             Orientation="Horizontal"
             Margin="50 0"
-
             HorizontalAlignment="Right">
             <StackPanel.Resources>
                 <Style TargetType="Button">

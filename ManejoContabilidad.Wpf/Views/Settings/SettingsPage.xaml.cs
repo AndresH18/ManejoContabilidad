@@ -22,6 +22,7 @@ namespace ManejoContabilidad.Wpf.Views.Settings;
 public partial class SettingsPage : Page
 {
     private readonly SettingsManager _settingsManager;
+    private bool _textHasChanged = false;
 
     public SettingsPage(SettingsManager settingsManager)
     {
@@ -36,6 +37,21 @@ public partial class SettingsPage : Page
     public bool CanReturn()
     {
         // TODO: verify if data has been changed. 
+        if (_textHasChanged)
+        {
+            var s = MessageBox.Show(
+                "",
+                "",
+                MessageBoxButton.YesNoCancel,
+                MessageBoxImage.Question,
+                MessageBoxResult.No);
+        }
+
         return true;
+    }
+
+    private void OnTextChanged(object sender, TextChangedEventArgs e)
+    {
+        _textHasChanged = true;
     }
 }
