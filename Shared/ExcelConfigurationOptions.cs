@@ -1,5 +1,6 @@
 ﻿namespace Shared;
 
+// TODO: Modify to make this structs instead of records? Consider using on AppSettings 
 public record ExcelConfigurationOptions
 {
     public const string WorkSheetName = "Sheet1";

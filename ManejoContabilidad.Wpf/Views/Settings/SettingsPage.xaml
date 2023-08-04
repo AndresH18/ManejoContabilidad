@@ -49,6 +49,7 @@
                 Grid.Row="1" />
             <TextBox
                 x:Name="ConnectionString"
+                Text="{Binding Path=AppSettings.DbConnection, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                 d:Text="Connection String"
                 VerticalContentAlignment="Center"
                 TextChanged="OnTextChanged"
@@ -70,6 +71,7 @@
                 Grid.Row="3" />
             <TextBox
                 x:Name="ApiKey"
+                Text="{Binding Path=AppSettings.RecognizerKey, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                 d:Text="Api Key"
                 TextChanged="OnTextChanged"
                 VerticalContentAlignment="Center"
@@ -82,6 +84,7 @@
                 Grid.Row="4" />
             <TextBox
                 x:Name="Endpoint"
+                Text="{Binding Path=AppSettings.RecognizerEndpoint, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                 d:Text="Endpoint"
                 TextChanged="OnTextChanged"
                 VerticalContentAlignment="Center"
@@ -94,6 +97,7 @@
                 Grid.Row="5" />
             <TextBox
                 x:Name="ModelId"
+                Text="{Binding Path=AppSettings.RecognizerModelId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 d:Text="Model ID"
                 TextChanged="OnTextChanged"
                 VerticalContentAlignment="Center"
@@ -116,6 +120,7 @@
                 Grid.Row="7" />
             <TextBox
                 x:Name="ExcelFilePath"
+                Text="{Binding Path=AppSettings.ExcelFile, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 d:Text="File path"
                 TextChanged="OnTextChanged"
                 VerticalContentAlignment="Center"
@@ -134,7 +139,9 @@
                 Grid.Row="8" />
             <TextBox
                 x:Name="ClientRow"
+                Text="{Binding Path=AppSettings.ExcelClientRow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 TextChanged="OnTextChanged"
+                PreviewTextInput="Row_OnPreviewTextInput"
                 VerticalContentAlignment="Center"
                 Grid.Column="2"
                 Grid.Row="8" />
@@ -144,6 +151,7 @@
                 Grid.Row="8" />
             <TextBox
                 x:Name="ClientCol"
+                Text="{Binding Path=AppSettings.ExcelClientCol, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 TextChanged="OnTextChanged"
                 VerticalContentAlignment="Center"
                 Grid.Column="5"
@@ -155,7 +163,9 @@
                 Grid.Row="9" />
             <TextBox
                 x:Name="InvoiceRow"
+                Text="{Binding Path=AppSettings.ExcelInvoiceRow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 TextChanged="OnTextChanged"
+                PreviewTextInput="Row_OnPreviewTextInput"
                 VerticalContentAlignment="Center"
                 Grid.Column="2"
                 Grid.Row="9" />
@@ -165,6 +175,7 @@
                 Grid.Row="9" />
             <TextBox
                 x:Name="InvoiceCol"
+                Text="{Binding Path=AppSettings.ExcelInvoiceCol, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 TextChanged="OnTextChanged"
                 VerticalContentAlignment="Center"
                 Grid.Column="5"
@@ -176,7 +187,9 @@
                 Grid.Row="10" />
             <TextBox
                 x:Name="DateRow"
+                Text="{Binding Path=AppSettings.ExcelDateRow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 TextChanged="OnTextChanged"
+                PreviewTextInput="Row_OnPreviewTextInput"
                 VerticalContentAlignment="Center"
                 Grid.Column="2"
                 Grid.Row="10" />
@@ -186,6 +199,7 @@
                 Grid.Row="10" />
             <TextBox
                 x:Name="DateCol"
+                Text="{Binding Path=AppSettings.ExcelDateCol, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 TextChanged="OnTextChanged"
                 VerticalContentAlignment="Center"
                 Grid.Column="5"
@@ -197,7 +211,9 @@
                 Grid.Row="11" />
             <TextBox
                 x:Name="PriceRow"
+                Text="{Binding Path=AppSettings.ExcelPriceRow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 TextChanged="OnTextChanged"
+                PreviewTextInput="Row_OnPreviewTextInput"
                 VerticalContentAlignment="Center"
                 Grid.Column="2"
                 Grid.Row="11" />
@@ -207,6 +223,7 @@
                 Grid.Row="11" />
             <TextBox
                 x:Name="PriceCol"
+                Text="{Binding Path=AppSettings.ExcelPriceCol, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 TextChanged="OnTextChanged"
                 VerticalContentAlignment="Center"
                 Grid.Column="5"
@@ -220,11 +237,11 @@
             <StackPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Margin" Value="10 0 0 0" />
-                    <Setter Property="Padding" Value="20 5"/>
+                    <Setter Property="Padding" Value="20 5" />
                 </Style>
             </StackPanel.Resources>
-            <Button Content="Save"/>
-            <Button Content="Cancel"/>
+            <Button Content="Save" />
+            <Button Content="Cancel" />
         </StackPanel>
     </StackPanel>
 </Page>

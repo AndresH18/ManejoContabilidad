@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using ManejoContabilidad.Wpf.Services;
+using Shared;
 
 namespace ManejoContabilidad.Wpf.Views.Settings;
 
@@ -21,14 +13,18 @@ namespace ManejoContabilidad.Wpf.Views.Settings;
 /// </summary>
 public partial class SettingsPage : Page
 {
+    private readonly Regex _numberRegex = NumberRegex();
     private readonly SettingsManager _settingsManager;
     private bool _textHasChanged = false;
 
     public SettingsPage(SettingsManager settingsManager)
     {
         _settingsManager = settingsManager;
+        AppSettings = _settingsManager.AppSettings;
         InitializeComponent();
     }
+
+    public AppSettings AppSettings { get; }
 
     /// <summary>
     /// Checks if the form has changed and has been saved.
@@ -36,15 +32,33 @@ public partial class SettingsPage : Page
     /// <returns><b>true</b> if the form has been saved or if nothing was changed. </returns>
     public bool CanReturn()
     {
-        // TODO: verify if data has been changed. 
-        if (_textHasChanged)
+        if (!_textHasChanged)
+            return true;
+
+        var r = MessageBox.Show(App.Current.MainWindow!,
+            "Save Settings?",
+            "Settings",
+            MessageBoxButton.YesNoCancel,
+            MessageBoxImage.Question,
+            MessageBoxResult.No);
+
+        return r switch
         {
-            var s = MessageBox.Show(
-                "",
-                "",
-                MessageBoxButton.YesNoCancel,
-                MessageBoxImage.Question,
-                MessageBoxResult.No);
+            MessageBoxResult.Cancel => false,
+            MessageBoxResult.No => true,
+            MessageBoxResult.Yes => SaveSettings(),
+            _ => true
+        };
+    }
+
+    /// <summary>
+    /// Save the settings calling the current <see cref="SettingsManager"/>
+    /// </summary>
+    private bool SaveSettings()
+    {
+        var result = _settingsManager.SaveSettings(AppSettings);
+        if (result.IsError)
+        {
         }
 
         return true;
@@ -54,4 +68,18 @@ public partial class SettingsPage : Page
     {
         _textHasChanged = true;
     }
+
+    /// <summary>
+    /// Checks if input on <see cref="CheckBox"/> that represents <see cref="ExcelCell.Row"/> elements is a number
+    /// </summary>
+    private void Row_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
+    {
+        if (!_numberRegex.IsMatch(e.Text))
+        {
+            e.Handled = true;
+        }
+    }
+
+    [GeneratedRegex("[0-9]+")]
+    private static partial Regex NumberRegex();
 }
