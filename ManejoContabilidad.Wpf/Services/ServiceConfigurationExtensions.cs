@@ -1,13 +1,11 @@
 ﻿using System;
-using ExcelModule;
+using Shared;
 using ManejoContabilidad.Wpf.Helpers.Dialog;
-using ManejoContabilidad.Wpf.Services.AppEnvironment;
 using ManejoContabilidad.Wpf.Services.Invoice;
 using ManejoContabilidad.Wpf.Services.Navigation;
-using ManejoContabilidad.Wpf.Services.RequestProvider;
 using ManejoContabilidad.Wpf.ViewModels;
 using ManejoContabilidad.Wpf.Views.Invoice;
-using Microsoft.EntityFrameworkCore;
+using ManejoContabilidad.Wpf.Views.Settings;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ManejoContabilidad.Wpf.Services;
@@ -17,27 +15,21 @@ public static class ServiceConfigurationExtensions
     public static void RegisterAppServices(this IServiceCollection services)
     {
         // Singleton
-        services.AddSingleton<AppEnvironmentService>();
         services.AddSingleton<INavigationService, NavigationService>();
-        services.AddSingleton<IRequestProvider, RequestProvider.RequestProvider>();
 
         services.AddSingleton<PrintService>();
 
         // TODO: replace for production version of Excel Writer
+        services.AddSingleton<IExcelWriter, EmptyExcelWriter>();
         // services.AddSingleton<IExcelWriter, ExcelWriter>(x =>
         // {
-        //     var environment = x.GetRequiredService<AppEnvironmentService>();
-        //     return new ExcelWriter(environment.GetExcelData());
+        //     var settingManager = x.GetRequiredService<SettingsManager>();
+        //     return new ExcelWriter(settingManager.ExcelConfigurationOptions);
         // });
-        services.AddSingleton<IExcelWriter, EmptyExcelWriter>();
 
-        services.AddSingleton<IInvoiceService, InvoiceService>(x =>
-        {
-            var environment = x.GetRequiredService<AppEnvironmentService>();
-            var cs = environment.GetConnectionString("sqlserver");
+        services.AddSingleton<IInvoiceService, InvoiceService>();
 
-            return new InvoiceService(cs!);
-        });
+        services.AddSingleton<SettingsManager>();
     }
 
     public static void RegisterViewModels(this ServiceCollection services)
@@ -48,27 +40,21 @@ public static class ServiceConfigurationExtensions
         services.AddTransient<InvoicesViewModel>();
     }
 
+    public static void RegisterViews(this IServiceCollection services)
+    {
+        // Windows
+        services.AddSingleton<MainWindow>();
+
+        // Pages
+        services.AddTransient<InvoicesPage>();
+        services.AddTransient<SettingsPage>();
+    }
+
     public static void RegisterHelpers(this IServiceCollection services)
     {
         // Singleton
 
         // Transient
         services.AddTransient<InvoiceDialogHelper>();
-    }
-
-    public static void RegisterWindows(this IServiceCollection services)
-    {
-        // Singleton
-        services.AddSingleton<MainWindow>();
-
-        // Transient
-    }
-
-    public static void RegisterPages(this IServiceCollection services)
-    {
-        // Singleton
-
-        // Transient
-        services.AddTransient<InvoicesPage>();
     }
 }

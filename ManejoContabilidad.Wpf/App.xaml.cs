@@ -14,7 +14,7 @@ public partial class App
     /// <summary>
     ///     Gets the current <see cref="App" /> instance in use
     /// </summary>
-    public new static App Current => (App)Application.Current;
+    public new static App Current => (App) Application.Current;
 
     /// <summary>
     ///     Gets the <see cref="IServiceProvider" /> instance to resolve application services.
@@ -27,6 +27,19 @@ public partial class App
 
         Application.Current.MainWindow = Services.GetRequiredService<MainWindow>();
         Application.Current.MainWindow.Show();
+
+        Exit += App_Exit;
+    }
+
+    private void App_Exit(object sender, ExitEventArgs e)
+    {
+        CleanExcel();
+    }
+
+    private void CleanExcel()
+    {
+        var s = Services.GetRequiredService<IExcelWriter>();
+        s.Dispose();
     }
 
     private static IServiceProvider ConfigureServices()
@@ -35,8 +48,7 @@ public partial class App
 
         services.RegisterAppServices();
         services.RegisterHelpers();
-        services.RegisterWindows();
-        services.RegisterPages();
+        services.RegisterViews();
         services.RegisterViewModels();
 
         return services.BuildServiceProvider();

@@ -1,0 +1,247 @@
+﻿<Page x:Class="ManejoContabilidad.Wpf.Views.Settings.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:ManejoContabilidad.Wpf.Views.Settings"
+      mc:Ignorable="d"
+      d:DesignHeight="450" d:DesignWidth="800"
+      d:Background="DarkGray"
+      DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
+      Title="Settings">
+
+    <StackPanel>
+        <Grid Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="80" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Database -->
+            <Label
+                Content="Database"
+                FontWeight="Bold"
+                HorizontalAlignment="Center"
+                Grid.Column="0"
+                Grid.Row="0" />
+            <Label
+                Content="Connection String"
+                Grid.Column="1"
+                Grid.Row="1" />
+            <TextBox
+                x:Name="ConnectionString"
+                Text="{Binding Path=AppSettings.DbConnection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                d:Text="Connection String"
+                VerticalContentAlignment="Center"
+                TextChanged="OnTextChanged"
+                Grid.ColumnSpan="5"
+                Grid.Column="2"
+                Grid.Row="1" />
+
+
+            <!-- Form Recognizer -->
+            <Label
+                Content="Recognizer"
+                FontWeight="Bold"
+                HorizontalAlignment="Center"
+                Grid.Column="0"
+                Grid.Row="2" />
+            <Label
+                Content="Api Key"
+                Grid.Column="1"
+                Grid.Row="3" />
+            <TextBox
+                x:Name="ApiKey"
+                Text="{Binding Path=AppSettings.RecognizerKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                d:Text="Api Key"
+                TextChanged="OnTextChanged"
+                VerticalContentAlignment="Center"
+                Grid.Column="2"
+                Grid.ColumnSpan="5"
+                Grid.Row="3" />
+            <Label
+                Content="Endpoint"
+                Grid.Column="1"
+                Grid.Row="4" />
+            <TextBox
+                x:Name="Endpoint"
+                Text="{Binding Path=AppSettings.RecognizerEndpoint, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                d:Text="Endpoint"
+                TextChanged="OnTextChanged"
+                VerticalContentAlignment="Center"
+                Grid.Column="2"
+                Grid.ColumnSpan="5"
+                Grid.Row="4" />
+            <Label
+                Content="Model ID"
+                Grid.Column="1"
+                Grid.Row="5" />
+            <TextBox
+                x:Name="ModelId"
+                Text="{Binding Path=AppSettings.RecognizerModelId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                d:Text="Model ID"
+                TextChanged="OnTextChanged"
+                VerticalContentAlignment="Center"
+                Grid.Column="2"
+                Grid.ColumnSpan="5"
+                Grid.Row="5" />
+
+
+            <!-- Excel -->
+            <Label
+                Content="Excel"
+                FontWeight="Bold"
+                HorizontalAlignment="Center"
+                Grid.Column="0"
+                Grid.Row="6" />
+            <!-- File  -->
+            <Label
+                Content="File Path"
+                Grid.Column="1"
+                Grid.Row="7" />
+            <TextBox
+                x:Name="ExcelFilePath"
+                Text="{Binding Path=AppSettings.ExcelFile, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                d:Text="File path"
+                TextChanged="OnTextChanged"
+                VerticalContentAlignment="Center"
+                Grid.Column="2"
+                Grid.ColumnSpan="5"
+                Grid.Row="7" />
+            <Button
+                Content="Examine"
+                Padding="5 0"
+                Grid.Column="6"
+                Grid.Row="7" />
+            <!-- Client -->
+            <Label
+                Content="Client Row"
+                Grid.Column="1"
+                Grid.Row="8" />
+            <TextBox
+                x:Name="ClientRow"
+                Text="{Binding Path=AppSettings.ExcelClientRow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                TextChanged="OnTextChanged"
+                PreviewTextInput="Row_OnPreviewTextInput"
+                VerticalContentAlignment="Center"
+                Grid.Column="2"
+                Grid.Row="8" />
+            <Label
+                Content="Client Column"
+                Grid.Column="4"
+                Grid.Row="8" />
+            <TextBox
+                x:Name="ClientCol"
+                Text="{Binding Path=AppSettings.ExcelClientCol, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                TextChanged="OnTextChanged"
+                VerticalContentAlignment="Center"
+                Grid.Column="5"
+                Grid.Row="8" />
+            <!-- Invoice -->
+            <Label
+                Content="Invoice Row"
+                Grid.Column="1"
+                Grid.Row="9" />
+            <TextBox
+                x:Name="InvoiceRow"
+                Text="{Binding Path=AppSettings.ExcelInvoiceRow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                TextChanged="OnTextChanged"
+                PreviewTextInput="Row_OnPreviewTextInput"
+                VerticalContentAlignment="Center"
+                Grid.Column="2"
+                Grid.Row="9" />
+            <Label
+                Content="Invoice Column"
+                Grid.Column="4"
+                Grid.Row="9" />
+            <TextBox
+                x:Name="InvoiceCol"
+                Text="{Binding Path=AppSettings.ExcelInvoiceCol, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                TextChanged="OnTextChanged"
+                VerticalContentAlignment="Center"
+                Grid.Column="5"
+                Grid.Row="9" />
+            <!-- Date -->
+            <Label
+                Content="Date Row"
+                Grid.Column="1"
+                Grid.Row="10" />
+            <TextBox
+                x:Name="DateRow"
+                Text="{Binding Path=AppSettings.ExcelDateRow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                TextChanged="OnTextChanged"
+                PreviewTextInput="Row_OnPreviewTextInput"
+                VerticalContentAlignment="Center"
+                Grid.Column="2"
+                Grid.Row="10" />
+            <Label
+                Content="Date Column"
+                Grid.Column="4"
+                Grid.Row="10" />
+            <TextBox
+                x:Name="DateCol"
+                Text="{Binding Path=AppSettings.ExcelDateCol, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                TextChanged="OnTextChanged"
+                VerticalContentAlignment="Center"
+                Grid.Column="5"
+                Grid.Row="10" />
+            <!-- Price -->
+            <Label
+                Content="Price Row"
+                Grid.Column="1"
+                Grid.Row="11" />
+            <TextBox
+                x:Name="PriceRow"
+                Text="{Binding Path=AppSettings.ExcelPriceRow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                TextChanged="OnTextChanged"
+                PreviewTextInput="Row_OnPreviewTextInput"
+                VerticalContentAlignment="Center"
+                Grid.Column="2"
+                Grid.Row="11" />
+            <Label
+                Content="Price Column"
+                Grid.Column="4"
+                Grid.Row="11" />
+            <TextBox
+                x:Name="PriceCol"
+                Text="{Binding Path=AppSettings.ExcelPriceCol, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                TextChanged="OnTextChanged"
+                VerticalContentAlignment="Center"
+                Grid.Column="5"
+                Grid.Row="11" />
+        </Grid>
+
+        <StackPanel
+            Orientation="Horizontal"
+            Margin="50 0"
+            HorizontalAlignment="Right">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="10 0 0 0" />
+                    <Setter Property="Padding" Value="20 5" />
+                </Style>
+            </StackPanel.Resources>
+            <Button Content="Save" Command="{Binding Path=SaveCommand}" />
+            <Button Content="Cancel" Command="{Binding Path=CancelCommand}" />
+        </StackPanel>
+    </StackPanel>
+</Page>

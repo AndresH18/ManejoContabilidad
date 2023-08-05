@@ -1,27 +1,20 @@
-﻿using ManejoContabilidad.Wpf.Services.Navigation;
-using ManejoContabilidad.Wpf.Views.Invoice;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using ManejoContabilidad.Wpf.Services.Navigation;
+using Views = ManejoContabilidad.Wpf.Views;
 
 namespace ManejoContabilidad.Wpf;
 
 /// <summary>
-/// Interaction logic for MainWindow.xaml
+///     Interaction logic for MainWindow.xaml
 /// </summary>
 public partial class MainWindow
 {
     private readonly INavigationService _navigation;
 
-    private readonly List<(string Tag, Type Page)> _pages = new()
-    {
-        // ("clients", typeof(ClientsPage)),
-        ("invoices", typeof(InvoicesPage))
-    };
-
-    public static MainWindow? Current { get; private set; }
 
     public MainWindow(INavigationService navigationService)
     {
@@ -32,27 +25,24 @@ public partial class MainWindow
         Current = this;
     }
 
+    public static MainWindow? Current { get; private set; }
+
     private void MenuItem_OnClick(object sender, RoutedEventArgs e)
     {
         if (sender is MenuItem menuItem)
         {
             var tag = menuItem.Tag as string ?? string.Empty;
-            Navigate(tag);
+            NavigateTo(tag);
         }
     }
 
-    private void Navigate(string tag)
+    private void NavigateTo(string page)
     {
-        var tuple = _pages.FirstOrDefault(t => t.Tag == tag);
-        var page = tuple.Page;
-        if (page != null)
-        {
-            _navigation.NavigateTo(page);
-        }
+        _navigation.NavigateTo(page);
     }
 
     private void NavigationFrame_OnLoaded(object sender, RoutedEventArgs e)
     {
-        Navigate("invoices");
+        NavigateTo("invoices");
     }
 }

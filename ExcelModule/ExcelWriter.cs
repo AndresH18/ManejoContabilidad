@@ -1,23 +1,26 @@
 ﻿using System.Diagnostics;
 using Excel = Microsoft.Office.Interop.Excel;
+using Models = Shared.Models;
 
-namespace ExcelModule;
+// ReSharper disable once CheckNamespace
+namespace Shared;
 
-public class ExcelWriter : IExcelWriter, IDisposable
+public class ExcelWriter : IExcelWriter
 {
     private readonly Excel.Application _app;
+    private Excel.Workbook _workbook;
 
-    private readonly ExcelData _excelData;
+    private ExcelConfigurationOptions _options;
 
-    public ExcelWriter(ExcelData excelData)
+    public ExcelWriter(ExcelConfigurationOptions excelConfigurationOptions)
     {
-        _excelData = excelData;
+        _options = excelConfigurationOptions;
         try
         {
-            _app = new Excel.Application { Visible = true };
+            _app = new Excel.Application {Visible = true};
             // _app.Workbooks.Open(
             //     Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "ExcelTest.xlsx"));
-            _app.Workbooks.Open(Path.Combine(_excelData.FileDirectory, _excelData.WorkbookName));
+            _workbook = _app.Workbooks.Open(_options.ExcelFile);
         }
         catch (Exception ex)
         {
@@ -28,7 +31,9 @@ public class ExcelWriter : IExcelWriter, IDisposable
 
     ~ExcelWriter() => Dispose();
 
-    public void Write(Shared.Models.InvoicePrintDto invoice)
+    public bool IsVisible { get; set; }
+
+    public void Write(Models::InvoicePrintDto invoice)
     {
         WriteClient(invoice.Name);
         WritePrice(invoice.Price);
@@ -36,75 +41,89 @@ public class ExcelWriter : IExcelWriter, IDisposable
         WriteDate(invoice.DateTime);
     }
 
-    public void WriteClient(string client)
+
+    public void Print(bool preview = true)
+    {
+        var sheet = (Excel.Worksheet) _workbook.Sheets[ExcelConfigurationOptions.WorkSheetName];
+        sheet.PrintOut(1, 1, 1, preview);
+    }
+
+    public void ReloadSettings(ExcelConfigurationOptions options)
+    {
+        _workbook.Close();
+        _options = options;
+        OpenWorkbook();
+    }
+
+    public void Dispose()
+    {
+        _app.Visible = true;
+        _workbook.Close();
+        _app.Quit();
+        GC.SuppressFinalize(this);
+    }
+
+    private void OpenWorkbook()
+    {
+        _workbook = _app.Workbooks.Open(_options.FileName);
+    }
+
+    private void WriteClient(string client)
     {
         var cell = GetClientCell();
         cell.Value = client;
     }
 
-    public void WriteDate(DateTime date)
+    private void WriteDate(DateTime date)
     {
         var cell = GetDateCell();
         cell.Value = date.ToShortDateString();
     }
 
-    public void WriteInvoiceNumber(int invoiceNumber)
+    private void WriteInvoiceNumber(int invoiceNumber)
     {
         var cell = GetInvoiceCell();
         cell.Value = invoiceNumber;
     }
 
-    public void WritePrice(double price)
+    private void WritePrice(double price)
     {
         var cell = GetPriceCell();
         cell.Value = price;
     }
 
-    public void Print(bool preview = true)
-    {
-        var sheet = (Excel.Worksheet)_app.Workbooks[_excelData.WorkbookName].Sheets[_excelData.WorksheetName];
-        sheet.PrintOut(1, 1, 1, preview);
-    }
-
-
-    public void Dispose()
-    {
-        _app.Visible = true;
-        _app.Quit();
-        GC.SuppressFinalize(this);
-    }
 
     private Excel.Range GetClientCell()
     {
-        var c = _excelData.Cells.Client;
+        var cell = _options.Cells["client"];
         var sheet = GetWorksheet();
-        return sheet.Cells[c.Row, c.Column];
+        return sheet.Cells[cell.Row, cell.Column];
     }
 
     private Excel.Range GetInvoiceCell()
     {
-        var i = _excelData.Cells.Invoice;
+        var cell = _options.Cells["invoice"];
         var sheet = GetWorksheet();
-        return sheet.Cells[i.Row, i.Column];
+        return sheet.Cells[cell.Row, cell.Column];
     }
 
     private Excel.Range GetDateCell()
     {
-        var d = _excelData.Cells.Date;
+        var cell = _options.Cells["date"];
         var sheet = GetWorksheet();
-        return sheet.Cells[d.Row, d.Column];
+        return sheet.Cells[cell.Row, cell.Column];
     }
 
     private Excel.Range GetPriceCell()
     {
-        var p = _excelData.Cells.Price;
+        var cell = _options.Cells["price"];
         var sheet = GetWorksheet();
-        return sheet.Cells[p.Row, p.Column];
+        return sheet.Cells[cell.Row, cell.Column];
     }
 
     private Excel.Worksheet GetWorksheet()
     {
-        return _app.Workbooks[_excelData.WorkbookName].Sheets[_excelData.WorksheetName];
+        return _workbook.Sheets[ExcelConfigurationOptions.WorkSheetName];
     }
 
     private void Check()

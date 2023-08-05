@@ -5,11 +5,5 @@ namespace ManejoContabilidad.Wpf.Services.Navigation;
 
 public interface INavigationService
 {
-    public void NavigateTo<T>() where T : class;
-
-    public void NavigateTo<T>(IDictionary<string, object>? dictionary) where T : class;
-
-    public void NavigateTo(Type type);
-
-    public void NavigateTo(Type type, IDictionary<string, object>? dictionary);
+    public void NavigateTo(string page);
 }

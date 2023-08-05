@@ -12,8 +12,7 @@ using ManejoContabilidad.Wpf.Services;
 
 namespace ManejoContabilidad.Wpf.ViewModels;
 
-[INotifyPropertyChanged]
-public partial class InvoicesViewModel
+public partial class InvoicesViewModel : ObservableObject, IDisposable
 {
     private readonly IInvoiceService _invoiceService;
     private readonly InvoiceDialogHelper _dialogHelper;
@@ -42,6 +41,11 @@ public partial class InvoicesViewModel
         _dialogHelper = dialogHelper;
 
         GetInvoices();
+    }
+
+    public void Dispose()
+    {
+        throw new NotImplementedException();
     }
 
     private async void GetInvoices(int page = 0)
@@ -166,7 +170,7 @@ public partial class InvoicesViewModel
 
     private bool CanGoBack()
     {
-        return _pageIndex > 0;
+        return PageIndex > 0;
     }
 
     private void NotifyError()

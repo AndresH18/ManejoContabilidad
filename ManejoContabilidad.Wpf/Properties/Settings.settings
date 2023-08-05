@@ -1,0 +1,45 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ManejoContabilidad.Wpf.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="InvoiceDb" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=localhost; Initial Catalog=InvoiceManagement; TrustServerCertificate=true; Trusted_Connection=true</Value>
+    </Setting>
+    <Setting Name="Excel_Client_Row" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="Excel_Client_Col" Type="System.String" Scope="User">
+      <Value Profile="(Default)">A</Value>
+    </Setting>
+    <Setting Name="Excel_Invoice_Row" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="Excel_Invoice_Col" Type="System.String" Scope="User">
+      <Value Profile="(Default)">A</Value>
+    </Setting>
+    <Setting Name="Excel_Date_Row" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="Excel_Date_Col" Type="System.String" Scope="User">
+      <Value Profile="(Default)">A</Value>
+    </Setting>
+    <Setting Name="Excel_Price_Row" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="Excel_Price_Col" Type="System.String" Scope="User">
+      <Value Profile="(Default)">A</Value>
+    </Setting>
+    <Setting Name="RecognizerEndpoint" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Recognizer URL</Value>
+    </Setting>
+    <Setting Name="ExcelFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\andre\Desktop\ExcelTest.xlsx</Value>
+    </Setting>
+    <Setting Name="RecognizerKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">key</Value>
+    </Setting>
+    <Setting Name="RecognizerModel" Type="System.String" Scope="User">
+      <Value Profile="(Default)">model</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
