@@ -25,8 +25,8 @@ public class NavigationService : INavigationService
     {
         _pages = new Dictionary<string, Type>
         {
-            {"invoices", typeof(InvoicesPage)},
-            {"settings", typeof(SettingsPage)}
+            { "invoices", typeof(InvoicesPage) },
+            { "settings", typeof(SettingsPage) }
         }.ToImmutableDictionary();
     }
 
@@ -43,11 +43,11 @@ public class NavigationService : INavigationService
     {
         if (CanNavigateTo(type))
         {
-            var service = _services.GetRequiredService(type) as Page ??
+            var pageService = _services.GetRequiredService(type) as Page ??
                           throw new InvalidOperationException($"The service is not of type {typeof(Page)}.");
 
-            MainWindow.Current?.NavigationFrame.Navigate(service);
-            _currentPage = service;
+            MainWindow.Current?.NavigationFrame.Navigate(pageService);
+            _currentPage = pageService;
         }
     }
 

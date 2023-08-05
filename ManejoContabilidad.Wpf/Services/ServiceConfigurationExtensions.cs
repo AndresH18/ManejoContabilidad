@@ -1,7 +1,6 @@
 ﻿using System;
 using Shared;
 using ManejoContabilidad.Wpf.Helpers.Dialog;
-using ManejoContabilidad.Wpf.Services.AppEnvironment;
 using ManejoContabilidad.Wpf.Services.Invoice;
 using ManejoContabilidad.Wpf.Services.Navigation;
 using ManejoContabilidad.Wpf.ViewModels;
@@ -16,7 +15,6 @@ public static class ServiceConfigurationExtensions
     public static void RegisterAppServices(this IServiceCollection services)
     {
         // Singleton
-        services.AddSingleton<AppEnvironmentService>();
         services.AddSingleton<INavigationService, NavigationService>();
 
         services.AddSingleton<PrintService>();

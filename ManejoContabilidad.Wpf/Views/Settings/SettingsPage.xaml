@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:ManejoContabilidad.Wpf.Views.Settings"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
-      d:Background="LightGray"
+      d:Background="DarkGray"
       DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
       Title="Settings">
 
@@ -49,7 +49,7 @@
                 Grid.Row="1" />
             <TextBox
                 x:Name="ConnectionString"
-                Text="{Binding Path=AppSettings.DbConnection, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                Text="{Binding Path=AppSettings.DbConnection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 d:Text="Connection String"
                 VerticalContentAlignment="Center"
                 TextChanged="OnTextChanged"
@@ -71,7 +71,7 @@
                 Grid.Row="3" />
             <TextBox
                 x:Name="ApiKey"
-                Text="{Binding Path=AppSettings.RecognizerKey, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                Text="{Binding Path=AppSettings.RecognizerKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 d:Text="Api Key"
                 TextChanged="OnTextChanged"
                 VerticalContentAlignment="Center"
@@ -84,7 +84,7 @@
                 Grid.Row="4" />
             <TextBox
                 x:Name="Endpoint"
-                Text="{Binding Path=AppSettings.RecognizerEndpoint, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                Text="{Binding Path=AppSettings.RecognizerEndpoint, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 d:Text="Endpoint"
                 TextChanged="OnTextChanged"
                 VerticalContentAlignment="Center"
@@ -240,8 +240,8 @@
                     <Setter Property="Padding" Value="20 5" />
                 </Style>
             </StackPanel.Resources>
-            <Button Content="Save" />
-            <Button Content="Cancel" />
+            <Button Content="Save" Command="{Binding Path=SaveCommand}" />
+            <Button Content="Cancel" Command="{Binding Path=CancelCommand}" />
         </StackPanel>
     </StackPanel>
 </Page>
